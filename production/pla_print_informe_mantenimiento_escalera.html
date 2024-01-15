@@ -1,0 +1,105 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+</head>
+<body>
+	<table class="conborde" style="margin-top: 10px">
+		<tr>
+			<td class="titulo2" style="text-align: center;">PAUTA DE MANTENCION ESCALERAS MECANICAS</td>
+		</tr>
+	</table>
+	<table class="conborde nobordetop" style="margin-bottom: 5px">
+		<tr>
+			<td style="margin:0; padding: -1">
+				<table>
+					<tr>
+						<td class="col-15 textochico">NOMBRE DE EDIFICIO:</td>
+						<td class="col-40 textochico">{obra}</td>
+						<td class="col-10 textochico">FECHA:</td>
+						<td class="textochico">{fechavisita} (<span class="bold">{periodotxt}</span>)</td>
+					</tr>
+					<tr>
+						<td class="col-15 textochico">FM {tipoascensor}:</td>
+						<td class="col-40 textochico">{ascensor}</td>
+						<td class="col-10 textochico">TIPO:</td>
+						<td class="textochico">{modelo}</td>
+					</tr>
+					<!-- <tr>
+						<td class="col-25 textochico">ASCENSOR/ESCALERA:</td>
+						<td class="textochico"> ({ascensor})</td>
+					</tr>
+					<tr>
+						<td class="col-40 textochico">SUPERVISOR:</td>
+						<td class="textochico">{supervisor}</td>
+					</tr>
+					<tr>
+						<td class="col-40 textochico">FECHA DE LA VISITA:</td>
+						<td class="textochico">{fechavisita}</td>
+					</tr> -->
+				</table>
+			</td>
+		</tr>
+	</table>
+
+	<table class="conborde nobordetop">
+		<tr>
+			<td class="subtitulo" style="text-align: center;">DETALLE INFORME - FABRIMETAL</td>
+		</tr>
+	</table>
+	<!-- START BLOCK : bloques -->
+	<table class="conborde nobordetop">
+		<tr>
+			<td class="subtitulo2" style="text-align: center;">{nombloque}</td>
+		</tr>
+	</table>
+	<!-- <table class="conborde nobordetop">
+		<tr>
+			<td class="col-45 encabezado">PARAMETROS A CONTROLAR</td>
+			<td class="col-05 encabezado centertext"><center>SI</center></td>
+			<td class="col-05 encabezado centertext"><center>NO</center></td>
+			<td class="">&nbsp;</td>
+		</tr>
+	</table> -->
+	<!-- START BLOCK : preguntas -->
+	<table class="conborde nobordetop">
+		<tr>
+			<td class="col-50 centertext verticalcentertext textochico negrita">{pregunta}: </td>
+			<td class="col-50 textochico">{respuesta}</td>
+		</tr>
+	</table>
+	<!-- END BLOCK : preguntas -->
+	<!-- END BLOCK : bloques -->
+	{observaciones}
+	{textoporfirmar}
+	<!-- START BLOCK : firmacliente -->
+	<table style="margin-top: 30px">
+	    <tr>
+	        <td class="col-10 sinborde"></td>
+	        <td class="col-30 sinborde" style="border-bottom: 1px solid #000000">{firmausuario}</td>
+	        <td class="col-10 sinborde"></td>
+	        <td class="col-30 sinborde" style="border-bottom: 1px solid #000000">{firmacliente}</td>
+	        <td class="sinborde"></td>
+	    </tr>
+	    <tr>
+	    	<td class="sinborde"></td>
+	        <td class="sinborde textochico">FIRMA FABRIMETAL</td>
+	        <td class="sinborde"></td>
+	        <td class="sinborde textochico">FIRMA CLIENTE</td>
+	        <td class="sinborde"></td>
+	    </tr>
+	    <tr>
+	    	<td class="sinborde"></td>
+	        <td class="sinborde textochico">TECNICO: {nomuser}</td>
+	        <td class="sinborde"></td>
+	        <td colspan="2" class="sinborde textochico">NOMBRE: {nomcli}</td>
+	    </tr>
+	    <tr>
+	    	<td class="sinborde"></td>
+	        <td class="sinborde textochico">RUT: {rutuser}</td>
+	        <td class="sinborde"></td>
+	        <td colspan="2" class="sinborde textochico"></td>
+	    </tr>
+	</table>
+	<!-- END BLOCK : firmacliente -->
+</body>
+</html>

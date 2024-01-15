@@ -1,0 +1,375 @@
+<table class="p-5" style="border-collapse: collapse;">
+	<!-- START BLOCK : cliente -->
+	<tr>
+		<td width=623 colspan=32 class="titulo-gris">DATOS CLIENTE</td>
+	</tr>
+	<tr>
+		<td width=102 colspan=3 >Nombre Edificio</td>
+		<td width=194 colspan=11 >{edificio} </td>
+		<td width=72 colspan=5 >Dirección </td>
+		<td width=256 colspan=13 >{direccion} </td>
+	</tr>
+	<tr>
+		<td width=102 colspan=3>Ciudad</td>
+		<td width=194 colspan=11>{ciudad}</td>
+		<td width=72 colspan=5>Comuna</td>
+		<td width=256 colspan=13>{comuna}</td>
+	</tr>
+	<tr>
+		<td width=102 colspan=3 >Nombre Contacto </td>
+		<td width=134 colspan=7 >{nombrecontacto}</td>
+		<td width=60 colspan=4 >Teléfono </td>
+		<td width=72 colspan=5 >{telefonocontacto}</td>
+		<td width=45 colspan=4 >e-mail </td>
+		<td width=210 colspan=9 >{emailcontacto}</td>
+	</tr>
+	<tr>
+		<td width=102 colspan=3 >N° Contrato</td>
+		<td width=522 colspan=29 >&nbsp;</td>
+	</tr>
+	<!-- END BLOCK : cliente -->
+	<!-- START BLOCK : equipo -->
+	<tr>
+		<td width=623 colspan=32 class="titulo-gris">INFORMACIÓN TÉCNICA DEL EQUIPO</td>
+	</tr>
+	<tr>
+		<td width=75 >Marca </td>
+		<td width=67 colspan=4 >{marca} </td>
+		<td width=94 colspan=5 >Modelo </td>
+		<td width=66 colspan=5 >{modelo} </td>
+		<td width=105 colspan=7 >N° Paradas </td>
+		<td width=57 colspan=4 >{paradas} </td>
+		<td width=88 colspan=4 >Velocidad </td>
+		<td width=73 colspan=2 >{velocidad} </td>
+	</tr>
+	<tr>
+		<td width=75 >Carga </td>
+		<td width=38 colspan=3 >{carga} </td>
+		<td width=66 colspan=3 >Maniobra </td>
+		<td width=66 colspan=4 > </td>
+		<td width=85 colspan=7 >Configuración </td>
+		<td width=57 colspan=3 >{comando} </td>
+		<td width=38 colspan=3 >S/M </td>
+		<td width=38 colspan=2 > </td>
+		<td width=88 colspan=4 >Accionamiento </td>
+		<td width=73 colspan=2 ></td>
+	</tr>
+	<!-- END BLOCK : equipo -->
+	<tr>
+		<td width=623 colspan=32 class="titulo-gris">INFORMACION PERSONAL DE MANTENIMIENTO</td>
+	</tr>
+	<!-- START BLOCK : supervisor -->
+	<tr>
+		<td width=84 colspan=2 >Supervisor Mantención</td>
+		<td width=134 colspan=7>{nombresupervisor}</td>
+		<td width=65 colspan=4 >Correo </td>
+		<td width=186 colspan=15 >{correosupervisor}</td>
+		<td width=82 colspan=2 >Teléfono</td>
+		<td width=73 colspan=2>{telefonosupervisor}</td>
+	</tr>
+	<!-- END BLOCK : supervisor -->
+	<tr>
+		<td width=84 colspan=2 >Jefe Mantención</td>
+		<td width=134 colspan=7></td>
+		<td width=65 colspan=4 >Correo</td>
+		<td width=186 colspan=15 ></td>
+		<td width=82 colspan=2 >Teléfono</td>
+		<td width=73 colspan=2></td>
+	</tr>
+	<tr>
+		<td width=623 colspan=32 class="titulo-gris">DATOS MANTENIMIENTO</td>
+	</tr>
+	<tr>
+		<!-- START BLOCK : matenimiento -->
+		<td width=191 colspan=8 >Identificación Equipo Atendido</td>
+		<td width=74 colspan=4 >{equipoatendido}</td>
+		<td width=57 colspan=5 >Fecha Inicio</td>
+		<td width=60 colspan=5 >{fechainicio}</td>
+		<td width=60 colspan=5 >Fecha Término</td>
+		<td width=53 colspan=5 >{fechafin}</td>
+	</tr>
+	<tr>
+		<td width=191 colspan=8 >Técnico que Realiza Mantenimiento </td>
+		<td width=433 colspan=24 >{tecnico}</td>
+		<!-- END BLOCK : matenimiento -->
+	</tr>
+	<tr>
+		<td width=623 colspan=32 class="titulo-gris">ACTIVIDADES REALIZADAS</td>
+	</tr>
+	<tr>
+		<td width=623 colspan=32>
+			<!-- START BLOCK : checklist -->
+			<table class="centertext textochico" style="margin-bottom: 5px">
+				<thead>
+					<tr class="encabezado-tabla fondogris">
+						<th class="fondogris">Pauta de Mantenimiento KMM</th>
+						<th class="fondogris centertext {selEne}">Ene</th>
+						<th class="fondogris centertext {selFeb}">Feb</th>
+						<th class="fondogris centertext {selMar}">Mar</th>
+						<th class="fondogris centertext {selAbr}">Abr</th>
+						<th class="fondogris centertext {selMay}">May</th>
+						<th class="fondogris centertext {selJun}">Jun</th>
+						<th class="fondogris centertext {selJul}">Jul</th>
+						<th class="fondogris centertext {selAgo}">Ago</th>
+						<th class="fondogris centertext {selSep}">Sep</th>
+						<th class="fondogris centertext {selOct}">Oct</th>
+						<th class="fondogris centertext {selNov}">Nov</th>
+						<th class="fondogris centertext {selDic}">Dic</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td colspan="13" class="text-left bold">Mantención Mensual</td>
+					</tr>
+					<tr>
+						<td class="bold text-left">Basico (B) - Estandar (ST)</td>
+						<td class="centertext {selEne}">B-ST</td>
+						<td class="centertext {selFeb}">B-ST</td>
+						<td class="centertext {selMar}">B-ST</td>
+						<td class="centertext {selAbr}">B-ST</td>
+						<td class="centertext {selMay}">B-ST</td>
+						<td class="centertext {selJun}">B-ST</td>
+						<td class="centertext {selJul}">B-ST</td>
+						<td class="centertext {selAgo}">B-ST</td>
+						<td class="centertext {selSep}">B-ST</td>
+						<td class="centertext {selOct}">B-ST</td>
+						<td class="centertext {selNov}">B-ST</td>
+						<td class="centertext {selDic}">B-ST</td>
+					</tr>
+					<tr>
+						<td class="bold text-left">Panel de Control (C)</td>
+						<td class="centertext {selEne}">C</td>
+						<td class="centertext {selFeb}">&nbsp;</td>
+						<td class="centertext {selMar}">C</td>
+						<td class="centertext {selAbr}">&nbsp;</td>
+						<td class="centertext {selMay}">C</td>
+						<td class="centertext {selJun}">&nbsp;</td>
+						<td class="centertext {selJul}">C</td>
+						<td class="centertext {selAgo}">&nbsp;</td>
+						<td class="centertext {selSep}">C</td>
+						<td class="centertext {selOct}">&nbsp;</td>
+						<td class="centertext {selNov}">C</td>
+						<td class="centertext {selDic}">&nbsp;</td>
+					</tr>
+					<tr>
+						<td class="bold text-left">Frenos (MX)</td>
+						<td class="centertext {selEne}">&nbsp;</td>
+						<td class="centertext {selFeb}">&nbsp;</td>
+						<td class="centertext {selMar}">&nbsp;</td>
+						<td class="centertext {selAbr}">&nbsp;</td>
+						<td class="centertext {selMay}">&nbsp;</td>
+						<td class="centertext {selJun}">MX</td>
+						<td class="centertext {selJul}">&nbsp;</td>
+						<td class="centertext {selAgo}">&nbsp;</td>
+						<td class="centertext {selSep}">&nbsp;</td>
+						<td class="centertext {selOct}">&nbsp;</td>
+						<td class="centertext {selNov}">&nbsp;</td>
+						<td class="centertext {selDic}">MX</td>
+					</tr>
+					<tr>
+						<td class="bold text-left">Maquinas (M)</td>
+						<td class="centertext {selEne}">M</td>
+						<td class="centertext {selFeb}">&nbsp;</td>
+						<td class="centertext {selMar}">&nbsp;</td>
+						<td class="centertext {selAbr}">&nbsp;</td>
+						<td class="centertext {selMay}">M</td>
+						<td class="centertext {selJun}">&nbsp;</td>
+						<td class="centertext {selJul}">&nbsp;</td>
+						<td class="centertext {selAgo}">&nbsp;</td>
+						<td class="centertext {selSep}">M</td>
+						<td class="centertext {selOct}">&nbsp;</td>
+						<td class="centertext {selNov}">&nbsp;</td>
+						<td class="centertext {selDic}">&nbsp;</td>
+					</tr>
+					<tr>
+						<td class="bold text-left">Sala de Maquinas (SM)</td>
+						<td class="centertext {selEne}">SM</td>
+						<td class="centertext {selFeb}">&nbsp;</td>
+						<td class="centertext {selMar}">SM</td>
+						<td class="centertext {selAbr}">&nbsp;</td>
+						<td class="centertext {selMay}">SM</td>
+						<td class="centertext {selJun}">&nbsp;</td>
+						<td class="centertext {selJul}">SM</td>
+						<td class="centertext {selAgo}">&nbsp;</td>
+						<td class="centertext {selSep}">SM</td>
+						<td class="centertext {selOct}">&nbsp;</td>
+						<td class="centertext {selNov}">SM</td>
+						<td class="centertext {selDic}">&nbsp;</td>
+					</tr>
+					<tr>
+						<td class="bold text-left">Escotilla (S)</td>
+						<td class="centertext {selEne}">&nbsp;</td>
+						<td class="centertext {selFeb}">S</td>
+						<td class="centertext {selMar}">&nbsp;</td>
+						<td class="centertext {selAbr}">S</td>
+						<td class="centertext {selMay}">&nbsp;</td>
+						<td class="centertext {selJun}">S</td>
+						<td class="centertext {selJul}">&nbsp;</td>
+						<td class="centertext {selAgo}">S</td>
+						<td class="centertext {selSep}">&nbsp;</td>
+						<td class="centertext {selOct}">S</td>
+						<td class="centertext {selNov}">&nbsp;</td>
+						<td class="centertext {selDic}">S</td>
+					</tr>
+					<tr>
+						<td class="bold text-left">Operaror de puerta (D)</td>
+						<td class="centertext {selEne}">&nbsp;</td>
+						<td class="centertext {selFeb}">D</td>
+						<td class="centertext {selMar}">&nbsp;</td>
+						<td class="centertext {selAbr}">D</td>
+						<td class="centertext {selMay}">&nbsp;</td>
+						<td class="centertext {selJun}">D</td>
+						<td class="centertext {selJul}">&nbsp;</td>
+						<td class="centertext {selAgo}">D</td>
+						<td class="centertext {selSep}">&nbsp;</td>
+						<td class="centertext {selOct}">D</td>
+						<td class="centertext {selNov}">&nbsp;</td>
+						<td class="centertext {selDic}">D</td>
+					</tr>
+					<tr>
+						<td class="bold text-left">Puertas de Piso (L)</td>
+						<td class="centertext {selEne}">L</td>
+						<td class="centertext {selFeb}">L</td>
+						<td class="centertext {selMar}">L</td>
+						<td class="centertext {selAbr}">L</td>
+						<td class="centertext {selMay}">L</td>
+						<td class="centertext {selJun}">L</td>
+						<td class="centertext {selJul}">L</td>
+						<td class="centertext {selAgo}">L</td>
+						<td class="centertext {selSep}">L</td>
+						<td class="centertext {selOct}">L</td>
+						<td class="centertext {selNov}">L</td>
+						<td class="centertext {selDic}">L</td>
+					</tr>
+					<tr>
+						<td class="bold text-left">Botoneras e indicadores (Z)</td>
+						<td class="centertext {selEne}">&nbsp;</td>
+						<td class="centertext {selFeb}">Z</td>
+						<td class="centertext {selMar}">&nbsp;</td>
+						<td class="centertext {selAbr}">Z</td>
+						<td class="centertext {selMay}">&nbsp;</td>
+						<td class="centertext {selJun}">Z</td>
+						<td class="centertext {selJul}">&nbsp;</td>
+						<td class="centertext {selAgo}">Z</td>
+						<td class="centertext {selSep}">&nbsp;</td>
+						<td class="centertext {selOct}">Z</td>
+						<td class="centertext {selNov}">&nbsp;</td>
+						<td class="centertext {selDic}">Z</td>
+					</tr>
+				</tbody>
+			</table>
+			<!-- END BLOCK : checklist -->
+			<table class="conborde nobordetop">
+				<tr>
+					<td class="subtitulo" style="text-align: center;">CHECK LIST KMM - FABRIMETAL</td>
+				</tr>
+			</table>
+			<!-- START BLOCK : bloques -->
+			<table class="conborde nobordetop">
+				<tr>
+					<td class="subtitulo2" style="text-align: center;">{nombloque}</td>
+				</tr>
+			</table>
+			<!-- START BLOCK : preguntas -->
+			<table class="conborde nobordetop">
+				<tr>
+					<td width=38 colspan=3 class="centertext verticalcentertext">{si1}</td>
+					<td class="col-45 textochico">{pregunta1}</td>
+					<td width=38 colspan=3 class="centertext verticalcentertext">{si2}</td>
+					<td class="col-45 textochico">{pregunta2}</td>
+				</tr>
+			</table>
+			<!-- END BLOCK : preguntas -->
+			<!-- END BLOCK : bloques -->
+			<table class="conborde nobordetop">
+				<tr>
+					<td class="subtitulo">OBSERVACIONES</td>
+				</tr>
+			</table>
+			<table class="conborde nobordetop">
+				<tr>
+					<td class="textochico">{observaciones}</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr height=0>
+		<td height=0 width=75 style='border:none'></td>
+		<td height=0 width=10 style='border:none'></td>
+		<td height=0 width=17 style='border:none'></td>
+		<td height=0 width=11 style='border:none'></td>
+		<td height=0 width=28 style='border:none'></td>
+		<td height=0 width=14 style='border:none'></td>
+		<td height=0 width=23 style='border:none'></td>
+		<td height=0 width=11 style='border:none'></td>
+		<td height=0 width=28 style='border:none'></td>
+		<td height=0 width=18 style='border:none'></td>
+		<td height=0 width=10 style='border:none'></td>
+		<td height=0 width=19 style='border:none'></td>
+		<td height=0 width=19 style='border:none'></td>
+		<td height=0 width=13 style='border:none'></td>
+		<td height=0 width=5 style='border:none'></td>
+		<td height=0 width=10 style='border:none'></td>
+		<td height=0 width=9 style='border:none'></td>
+		<td height=0 width=10 style='border:none'></td>
+		<td height=0 width=37 style='border:none'></td>
+		<td height=0 width=13 style='border:none'></td>
+		<td height=0 width=6 style='border:none'></td>
+		<td height=0 width=19 style='border:none'></td>
+		<td height=0 width=7 style='border:none'></td>
+		<td height=0 width=12 style='border:none'></td>
+		<td height=0 width=16 style='border:none'></td>
+		<td height=0 width=22 style='border:none'></td>
+		<td height=0 width=5 style='border:none'></td>
+		<td height=0 width=1 style='border:none'></td>
+		<td height=0 width=28 style='border:none'></td>
+		<td height=0 width=54 style='border:none'></td>
+		<td height=0 width=20 style='border:none'></td>
+		<td height=0 width=53 style='border:none'></td>
+	</tr>
+</table>
+<pagebreak />
+<table class="p-5" style="border-collapse: collapse;">
+	<tr>
+		<td width=623 colspan=32 class="titulo-gris">ESTADO ACTUAL </td>
+	</tr>
+	<tr>
+		<td class="centertext col-50" >FOSO </td>
+		<td class="centertext col-50" >TECHO CABINA </td>
+	</tr>
+</table>
+	<!-- START BLOCK : imagenes -->
+<div class="col-50" style="float:left">
+	<img style="padding:5px; width: 100%; max-height: 75%; margin-right: auto; margin-left: auto;" src="../files/images/{imgfoso}">
+</div>
+<div class="col-50" style="float:left">
+	<img style="padding:5px; width: 100%; max-height: 75%; margin-right: auto; margin-left: auto;" src="../files/images/{imgtecho}">
+</div>
+<table class="p-5" style="border-collapse: collapse;">
+	<tr>
+		<td class="centertext col-50">MAQUINA </td>
+		<td class="centertext col-50">OPERADOR PUERTA CABINA </td>
+	</tr>
+</table>
+<div class="col-50" style="float:left">
+	<img style="padding:5px; width: 100%; max-height: 75%; margin-right: auto; margin-left: auto;" src="../files/images/{imgmaquina}">
+</div>
+<div class="col-50" style="float:left">
+	<img style="padding:5px; width: 100%; max-height: 75%; margin-right: auto; margin-left: auto;" src="../files/images/{imgoperador}">
+</div>
+	<!-- END BLOCK : imagenes -->
+<table class="p-5" style="border-collapse: collapse;">
+	<tr>
+		<td width=623 colspan=32 class="titulo-gris">ESTADO DEL EQUIPO AL FINALIZAR EL SERVICIO DE MANTENCIÓN</td>
+	</tr>
+	<!-- START BLOCK : servicio -->
+	<tr>
+		<td colspan=10 >Estado del Equipo</td>
+		<td colspan=22 >{estadofin}</td>
+	</tr>
+	<tr>
+		<td colspan=10 >Observación</td>
+		<td colspan=22 >{observacionfin}</td>
+	</tr>
+	<!-- END BLOCK : servicio -->
+</table>

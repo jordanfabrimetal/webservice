@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="css/form_visita_obra.css">
+</head>
+<body>
+	<table class="conborde" style="margin-top: 10px">
+		<tr>
+			<td class="titulo2" style="text-align: center;">INFORME DE MANTENIMIENTO</td>
+		</tr>
+	</table>
+	<table class="conborde nobordetop" style="margin-bottom: 5px">
+		<tr>
+			<td style="margin:0; padding: -1">
+				<table>
+					<tr>
+						<td class="col-15 textochico">NOMBRE DE EDIFICIO:</td>
+						<td class="col-40 textochico">{obra}</td>
+						<td class="col-10 textochico">FECHA:</td>
+						<td class="textochico">{fechavisita} (<span class="bold">{periodotxt}</span>)</td>
+					</tr>
+					<tr>
+						<td class="col-15 textochico">FM ASCENSOR:</td>
+						<td class="col-40 textochico">{ascensor}</td>
+						<td class="col-10 textochico">TIPO:</td>
+						<td class="textochico">{modelo}</td>
+					</tr>
+					<!-- <tr>
+						<td class="col-25 textochico">ASCENSOR/ESCALERA:</td>
+						<td class="textochico">{tipoascensor} ({ascensor})</td>
+					</tr>
+					<tr>
+						<td class="col-40 textochico">SUPERVISOR:</td>
+						<td class="textochico">{supervisor}</td>
+					</tr>
+					<tr>
+						<td class="col-40 textochico">FECHA DE LA VISITA:</td>
+						<td class="textochico">{fechavisita}</td>
+					</tr> -->
+				</table>
+			</td>
+		</tr>
+	</table>
+
+	<table class="centertext textochico" style="margin-bottom: 5px">
+		<thead>
+			<tr class="encabezado-tabla fondogris">
+		  		<th class="fondogris">Pauta de Mantenimiento KMM</th>
+		  		<th class="fondogris centertext {selEne}">Ene</th>
+		  		<th class="fondogris centertext {selFeb}">Feb</th>
+		  		<th class="fondogris centertext {selMar}">Mar</th>
+		  		<th class="fondogris centertext {selAbr}">Abr</th>
+		  		<th class="fondogris centertext {selMay}">May</th>
+		  		<th class="fondogris centertext {selJun}">Jun</th>
+		  		<th class="fondogris centertext {selJul}">Jul</th>
+		  		<th class="fondogris centertext {selAgo}">Ago</th>
+		  		<th class="fondogris centertext {selSep}">Sep</th>
+		  		<th class="fondogris centertext {selOct}">Oct</th>
+		  		<th class="fondogris centertext {selNov}">Nov</th>
+		  		<th class="fondogris centertext {selDic}">Dic</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+	  			<td colspan="13" class="text-left bold">Mantención Mensual</td>
+			</tr>
+			<tr>
+		  		<td class="bold text-left">Basico (B) - Estandar (ST)</td>
+		  		<td class="centertext {selEne}">B-ST</td>
+		  		<td class="centertext {selFeb}">B-ST</td>
+		  		<td class="centertext {selMar}">B-ST</td>
+		  		<td class="centertext {selAbr}">B-ST</td>
+		  		<td class="centertext {selMay}">B-ST</td>
+		  		<td class="centertext {selJun}">B-ST</td>
+		  		<td class="centertext {selJul}">B-ST</td>
+		  		<td class="centertext {selAgo}">B-ST</td>
+		  		<td class="centertext {selSep}">B-ST</td>
+		  		<td class="centertext {selOct}">B-ST</td>
+		  		<td class="centertext {selNov}">B-ST</td>
+		  		<td class="centertext {selDic}">B-ST</td>
+			</tr>
+			<tr>
+		  		<td class="bold text-left">Panel de Control (C)</td>
+		  		<td class="centertext {selEne}">C</td>
+		  		<td class="centertext {selFeb}">&nbsp;</td>
+		  		<td class="centertext {selMar}">C</td>
+		  		<td class="centertext {selAbr}">&nbsp;</td>
+		  		<td class="centertext {selMay}">C</td>
+		  		<td class="centertext {selJun}">&nbsp;</td>
+		  		<td class="centertext {selJul}">C</td>
+		  		<td class="centertext {selAgo}">&nbsp;</td>
+		  		<td class="centertext {selSep}">C</td>
+		  		<td class="centertext {selOct}">&nbsp;</td>
+		  		<td class="centertext {selNov}">C</td>
+		  		<td class="centertext {selDic}">&nbsp;</td>
+			</tr>
+			<tr>
+		  		<td class="bold text-left">Frenos (MX)</td>
+		  		<td class="centertext {selEne}">&nbsp;</td>
+		  		<td class="centertext {selFeb}">&nbsp;</td>
+		  		<td class="centertext {selMar}">&nbsp;</td>
+		  		<td class="centertext {selAbr}">&nbsp;</td>
+		  		<td class="centertext {selMay}">&nbsp;</td>
+		  		<td class="centertext {selJun}">MX</td>
+		  		<td class="centertext {selJul}">&nbsp;</td>
+		  		<td class="centertext {selAgo}">&nbsp;</td>
+		  		<td class="centertext {selSep}">&nbsp;</td>
+		  		<td class="centertext {selOct}">&nbsp;</td>
+		  		<td class="centertext {selNov}">&nbsp;</td>
+		  		<td class="centertext {selDic}">MX</td>
+			</tr>
+			<tr>
+		  		<td class="bold text-left">Maquinas (M)</td>
+		  		<td class="centertext {selEne}">M</td>
+		  		<td class="centertext {selFeb}">&nbsp;</td>
+		  		<td class="centertext {selMar}">&nbsp;</td>
+		  		<td class="centertext {selAbr}">&nbsp;</td>
+		  		<td class="centertext {selMay}">M</td>
+		  		<td class="centertext {selJun}">&nbsp;</td>
+		  		<td class="centertext {selJul}">&nbsp;</td>
+		  		<td class="centertext {selAgo}">&nbsp;</td>
+		  		<td class="centertext {selSep}">M</td>
+		  		<td class="centertext {selOct}">&nbsp;</td>
+		  		<td class="centertext {selNov}">&nbsp;</td>
+		  		<td class="centertext {selDic}">&nbsp;</td>
+			</tr>
+			<tr>
+		  		<td class="bold text-left">Sala de Maquinas (SM)</td>
+		  		<td class="centertext {selEne}">SM</td>
+		  		<td class="centertext {selFeb}">&nbsp;</td>
+		  		<td class="centertext {selMar}">SM</td>
+		  		<td class="centertext {selAbr}">&nbsp;</td>
+		  		<td class="centertext {selMay}">SM</td>
+		  		<td class="centertext {selJun}">&nbsp;</td>
+		  		<td class="centertext {selJul}">SM</td>
+		  		<td class="centertext {selAgo}">&nbsp;</td>
+		  		<td class="centertext {selSep}">SM</td>
+		  		<td class="centertext {selOct}">&nbsp;</td>
+		  		<td class="centertext {selNov}">SM</td>
+		  		<td class="centertext {selDic}">&nbsp;</td>
+			</tr>
+			<tr>
+		  		<td class="bold text-left">Escotilla (S)</td>
+		  		<td class="centertext {selEne}">&nbsp;</td>
+		  		<td class="centertext {selFeb}">S</td>
+		  		<td class="centertext {selMar}">&nbsp;</td>
+		  		<td class="centertext {selAbr}">S</td>
+		  		<td class="centertext {selMay}">&nbsp;</td>
+		  		<td class="centertext {selJun}">S</td>
+		  		<td class="centertext {selJul}">&nbsp;</td>
+		  		<td class="centertext {selAgo}">S</td>
+		  		<td class="centertext {selSep}">&nbsp;</td>
+		  		<td class="centertext {selOct}">S</td>
+		  		<td class="centertext {selNov}">&nbsp;</td>
+		  		<td class="centertext {selDic}">S</td>
+			</tr>
+			<tr>
+		  		<td class="bold text-left">Operaror de puerta (D)</td>
+		  		<td class="centertext {selEne}">&nbsp;</td>
+		  		<td class="centertext {selFeb}">D</td>
+		  		<td class="centertext {selMar}">&nbsp;</td>
+		  		<td class="centertext {selAbr}">D</td>
+		  		<td class="centertext {selMay}">&nbsp;</td>
+		  		<td class="centertext {selJun}">D</td>
+		  		<td class="centertext {selJul}">&nbsp;</td>
+		  		<td class="centertext {selAgo}">D</td>
+		  		<td class="centertext {selSep}">&nbsp;</td>
+		  		<td class="centertext {selOct}">D</td>
+		  		<td class="centertext {selNov}">&nbsp;</td>
+		  		<td class="centertext {selDic}">D</td>
+			</tr>
+			<tr>
+		  		<td class="bold text-left">Puertas de Piso (L)</td>
+		  		<td class="centertext {selEne}">L</td>
+		  		<td class="centertext {selFeb}">L</td>
+		  		<td class="centertext {selMar}">L</td>
+		  		<td class="centertext {selAbr}">L</td>
+		  		<td class="centertext {selMay}">L</td>
+		  		<td class="centertext {selJun}">L</td>
+		  		<td class="centertext {selJul}">L</td>
+		  		<td class="centertext {selAgo}">L</td>
+		  		<td class="centertext {selSep}">L</td>
+		  		<td class="centertext {selOct}">L</td>
+		  		<td class="centertext {selNov}">L</td>
+		  		<td class="centertext {selDic}">L</td>
+			</tr>
+			<tr>
+		  		<td class="bold text-left">Botoneras e indicadores (Z)</td>
+		  		<td class="centertext {selEne}">&nbsp;</td>
+		  		<td class="centertext {selFeb}">Z</td>
+		  		<td class="centertext {selMar}">&nbsp;</td>
+		  		<td class="centertext {selAbr}">Z</td>
+		  		<td class="centertext {selMay}">&nbsp;</td>
+		  		<td class="centertext {selJun}">Z</td>
+		  		<td class="centertext {selJul}">&nbsp;</td>
+		  		<td class="centertext {selAgo}">Z</td>
+		  		<td class="centertext {selSep}">&nbsp;</td>
+		  		<td class="centertext {selOct}">Z</td>
+		  		<td class="centertext {selNov}">&nbsp;</td>
+		  		<td class="centertext {selDic}">Z</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<table class="conborde nobordetop">
+		<tr>
+			<td class="subtitulo" style="text-align: center;">CHECK LIST KMM - FABRIMETAL</td>
+		</tr>
+	</table>
+	<!-- START BLOCK : bloques -->
+	<table class="conborde nobordetop">
+		<tr>
+			<td class="subtitulo2" style="text-align: center;">{nombloque}</td>
+		</tr>
+	</table>
+	<!-- <table class="conborde nobordetop">
+		<tr>
+			<td class="col-45 encabezado">PARAMETROS A CONTROLAR</td>
+			<td class="col-05 encabezado centertext"><center>SI</center></td>
+			<td class="col-05 encabezado centertext"><center>NO</center></td>
+			<td class="">&nbsp;</td>
+		</tr>
+	</table> -->
+	<!-- START BLOCK : preguntas -->
+	<table class="conborde nobordetop">
+		<tr>
+			<td class="col-05 centertext verticalcentertext">{si1}</td>
+			<td class="col-45 textochico">{pregunta1}</td>
+			<td class="col-05 centertext verticalcentertext">{si2}</td>
+			<td class="col-45 textochico">{pregunta2}</td>
+		</tr>
+	</table>
+	<!-- END BLOCK : preguntas -->
+	<!-- END BLOCK : bloques -->
+	<table class="conborde nobordetop">
+		<tr>
+			<td class="subtitulo">OBSERVACIONES</td>
+		</tr>
+	</table>
+	<table class="conborde nobordetop">
+		<tr>
+			<td class="textochico">{observaciones}</td>
+		</tr>
+	</table>
+	{textoporfirmar}
+	<!-- START BLOCK : firmacliente -->
+	<table style="margin-top: 30px">
+	    <tr>
+	        <td class="col-10 sinborde"></td>
+	        <td class="col-30 sinborde" style="border-bottom: 1px solid #000000">{firmausuario}</td>
+	        <td class="col-10 sinborde"></td>
+	        <td class="col-30 sinborde" style="border-bottom: 1px solid #000000">{firmacliente}</td>
+	        <td class="sinborde"></td>
+	    </tr>
+	    <tr>
+	    	<td class="sinborde"></td>
+	        <td class="sinborde textochico">FIRMA FABRIMETAL</td>
+	        <td class="sinborde"></td>
+	        <td class="sinborde textochico">FIRMA CLIENTE</td>
+	        <td class="sinborde"></td>
+	    </tr>
+	    <tr>
+	    	<td class="sinborde"></td>
+	        <td class="sinborde textochico">TECNICO: {nomuser}</td>
+	        <td class="sinborde"></td>
+	        <td colspan="2" class="sinborde textochico">NOMBRE: {nomcli}</td>
+	    </tr>
+	    <tr>
+	    	<td class="sinborde"></td>
+	        <td class="sinborde textochico">RUT: {rutuser}</td>
+	        <td class="sinborde"></td>
+	        <td colspan="2" class="sinborde textochico"></td>
+	    </tr>
+	    <tr>
+	        <td colspan="5" class="sinborde textochico centertext">Fecha firma: {fechafirmacliente}</td>
+	    </tr>
+	</table>
+	<!-- END BLOCK : firmacliente -->
+</body>
+</html>

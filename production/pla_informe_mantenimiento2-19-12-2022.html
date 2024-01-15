@@ -1,0 +1,1251 @@
+
+<style type="text/css">
+	.col-md-55, .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12{float: revert !important}
+.py-0 {
+		padding-top: 0 !important;
+		padding-bottom: 0 !important;
+	}
+
+	.py-1 {
+		padding-top: 0.25rem !important;
+		padding-bottom: 0.25rem !important;
+	}
+
+	.py-2 {
+		padding-top: 0.5rem !important;
+		padding-bottom: 0.5rem !important;
+	}
+
+	.py-3 {
+		padding-top: 1rem !important;
+		padding-bottom: 1rem !important;
+	}
+
+	.py-4 {
+		padding-top: 1.5rem !important;
+		padding-bottom: 1.5rem !important;
+	}
+
+	.py-5 {
+		padding-top: 3rem !important;
+		padding-bottom: 3rem !important;
+	}
+	.x_title h2{
+		overflow: visible !important; 
+	}
+
+	.border-bottom {
+		border: 1px solid lightgrey;
+		margin:-1px 0 0 -1px;
+	}
+
+	.border-bottom-center {
+		border: 1px solid lightgrey;
+		margin:-1px 0 0 -1px;
+		text-align: center;
+	}
+
+	.encabezado-tabla {
+		background-color: grey;
+		color: #FFFFFF;
+		font-weight: bold;
+	}
+
+	.bold {
+		font-weight: bold;
+	}
+
+	.margen-top {
+		margin-top: 20px;
+	}
+
+	.x_title {
+		border-bottom: none;
+		margin-bottom: none;
+	}
+
+	.selcolumn {
+		border: 3px solid salmon !important;
+		font-weight: bold;
+	}
+
+	.text-center {
+		text-align: center;
+	}
+
+	.text-left {
+		text-align: left;
+	}
+
+	.table-condensed>tbody>tr>td,
+	.table-condensed>tbody>tr>th,
+	.table-condensed>tfoot>tr>td,
+	.table-condensed>tfoot>tr>th,
+	.table-condensed>thead>tr>td,
+	.table-condensed>thead>tr>th {
+		padding: 2px;
+	}
+
+	.table {
+		margin-bottom: 0px;
+	}
+
+	.thumb-image{
+		float:left;
+		width:100%;
+		position:relative;
+		padding:5px;
+	}
+
+/*form styles*/
+#msform {
+    
+    position: relative;
+    margin-top: 20px;
+}
+
+#msform fieldset .form-card {
+    background: white;
+    border: 0 none;
+    border-radius: 0px;
+    box-shadow: 0 2px 2px 2px rgba(0, 0, 0, 0.2);
+    padding: 5px 10px 5px 10px;
+    box-sizing: border-box;
+    width: 100%;
+    display: contents;
+    /*stacking fieldsets above each other*/
+    position: relative;
+}
+
+#msform fieldset {
+    background: white;
+    border: 0 none;
+    border-radius: 0.5rem;
+    box-sizing: border-box;
+    width: 100%;
+    margin: 0;
+    padding-bottom: 20px;
+
+    /*stacking fieldsets above each other*/
+    position: relative;
+}
+
+/*Hide all except first fieldset*/
+#msform fieldset:not(:first-of-type) {
+    display: none;
+}
+
+#msform fieldset .form-card {
+    text-align: left;
+    color: #9E9E9E;
+}
+
+/*Blue Buttons*/
+#msform .action-button {
+    background: #98bf0c;
+    font-weight: bold;
+    color: white;
+    border: 0 none;
+    border-radius: 0px;
+    cursor: pointer;
+    padding: 10px 5px;
+    margin: 10px 5px;
+}
+
+#msform .action-button:hover, #msform .action-button:focus {
+    box-shadow: 0 0 0 2px white, 0 0 0 3px #98bf0c;
+}
+
+/*Previous Buttons*/
+#msform .action-button-previous {
+    background: #616161;
+    font-weight: bold;
+    color: white;
+    border: 0 none;
+    border-radius: 0px;
+    cursor: pointer;
+    padding: 10px 5px;
+    margin: 10px 5px;
+}
+
+#msform .action-button-previous:hover, #msform .action-button-previous:focus {
+    box-shadow: 0 0 0 2px white, 0 0 0 3px #616161;
+}
+
+/*Dropdown List Exp Date*/
+select.list-dt {
+    border: none;
+    outline: 0;
+    border-bottom: 1px solid #ccc;
+    padding: 2px 5px 3px 5px;
+    margin: 2px;
+}
+
+select.list-dt:focus {
+    border-bottom: 2px solid #98bf0c;
+}
+
+/*The background card*/
+.card {
+    z-index: 0;
+    border: none;
+    border-radius: 0.5rem;
+    position: relative;
+}
+
+/*FieldSet headings*/
+.fs-title {
+    font-size: 25px;
+    color: #2C3E50;
+    margin-bottom: 10px;
+    font-weight: bold;
+    text-align: left;
+}
+
+/*progressbar*/
+#progressbar {
+    margin-bottom: 30px;
+    overflow: hidden;
+    color: lightgrey;
+    padding-left: 0px;
+}
+
+#progressbar .active {
+    color: #000000;
+}
+
+#progressbar li {
+    list-style-type: none;
+    font-size: 12px;
+    width: 33.3%;
+    float: left;
+    position: relative;
+}
+
+/*Icons in the ProgressBar*/
+#progressbar #checklist:before {
+    font-family: FontAwesome;
+    content: "\f03a";
+}
+
+#progressbar #guia-servicio:before {
+    font-family: FontAwesome;
+    content: "\f0f6";
+}
+
+#progressbar #imagen-mensual:before {
+    font-family: FontAwesome;
+    content: "\f030";
+}
+
+/*ProgressBar before any progress*/
+#progressbar li:before {
+    width: 50px;
+    height: 50px;
+    line-height: 45px;
+    display: block;
+    font-size: 18px;
+    color: #ffffff;
+    background: lightgray;
+    border-radius: 50%;
+    margin: 0 auto 10px auto;
+    padding: 2px;
+}
+
+/*ProgressBar connectors*/
+#progressbar li:after {
+    content: '';
+    width: 100%;
+    height: 2px;
+    background: lightgray;
+    position: absolute;
+    left: 0;
+    top: 25px;
+    z-index: -1;
+}
+
+/*Color number of the step and the connector before it*/
+#progressbar li.active:before, #progressbar li.active:after {
+    background: #98bf0c;
+}
+
+/*Imaged Radio Buttons*/
+.radio-group {
+    position: relative;
+    margin-bottom: 25px;
+}
+
+.radio {
+    display:inline-block;
+    width: 204;
+    height: 104;
+    border-radius: 0;
+    background: lightblue;
+    box-shadow: 0 2px 2px 2px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+    cursor:pointer;
+    margin: 8px 2px; 
+}
+
+.radio:hover {
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.3);
+}
+
+.radio.selected {
+    box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.1);
+}
+
+/*Fit image in bootstrap div*/
+.fit-image{
+    width: 100%;
+    object-fit: cover;
+}
+
+tr>th:first-child,tr>td:first-child {
+  position: sticky;
+  left: 0;
+}
+
+tr:nth-child(odd) td {
+   background: white;
+}
+
+tr:nth-child(even) td {
+   background: white;
+}
+</style>
+<!-- MultiStep Form -->
+<div class="" id="grad1">
+	<div class="row justify-content-center mt-0">
+		<div class="col-12 col-sm-12 col-md-12 col-lg-12 text-center p-0 mt-3 mb-2">
+			<div class="card px-0 pt-4 pb-0 mt-3 mb-3">
+				<div class="row">
+					<div class="col-md-12 mx-0">
+						<form id="msform" enctype="multipart/form-data">
+							<!-- progressbar -->
+							<ul id="progressbar">
+								<li class="active" id="checklist"><strong>Checklist</strong></li>
+								<li id="guia-servicio"><strong>Guia de Servicio</strong></li>
+								<li id="imagen-mensual"><strong>Imagenes</strong></li>
+							</ul>
+							<!-- fieldsets -->
+							<fieldset>
+								<div class="form-card">
+									<div class="clearfix"></div>
+									<hr>
+									<!-- <div class="row "> -->
+										<div class="col-md-6 col-sm-12 col-xs-12">
+											<div class="row">
+												<div class="col-md-5 col-sm-12 col-xs-12">
+													<strong>OBRA: </strong>
+												</div>
+												<div class="col-md-7 col-sm-12 col-xs-12">
+													{obra}
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-5 col-sm-12 col-xs-12">
+													<strong>ASCENSOR / ESCALERA: </strong>
+												</div>
+												<div class="col-md-7 col-sm-12 col-xs-12">
+													{tipoascensor} ({ascensor})
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-5 col-sm-12 col-xs-12">
+													<strong>SUPERVISOR: </strong>
+												</div>
+												<div class="col-md-7 col-sm-12 col-xs-12">
+													{supervisor}
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-5 col-sm-12 col-xs-12">
+													<strong>FECHA DE LA VISITA: </strong>
+												</div>
+												<div class="col-md-7 col-sm-12 col-xs-12">
+													{fechanow} (<span style="color: salmon">{periodotxt}</span>)
+												</div>
+											</div>
+										</div>
+										<div class="col-md-6 col-sm-12 col-xs-12">
+											<div class="row">
+												<div class="col-md-5 col-sm-12 col-xs-12">
+													<strong>CLIENTE: </strong>
+												</div>
+												<div class="col-md-7 col-sm-12 col-xs-12">
+													<input type="text" class="form-control" name="empresa" id="empresa" required="" value="{empresa}">
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-5 col-sm-12 col-xs-12">
+													<strong>DIRECCIÓN: </strong>
+												</div>
+												<div class="col-md-7 col-sm-12 col-xs-12">
+													<input type="text" class="form-control" name="direccion" id="direccion" required="" value="{direccion}">
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-5 col-sm-12 col-xs-12">
+													<strong>MODELO EQUIPO: </strong>
+												</div>
+												<div class="col-md-7 col-sm-12 col-xs-12">
+													{modelo}
+												</div>
+											</div>
+										</div>
+									<!-- </div> -->
+									<hr>
+									<div class="row">
+										<div class="col-md-12 col-sm-12 col-xs-12" style="display: contents;">
+											<div class="table-responsive">
+												<table class="table table-bordered table-condensed text-center">
+													<thead>
+														<tr class="encabezado-tabla">
+															<th style="background-color: grey;">Pauta de Mantenimiento KMM</th>
+															<th class="text-center {selEne}">Ene</th>
+															<th class="text-center {selFeb}">Feb</th>
+															<th class="text-center {selMar}">Mar</th>
+															<th class="text-center {selAbr}">Abr</th>
+															<th class="text-center {selMay}">May</th>
+															<th class="text-center {selJun}">Jun</th>
+															<th class="text-center {selJul}">Jul</th>
+															<th class="text-center {selAgo}">Ago</th>
+															<th class="text-center {selSep}">Sep</th>
+															<th class="text-center {selOct}">Oct</th>
+															<th class="text-center {selNov}">Nov</th>
+															<th class="text-center {selDic}">Dic</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr>
+															<td class="text-left bold">Mantención Mensual</td>
+															<td colspan="12">&nbsp;</td>
+														</tr>
+														<tr>
+															<td class="bold text-left">Basico (B) - Estandar (ST)</td>
+															<td class=" {selEne}">B-ST</td>
+															<td class=" {selFeb}">B-ST</td>
+															<td class=" {selMar}">B-ST</td>
+															<td class=" {selAbr}">B-ST</td>
+															<td class=" {selMay}">B-ST</td>
+															<td class=" {selJun}">B-ST</td>
+															<td class=" {selJul}">B-ST</td>
+															<td class=" {selAgo}">B-ST</td>
+															<td class=" {selSep}">B-ST</td>
+															<td class=" {selOct}">B-ST</td>
+															<td class=" {selNov}">B-ST</td>
+															<td class=" {selDic}">B-ST</td>
+														</tr>
+														<tr>
+															<td class="bold text-left">Panel de Control (C)</td>
+															<td class=" {selEne}">C</td>
+															<td class=" {selFeb}">&nbsp;</td>
+															<td class=" {selMar}">C</td>
+															<td class=" {selAbr}">&nbsp;</td>
+															<td class=" {selMay}">C</td>
+															<td class=" {selJun}">&nbsp;</td>
+															<td class=" {selJul}">C</td>
+															<td class=" {selAgo}">&nbsp;</td>
+															<td class=" {selSep}">C</td>
+															<td class=" {selOct}">&nbsp;</td>
+															<td class=" {selNov}">C</td>
+															<td class=" {selDic}">&nbsp;</td>
+														</tr>
+														<tr>
+															<td class="bold text-left">Frenos (MX)</td>
+															<td class=" {selEne}">&nbsp;</td>
+															<td class=" {selFeb}">&nbsp;</td>
+															<td class=" {selMar}">&nbsp;</td>
+															<td class=" {selAbr}">&nbsp;</td>
+															<td class=" {selMay}">&nbsp;</td>
+															<td class=" {selJun}">MX</td>
+															<td class=" {selJul}">&nbsp;</td>
+															<td class=" {selAgo}">&nbsp;</td>
+															<td class=" {selSep}">&nbsp;</td>
+															<td class=" {selOct}">&nbsp;</td>
+															<td class=" {selNov}">&nbsp;</td>
+															<td class=" {selDic}">MX</td>
+														</tr>
+														<tr>
+															<td class="bold text-left">Maquinas (M)</td>
+															<td class=" {selEne}">M</td>
+															<td class=" {selFeb}">&nbsp;</td>
+															<td class=" {selMar}">&nbsp;</td>
+															<td class=" {selAbr}">&nbsp;</td>
+															<td class=" {selMay}">M</td>
+															<td class=" {selJun}">&nbsp;</td>
+															<td class=" {selJul}">&nbsp;</td>
+															<td class=" {selAgo}">&nbsp;</td>
+															<td class=" {selSep}">M</td>
+															<td class=" {selOct}">&nbsp;</td>
+															<td class=" {selNov}">&nbsp;</td>
+															<td class=" {selDic}">&nbsp;</td>
+														</tr>
+														<tr>
+															<td class="bold text-left">Sala de Maquinas (SM)</td>
+															<td class=" {selEne}">SM</td>
+															<td class=" {selFeb}">&nbsp;</td>
+															<td class=" {selMar}">SM</td>
+															<td class=" {selAbr}">&nbsp;</td>
+															<td class=" {selMay}">SM</td>
+															<td class=" {selJun}">&nbsp;</td>
+															<td class=" {selJul}">SM</td>
+															<td class=" {selAgo}">&nbsp;</td>
+															<td class=" {selSep}">SM</td>
+															<td class=" {selOct}">&nbsp;</td>
+															<td class=" {selNov}">SM</td>
+															<td class=" {selDic}">&nbsp;</td>
+														</tr>
+														<tr>
+															<td class="bold text-left">Escotilla (S)</td>
+															<td class=" {selEne}">&nbsp;</td>
+															<td class=" {selFeb}">S</td>
+															<td class=" {selMar}">&nbsp;</td>
+															<td class=" {selAbr}">S</td>
+															<td class=" {selMay}">&nbsp;</td>
+															<td class=" {selJun}">S</td>
+															<td class=" {selJul}">&nbsp;</td>
+															<td class=" {selAgo}">S</td>
+															<td class=" {selSep}">&nbsp;</td>
+															<td class=" {selOct}">S</td>
+															<td class=" {selNov}">&nbsp;</td>
+															<td class=" {selDic}">S</td>
+														</tr>
+														<tr>
+															<td class="bold text-left">Operaror de puerta (D)</td>
+															<td class=" {selEne}">&nbsp;</td>
+															<td class=" {selFeb}">D</td>
+															<td class=" {selMar}">&nbsp;</td>
+															<td class=" {selAbr}">D</td>
+															<td class=" {selMay}">&nbsp;</td>
+															<td class=" {selJun}">D</td>
+															<td class=" {selJul}">&nbsp;</td>
+															<td class=" {selAgo}">D</td>
+															<td class=" {selSep}">&nbsp;</td>
+															<td class=" {selOct}">D</td>
+															<td class=" {selNov}">&nbsp;</td>
+															<td class=" {selDic}">D</td>
+														</tr>
+														<tr>
+															<td class="bold text-left">Puertas de Piso (L)</td>
+															<td class=" {selEne}">L</td>
+															<td class=" {selFeb}">L</td>
+															<td class=" {selMar}">L</td>
+															<td class=" {selAbr}">L</td>
+															<td class=" {selMay}">L</td>
+															<td class=" {selJun}">L</td>
+															<td class=" {selJul}">L</td>
+															<td class=" {selAgo}">L</td>
+															<td class=" {selSep}">L</td>
+															<td class=" {selOct}">L</td>
+															<td class=" {selNov}">L</td>
+															<td class=" {selDic}">L</td>
+														</tr>
+														<tr>
+															<td class="bold text-left">Botoneras e indicadores (Z)</td>
+															<td class=" {selEne}">&nbsp;</td>
+															<td class=" {selFeb}">Z</td>
+															<td class=" {selMar}">&nbsp;</td>
+															<td class=" {selAbr}">Z</td>
+															<td class=" {selMay}">&nbsp;</td>
+															<td class=" {selJun}">Z</td>
+															<td class=" {selJul}">&nbsp;</td>
+															<td class=" {selAgo}">Z</td>
+															<td class=" {selSep}">&nbsp;</td>
+															<td class=" {selOct}">Z</td>
+															<td class=" {selNov}">&nbsp;</td>
+															<td class=" {selDic}">Z</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+									
+									<div class="panel-body col-md-12">
+										<input type="hidden" name="idencuesta" value="{idencuesta}">
+										<input type="hidden" name="idascensor" value="{idascensor}">
+										<input type="hidden" name="idcliente" value="{idcliente}">
+										<input type="hidden" name="idservicio" id="idserviciocheck" value="{idservicio}">
+										<input type="hidden" name="idactividad" id="idactividadcheck" value="{idactividad}">
+										<input type="hidden" name="periodo" value="{periodo}">
+										<input type="hidden" name="porfirmar" id="porfirmar" value="true">
+										<div class="project_detail">
+											<!-- START BLOCK : bloques -->
+											<div class="row margen-top">
+												<div class="col-md-12 col-sm-12 col-xs-12">
+													<h4><strong>{nombloque}</strong></h4>
+												</div>
+											</div>
+											<div class="row">
+												<!-- START BLOCK : preguntas -->
+												
+															{pregunta}
+													
+												<!-- END BLOCK : preguntas -->
+											</div>
+											<!-- END BLOCK : bloques -->
+
+											<div class="row">
+												<div class="col-md-12 col-sm-12 col-xs-12 title">Observaciones</div>
+												<div class="col-md-12 col-sm-12 col-xs-12 title"><textarea name="observaciones" id="observaciones" class="form-control" rows="4" style="width: 100%"></textarea></div>
+												<div class="col-md-12 col-sm-12 col-xs-12 title">&nbsp;</div>
+											</div>
+
+											<div class="row">
+												<div class="col-md-12 col-sm-12 col-xs-12">
+													<div class="checkbox" id="certifica">
+														<label>
+															<input type="checkbox" name="chkCertifica" id="chkCertifica" value="SI">
+															<b>Técnico de mantención declara que se cumple y se realiza lo indicado en el programa de mantención de este mes</b>
+														</label>
+													</div>
+												</div>
+											</div>
+											<hr>
+											<div class="row">
+												<div class="col-md-12 col-sm-12 col-xs-12">
+													<label for="descripcion1">Imagen 1 - Foso</label>
+													<div class="col-md-12 col-sm-12 col-xs-12" id="zonaUpload1">
+														<div class="col-md-12 col-sm-12 col-xs-12">
+															<input type="file" name="imgfoso" id="imgfoso" multiple="3">
+														</div>
+														<div class="col-md-12 col-sm-12 col-xs-12" id="image-foso-holder"></div>
+													</div>
+												</div>
+											</div>
+											<hr>
+											<div class="row">
+												<div class="col-md-12 col-sm-12 col-xs-12">
+													<label for="descripcion1">Imagen 2 - Techo de cabina</label>
+													<div class="col-md-12 col-sm-12 col-xs-12" id="zonaUpload2">
+														<div class="col-md-12 col-sm-12 col-xs-12">
+															<input type="file" name="imgtecho" id="imgtecho">
+														</div>
+														<div class="col-md-12 col-sm-12 col-xs-12" id="image-techo-holder"></div>
+													</div>
+												</div>
+											</div>
+											<hr>
+											<div class="row">
+												<div class="col-md-12 col-sm-12 col-xs-12">
+													<label for="descripcion1">Imagen 3 - Máquina</label>
+													<div class="col-md-12 col-sm-12 col-xs-12" id="zonaUpload3">
+														<div class="col-md-12 col-sm-12 col-xs-12">
+															<input type="file" name="imgmaquina" id="imgmaquina">
+														</div>
+														<div class="col-md-12 col-sm-12 col-xs-12" id="image-maquina-holder"></div>
+													</div>
+												</div>
+											</div>
+											<hr>
+											<div class="row">
+												<div class="col-md-12 col-sm-12 col-xs-12">
+													<label for="descripcion1">Imagen 4 - Operador de puerta de cabina</label>
+													<div class="col-md-12 col-sm-12 col-xs-12" id="zonaUpload4">
+														<div class="col-md-12 col-sm-12 col-xs-12">
+															<input type="file" name="imgoperador" id="imgoperador">
+														</div>
+														<div class="col-md-12 col-sm-12 col-xs-12" id="image-operador-holder"></div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<hr>
+								<input type="button" name="next" class="next btn btn-info fa-input" value="Guía de Servicio"/>
+							</fieldset>
+							<fieldset>
+								<div class="form-card">
+									<div class="col-md-12 col-sm-12 col-xs-12 form-group" style="display: none;">
+										<input type="hidden" readonly="true" class="form-control" name="servicecallIDfi" id="servicecallIDfi">
+										<input type="hidden" readonly="true" class="form-control" name="actividadIDfi" id="actividadIDfi">
+										<input type="hidden" readonly="true" class="form-control" name="customercodefi" id="customercodefi">
+										<input type="hidden" readonly="true" class="form-control" name="codigofmfi" id="codigofmfi">
+										<input type="hidden" readonly="true" class="form-control" name="ascensorIDfi" id="ascensorIDfi">
+										<input type="hidden" readonly="true" class="form-control" name="txtObsFin" id="txtObsFin">
+										<input type="text" class="form-control" disabled="disabled" name="codigofi" id="codigofi">
+										<input type="text" class="form-control" disabled="disabled" name="tascensorfi" id="tascensorfi">
+										<input type="text" class="form-control" disabled="disabled" name="marcafi" id="marcafi">
+										<input type="text" class="form-control" disabled="disabled" name="modelofi" id="modelofi">
+										<input type="text" class="form-control" readonly="true" name="edificiofi" id="edificiofi">
+										<input type="hidden" class="form-control" name="codclifi" id="codclifi">
+										<input type="text" class="form-control" disabled="disabled" name="direccionfi" id="direccionfi">
+										<input type="text" class="form-control" disabled="disabled" name="fechainifi" id="fechainifi">
+										<input type="text" class="form-control" disabled="disabled" name="horainifi" id="horainifi">
+										<input type="text" class="form-control" disabled="disabled" name="tserviciofi" id="tserviciofi">
+										<input type="text" class="form-control" disabled="disabled" name="estadoinifi" id="estadoinifi">
+									
+										<textarea type="text" id="observacioniniso" name="observacioniniso" disabled="disabled" class="resizable_textarea form-control"></textarea>
+									</div>
+									<h4><b>INFORMACION DE FINALIZACION DEL SERVICIO</b></h4>
+									<div class="col-md-12 col-sm-12 col-xs-12 form-group">
+										<label>Estado del equipo despues del servicio <span class="required">*</span></label>
+										<input type="hidden" id="idserviciofi" name="idserviciofi" class="form-control">
+										<input type="hidden" id="idascensorfi" name="idascensorfi" class="form-control">
+										<input type="hidden" id="supervisorID" name="supervisorID" class="form-control">
+										<input type="hidden" id="latitudfi" name="latitudfi" class="form-control">
+										<input type="hidden" id="longitudfi" name="longitudfi" class="form-control">
+										<select class="form-control" data-live-search="true" id="idestadofi" name="idestadofi" required="Campo requerido">
+										</select>
+									</div>
+									<div class="col-md-12 col-sm-12 col-xs-12 form-group">
+										<label for="observacionfi">Observaciones de finalizacion del servicio</label>
+										<!--<select class="form-control selectpicker" data-live-search="true" id="listaobsfin" name="listaobsfin" required="required"></select>-->
+										<textarea type="text" id="observacionfi" name="observacionfi" class="resizable_textarea form-control" placeholder="Ingrese observación"></textarea>
+									</div>
+									<!--<div class="col-md-12 col-sm-12 col-xs-12 form-group">
+										<textarea type="text" id="observacionfi" name="observacionfi" class="resizable_textarea form-control" placeholder="Ingrese observación" style="display:none"></textarea>
+									</div>-->
+									<div id="obsInt">
+										<div id="terminoreparacion" class="col-md-12 col-sm-12 col-xs-12 form-group">
+											<label for="terminado">¿Se termino el trabajo a realizar?</label>
+											<select class="form-control" data-live-search="true" id="terminado" name="terminado" required="required">
+												<option disabled>Seleccione una Opción</option>
+												<option value="y">SI</option>
+												<option value="n">NO</option>
+											</select>
+										</div>
+										<!--<div class="col-md-11 col-sm-11 col-xs-11 form-group">
+											<label for="observacionfi">Observacion interna</label>
+											<textarea type="text" id="observacionint" name="observacionint" class="resizable_textarea form-control" placeholder="Ingrese observación que solo será vista por personal de Fabrimetal"></textarea>
+										</div>
+										<div class="col-md-1 col-sm-1 col-xs-1 form-group">
+											<br><br>
+											<button class="btn btn-primary" type="button" onclick="bloqueaObs()" id="blqObs">Bloquear</button>
+										</div>-->
+									</div>
+									<div id="divAyudantes">
+										<div class="col-md-12 col-sm-12 col-xs-12 form-group">
+											<label for="opayu">¿Realizó el trabajo con ayudante?</label>
+											<select class="form-control"onchange="addayudante1()" id="opayu" name="opayu" required="Campo requerido">
+												<option value="" selected readonly>SELECCIONE OPCIÓN</option>
+												<option value="S">SI</option>
+												<option value="N">NO</option>
+											</select>
+										</div>
+										<div class="col-md-12 col-sm-12 col-xs-12 form-group" id="cantAyu" style="display: none">
+											<label for="cantAyud">Ingrese cantidad de ayudantes</label>
+											<select class="form-control" data-live-search="true" onchange="addayudante2()" id="cantAyud" name="cantAyud">
+												<option value="" selected disabled>SELECCIONE OPCIÓN</option>
+												<option value="1">1</option>
+												<option value="2">2</option>
+											</select>
+										</div>
+										<div id="ayudantes"></div>
+									</div>
+									<div id="formdoc" name="formdoc">
+									</div>
+									<div class="col-md-12 col-sm-12 col-xs-12 form-group">
+										<label>Generar solicitud de presupueto</label>
+										<select class="form-control" data-live-search="true" onchange="addpreform()" id="oppre" name="oppre" required="Campo requerido">
+											<option value="" selected disabled>SELECCIONE OPCION</option>
+											<option value="1">SI</option>
+											<option value="2">NO</option>
+										</select>
+									</div>
+									<div class="col-md-12 col-sm-12 col-xs-12 form-group" id="zonaUpload" style="display: none">
+										<label for="descripcion2">Imagenes Presupuesto (máx. 3)</label>
+										<div class="dropzone" id="zonedrop">
+										</div>
+									</div>
+									<div id="formpre" name="formpre">
+									</div>
+									<div class="col-md-12 col-sm-12 col-xs-12 form-group">
+										<label>Opciones de firma del servicio</label>
+										<select class="form-control" data-live-search="true" onchange="addvalidform()" id="opfirma" name="opfirma" required="Campo requerido">
+											<option value="" selected disabled>SELECCIONE OPCION</option>
+											<option value="1">FIRMADA</option>
+											<option value="2">POSPONER</option>
+											<!-- <option value="3">Norequiere firma</option> -->
+										</select>
+									</div>
+									<div id="formfirma" name="formfirma">
+									</div>
+									<div class="clearfix"></div>
+									<div class="ln_solid"></div>
+									<div class="form-group">
+										<div class="col-md-6 col-sm-6 col-xs-12 left-margin">
+											<!-- <button class="btn btn-primary" type="button" onclick="cancelarform()" id="btnVolver">Volver</button>
+											<button class="btn btn-success" type="submit" id="btnFinalizar">Finalizar Servicio</button> -->
+										</div>
+									</div>
+								</div>
+								<hr>
+								<input type="button" name="previous" class="previous btn btn-default" value="CheckList"/>
+								<input type="button" name="next" class="next btn btn-info" value="Foto Mensual"/>
+							</fieldset>
+							<fieldset>
+								<div class="form-card">
+									<h3  style="color: #169F85">Foto Mensual</h3>
+									<!-- START BLOCK : imagenmensual -->
+									<div class="row">
+										<div class="col-12 col-sm-12 col-md-12 col-lg-12 alert alert-info">
+											<h4>{titulo}</h4>
+											<span class="">{descripcion}</span>
+										</div>
+										<div class="col-md-12 col-sm-12 col-xs-12" id="">
+											<div class="col-md-12 col-sm-12 col-xs-12">
+												<input type="file" name="imagenmensual" id="imagenmensual" >
+												<input type="hidden" name="imagenmensualID" id="imagenmensualID" value="{imagenmensualID}" readonly>
+											</div>
+											<div class="col-md-12 col-sm-12 col-xs-12" id="imagenmensual-holder"></div>
+										</div>
+									</div>
+									<!-- END BLOCK : imagenmensual -->
+								</div>
+
+								<hr>
+								<input type="button" name="previous" class="previous btn btn-default" value="Guía de Servicio"/>
+								<input type="button" name="submit" class="btn btn-success submit" value="Terminar"/>
+							</fieldset>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<link rel="stylesheet" type="text/css" href="../public/build/css/dropzone.css">
+<link rel="stylesheet" type="text/css" href="../public/build/css/component-dropzone.css">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
+<script>
+	$(document).ready(function(){
+
+		var current_fs, next_fs, previous_fs; //fieldsets
+		var opacity;
+		$(".next").click(function(){
+			current_fs = $(this).parent();
+			next_fs = $(this).parent().next();
+			$("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+			next_fs.show();
+			current_fs.animate({opacity: 0}, {
+				step: function(now) {
+					opacity = 1 - now;
+					current_fs.css({
+						'display': 'none',
+						'position': 'relative'
+					});
+					next_fs.css({'opacity': opacity});
+				},
+				duration: 600
+			});
+		});
+
+		$(".previous").click(function(){
+			current_fs = $(this).parent();
+			previous_fs = $(this).parent().prev();
+			$("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
+			previous_fs.show();
+			current_fs.animate({opacity: 0}, {
+				step: function(now) {
+					opacity = 1 - now;
+					current_fs.css({
+						'display': 'none',
+						'position': 'relative'
+					});
+					previous_fs.css({'opacity': opacity});
+				},
+				duration: 600
+			});
+		});
+
+		$('.radio-group .radio').click(function(){
+			$(this).parent().find('.radio').removeClass('selected');
+			$(this).addClass('selected');
+		});
+
+		$(".submit").click(function(){
+			var msj = '';
+			if($("#imgfoso").get(0).files.length === 0){
+				msj = msj+'Falta Archivo de imagen de Foso'+"</br>";
+			}
+			if($("#imgtecho").get(0).files.length === 0){
+				msj = msj+'Falta Archivo de Techo de Cabina'+"</br>";
+			}
+			if($("#imgmaquina").get(0).files.length === 0){
+				msj = msj+'Falta Archivo de imagen de Maquina'+"</br>";
+			}
+			if($("#imgoperador").get(0).files.length === 0){
+				msj = msj+'Falta Archivo de imagen de Operador de Puerta de cabina'+"</br>";
+			}
+
+			if ($('#chkCertifica').is(':checked')) {
+	            $("#certifica").removeClass('alert alert-danger');
+				if(msj == ''){
+		            bootbox.confirm("¿Desea generar un nuevo informe para este servicio/equipo?", function (result) {
+	        			var formData = new FormData($("#msform")[0]);
+	        			if ($("#opayu").val() == 'S'){
+		                    if ($("#cantAyud").val() == 1){
+		                        formData.append('cantayu', 1);
+		                        formData.append('ayudante1', $("#idayud1 option:selected" ).text());
+		                    }
+		                    if ($("#cantAyud").val() == 2){
+		                        formData.append('cantayu', 2);
+		                        formData.append('ayudante1', $("#idayud1 option:selected" ).text());
+		                        formData.append('ayudante2', $("#idayud2 option:selected" ).text());
+		                    }
+		                }
+		                else{
+		                    formData.append('cantayu', 0);
+		                }
+
+		                formData.append('estadofintext', $("#idestadofi option:selected" ).text());
+
+			            if (result) {
+			                $.ajax({
+			                    url: '../ajax/servicio.php?op=formguardarnuevoinforme',
+			                    type: "POST",
+			                    data: formData,
+			                    contentType: false,
+			                    processData: false,
+
+			                    success: function (datos) {
+			                        bootbox.alert(datos);
+			                        $(location).attr("href", "estado.php");
+			                        //mostarform(false);
+			                        /*$("#inicioservicio").hide();
+			                        $("#finservicio").hide();
+			                        $("#otradata").hide();
+			                        $("#inicio").show();
+			                        $('#btnInforme').hide();
+			                        $('#btnInforme2').show();
+			                        $('#btnTerminar').prop('disabled', false);*/
+			                    }
+			                });
+			            }
+			        });
+				}else{
+					bootbox.alert(msj);
+					return false;
+				}
+	        }else{
+	            $('#chkCertifica').focus();
+	            $("#certifica").addClass('alert alert-danger');
+	            bootbox.alert("Falta declarar que se realizo la mantención correspondiente"+"</br>"+msj);
+	            return false;
+	        }
+		})
+
+		// FOSO
+		$("#imgfoso").on('change', function() {
+			var countFiles = $(this)[0].files.length;
+			var imgPath = $(this)[0].value;
+			var extn = imgPath.substring(imgPath.lastIndexOf('.') + 1).toLowerCase();
+			var image_holder = $("#image-foso-holder");
+			image_holder.empty();
+			if (extn == "gif" || extn == "png" || extn == "jpg" || extn == "jpeg") {
+				if (typeof(FileReader) != "undefined") {
+					for (var i = 0; i < countFiles; i++) {
+						var reader = new FileReader();
+						reader.onload = function(e) {
+							$("<img />", {
+								"src": e.target.result,
+								"class": "thumb-image"
+							}).appendTo(image_holder);
+						}
+						image_holder.show();
+						reader.readAsDataURL($(this)[0].files[i]);
+					}
+				}else{
+					alert("no soporta FileReader.");
+				}
+			}else{
+				alert("Solo Imagenes");
+			}
+		});
+
+
+		// TECHO
+		$("#imgtecho").on('change', function() {
+			var countFiles = $(this)[0].files.length;
+			var imgPath = $(this)[0].value;
+			var extn = imgPath.substring(imgPath.lastIndexOf('.') + 1).toLowerCase();
+			var image_holder = $("#image-techo-holder");
+			image_holder.empty();
+			if (extn == "gif" || extn == "png" || extn == "jpg" || extn == "jpeg") {
+				if (typeof(FileReader) != "undefined") {
+					for (var i = 0; i < countFiles; i++) {
+						var reader = new FileReader();
+						reader.onload = function(e) {
+							$("<img />", {
+								"src": e.target.result,
+								"class": "thumb-image"
+							}).appendTo(image_holder);
+						}
+						image_holder.show();
+						reader.readAsDataURL($(this)[0].files[i]);
+					}
+				}else{
+					alert("This browser does not support FileReader.");
+				}
+			}else{
+				alert("Pls select only images");
+			}
+		});
+
+
+		// MAQUINA
+		$("#imgmaquina").on('change', function() {
+			var countFiles = $(this)[0].files.length;
+			var imgPath = $(this)[0].value;
+			var extn = imgPath.substring(imgPath.lastIndexOf('.') + 1).toLowerCase();
+			var image_holder = $("#image-maquina-holder");
+			image_holder.empty();
+			if (extn == "gif" || extn == "png" || extn == "jpg" || extn == "jpeg") {
+				if (typeof(FileReader) != "undefined") {
+					for (var i = 0; i < countFiles; i++) {
+						var reader = new FileReader();
+						reader.onload = function(e) {
+							$("<img />", {
+								"src": e.target.result,
+								"class": "thumb-image"
+							}).appendTo(image_holder);
+						}
+						image_holder.show();
+						reader.readAsDataURL($(this)[0].files[i]);
+					}
+				}else{
+					alert("This browser does not support FileReader.");
+				}
+			}else{
+				alert("Pls select only images");
+			}
+		});
+
+
+		// OPERADOR
+		$("#imgoperador").on('change', function() {
+			var countFiles = $(this)[0].files.length;
+			var imgPath = $(this)[0].value;
+			var extn = imgPath.substring(imgPath.lastIndexOf('.') + 1).toLowerCase();
+			var image_holder = $("#image-operador-holder");
+			image_holder.empty();
+			if (extn == "gif" || extn == "png" || extn == "jpg" || extn == "jpeg") {
+				if (typeof(FileReader) != "undefined") {
+					for (var i = 0; i < countFiles; i++) {
+						var reader = new FileReader();
+						reader.onload = function(e) {
+							$("<img />", {
+								"src": e.target.result,
+								"class": "thumb-image"
+							}).appendTo(image_holder);
+						}
+						image_holder.show();
+						reader.readAsDataURL($(this)[0].files[i]);
+					}
+				}else{
+					alert("This browser does not support FileReader.");
+				}
+			}else{
+				alert("Pls select only images");
+			}
+		});
+
+		// OPERADOR
+		$("#imagenmensual").on('change', function() {
+			var countFiles = $(this)[0].files.length;
+			var imgPath = $(this)[0].value;
+			var extn = imgPath.substring(imgPath.lastIndexOf('.') + 1).toLowerCase();
+			var image_holder = $("#imagenmensual-holder");
+			image_holder.empty();
+			if (extn == "gif" || extn == "png" || extn == "jpg" || extn == "jpeg") {
+				if (typeof(FileReader) != "undefined") {
+					for (var i = 0; i < countFiles; i++) {
+						var reader = new FileReader();
+						reader.onload = function(e) {
+							$("<img />", {
+								"src": e.target.result,
+								"class": "thumb-image"
+							}).appendTo(image_holder);
+						}
+						image_holder.show();
+						reader.readAsDataURL($(this)[0].files[i]);
+					}
+				}else{
+					alert("This browser does not support FileReader.");
+				}
+			}else{
+				alert("Pls select only images");
+			}
+		});
+	});
+
+	var datos = { idactividad : $("#idactividadcheck").val() };
+	$.post("../ajax/servicio.php?op=guiaPorCerrar",datos, function(data,status){
+        data = JSON.parse(data);
+            $.post("../ajax/servicio.php?op=selecttestadossap", function(r){
+                $("#idestadofi").html(r);
+            });
+        	var datos2 = { idserviciofi : $("#idserviciocheck").val() , idactividad : $("#idactividadcheck").val() };
+            $.post("../ajax/servicio.php?op=infoguiasap",datos2, function(data,status){             
+                $("#inicio").hide();
+                $("#finservicio").show();
+                data = JSON.parse(data);
+                $("#codigofi").val(data.codigo);
+                $("#marcafi").val(data.Manufacturer);
+                $("#modelofi").val(data.modelo);
+                $("#direccionfi").val(data.direccion);
+                $("#edificiofi").val(data.edificio);
+                $("#fechainifi").val(data.fecha);
+                $("#horainifi").val(data.hora);
+                $("#tserviciofi").val(data.CallType);
+                $("#estadoinifi").val(data.status);
+                $("#observacioniniso").val(data.Subject);
+                $("#tascensorfi").val(data.tipoequipo);
+                $("#codigofmfi").val(data.codigo);
+                $("#customercodefi").val(data.CustomerCode);
+                $("#actividadIDfi").val(data.activityID);
+                $("#servicecallIDfi").val(data.ServiceCallID);
+                $("#ascensorIDfi").val(data.idascensor);
+                $("#supervisorID").val(data.supervisorID);
+                $("#codclifi").val(data.nomenclatura);
+                if(data.idtservicio == 4){
+                    var html2 = '<div class="col-md-12 col-sm-12 col-xs-12 form-group"><label>¿Falla por terceros?</label>'+
+                                '<select class="form-control" name="terceros" id="terceros"><option value="false">NO</option><option value="true">SI</option></select>'+
+                                '</div> ';
+                    $("#formdoc").append(html2);
+                    $("#terminado option[value='y'").attr("selected",true);
+                    $("#terminoreparacion").hide();
+                }else if(data.idtservicio !== 2){
+                    $("#terminado option[value='y'").attr("selected",true);
+                    $("#terminoreparacion").hide();
+                }
+                $(".table-responsive").animate({'scrollLeft': $('.selcolumn').offset().left}, 500);
+                return false;
+
+            });
+            if(navigator.geolocation){
+                navigator.geolocation.getCurrentPosition(
+                    function(position){
+                        $("#latitudfi").val(position.coords.latitude);
+                        $("#longitudfi").val(position.coords.longitude);
+                    },function(error){
+                        new PNotify({
+                            title: 'Geolocalización',
+                            text: showError(error.code),
+                            type: 'warning',
+                            styling: 'bootstrap3'
+                        });
+                        $("#latitudfi").val("-33.385232");
+                        $("#longitudfi").val("-70.776407");
+                    },{timeout:5000}
+                );return false;
+            }else{
+                new PNotify({
+                    title: 'Geolocalización',
+                    text: "La Geolocalización no es soportada por este navegador.",
+                    type: 'warning',
+                    styling: 'bootstrap3'
+                });
+                $("#latitudfi").val("-33.385232");
+                $("#longitudfi").val("-70.776407");
+            }
+        //}
+
+    });
+
+	function addayudante1(){    
+
+	    var opcion= $("#opayu").val();
+	    if (opcion == 'S'){
+	        $("#cantAyu").show();
+	        $("#cantAyud").prop('required',true);
+	    }
+	    else{
+	        $("#cantAyud").prop('required',false);
+	        $("#cantAyu").hide();
+	        $("#ayudantes").html('');
+	    }
+	}
+
+	function addayudante2(){
+	    var opcion= $("#cantAyud").val();
+	    var i = 1;
+	    $("#ayudantes").html('');
+	    var listado = '';
+	    $.ajax({
+	       type: "POST",
+	       url: "../ajax/servicio.php?op=selectTecnico",
+	       async: false,
+	       success: function(response) { listado = response; }
+	    });
+	    while (i <= opcion) {
+	        var div = '<div class="col-md-12 col-sm-12 col-xs-12 form-group" id="ayud'+i+'"">'+
+	            '<label for="idayud1">Ingrese ayudante '+i+'</label>'+
+	            '<select class="form-control" id="idayud'+i+'" name="idayud'+i+'" required="Campo requerido">'+
+	                '<option value="" selected disabled>Seleccione Técnico</option>'+
+	            '</select>'+
+	        '</div>';
+	        $("#ayudantes").append(div);
+	        $("#idayud"+i).html(listado);
+	        i++;
+	    }
+	}
+
+	function addpreform(){
+            $("#formpre").empty();
+            var opcion= $("#oppre").val();
+            if (opcion == '1'){
+            	var input = '<div class="col-md-12 col-sm-12 col-xs-12" id="">'+
+								'<div class="col-md-12 col-sm-12 col-xs-12">'+
+									'<input type="file" name="imgpresupuesto1" id="imgpresupuesto-1" onchange="imagen(this)">'+
+								'</div>'+
+								'<div class="col-md-12 col-sm-12 col-xs-12" id="imgpresupuesto-1-holder"></div>'+
+							'</div>';
+				$("#zonedrop").append(input);
+                $("#zonaUpload").show();
+                var myvar = '<div class="col-md-12 col-sm-12 col-xs-12 form-group"><label for="observacionfi">Descripcion de la solicitud</label>'+
+                '<textarea type="text" id="descripcion" name="descripcion" required="Campo requerido" class="resizable_textarea form-control"></textarea>'+
+                '</div> ';
+                $("#formpre").append(myvar);
+            }
+            else
+                $("#zonaUpload").hide();
+}
+
+	function imagen(element){
+			var array = element.id.split('-');
+			console.log(array[1]);
+			var countFiles = $(element)[0].files.length;
+			var imgPath = $(element)[0].value;
+			var extn = imgPath.substring(imgPath.lastIndexOf('.') + 1).toLowerCase();
+			var image_holder = $("#"+element.id+"-holder");
+			image_holder.empty();
+			if (extn == "gif" || extn == "png" || extn == "jpg" || extn == "jpeg") {
+				if (typeof(FileReader) != "undefined") {
+					for (var i = 0; i < countFiles; i++) {
+						var reader = new FileReader();
+						reader.onload = function(e) {
+							$("<img />", {
+								"src": e.target.result,
+								"class": "thumb-image"
+							}).appendTo(image_holder);
+						}
+						image_holder.show();
+						reader.readAsDataURL($(element)[0].files[i]);
+					}
+				}else{
+					alert("This browser does not support FileReader.");
+				}
+			}else{
+				alert("Pls select only images");
+			}
+
+			if(!$('#imgpresupuesto-3').length){
+					var numero = Number(array[1]) + 1;
+					var input = '<div class="col-md-12 col-sm-12 col-xs-12" id="">'+
+								'<div class="col-md-12 col-sm-12 col-xs-12">'+
+									'<input type="file" name="imgpresupuesto'+numero+'" id="imgpresupuesto-'+numero+'" onchange="imagen(this)">'+
+								'</div>'+
+								'<div class="col-md-12 col-sm-12 col-xs-12" id="imgpresupuesto-'+numero+'-holder"></div>'+
+							'</div>';
+				$("#zonedrop").append(input);
+			}
+
+	}
+</script>
+

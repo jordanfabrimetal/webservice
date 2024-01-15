@@ -1,0 +1,263 @@
+			<style type="text/css">
+				.py-0 {
+					padding-top: 0 !important;
+					padding-bottom: 0 !important;
+				}
+
+				.py-1 {
+					padding-top: 0.25rem !important;
+					padding-bottom: 0.25rem !important;
+				}
+
+				.py-2 {
+					padding-top: 0.5rem !important;
+					padding-bottom: 0.5rem !important;
+				}
+
+				.py-3 {
+					padding-top: 1rem !important;
+					padding-bottom: 1rem !important;
+				}
+
+				.py-4 {
+					padding-top: 1.5rem !important;
+					padding-bottom: 1.5rem !important;
+				}
+
+				.py-5 {
+					padding-top: 3rem !important;
+					padding-bottom: 3rem !important;
+				}
+				.x_title h2{
+					overflow: visible !important; 
+				}
+
+				.border-bottom {
+					border: 1px solid lightgrey;
+					margin:-1px 0 0 -1px;
+				}
+
+				.border-bottom-center {
+					border: 1px solid lightgrey;
+					margin:-1px 0 0 -1px;
+					text-align: center;
+				}
+
+				.encabezado-tabla {
+					background-color: grey;
+					color: #FFFFFF;
+					font-weight: bold;
+				}
+
+				.bold {
+					font-weight: bold;
+				}
+
+				.margen-top {
+					margin-top: 20px;
+				}
+
+				.x_title {
+					border-bottom: none;
+					margin-bottom: none;
+				}
+
+				.selcolumn {
+					border: 3px solid salmon !important;
+					font-weight: bold;
+				}
+
+				.text-center {
+					text-align: center;
+				}
+
+				.text-left {
+					text-align: left;
+				}
+
+				.table-condensed>tbody>tr>td, .table-condensed>tbody>tr>th, .table-condensed>tfoot>tr>td, .table-condensed>tfoot>tr>th, .table-condensed>thead>tr>td, .table-condensed>thead>tr>th {
+				    padding: 2px;
+				}
+
+				.table {
+				    margin-bottom: 0px;
+				}
+			</style>
+			<!-- page content -->
+
+			<br/>
+			<div class="col-md-12 center-margin">
+						<section class="panel">
+							<form method="post" id="formnewinforme">
+							<div class="x_title">
+								<h3 style="color: #169F85">{tituloencuesta}</h3>
+								<div class="clearfix"></div>
+								<hr>
+								<div class="row ">
+									<div class="col-md-6 col-sm-12 col-xs-12">
+										<div class="row">
+											<div class="col-md-5 col-sm-12 col-xs-12">
+												<strong>OBRA: </strong>
+											</div>
+											<div class="col-md-7 col-sm-12 col-xs-12">
+												{obra}
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-5 col-sm-12 col-xs-12">
+												<strong>ASCENSOR / ESCALERA: </strong>
+											</div>
+											<div class="col-md-7 col-sm-12 col-xs-12">
+												{tipoascensor} ({ascensor})
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-5 col-sm-12 col-xs-12">
+												<strong>SUPERVISOR: </strong>
+											</div>
+											<div class="col-md-7 col-sm-12 col-xs-12">
+												{supervisor}
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-5 col-sm-12 col-xs-12">
+												<strong>FECHA DE LA VISITA: </strong>
+											</div>
+											<div class="col-md-7 col-sm-12 col-xs-12">
+												{fechanow} (<span style="color: salmon">{periodotxt}</span>)
+											</div>
+										</div>
+									</div>
+									<div class="col-md-6 col-sm-12 col-xs-12">
+										<div class="row">
+											<div class="col-md-5 col-sm-12 col-xs-12">
+												<strong>EMPRESA CONSTRUCTORA: </strong>
+											</div>
+											<div class="col-md-7 col-sm-12 col-xs-12">
+												<input type="text" class="form-control" name="empresa" id="empresa" required="" value="{empresa}">
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-5 col-sm-12 col-xs-12">
+												<strong>DIRECCION DE OBRA: </strong>
+											</div>
+											<div class="col-md-7 col-sm-12 col-xs-12">
+												<input type="text" class="form-control" name="direccion" id="direccion" required="" value="{direccion}">
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-5 col-sm-12 col-xs-12">
+												<strong>MODELO EQUIPO: </strong>
+											</div>
+											<div class="col-md-7 col-sm-12 col-xs-12">
+												{modelo}
+											</div>
+										</div>
+									</div>
+								</div>
+								<hr>
+							</div>
+
+							<div class="panel-body col-md-12">
+								<input type="hidden" name="idencuesta" value="{idencuesta}">
+								<input type="hidden" name="idascensor" value="{idascensor}">
+								<input type="hidden" name="idcliente" value="{idcliente}">
+								<input type="hidden" name="idservicio" value="{idservicio}">
+								<input type="hidden" name="idactividad" value="{idactividad}">
+								<input type="hidden" name="periodo" value="{periodo}">
+								<input type="hidden" name="porfirmar" id="porfirmar" value="true">
+								<div class="project_detail">
+									<!-- START BLOCK : bloques -->
+									<div class="panel panel-default">
+										<!-- Default panel contents -->
+										<div class="panel-heading"><h4><strong>{nombloque}</strong></h4></div>
+										<!-- START BLOCK : preguntas -->
+										<div class="panel-body">
+											<div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+												<label>{pregunta}</label>
+											</div>
+											<div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
+												<input type="text" class="form-control" name="preg[{idpreg}]" opsel="{opsel}">
+											</div>
+										</div>
+										<!-- END BLOCK : preguntas -->
+									</div>
+									<!-- END BLOCK : bloques -->
+									<div class="row">
+										<div class="col-md-12 col-sm-12 col-xs-12 title">Observaciones</div>
+										<div class="col-md-12 col-sm-12 col-xs-12 title"><textarea name="observaciones" id="observaciones" class="form-control" rows="4" style="width: 100%"></textarea></div>
+										<div class="col-md-12 col-sm-12 col-xs-12 title">&nbsp;</div>
+									</div>
+								</div>
+							</div>
+
+							<div id="formfirma2" name="formfirma">
+							  <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+							    <label>Firma Cliente *</label>
+							    <div class="input-group">
+							      <input type="hidden" name="firma" id="firma">
+							      <input type="text" disabled="disabled" class="form-control" name="firmavali" id="firmavali" required="Campo requerido">
+							      <div class="input-group-btn">
+							        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Opciones <span class="caret"></span></button>
+							        <ul class="dropdown-menu dropdown-menu-right" role="menu">
+							          <li><a onclick="fijarfirma()">Validar</a></li>
+							          <li class="divider"></li>
+							          <li><a onclick="borrarfirma()">Borrar firma</a></li>
+							        </ul>
+							      </div>
+							    </div>
+							  </div>
+							  <div class="col-md-12 col-sm-12 col-xs-12 form-group" id="firmapad" name="firmapad" >
+							    <canvas id="firmafi" class="firmafi" style="border: 2px dashed #888; width: 100%;"></canvas>
+							  </div>
+
+							  <div class="col-md-3 col-sm-12 col-xs-12 title">Nombre Cliente *</div>
+							  <div class="col-md-9 col-sm-12 col-xs-12 py-1">
+							  	<input type="text" class="form-control" id="nomcli" name="nomcli" placeholder="Nombre Cliente" maxlength="128" required="">
+							  </div>
+
+							  <div class="col-md-3 col-sm-12 col-xs-12 title">Rut Cliente</div>
+							  <div class="col-md-9 col-sm-12 col-xs-12 py-1">
+							  	<input type="text" class="form-control" id="rutcli" name="rutcli" placeholder="Rut Cliente" maxlength="32">
+							  </div>
+
+							  <div class="col-md-3 col-sm-12 col-xs-12 title">Nº Celular Cliente</div>
+							  <div class="col-md-9 col-sm-12 col-xs-12 py-1">
+							  	<input type="text" class="form-control" id="celularcli" name="celularcli" placeholder="Celular Cliente" maxlength="32">
+							  </div>
+
+							  <div class="col-md-3 col-sm-12 col-xs-12 title">Email Cliente *</div>
+							  <div class="col-md-9 col-sm-12 col-xs-12 py-1">
+							  	<input type="email" class="form-control" id="emailcli" name="emailcli" placeholder="Email Cliente" maxlength="64" required="">
+							  </div>
+							  
+							  <div class="clearfix"></div>
+							  <div class="ln_solid"></div>
+							</div>
+
+							<div class="row">
+								<div class="col-md-4 col-sm-4 col-xs-4 py-1 text-center">
+									<button class="btn btn-default" type="button" id="btnCancelar" onclick="cancelarform()"> Cancelar</button>
+								</div>
+								<div class="col-md-4 col-sm-4 col-xs-4 py-1 text-center">
+									<button class="btn btn-warning" type="button" id="btnPostergar" onclick="postergarfirma()"> Postergar Firma</button>
+								</div>
+								<div class="col-md-4 col-sm-4 col-xs-4 py-1 text-center">
+									<button class="btn btn-primary"> Generar Informe</button>
+								</div>
+							</div>
+							</form>
+						</section>
+				</div>
+			<!-- /page content -->
+			<script>
+				/*canvas = document.getElementById('firmafi');
+				if (canvas) {
+				    canvas.height = canvas.offsetHeight;
+				    canvas.width = canvas.offsetWidth;
+				    signaturePad = new SignaturePad(canvas, {
+				        backgroundColor: 'rgb(255, 255, 255)',
+				        penColor: 'rgb(0, 0, 0)'
+				    });
+				}*/
+			</script>

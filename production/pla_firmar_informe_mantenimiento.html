@@ -1,0 +1,445 @@
+			<style type="text/css">
+				.py-0 {
+					padding-top: 0 !important;
+					padding-bottom: 0 !important;
+				}
+
+				.py-1 {
+					padding-top: 0.25rem !important;
+					padding-bottom: 0.25rem !important;
+				}
+
+				.py-2 {
+					padding-top: 0.5rem !important;
+					padding-bottom: 0.5rem !important;
+				}
+
+				.py-3 {
+					padding-top: 1rem !important;
+					padding-bottom: 1rem !important;
+				}
+
+				.py-4 {
+					padding-top: 1.5rem !important;
+					padding-bottom: 1.5rem !important;
+				}
+
+				.py-5 {
+					padding-top: 3rem !important;
+					padding-bottom: 3rem !important;
+				}
+				.x_title h2{
+					overflow: visible !important; 
+				}
+
+				.border-bottom {
+					border: 1px solid lightgrey;
+					margin:-1px 0 0 -1px;
+				}
+
+				.border-bottom-center {
+					border: 1px solid lightgrey;
+					margin:-1px 0 0 -1px;
+					text-align: center;
+				}
+
+				.encabezado-tabla {
+					background-color: grey;
+					color: #FFFFFF;
+					font-weight: bold;
+				}
+
+				.bold {
+					font-weight: bold;
+				}
+
+				.margen-top {
+					margin-top: 20px;
+				}
+
+				.x_title {
+					border-bottom: none;
+					margin-bottom: none;
+				}
+
+				.selcolumn {
+					border: 3px solid salmon !important;
+					font-weight: bold;
+				}
+
+				.text-center {
+					text-align: center;
+				}
+
+				.text-left {
+					text-align: left;
+				}
+
+				.table-condensed>tbody>tr>td, .table-condensed>tbody>tr>th, .table-condensed>tfoot>tr>td, .table-condensed>tfoot>tr>th, .table-condensed>thead>tr>td, .table-condensed>thead>tr>th {
+				    padding: 2px;
+				}
+
+				.table {
+				    margin-bottom: 0px;
+				}
+			</style>
+			<!-- page content -->
+
+			<br/>
+			<div class="col-md-12 center-margin">
+						<section class="panel">
+							<div class="x_title">
+								<h3 style="color: #169F85">{tituloencuesta}</h3>
+								<div class="clearfix"></div>
+								<hr>
+								<div class="row ">
+									<div class="col-md-6 col-sm-12 col-xs-12">
+										<div class="row">
+											<div class="col-md-5 col-sm-12 col-xs-12">
+												<strong>OBRA: </strong>
+											</div>
+											<div class="col-md-7 col-sm-12 col-xs-12">
+												{obra}
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-5 col-sm-12 col-xs-12">
+												<strong>ASCENSOR / ESCALERA: </strong>
+											</div>
+											<div class="col-md-7 col-sm-12 col-xs-12">
+												{tipoascensor} ({ascensor})
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-5 col-sm-12 col-xs-12">
+												<strong>SUPERVISOR: </strong>
+											</div>
+											<div class="col-md-7 col-sm-12 col-xs-12">
+												{supervisor}
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-5 col-sm-12 col-xs-12">
+												<strong>FECHA DE LA VISITA: </strong>
+											</div>
+											<div class="col-md-7 col-sm-12 col-xs-12">
+												{fechanow} (<span style="color: salmon">{periodotxt}</span>)
+											</div>
+										</div>
+									</div>
+									<div class="col-md-6 col-sm-12 col-xs-12">
+										<div class="row">
+											<div class="col-md-5 col-sm-12 col-xs-12">
+												<strong>EMPRESA CONSTRUCTORA: </strong>
+											</div>
+											<div class="col-md-7 col-sm-12 col-xs-12">
+												<input type="text" class="form-control" name="empresa" id="empresa" required="" value="{empresa}" disabled>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-5 col-sm-12 col-xs-12">
+												<strong>DIRECCION DE OBRA: </strong>
+											</div>
+											<div class="col-md-7 col-sm-12 col-xs-12">
+												<input type="text" class="form-control" name="direccion" id="direccion" required="" value="{direccion}" disabled>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-5 col-sm-12 col-xs-12">
+												<strong>MODELO EQUIPO: </strong>
+											</div>
+											<div class="col-md-7 col-sm-12 col-xs-12">
+												{modelo}
+											</div>
+										</div>
+									</div>
+								</div>
+								<hr>
+								<div class="row">
+									<div class="col-md-12 col-sm-12 col-xs-12">
+										<div class="table-responsive">
+										  <table class="table table-bordered table-condensed text-center">
+										  	<thead>
+										  		<tr class="encabezado-tabla">
+											  		<th>Pauta de Mantenimiento KMM</th>
+											  		<th class="text-center {selEne}">Ene</th>
+											  		<th class="text-center {selFeb}">Feb</th>
+											  		<th class="text-center {selMar}">Mar</th>
+											  		<th class="text-center {selAbr}">Abr</th>
+											  		<th class="text-center {selMay}">May</th>
+											  		<th class="text-center {selJun}">Jun</th>
+											  		<th class="text-center {selJul}">Jul</th>
+											  		<th class="text-center {selAgo}">Ago</th>
+											  		<th class="text-center {selSep}">Sep</th>
+											  		<th class="text-center {selOct}">Oct</th>
+											  		<th class="text-center {selNov}">Nov</th>
+											  		<th class="text-center {selDic}">Dic</th>
+										  		</tr>
+										  	</thead>
+										  	<tbody>
+										  		<tr>
+											  		<td colspan="13" class="text-left bold">Mantención Mensual</td>
+										  		</tr>
+										  		<tr>
+											  		<td class="bold text-left">Basico (B) - Estandar (ST)</td>
+											  		<td class=" {selEne}">B-ST</td>
+											  		<td class=" {selFeb}">B-ST</td>
+											  		<td class=" {selMar}">B-ST</td>
+											  		<td class=" {selAbr}">B-ST</td>
+											  		<td class=" {selMay}">B-ST</td>
+											  		<td class=" {selJun}">B-ST</td>
+											  		<td class=" {selJul}">B-ST</td>
+											  		<td class=" {selAgo}">B-ST</td>
+											  		<td class=" {selSep}">B-ST</td>
+											  		<td class=" {selOct}">B-ST</td>
+											  		<td class=" {selNov}">B-ST</td>
+											  		<td class=" {selDic}">B-ST</td>
+										  		</tr>
+										  		<tr>
+											  		<td class="bold text-left">Panel de Control (C)</td>
+											  		<td class=" {selEne}">C</td>
+											  		<td class=" {selFeb}">&nbsp;</td>
+											  		<td class=" {selMar}">C</td>
+											  		<td class=" {selAbr}">&nbsp;</td>
+											  		<td class=" {selMay}">C</td>
+											  		<td class=" {selJun}">&nbsp;</td>
+											  		<td class=" {selJul}">C</td>
+											  		<td class=" {selAgo}">&nbsp;</td>
+											  		<td class=" {selSep}">C</td>
+											  		<td class=" {selOct}">&nbsp;</td>
+											  		<td class=" {selNov}">C</td>
+											  		<td class=" {selDic}">&nbsp;</td>
+										  		</tr>
+										  		<tr>
+											  		<td class="bold text-left">Frenos (MX)</td>
+											  		<td class=" {selEne}">&nbsp;</td>
+											  		<td class=" {selFeb}">&nbsp;</td>
+											  		<td class=" {selMar}">&nbsp;</td>
+											  		<td class=" {selAbr}">&nbsp;</td>
+											  		<td class=" {selMay}">&nbsp;</td>
+											  		<td class=" {selJun}">MX</td>
+											  		<td class=" {selJul}">&nbsp;</td>
+											  		<td class=" {selAgo}">&nbsp;</td>
+											  		<td class=" {selSep}">&nbsp;</td>
+											  		<td class=" {selOct}">&nbsp;</td>
+											  		<td class=" {selNov}">&nbsp;</td>
+											  		<td class=" {selDic}">MX</td>
+										  		</tr>
+										  		<tr>
+											  		<td class="bold text-left">Maquinas (M)</td>
+											  		<td class=" {selEne}">M</td>
+											  		<td class=" {selFeb}">&nbsp;</td>
+											  		<td class=" {selMar}">&nbsp;</td>
+											  		<td class=" {selAbr}">&nbsp;</td>
+											  		<td class=" {selMay}">M</td>
+											  		<td class=" {selJun}">&nbsp;</td>
+											  		<td class=" {selJul}">&nbsp;</td>
+											  		<td class=" {selAgo}">&nbsp;</td>
+											  		<td class=" {selSep}">M</td>
+											  		<td class=" {selOct}">&nbsp;</td>
+											  		<td class=" {selNov}">&nbsp;</td>
+											  		<td class=" {selDic}">&nbsp;</td>
+										  		</tr>
+										  		<tr>
+											  		<td class="bold text-left">Sala de Maquinas (SM)</td>
+											  		<td class=" {selEne}">SM</td>
+											  		<td class=" {selFeb}">&nbsp;</td>
+											  		<td class=" {selMar}">SM</td>
+											  		<td class=" {selAbr}">&nbsp;</td>
+											  		<td class=" {selMay}">SM</td>
+											  		<td class=" {selJun}">&nbsp;</td>
+											  		<td class=" {selJul}">SM</td>
+											  		<td class=" {selAgo}">&nbsp;</td>
+											  		<td class=" {selSep}">SM</td>
+											  		<td class=" {selOct}">&nbsp;</td>
+											  		<td class=" {selNov}">SM</td>
+											  		<td class=" {selDic}">&nbsp;</td>
+										  		</tr>
+										  		<tr>
+											  		<td class="bold text-left">Escotilla (S)</td>
+											  		<td class=" {selEne}">&nbsp;</td>
+											  		<td class=" {selFeb}">S</td>
+											  		<td class=" {selMar}">&nbsp;</td>
+											  		<td class=" {selAbr}">S</td>
+											  		<td class=" {selMay}">&nbsp;</td>
+											  		<td class=" {selJun}">S</td>
+											  		<td class=" {selJul}">&nbsp;</td>
+											  		<td class=" {selAgo}">S</td>
+											  		<td class=" {selSep}">&nbsp;</td>
+											  		<td class=" {selOct}">S</td>
+											  		<td class=" {selNov}">&nbsp;</td>
+											  		<td class=" {selDic}">S</td>
+										  		</tr>
+										  		<tr>
+											  		<td class="bold text-left">Operaror de puerta (D)</td>
+											  		<td class=" {selEne}">&nbsp;</td>
+											  		<td class=" {selFeb}">D</td>
+											  		<td class=" {selMar}">&nbsp;</td>
+											  		<td class=" {selAbr}">D</td>
+											  		<td class=" {selMay}">&nbsp;</td>
+											  		<td class=" {selJun}">D</td>
+											  		<td class=" {selJul}">&nbsp;</td>
+											  		<td class=" {selAgo}">D</td>
+											  		<td class=" {selSep}">&nbsp;</td>
+											  		<td class=" {selOct}">D</td>
+											  		<td class=" {selNov}">&nbsp;</td>
+											  		<td class=" {selDic}">D</td>
+										  		</tr>
+										  		<tr>
+											  		<td class="bold text-left">Puertas de Piso (L)</td>
+											  		<td class=" {selEne}">L</td>
+											  		<td class=" {selFeb}">L</td>
+											  		<td class=" {selMar}">L</td>
+											  		<td class=" {selAbr}">L</td>
+											  		<td class=" {selMay}">L</td>
+											  		<td class=" {selJun}">L</td>
+											  		<td class=" {selJul}">L</td>
+											  		<td class=" {selAgo}">L</td>
+											  		<td class=" {selSep}">L</td>
+											  		<td class=" {selOct}">L</td>
+											  		<td class=" {selNov}">L</td>
+											  		<td class=" {selDic}">L</td>
+										  		</tr>
+										  		<tr>
+											  		<td class="bold text-left">Botoneras e indicadores (Z)</td>
+											  		<td class=" {selEne}">&nbsp;</td>
+											  		<td class=" {selFeb}">Z</td>
+											  		<td class=" {selMar}">&nbsp;</td>
+											  		<td class=" {selAbr}">Z</td>
+											  		<td class=" {selMay}">&nbsp;</td>
+											  		<td class=" {selJun}">Z</td>
+											  		<td class=" {selJul}">&nbsp;</td>
+											  		<td class=" {selAgo}">Z</td>
+											  		<td class=" {selSep}">&nbsp;</td>
+											  		<td class=" {selOct}">Z</td>
+											  		<td class=" {selNov}">&nbsp;</td>
+											  		<td class=" {selDic}">Z</td>
+										  		</tr>
+										  	</tbody>
+										  </table>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="panel-body col-md-12">
+								<div class="project_detail">
+									<!-- START BLOCK : bloques -->
+									<div class="row margen-top">
+										<div class="col-md-12 col-sm-12 col-xs-12">
+											<h4><strong>{nombloque}</strong></h4>
+										</div>
+									</div>
+									<div class="row">
+									<!-- START BLOCK : preguntas -->
+										<div class="col-md-6 col-sm-12 col-xs-12">
+											<div class="checkbox">
+											  <label>
+											    <input type="checkbox" name="preg[{idpreg}]" opsel="{opsel}" value="SI" {checkpreg} disabled>
+											    {pregunta}
+											  </label>
+											</div>
+											<!-- <label class="radio-inline">
+												<input type="radio" value="SI" name="preg[{idpreg}]" opsel="{opsel}" style="cursor: pointer;" required="" checked> Si
+											</label>
+											<label class="radio-inline">
+												<input type="radio" value="NO" name="preg[{idpreg}]" opsel="{opsel}" style="cursor: pointer;" required=""> No
+											</label> -->
+										</div>
+										<!-- <div class="col-md-5 col-sm-12 col-xs-12 title">{pregunta}</div> -->
+									<!-- <hr> -->
+									<!-- END BLOCK : preguntas -->
+									</div>
+									<!-- END BLOCK : bloques -->
+									<div class="row">
+										<div class="col-md-12 col-sm-12 col-xs-12 title">Observaciones</div>
+										<div class="col-md-12 col-sm-12 col-xs-12 title"><textarea name="observaciones" id="observaciones" class="form-control" rows="4" style="width: 100%" disabled>{observaciones}</textarea></div>
+										<div class="col-md-12 col-sm-12 col-xs-12 title">&nbsp;</div>
+									</div>
+								</div>
+							</div>
+
+							<form method="post" id="formfirmarinforme">
+								<input type="hidden" name="idencuesta" value="{idencuesta}">
+								<input type="hidden" name="idinforme" id="idinforme" value="{idinforme}">
+								<!--<div id="formfirma2" name="formfirma">
+								  
+
+								  <div class="col-md-3 col-sm-12 col-xs-12 title">Nombre Cliente *</div>
+								  <div class="col-md-9 col-sm-12 col-xs-12 py-1">
+								  	<input type="text" class="form-control" id="nomcli" name="nomcli" placeholder="Nombre Cliente" maxlength="128" required="">
+								  </div>
+
+								  <div class="col-md-3 col-sm-12 col-xs-12 title">Rut Cliente</div>
+								  <div class="col-md-9 col-sm-12 col-xs-12 py-1">
+								  	<input type="text" class="form-control" id="rutcli" name="rutcli" placeholder="Rut Cliente" maxlength="32">
+								  </div>
+
+								  <div class="col-md-3 col-sm-12 col-xs-12 title">Nº Celular Cliente</div>
+								  <div class="col-md-9 col-sm-12 col-xs-12 py-1">
+								  	<input type="text" class="form-control" id="celularcli" name="celularcli" placeholder="Celular Cliente" maxlength="32">
+								  </div>
+
+								  <div class="col-md-3 col-sm-12 col-xs-12 title">Email Cliente *</div>
+								  <div class="col-md-9 col-sm-12 col-xs-12 py-1">
+								  	<input type="email" class="form-control" id="emailcli" name="emailcli" placeholder="Email Cliente" maxlength="64" required="">
+								  </div>
+
+								  <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+								    <label>Firma Cliente *</label>
+								    <div class="input-group">
+								      <input type="hidden" name="firma2" id="firma2">
+								      <input type="text" disabled="disabled" class="form-control" name="firmavali" id="firmavali" required="Campo requerido">
+								      <div class="input-group-btn">
+								        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Opciones <span class="caret"></span></button>
+								        <ul class="dropdown-menu dropdown-menu-right" role="menu">
+								          <li><a onclick="fijarfirma2()">Validar</a></li>
+								          <li class="divider"></li>
+								          <li><a onclick="borrarfirma2()">Borrar firma</a></li>
+								        </ul>
+								      </div>
+								    </div>
+								  </div>
+								  <div class="col-md-12 col-sm-12 col-xs-12 form-group" id="firmapad2" name="firmapad2" >
+								    <canvas id="firmafi2" class="firmafi2" style="border: 2px dashed #888; width: 100%;"></canvas>
+								  </div>
+								  
+								  <div class="clearfix"></div>
+								  <div class="ln_solid"></div>
+								</div>-->
+
+								<!-- <div class="row">
+									<div class="col-md-12 col-sm-12 col-xs-12 py-1">
+										Postergar firma cliente: 
+										<div class="btn-group" role="group" aria-label="...">
+										  <button type="button" class="btn btn-default">Si</button>
+										  <button type="button" class="btn btn-default">No</button>
+										</div>
+									</div>
+								</div>
+
+								<br> -->
+
+								<div class="row">
+									<div class="col-md-6 col-sm-6 col-xs-6 py-1 text-center">
+										<button class="btn btn-default" type="button" id="btnCancelar" onclick="cancelarform()"> Cancelar</button>
+									</div>
+									<div class="col-md-6 col-sm-6 col-xs-6 py-1 text-center">
+										<button class="btn btn-primary"> Firmar Informe</button>
+									</div>
+								</div>
+							</form>
+						</section>
+				</div>
+			<!-- /page content -->
+			<script>
+				/*canvas = document.getElementById('firmafi');
+				if (canvas) {
+				    canvas.height = canvas.offsetHeight;
+				    canvas.width = canvas.offsetWidth;
+				    signaturePad = new SignaturePad(canvas, {
+				        backgroundColor: 'rgb(255, 255, 255)',
+				        penColor: 'rgb(0, 0, 0)'
+				    });
+				}*/
+			</script>

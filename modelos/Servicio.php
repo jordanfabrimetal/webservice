@@ -596,7 +596,7 @@ class Servicio
 		return json_decode(ConsultaEntity($entity, $select, $filter), true);
 	}
 
-	public function finalizarActividadPorFirmar($data)
+	public function finalizarActividadPorFirmar($data, $srvCodigo)
 	{
 		$data = json_decode($data);
 		//echo '<pre>';print_r($data);echo '</pre>';die;
@@ -617,7 +617,7 @@ class Servicio
 		$rsptaactv = EditardatosNum($entity, $id, $actividad);
 
 		$entity = 'ServiceCalls';
-		$id = $data->idserfirma;
+		$id = $srvCodigo;
 		$servicecall = json_encode(array("Status" => $status));
 		$rsptaservcall = EditardatosNum($entity, $id, $servicecall);
 		return true;

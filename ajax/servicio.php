@@ -3126,7 +3126,9 @@ switch ($_GET["op"]) {
             $_POST['idserfirma'] = $idservicio;
             $idservicio = $_POST['idservicio'];
             $data = json_encode($_POST);
-            $rspta_finalizar = $servicio->finalizarActividadPorFirmar($data);
+            
+            $srvCodigo = $_POST['idservicio'];
+            $rspta_finalizar = $servicio->finalizarActividadPorFirmar($data, $srvCodigo);
 
             $result = newPdf('informemantencionnuevo', '', 'variable', $params);
 

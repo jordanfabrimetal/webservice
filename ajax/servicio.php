@@ -3024,11 +3024,10 @@ switch ($_GET["op"]) {
         break;
 
         case 'firmapendiente':
-
-            //FinalizarActividadAndroid
             $idSAP = $_POST['idSAP'];
             $actividadIDfi = $_POST['idactividad'];
-            $srvCodigo = $_POST['$idservicio'];
+            $srvCodigo = $_POST['idservicio'];
+            $idservicio = $_POST['idservicio'];
             $opfirma = 1;
             $nombresfi = $_POST['nombre'];
             $apellidosfi = $_POST['apellido'];
@@ -3036,53 +3035,140 @@ switch ($_GET["op"]) {
             $firma = $_POST['firma'];
             $guiafimada = 1;
             $_POST['guiafimada'] = $guiafimada;
-
-            //Firma Pendiente
             $idactividad = $_POST['idactividad'];
-            $nombre = $_POST['nombre'];
-            $apellido = $_POST['apellido'];
-            $rut = $_POST['rut']; 
-            $celular = $_POST['celular'];
-            $email = $_POST['email']; 
-            $cargo = $_POST['cargo'];
-            $firma = $_POST['firma'];
 
-            //FinalizarActividadPorFirmar
-            $idservicio = $_POST['idservicio'];
-            $_POST['actividadIDfi'] = $idactividad;
-            $_POST['servicecallIDfi'] = $idservicio;
-            $actividadIDfi =  $_POST['actividadIDfi'];
-            $servicecallIDfi = $_POST['servicecallIDfi']; 
-            $_POST["idserfirma"] = $idserfirma;
+            $obtenerinformes = $servicio->firmapendiente($idactividad);
 
+            $rowss = $obtenerinformes->fetch_all(MYSQLI_ASSOC);
 
-            $attachment = Query('Activities(' . $_POST["actividadIDfi"] . ')?$select=AttachmentEntry');
-            $rsptas = json_decode($attachment);
-            $idattachment = $rsptas->AttachmentEntry . '';
-            $rsptas = UploadFile($data, true, $idattachment);
+            $infv_id = $rowss[0]['infv_id'];
+            $enc_id = $rowss[0]['enc_id'];
+            $infv_servicio = $rowss[0]['infv_servicio'];
+            $infv_actividad = $rowss[0]['infv_actividad'];
+            $periodo = $rowss[0]['periodo'];
+
+            $idencuesta = $enc_id;
+            $idinforme = $infv_id;
+            $idencuesta = isset($enc_id) ? limpiarCadena($enc_id) : "";
+            $idinforme = isset($infv_id) ? limpiarCadena($infv_id) : "";
+            $nomcli = isset($_POST["nombre"]) ? limpiarCadena($_POST["nombre"]) : "";
+            $apecli = isset($_POST["apellido"]) ? limpiarCadena($_POST["apellido"]) : "";
+            $carcli = isset($_POST["cargo"]) ? limpiarCadena($_POST["cargo"]) : "";
+            $rutcli = isset($_POST["rut"]) ? limpiarCadena($_POST["rut"]) : "";
+            $firma3 = isset($_POST["firma"]) ? limpiarCadena($_POST["firma"]) : '';
+            $encoded_image = explode(",", $firma3) [1];
+            $decoded_image = base64_decode($encoded_image);
+            $imgfirma = round(microtime(true)) . ".png";
+            $patchfir = "../files/servicioequipo/firmas/" . $imgfirma;
+            file_put_contents($patchfir, $decoded_image);
+
+            $rspta = $servicio->firmapendiente($idactividad);
+
+            $rspta = $servicio->firmapendientes($idactividad, $nomcli, $rutcli, $firma3);
+
+            $estadovisita = 'terminado';
+
+            $rspinforme = $encuesta->infoVisita($idinforme);
+
+            $rows = $rspinforme->fetch_all(MYSQLI_ASSOC);
+
+            $idascensor = $rows[0]['infv_ascensor'] . '';
+            $idencuesta = $rows[0]['enc_id'] . '';
+            $idservicio = $rows[0]['infv_servicio'] . '';
+            $idactividad = $rows[0]['infv_actividad'] . '';
+            $periodo = $rows[0]['infv_periodo'] . '';
             
-            if (!$idattachment) {
-                $rsptas = json_decode($rsptsa);
-                if (isset($rspta->AbsoluteEntry)){
-                    $_POST['guiafimada'] = $rsptas->AbsoluteEntry;
-                }
-            } 
-            $guiafimada = $rsptas->AbsoluteEntry;
-            $data = json_encode($_POST);
+            $datosactividad = $servicio->Actividad($rows[0]['infv_actividad']);
 
-            $datosactividad = $servicio->Actividad($idactividad);
-            $rspta = $servicio->firmapendiente($idactividad, $nombre, $rut, $celular, $email, $firma);
-            $rspta2 = $servicio->finalizarActividadPorFirmar($data);
-            $rspta3 = $servicio->finalizarActividadAndroid($data, $actividadIDfi, $guiafimada);
+            $params['imgfoso'] = $rows[0]['imgfoso'] . '';
+            $params['imgtecho'] = $rows[0]['imgtecho'] . '';
+            $params['imgmaquina'] = $rows[0]['imgmaquina'] . '';
+            $params['imgoperador'] = $rows[0]['imgoperador'] . '';
 
-            if($rspta){
-                echo json_encode('enviado');
+            $idascensor = $rows[0]['infv_ascensor'] . '';
+            $idencuesta = $rows[0]['enc_id'] . '';
+            $idservicio = $rows[0]['infv_servicio'] . '';
+            $idactividad = $rows[0]['infv_actividad'] . '';
+            $periodo = $rows[0]['infv_periodo'] . '';
 
-            }else{
-                echo json_encode('error');
+            $params['actividadsap'] = $datosactividad['value'][0];
+            $params['idservicio'] = $idservicio . '';
+            $params['idascensor'] = $idascensor . '';
+            $params['idencuesta'] = $idencuesta . '';
+
+            $params['firmabase64'] = $firma3 . '';
+            
+            $params['estadofintext'] = $_POST['estadofintext'];
+            $params['obsfin'] = isset($_POST['observacionfinnuevo']) ? $_POST['observacionfinnuevo'] : '';
+            $params['estadofintext'] = isset($_POST['estadofintext']) ? $_POST['estadofintext'] : 'terminado';
+
+            $dataPresupuesto = $servicio->existepresupuesto($datosactividad['value'][0]['actCodigo']);
+            $rowspresupuesto = $dataPresupuesto->fetch_all(MYSQLI_ASSOC);
+            $contadorpresupuesto =count($rowspresupuesto);
+
+            if($contadorpresupuesto == 1){
+                $params['presupuesto'] = $contadorpresupuesto;
+                $datospresupuesto = json_decode($rowspresupuesto[0]['informacion']);
+                $params['presupuestoobservacion'] = $datospresupuesto->descripcion;
+                $params['imgpresupuesto1'] = $datospresupuesto->imgpresupuesto1;
+                $params['imgpresupuesto2'] = $datospresupuesto->imgpresupuesto2;
+                $params['imgpresupuesto3'] = $datospresupuesto->imgpresupuesto3;
             }
 
-        break;
+            $params['nombrecliente'] = $_POST['nombre'].' '.$_POST['apellido'];
+            $params['rutcliente'] = $_POST['rut'];
+            $params['cargocliente'] = $_POST['cargo'];
+            $params['firmacliente'] = $_POST['firma'];
+
+            $_POST['actividadIDfi'] = $datosactividad['value'][0]['actCodigo'];
+            $_POST['idactividad'] = $datosactividad['value'][0]['actCodigo'];
+            $_POST['servicecallIDfi'] = $idservicio;
+            $_POST['idserfirma'] = $idservicio;
+            $idservicio = $_POST['idservicio'];
+            $data = json_encode($_POST);
+            $rspta_finalizar = $servicio->finalizarActividadPorFirmar($data);
+
+            $result = newPdf('informemantencionnuevo', '', 'variable', $params);
+
+            $archivo = 'Informe_Servicio_' . $idservicio . '_' . $idascensor . '_' . $periodo . '.pdf';
+            file_put_contents('../files/pdf/' . $archivo, $result);
+
+            $data = array(array('name' => $archivo,'type'=>mime_content_type('../files/pdf/' . $archivo),'tmp_name'=>'../files/pdf/' . $archivo,'error'=>0,'size'=>filesize('../files/pdf/' . $archivo)));
+
+            //consulto si la actividad esta cerrada y su lista de attachment
+            $attachment = Query('Activities(' . $idactividad . ')?$select=AttachmentEntry,Closed');
+            $rspta = json_decode($attachment);
+
+            $idattachment = $rspta->AttachmentEntry . '';
+            $activityclosed = $rspta->Closed . '';
+
+            $rspta = UploadFile($data, true, $idattachment);//true: renombrar archivo y agregar timestamp
+
+            if (!$idattachment) {
+                //si la actividad esta cerrada y no existe lista de attachment asociada
+                //la abro, actualizo la lista y luego se vuelve a cerrar
+                $swActClosed = true;
+                if (strtolower($activityclosed) == 'tyes') {
+                    $abrir = json_encode(array("Closed"=>"N"));
+                    EditardatosNum('Activities',$idactividad,$abrir);
+                    $swActClosed = false;
+                }
+
+                $rspta = json_decode($rspta);
+                if (isset($rspta->AbsoluteEntry)){
+                    $newattachment = Editardatos('Activities', $idactividad, '{AttachmentEntry:' . $rspta->AbsoluteEntry . '}', false);
+                }
+
+                if (!$swActClosed) {
+                    $abrir = json_encode(array("Closed"=>"Y"));
+                    EditardatosNum('Activities',$idactividad,$abrir);
+                }
+            }
+
+            $rsptaservicio = $encuesta->ultimoInforme($idencuesta, $idascensor, $idservicio);
+            $idvisita = $rsptaservicio['infv_id'];
+
+        break;// FM131715 54916
 
         case 'firmarsap':
             $firma = isset($_POST["firma"]) ? limpiarCadena($_POST["firma"]) : '';

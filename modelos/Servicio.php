@@ -39,16 +39,20 @@ class Servicio
 		return ejecutarConsulta($sql);
 	}
 
-	public function firmapendiente($idactividad, $nombre, $rut, $celular, $email, $firma){
+	public function firmapendiente($idactividad){
+		$sql = "SELECT * FROM informevisita WHERE infv_actividad = '$idactividad'";
+		return ejecutarConsulta($sql);
+	}
+
+
+	public function firmapendientes($idactividad, $nomcli, $rut, $firma){
 		$sql = "UPDATE informevisita 
-        SET infv_nomcli = '$nombre', 
+        SET infv_nomcli = '$nomcli', 
             infv_rutcli = '$rut', 
-            infv_celularcli = '$celular', 
-            infv_emailcli = '$email', 
             infv_firmacliente = '$firma', 
             infv_estado = 'terminado', 
             infv_fechamod = NOW()
-        WHERE infv_actividad = '$idactividad'";	
+        WHERE infv_actividad = '$idactividad'";
 		return ejecutarConsulta($sql);
 	}
 

@@ -1689,8 +1689,6 @@ switch ($_GET["op"]) {
             $idSAP = $_GET['idSAP'];
             error_log("ESTA NOCHE IREMOS DE SAP: ".$idSAP);
             $rspta = $ascensor->IniciarServicioNormalizacionandroid($subject,$fm,$customerCode,$itemCode,$status,$gps,$idSAP);
-        }else{
-            $rspta = $ascensor->IniciarServicioNormalizacion($subject,$fm,$customerCode,$itemCode,$status,$gps);
         }
         error_log("Statuss ".$status);
         error_log("Nomen ".$_GET['nomen']);
@@ -3038,7 +3036,6 @@ switch ($_GET["op"]) {
             $idactividad = $_POST['idactividad'];
 
             $obtenerinformes = $servicio->firmapendiente($idactividad);
-
             $rowss = $obtenerinformes->fetch_all(MYSQLI_ASSOC);
 
             $infv_id = $rowss[0]['infv_id'];
@@ -3095,7 +3092,6 @@ switch ($_GET["op"]) {
             $params['idservicio'] = $idservicio . '';
             $params['idascensor'] = $idascensor . '';
             $params['idencuesta'] = $idencuesta . '';
-
             $params['firmabase64'] = $firma3 . '';
             
             $params['estadofintext'] = $_POST['estadofintext'];

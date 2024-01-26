@@ -1948,43 +1948,14 @@ switch ($_GET["op"]) {
 
         case  'finalizarsap':
             $firma = isset($_POST["firma"]) ? limpiarCadena($_POST["firma"]) : '';
-            error_log("La firma dice: ".$firma);
-            
-            //echo '<br><br><pre>';print_r($_POST);echo '</pre><br><br><br><br>';die;
+            $imagen_presupuesto[] = isset($_POST["file01"]) ? limpiarCadena($_POST["file01"]) : "";
+            $imagen_presupuesto[] = isset($_POST["file02"]) ? limpiarCadena($_POST["file02"]) : "";
+            $imagen_presupuesto[] = isset($_POST["file03"]) ? limpiarCadena($_POST["file03"]) : "";
             $data = json_encode($_POST);
-            error_log("El json de lo que llega desde l POST: ".$data);           //$rspta = $servicio->finalizarActividad($data);
+            error_log("El json de lo que llega desde l POST: ".$data);         
             $datosactividad = $servicio->Actividad($_POST['actividadIDfi']);
-            error_log("Variable datosactividad: " . json_encode($datosactividad));
-
-            //comprobacion de lo que llega
-            error_log("POST actividadIDfi: ". $_POST["actividadIDfi"]);
-            error_log("datosactividad value 0 srvcodigo: ". $datosactividad['value'][0]['srvCodigo']);
-            error_log("datosactividad value 0 equCcostoNombre: ". $datosactividad['value'][0]['equCcostoNombre']);
-            error_log("datosactividad value 0 equCalle: ". $datosactividad['value'][0]['equCalle']);
-            error_log("datosactividad value 0 equCiudad: ". $datosactividad['value'][0]['equCiudad']); 
-            error_log("datosactividad value 0 artFabricante: ". $datosactividad['value'][0]['artFabricante']); 
-            error_log("datosactividad value 0 artTipoEquipo: ". $datosactividad['value'][0]['artTipoEquipo']);
-            error_log("datosactividad value 0 equSnInterno: ". $datosactividad['value'][0]['equSnInterno']); 
-            error_log("datosactividad value 0 equNomenCli: ". $datosactividad['value'][0]['equNomenCli']); 
-            error_log("datosactividad value 0 tecNombre: ". $datosactividad['value'][0]['tecNombre']);
-            error_log("datosactividad value 0 tecApellido: ". $datosactividad['value'][0]['tecApellido']);  
-            error_log("datosactividad value 0 tecNumDoc: ". $datosactividad['value'][0]['tecNumDoc']); 
-            error_log("datosactividad value 0 tecCargo: ". $datosactividad['value'][0]['tecCargo']); 
-            error_log("POST ayudante1: ". $_POST["ayudante1"]); 
-            error_log("POST ayudante2: ". $_POST["ayudante2"]); 
-            error_log("POST ayudante2: ". $_POST["cantayu"]); 
-            error_log("datosactividad value 0 srvTipoLlamada: ". $datosactividad['value'][0]['srvTipoLlamada']);            
-            error_log("datosactividad fecha formateada 1: ".date('d-m-Y',strtotime($datosactividad['value'][0]['actFechaIni'])));
-            error_log("datosactividad value 0 actEstEquiIni: ". $datosactividad['value'][0]['actEstEquiIni']);
-            error_log("datosactividad value 0 srvAsunto: ". $datosactividad['value'][0]['srvAsunto']);
-            error_log("POST estadoascensor: ". $_POST["estadoascensor"]);
-            error_log("POST observacionFi: ". $_POST["observacionfi"]);
-            error_log("opfirma: ". $opfirma);
-            error_log("POST nombresfi: ". $_POST["nombresfi"]);
-            error_log("POST apellidosfi: ". $_POST["apellidosfi"]);
-            error_log("POST rutfi: ". $_POST["rutfi"]);
-            error_log("firma: ". $firma);
-            // if($opfirma=='1' || $opfirma=='3' && $rspta){
+            $opfirma = $_POST['opfirma'];
+            $actividadIDfi = $_POST['actividadIDfi'];
             if($opfirma=='1' || $opfirma=='3'){
                 error_log("opfirma es igual a 1 o 3");
                 $bodypdf = '
@@ -2262,14 +2233,40 @@ switch ($_GET["op"]) {
                                                 </td>
                                             </tr>
                                             <tr class="item">
-                                                <td colspan="2">
-                                                    <b>FIRMA: </b><br>
-                                                    <img src="' . $firma . '" style="width:100%; max-width:150px;"><br>
-                                                </td>
-                                            </tr>
+                                            <td colspan="2">
+                                                <b>FIRMA: </b><br>
+                                                <img src="' . $_POST['firma'] . '" style="width:100%; max-width:150px;"><br>
+                                            </td>
+                                        </tr>
                                         ';
+                                        if (count($imagen_presupuesto) > 0 && isset($_POST['descripcion']) && $_POST['descripcion']) {
+                                            $bodypdf .= '
+                                                <tr class="item" style="display: flex; flex-wrap: wrap; justify-content: center;">
+                                                    <td colspan="50" style="text-align: center;">
+                                                        <b style="text-align:left;">PRESUPUESTO </b><br>';
+                                            foreach ($imagen_presupuesto as $imagen) {
+                                                if ($imagen) {
+                                                    $bodypdf .= '
+                                                        <img src="../files/img_presupuesto/' . $imagen . '" style="width:100%; max-width:280px; display: inline-block; margin-bottom: 10px;"><br>';
+                                                }
+                                            }
+                                            $bodypdf .= '   
+                                                    </td>   
+                                                </tr>
+                                                <tr class="item">
+                                                    <td>
+                                                        <b>DESCRIPCIÓN: </b>' . $_POST["descripcion"] . '
+                                                    </td>
+                                                </tr>';
+                                        }else{
+                                            $bodypdf .= '   
+                                            <tr class="item">
+                                                <td>
+                                                    <b>No se registro presupuesto</b>'.'
+                                                </td>
+                                            </tr>';
+                                        }
                                     }
-
                                     $bodypdf .= '<br><br>
                                     <tr class="top">
                                         <td colspan="2">
@@ -2566,12 +2563,40 @@ switch ($_GET["op"]) {
                                             <tr class="item">
                                                 <td colspan="2">
                                                     <b>FIRMA: </b><br>
-                                                    <img src="' . $firma . '" style="width:100%; max-width:150px;"><br>
+                                                    <img src="' . $_POST['firma'] . '" style="width:100%; max-width:150px;"><br>
                                                 </td>
                                             </tr>
-                                        ';
+                                            <tr class="item" style="display: flex; flex-wrap: wrap; justify-content: center;">
+                                            <td colspan="50" style="text-align: center;">
+                                            <b style="text-align:left;">PRESUPUESTO </b><br>';
+                                            if (count($imagen_presupuesto) > 0 && isset($_POST['descripcion']) && $_POST['descripcion']) {
+                                                $bodypdf .= '
+                                                    <tr class="item" style="display: flex; flex-wrap: wrap; justify-content: center;">
+                                                        <td colspan="50" style="text-align: center;">
+                                                            <b style="text-align:left;">PRESUPUESTO </b><br>';
+                                                foreach ($imagen_presupuesto as $imagen) {
+                                                    if ($imagen) {
+                                                        $bodypdf .= '
+                                                            <img src="../files/img_presupuesto/' . $imagen . '" style="width:100%; max-width:280px; display: inline-block; margin-bottom: 10px;"><br>';
+                                                    }
+                                                }
+                                                $bodypdf .= '   
+                                                        </td>   
+                                                    </tr>
+                                                    <tr class="item">
+                                                        <td>
+                                                            <b>DESCRIPCIÓN: </b>' . $_POST["descripcion"] . '
+                                                        </td>
+                                                    </tr>';
+                                            }else{
+                                                $bodypdf .= '   
+                                                <tr class="item">
+                                                    <td>
+                                                        <b>No se registro presupuesto</b>'.'
+                                                    </td>
+                                                </tr>';
+                                            }
                                     }
-
                                     $body .= '<br><br>
                                     <tr class="top">
                                         <td colspan="2">
@@ -2589,18 +2614,9 @@ switch ($_GET["op"]) {
                         </body>
                     </html>
                 ';
-                                    
-                /*
-                error_log("bodypdf: ". $bodypdf);
-                error_log("body: ". $body);
-                //echo $bodypdf;die;
-                //$guiaPDF = new mPDF('c');
-                $guiaPDF = new \Mpdf\Mpdf();
-                //$guiaPDF->showImageErrors = true;
+                $guiaPDF = new mPDF('c');
                 $guiaPDF->WriteHTML($bodypdf);
                 $archivo = 'GSE - '.$_POST['servicecallIDfi'].' - '.$_POST["actividadIDfi"].".pdf";
-                error_log("POST servicecallIDfi: ". $_POST["servicecallIDfi"]);
-                error_log("POST actividadIDfi: ". $_POST["actividadIDfi"]);
                 $rpdf = $guiaPDF->Output('../files/pdf/' . $archivo, 'F');
                 $data = array(array('name' => $archivo,'type'=>mime_content_type('../files/pdf/' . $archivo),'tmp_name'=>'../files/pdf/' . $archivo,'error'=>0,'size'=>filesize('../files/pdf/' . $archivo)));
 
@@ -2615,7 +2631,6 @@ switch ($_GET["op"]) {
                     $rspta = json_decode($rspta);
                     if (isset($rspta->AbsoluteEntry)){
                         $_POST['guiafimada'] = $rspta->AbsoluteEntry;
-                        error_log("POST guiafimada: ". $_POST['guiafimada']);
                     }
                 }
 
@@ -2649,73 +2664,54 @@ switch ($_GET["op"]) {
 
                 //supervisor del tecnico
                 if(!empty($datosactividad['value'][0]['equSupEmail'])){
-                    $Mailer->addAddress($datosactividad['value'][0]['equSupEmail'], '');
-                    error_log("POST datosactividad equSupEmail: ". $datosactividad['value'][0]['equSupEmail']);
+                    //$Mailer->addAddress($datosactividad['value'][0]['equSupEmail'], '');
                 }
 
-                error_log("POST datosactividad srvTipoLlamadaId: ". $datosactividad['value'][0]['srvTipoLlamadaId']);
-             
-                $Mailer->addAddress('ignacio.cabello.paiva@gmail.com','');
-                //agrega cuando sea Ingenieria de Campo
+                $Mailer->addAddress('jaguilera@fabrimetalsa.cl');
+
                 if($datosactividad['value'][0]['srvTipoLlamadaId'] == 16){
-                    $Mailer->addAddress('finostroza@fabrimetal.cl','');
-                    $Mailer->addAddress('hhernandez@fabrimetal.cl','');
+                    //$Mailer->addAddress('upino@fabrimetal.cl','');
                 }
                 
                 //agrega cuando sea Reparaciones
                 if($datosactividad['value'][0]['srvTipoLlamadaId'] == 2){
-                    $Mailer->addAddress('mmonares@fabrimetal.cl','');
+                    //$Mailer->addAddress('mmonares@fabrimetal.cl','');
+                    //$Mailer->addAddress('paraneda@fabrimetal.cl','');                
                 }
-                */
                 
                 //contactos del cliente
-                $select = 'ContactEmployees';
-                $entity = "BusinessPartners";
-                $id = $datosactividad['value'][0]['cliCodigo'];
-                error_log("POST datosactividad cliCodigo: ". $datosactividad['value'][0]['cliCodigo']);
-                $contactos = json_decode(ConsultaIDLet($entity,$id,$select),true);
-                if(count($contactos['ContactEmployees']) > 0){
-                    foreach($contactos['ContactEmployees']  as $key => $val){
-                        if(!empty($val['E_Mail']) && $val['EmailGroupCode'] == 'GSE'){
-                            /*$Mailer->addAddress($val['E_Mail'], $val['FirstName'].' '.$val['LastName']);*/
-                        }
-                    }
-                }
-                //print_r($Mailer);die();
-                /*
+                //$select = 'ContactEmployees';
+                //$entity = "BusinessPartners";
+                //$id = $datosactividad['value'][0]['cliCodigo'];
+                //$contactos = json_decode(ConsultaIDLet($entity,$id,$select),true);
+                //if(count($contactos['ContactEmployees']) > 0){
+                //   foreach($contactos['ContactEmployees']  as $key => $val){
+                //        if(!empty($val['E_Mail']) && $val['EmailGroupCode'] == 'GSE'){
+                //            $Mailer->addAddress($val['E_Mail'], $val['FirstName'].' '.$val['LastName']);
+                //        }
+                //    }
+                //}
+
                 if (!$Mailer->send()) {
                     echo "Error al enviar correo: " . $Mailer->ErrorInfo . "<br>";
-                    error_log("error al enviar el correo");
-             
                 } else {
                     echo "Correo enviado exitosamente<br>";
-                    error_log("Correo enviado exitosamente");
                 }
 
-                unlink('../files/pdf/' . $archivo);*/
+                unlink('../files/pdf/' . $archivo);
             }
 
             $data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $firma));
-            error_log("Variable firma antes del base64: " .$firma);
-            error_log("Variable data despues del base64: " .$data);
             $archivo = "cli".time().".png";
-            error_log("Variable archivo, posiblemente nombre del archivo de la firma: " .$archivo);
             $filepath = "../files/firma/".$archivo; // or image.jpg
             file_put_contents($filepath, $data);
             $_POST['firma'] = $archivo;
-            error_log("POST firma: ". $_POST['firma']);
             $_POST['comercialID'] = $datosactividad['value'][0]['equComercialId'];
-            error_log("datosactividad equComercialId: ". $datosactividad['value'][0]['equComercialId']);
             $_POST['codCenCosto'] = $datosactividad['value'][0]['equCcostoCod'];
-            error_log("datosactividad equCcostoCod: ". $datosactividad['value'][0]['equCcostoCod']);
             $_POST['nomCenCosto'] = $datosactividad['value'][0]['equCcostoNombre'];
-            error_log("datosactividad equCcostoNombre: ". $datosactividad['value'][0]['equCcostoNombre']);
             $data = json_encode($_POST);
-            error_log("Variable data: " .$data);
             $rspta = $servicio->finalizarActividad($data);
-            error_log("Variable rspta: " .$rspta);
-            //ENVIO DE CORREO A CLIENTE POR SOLICITUD DE PPTO
-            error_log("POST oppre: ". $_POST["oppre"]);
+
                 if ($_POST["oppre"] == "1"){
                     $body = '
                 <html>
@@ -2876,52 +2872,39 @@ switch ($_GET["op"]) {
             $body = str_replace('{{equipo}}', $datosactividad['value'][0]['equSnInterno'], $body);
             $body = str_replace('{{supervisor}}', $datosactividad['value'][0]['equSupNombre'] . ' '. $datosactividad['value'][0]['equSupApellido'] , $body);
 
-            //se envia correo al emal del usuario y al email del cliente, que ingreso en el formulario
             $Mailer = new PHPMailer();
-
             $Mailer->isSMTP();
             $Mailer->CharSet = 'UTF-8';
-
             $Mailer->Port = 587;
             $Mailer->SMTPAuth = true;
             $Mailer->SMTPSecure = "tls";
             $Mailer->SMTPDebug = 0;
             $Mailer->Debugoutput = 'html';
-
-            // $Mailer->Host = "www.fabrimetalsa.cl";
             $Mailer->Host = "smtp.gmail.com";
             $Mailer->Username = "emergencia@fabrimetal.cl";
             $Mailer->Password = "fm818820";
             $Mailer->From = "emergencia@fabrimetal.cl";
-
-            //$Mailer->From = "notificaciones@fabrimetalsa.cl"; //"emergencia@fabrimetal.cl";
             $Mailer->FromName = "Sistema Fabrimetal";
             $Mailer->Subject = "Solicitud de Presupuesto generada - FABRIMETAL";
-            // $Mailer->addAttachment("$uploads_dir/$name");
             $Mailer->msgHTML($body);
 
-            $Mailer->addAddress('vvasquez@fabrimetal.cl');
-            
-            //FALTA AGREGAR CORREO DEL SUPERVISOR, JEFE DE SERVICIO Y CLIENTE
-            //$Mailer->addAddress($datosactividad['value'][0]['equSupEmail']);
-            //$Mailer->addAddress('dmediavilla@fabrimetal.cl');
-            
-            $select = 'ContactEmployees';
-            $entity = "BusinessPartners";
-            $id = $datosactividad['value'][0]['cliCodigo'];
-            error_log("id llegando al final: ".$id);
-            $contactos = json_decode(ConsultaIDLet($entity,$id,$select),true);
-            error_log("variable contactos llegando al final: ".json_encode($contactos));
-            if(count($contactos['ContactEmployees']) > 0){
-                foreach($contactos['ContactEmployees']  as $key => $val){
-                    if(!empty($val['E_Mail']) && $val['EmailGroupCode'] == 'GSE'){
-                        $Mailer->addAddress($val['E_Mail'], $val['FirstName'].' '.$val['LastName']);
-                    }
-                }
-            }
+            //$Mailer->addAddress('vvasquez@fabrimetal.cl');
+            $Mailer->addAddress('jaguilera@fabrimetalsa.cl');
+
+            //$select = 'ContactEmployees';
+            //$entity = "BusinessPartners";
+            //$id = $datosactividad['value'][0]['cliCodigo'];
+            //$contactos = json_decode(ConsultaIDLet($entity,$id,$select),true);
+            //if(count($contactos['ContactEmployees']) > 0){
+            //    foreach($contactos['ContactEmployees']  as $key => $val){
+            //        if(!empty($val['E_Mail']) && $val['EmailGroupCode'] == 'GSE'){
+            //            $Mailer->addAddress($val['E_Mail'], $val['FirstName'].' '.$val['LastName']);
+            //        }
+            //    }
+            //}
             
             $Mailer->send();
-                }
+            }
             //FIN CORREO PPTO
             echo $rspta ? "Servicio finalizado con exito" : "El servicio no pudo ser finalizado";
         break;
@@ -3061,7 +3044,7 @@ switch ($_GET["op"]) {
 
             $rspta = $servicio->firmapendiente($idactividad);
 
-            $rspta = $servicio->firmapendientes($idactividad, $nomcli, $rutcli, $firma3);
+            $rspta = $servicio->firmapendientes($idactividad, $rutcli, $firma3);
 
             $estadovisita = 'terminado';
 

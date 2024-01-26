@@ -2563,7 +2563,7 @@ switch ($_GET["op"]) {
                                             <tr class="item">
                                                 <td colspan="2">
                                                     <b>FIRMA: </b><br>
-                                                    <img src="' . $_POST['firma'] . '" style="width:100%; max-width:150px;"><br>
+                                                    <img src="' . $_POST["firma"] . '" style="width:100%; max-width:150px;"><br>
                                                 </td>
                                             </tr>
                                             <tr class="item" style="display: flex; flex-wrap: wrap; justify-content: center;">
@@ -3008,6 +3008,8 @@ switch ($_GET["op"]) {
             $idSAP = $_POST['idSAP'];
             $actividadIDfi = $_POST['idactividad'];
             $srvCodigo = $_POST['idservicio'];
+            $firma_real = $_POST['firma_real'];
+
             $idservicio = $_POST['idservicio'];
             $opfirma = 1;
             $nombresfi = $_POST['nombre'];

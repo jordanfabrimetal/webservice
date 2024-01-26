@@ -45,10 +45,9 @@ class Servicio
 	}
 
 
-	public function firmapendientes($idactividad, $nomcli, $rut, $firma){
+	public function firmapendientes($idactividad, $rut, $firma){
 		$sql = "UPDATE informevisita 
-        SET infv_nomcli = '$nomcli', 
-            infv_rutcli = '$rut', 
+        SET infv_rutcli = '$rut', 
             infv_firmacliente = '$firma', 
             infv_estado = 'terminado', 
             infv_fechamod = NOW()

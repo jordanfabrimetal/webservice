@@ -3037,9 +3037,9 @@ switch ($_GET["op"]) {
                     $params['presupuesto'] = $contadorpresupuesto;
                     $datospresupuesto = json_decode($rowspresupuesto[0]['informacion']);
                     $descripcion = $datospresupuesto->descripcion;
-                    $imagen_presupuesto[] = isset($datospresupuesto->imgpresupuesto1) ? limpiarCadena($datospresupuesto->imgpresupuesto1) : "";
-                    $imagen_presupuesto[] = isset($datospresupuesto->imgpresupuesto2) ? limpiarCadena($datospresupuesto->imgpresupuesto2) : "";
-                    $imagen_presupuesto[] = isset($datospresupuesto->imgpresupuesto3) ? limpiarCadena($datospresupuesto->imgpresupuesto3) : "";
+                    $imagen_presupuesto[] = isset($datospresupuesto->file01) ? limpiarCadena($datospresupuesto->file01) : "";
+                    $imagen_presupuesto[] = isset($datospresupuesto->file02) ? limpiarCadena($datospresupuesto->file02) : "";
+                    $imagen_presupuesto[] = isset($datospresupuesto->file03) ? limpiarCadena($datospresupuesto->file03) : "";
                 }
                 $data = json_encode($_POST);
                 error_log("El json de lo que llega desde l POST: ".$data);         
@@ -3323,8 +3323,8 @@ switch ($_GET["op"]) {
                                                 <tr class="item">
                                                 <td colspan="2">
                                                     <b>FIRMA: </b><br>
-                                                    <img src="' . $firma . '" style="width:100%; max-width:150px;"><br>
-                                                </td>
+                                                    <img src="' . $_POST['firma'] . '" style="width:100%; max-width:150px;"><br>
+                                                    </td>
                                             </tr>
                                             ';
                                             if (count($imagen_presupuesto) > 0 && isset($descripcion) && $descripcion) {
@@ -3651,8 +3651,8 @@ switch ($_GET["op"]) {
                                                 <tr class="item">
                                                     <td colspan="2">
                                                         <b>FIRMA: </b><br>
-                                                        <img src="' . $firma . '" style="width:100%; max-width:150px;"><br>
-                                                    </td>
+                                                        <img src="' . $_POST['firma'] . '" style="width:100%; max-width:150px;"><br>
+                                                        </td>
                                                 </tr>
                                                 <tr class="item" style="display: flex; flex-wrap: wrap; justify-content: center;">
                                                 <td colspan="50" style="text-align: center;">

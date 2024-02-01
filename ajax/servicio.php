@@ -1960,6 +1960,8 @@ switch ($_GET["op"]) {
             $actividadIDfi = $_POST['actividadIDfi'];
             $codigoequipo = $_POST['codigoEquipo']; // FM
             $tipoequipo = $_POST['tipoEquipo']; // ASCENSOR o ESCALERA
+            $comentario = $_POST['comentario'];
+            $idSAP = $_POST['idSAP'];
 
             if($tiposervicio == 'Mantención'){
 
@@ -2025,12 +2027,12 @@ switch ($_GET["op"]) {
                                 'firmaempleado' => 'firmarmpleado.png',
                                 'cliente' => $idcliente . '',
                                 'firmacliente' => $imgfirma . '',
-                                'empresa' => ' ',
-                                'direccion' => ' ',
+                                'empresa' => 'circuntancial',
+                                'direccion' => 'circuntancial',
                                 'nomcli' => $_POST['nombresfi'] . ' '.$_POST['apellidosfi'],
                                 'rutcli' => $_POST['rutfi'] . '',
-                                'celularcli' => ' ',
-                                'emailcli' => ' ',
+                                'celularcli' => '586188440',
+                                'emailcli' => ' circuntancial@circuntancial.cl',
                                 'estado' => $estadovisita . '',
                                 'actividad' => $idactividad
                             ];
@@ -2040,27 +2042,27 @@ switch ($_GET["op"]) {
                             $imgmaquina = $_POST['mImagePath3'];
                             $imgoperador = $_POST['mImagePath4'];
 
-                            $params['imgfoso'] = $imgfoso;
-                            $params['imgtecho'] = $imgtecho;
-                            $params['imgmaquina'] = $imgmaquina;
-                            $params['imgoperador'] = $imgoperador;
+                            $params['imgfoso'] = "image.png";
+                            $params['imgtecho'] = "image.png";
+                            $params['imgmaquina'] = "image.png";
+                            $params['imgoperador'] = "image.png"; 
         
                             //SE MODIFICA LA VISITA
                             $rspvisita = $encuesta->nuevaVisita($params);
-        
-                            //$respuestas = array();
-                            //if ($_POST['preg']) {
-                            //    $resp01 = array("tipo" => "pregunta", "data" => $_POST['preg']);
-                            //    $respuestas[] = $resp01;
-                            //}
-                            //if (isset($_POST['compreg'])) {
-                            //    $resp02 = array("tipo" => "comentario", "data" => $_POST['compreg']);
-                            //    $respuestas[] = $resp02;
-                            //}
-    
-                            //$rsppregvisita = $encuesta->nuevaRespuestaVisita($rspvisita, $respuestas);   
+                            $_POST['preg'] = json_decode($_POST['preg'], true);
                             
-                            
+                            if (isset($_POST['preg'])) {
+                                $respuestas = array();
+                                if ($_POST['preg']) {
+                                    $resp01 = array("tipo" => "pregunta", "data" => $_POST['preg']);
+                                    $respuestas[] = $resp01;
+                                }
+                                if (isset($_POST['compreg'])) {
+                                    $resp02 = array("tipo" => "comentario", "data" => $_POST['compreg']);
+                                    $respuestas[] = $resp02; 
+                                }
+                                $rsppregvisita = $encuesta->nuevaRespuestaVisita($rspvisita, $respuestas);   
+                            }
                         break;
                     }
 
@@ -2080,10 +2082,16 @@ switch ($_GET["op"]) {
                         $params['estadoobs'] = $_POST[''];
                     }
 
-                    if($_POST['oppre'] == 1){
-                        $params['imgpresupuesto1'] =  $_POST["file01"];
-                        $params['imgpresupuesto2'] =  $_POST["file02"];
-                        $params['imgpresupuesto3'] =  $_POST["file03"];
+                    if (!empty($_POST["file01"])) {
+                        $params['imgpresupuesto1'] = $_POST["file01"];
+                    }
+                    
+                    if (!empty($_POST["file02"])) {
+                        $params['imgpresupuesto2'] = $_POST["file02"];
+                    }
+                    
+                    if (!empty($_POST["file03"])) {
+                        $params['imgpresupuesto3'] =$_POST["file03"];
                     }
 
                     //$dataimagenmensual = ['actividadSAP'=>$idactividad,'servicioSAP'=>$idservicio,'equipoFM'=>$idascensor, 'tipoascensor' => $_POST['tipo_ascensor'], 'configuracion' => $_POST['tipo_comando']];

@@ -595,7 +595,7 @@ class Servicio
 		return json_decode(ConsultaEntity($entity, $select, $filter), true);
 	}
 
-	public function finalizarActividadPorFirmar($data, $srvCodigo)
+	public function finalizarActividadPorFirmarM($data, $srvCodigo)
 	{
 		$data = json_decode($data);
 		//echo '<pre>';print_r($data);echo '</pre>';die;
@@ -617,6 +617,33 @@ class Servicio
 
 		$entity = 'ServiceCalls';
 		$id = $srvCodigo;
+		$servicecall = json_encode(array("Status" => $status));
+		$rsptaservcall = EditardatosNum($entity, $id, $servicecall);
+		return true;
+	}
+
+	public function finalizarActividadPorFirmar($data)
+	{
+		$data = json_decode($data);
+		//echo '<pre>';print_r($data);echo '</pre>';die;
+
+		$entity = 'Activities';
+		$id = $data->idactividad;
+		$firma = 'N';
+		$status = 1;
+
+		if (isset($data->guiafimada)) {
+			$actividad = json_encode(array("Closed" => "Y", "U_PorFirmar" => $firma, "AttachmentEntry" => $data->guiafimada));
+		} else {
+			$actividad = json_encode(array("Closed" => "Y", "U_PorFirmar" => $firma));
+		}
+
+		$abrir = json_encode(array("Closed" => "N"));
+		EditardatosNum($entity, $id, $abrir);
+		$rsptaactv = EditardatosNum($entity, $id, $actividad);
+
+		$entity = 'ServiceCalls';
+		$id = $data->idserfirma;
 		$servicecall = json_encode(array("Status" => $status));
 		$rsptaservcall = EditardatosNum($entity, $id, $servicecall);
 		return true;
@@ -662,6 +689,15 @@ class Servicio
 		$filter = "startswith(CustomerCode,'C" . $cliente . "')";
 		return json_decode(ConsultaEntity($entity, $select, $filter), true);
 	}
+
+	public function SelectClientes($fm)
+	{
+		$entity = 'CustomerEquipmentCards';
+		$select = 'InternalSerialNum,CustomerCode';
+		$filter = "InternalSerialNum eq '. $fm . ')";
+		return json_decode(ConsultaEntity($entity, $select, $filter), true);
+	}
+
 
 	public function CrearLlamada($data)
 	{

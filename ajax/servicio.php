@@ -1971,7 +1971,7 @@ switch ($_GET["op"]) {
                     $idencuestatext = $idencuesta;
                     $idservicio = $_POST['servicecallIDfi'];
 
-                    $periodo = date("Yd");
+                    $periodo = date("Ym");
                     
                     //Recupero el ID del cliente
                     $cliente = $servicio->SelectClientes($codigoequipo);
@@ -2037,16 +2037,11 @@ switch ($_GET["op"]) {
                                 'actividad' => $idactividad
                             ];
 
-                            $imgfoso = $_POST['mImagePath'];
-                            $imgtecho = $_POST['mImagePath2'];
-                            $imgmaquina = $_POST['mImagePath3'];
-                            $imgoperador = $_POST['mImagePath4'];
+                            $params['imgfoso'] ='';
+                            $params['imgtecho'] ='';
+                            $params['imgmaquina'] ='';
+                            $params['imgoperador'] ='';
 
-                            $params['imgfoso'] = "image.png";
-                            $params['imgtecho'] = "image.png";
-                            $params['imgmaquina'] = "image.png";
-                            $params['imgoperador'] = "image.png"; 
-        
                             //SE MODIFICA LA VISITA
                             $rspvisita = $encuesta->nuevaVisita($params);
                             $_POST['preg'] = json_decode($_POST['preg'], true);
@@ -2083,15 +2078,29 @@ switch ($_GET["op"]) {
                     }
 
                     if (!empty($_POST["file01"])) {
-                        $params['imgpresupuesto1'] = $_POST["file01"];
+                        $imgpresupuesto = $_POST['file01'];
+                        $decoded_image =  $imgpresupuesto;
+                        $patchfir = "../files/images/" . $imgpresupuesto;
+                        file_put_contents($patchfir, $decoded_image);
+                        $params['imgpresupuesto'] = $_POST["file01"];
                     }
+
                     
                     if (!empty($_POST["file02"])) {
+                        $imgpresupuesto2 = $_POST['file02'];
+                        $decoded_image =  $imgpresupuesto2;
+                        $patchfir = "../files/images/" . $imgpresupuesto2;
+                        file_put_contents($patchfir, $decoded_image);
                         $params['imgpresupuesto2'] = $_POST["file02"];
                     }
+
                     
                     if (!empty($_POST["file03"])) {
-                        $params['imgpresupuesto3'] =$_POST["file03"];
+                        $imgpresupuesto = $_POST['file03'];
+                        $decoded_image =  $imgpresupuesto;
+                        $patchfir = "../files/images/" . $imgpresupuesto;
+                        file_put_contents($patchfir, $decoded_image);
+                        $params['imgpresupuesto3'] = $_POST["file03"];
                     }
 
                     //$dataimagenmensual = ['actividadSAP'=>$idactividad,'servicioSAP'=>$idservicio,'equipoFM'=>$idascensor, 'tipoascensor' => $_POST['tipo_ascensor'], 'configuracion' => $_POST['tipo_comando']];

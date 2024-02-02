@@ -2081,43 +2081,32 @@ switch ($_GET["op"]) {
                         $params['estadoobs'] = $_POST[''];
                     }
 
+                    $jsonImages = $_POST['images'];
+                    $data_imagen = json_decode($jsonImages, true);
+                    $rutaDestino = '../files/images/';
                     
-    
-                        $jsonImages = $_POST['images'];
-
-                        $data_imagen = json_decode($jsonImages, true);
-
-                        $imagen1 = $data_imagen['imagen1'];
-                        $imagen2 = $data_imagen['imagen2'];
-                        $imagen3 = $data_imagen['imagen3'];
-                        
-                        if(isset($imagen1) && !empty($imagen1)){
-                            $extension1 = 'jpg'; // O la extensión adecuada
-                            $nombreImagen1 = 'imagen1_' . time() . '.' . $extension1;
-                            $rutaDestino1 = '../files/images/' . $nombreImagen1;
-                            $imagenBinaria1 = base64_decode($imagen1);
-                            file_put_contents($rutaDestino1, $imagenBinaria1);
-                            $params['imgpresupuesto1'] = $nombreImagen1;
+                    for ($i = 1; $i <= 3; $i++) {
+                        $claveImagen = 'imagen' . $i;
+                    
+                        if (isset($data_imagen[$claveImagen]) && !empty($data_imagen[$claveImagen])) {
+                            $base64Image = $data_imagen[$claveImagen];
+                    
+                            // Decodificar la imagen Base64
+                            $imagenBinaria = base64_decode($base64Image);
+                    
+                            // Obtener la extensión de la imagen
+                            $extension = 'jpg'; // O la extensión adecuada
+                    
+                            // Crear el nombre único de la imagen
+                            $nombreImagen = 'imagen' . $i . '_' . time() . '.' . $extension;
+                    
+                            // Guardar la imagen en el servidor
+                            file_put_contents($rutaDestino . $nombreImagen, $imagenBinaria);
+                    
+                            // Agregar el nombre de la imagen al array de parámetros
+                            $params['imgpresupuesto' . $i] = $nombreImagen;
                         }
-                        
-                        if(isset($imagen2) && !empty($imagen2)){
-                            $extension2 = 'jpg'; // O la extensión adecuada
-                            $nombreImagen2 = 'imagen2_' . time() . '.' . $extension2;
-                            $rutaDestino2 = '../files/images/' . $nombreImagen2;
-                            $imagenBinaria2 = base64_decode($imagen2);
-                            file_put_contents($rutaDestino2, $imagenBinaria2);
-                            $params['imgpresupuesto2'] = $nombreImagen2;
-                        }                        
-                        
-                        if(isset($imagen3) && !empty($imagen3)){
-                            $extension3 = 'jpg'; // O la extensión adecuada
-                            $nombreImagen3 = 'imagen3_' . time() . '.' . $extension3;
-                            $rutaDestino3 = '../files/images/' . $nombreImagen3;
-                            $imagenBinaria3 = base64_decode($imagen3);
-                            file_put_contents($rutaDestino3, $imagenBinaria3);   
-                            $params['imgpresupuesto3'] = $nombreImagen3;
-                        }                        
-
+                    }
 
                     //$dataimagenmensual = ['actividadSAP'=>$idactividad,'servicioSAP'=>$idservicio,'equipoFM'=>$idascensor, 'tipoascensor' => $_POST['tipo_ascensor'], 'configuracion' => $_POST['tipo_comando']];
                     //echo $imagenMensual->insertar_imagen_mensual($dataimagenmensual);

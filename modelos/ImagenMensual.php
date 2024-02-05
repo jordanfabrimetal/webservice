@@ -21,7 +21,6 @@ require "../config/conexion.php";
 			return ejecutarConsu_retornarID($sql);
 		}
 
-
 		public function imagen_actividad($actividad){
 			$sql = "SELECT enc_id AS 'tipo' FROM informevisita WHERE infv_actividad = $actividad";
 			//$sql="SELECT COUNT(*) AS 'contador'  FROM imagen_mensual_actividad WHERE actividadSAP = $actividad";

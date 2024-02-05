@@ -16,11 +16,11 @@ require "../config/conexion.php";
 			$sql="SELECT * FROM imagen_mensual WHERE mes = $mes AND anio = $anio";
 			return ejecutarConsulta($sql);
 		}
-
 		public function insertar_imagen_mensual($data){
-			$sql = "INSERT INTO `imagen_mensual_actividad`(`equipoFM`,`servicioSAP`,`actividadSAP`,`imagenmensualID`,`imagen`) VALUES ('{$data['equipoFM']}', {$data['servicioSAP']}, {$data['actividadSAP']}, {$data['imagenmensualID']}, '{$data['imagen']}' )";
+			$sql = "INSERT INTO `imagen_mensual_actividad`(`equipoFM`,`servicioSAP`,`actividadSAP`,`tipoascensor`,`configuracion`) VALUES ('{$data['equipoFM']}', {$data['servicioSAP']}, {$data['actividadSAP']}, '{$data['tipoascensor']}' , '{$data['configuracion']}')";
 			return ejecutarConsu_retornarID($sql);
 		}
+
 
 		public function imagen_actividad($actividad){
 			$sql = "SELECT enc_id AS 'tipo' FROM informevisita WHERE infv_actividad = $actividad";

@@ -659,7 +659,6 @@ class PHPMailer
      */
     public function __destruct()
     {
-        //Close any open SMTP connection nicely
         $this->smtpClose();
     }
 

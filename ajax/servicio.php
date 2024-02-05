@@ -2108,8 +2108,8 @@ switch ($_GET["op"]) {
                         }
                     }
 
-                    //$dataimagenmensual = ['actividadSAP'=>$idactividad,'servicioSAP'=>$idservicio,'equipoFM'=>$idascensor, 'tipoascensor' => $_POST['tipo_ascensor'], 'configuracion' => $_POST['tipo_comando']];
-                    //echo $imagenMensual->insertar_imagen_mensual($dataimagenmensual);
+                    $dataimagenmensual = ['actividadSAP'=>$idactividad,'servicioSAP'=>$idservicio,'equipoFM'=>$idascensor, 'tipoascensor' => $_POST['tipoelevador'], 'configuracion' => $_POST['configuracion']];
+                    echo $imagenMensual->insertar_imagen_mensual($dataimagenmensual);
     
                     $datosactividad = $servicio->Actividad($_POST['actividadIDfi']);
     
@@ -3568,7 +3568,6 @@ switch ($_GET["op"]) {
                 }
 
             }
-            //FIN CORREO PPTO
             echo $rspta ? "Servicio finalizado con exito" : "El servicio no pudo ser finalizado";
         break;
 

@@ -2022,7 +2022,7 @@ switch ($_GET["op"]) {
                                 'servicio' => $idservicio . '',
                                 'periodo' => $periodo . '',
                                 // 'fecha' => date('Y-m-d H:i:s'), //es automatico pero se puede setear
-                                'observaciones' => $observaciones . '',
+                                'observaciones' => 'Hola',
                                 'empleado' => $_POST['idSAP'] . '',
                                 'firmaempleado' => 'firmarmpleado.png',
                                 'cliente' => $idcliente . '',
@@ -2051,7 +2051,7 @@ switch ($_GET["op"]) {
                             // Guardar imagen del Foso
                             if (!empty($imgFoso)) {
                                 $imagenBinaria = base64_decode($imgFoso);
-                                $nombreImagenFoso = 'imgfoso_' . time() . '.' . $extension;
+                                $nombreImagenFoso = $idactividad.'_imgfoso_'.time().'.'.$extension;
                                 file_put_contents($rutaDestino . $nombreImagenFoso, $imagenBinaria);
                                 $params['imgfoso'] = $nombreImagenFoso;
                             }
@@ -2059,33 +2059,27 @@ switch ($_GET["op"]) {
                             // Guardar imagen del Techo
                             if (!empty($imgTecho)) {
                                 $imagenBinaria = base64_decode($imgTecho);
-                                $nombreImagenTecho = 'imgtecho_' . time() . '.' . $extension;
+                                $nombreImagenTecho = $idactividad.'_imgtecho_'.time().'.'.$extension;
                                 file_put_contents($rutaDestino . $nombreImagenTecho, $imagenBinaria);
                                 $params['imgtecho'] = $nombreImagenTecho;
                             }
 
                             if (!empty($imgMaquina)) {
                                 $imagenBinaria = base64_decode($imgMaquina);
-                                $nombreImagenMaquina = 'imgmaquina_' . time() . '.' . $extension;
+                                $nombreImagenMaquina = $idactividad.'_imgmaquina_'.time().'.'.$extension;
                                 file_put_contents($rutaDestino . $nombreImagenMaquina, $imagenBinaria);
                                 $params['imgmaquina'] = $nombreImagenMaquina;
                             }
 
                             if (!empty($imgOperador)) {
                                 $imagenBinaria = base64_decode($imgOperador);
-                                $nombreImagenOperador = 'imgoperador_' . time() . '.' . $extension;
+                                $nombreImagenOperador = $idactividad.'_imgoperador_'.time().'.'.$extension;
                                 file_put_contents($rutaDestino . $nombreImagenOperador, $imagenBinaria);
                                 $params['imgoperador'] = $nombreImagenOperador;
                             }
                             
-                            // Repite el proceso para las otras imágenes (imgmaquina, imgoperador)
-                            
-                            // Responder con los nombres de las imágenes guardadas
-                            echo json_encode($params);
-
-
-                            //SE MODIFICA LA VISITA
                             $rspvisita = $encuesta->nuevaVisita($params);
+
                             $_POST['preg'] = json_decode($_POST['preg'], true);
                             
                             if (isset($_POST['preg'])) {
@@ -2165,7 +2159,8 @@ switch ($_GET["op"]) {
                     $_POST['nomCenCosto'] = $datosactividad['value'][0]['equCcostoNombre'];
                     $_POST['imgpresupuesto1'] = $params['imgpresupuesto1'];
                     $_POST['imgpresupuesto2'] = $params['imgpresupuesto2'];
-                    $_POST['imgpresupuesto3'] = $params['imgpresupuesto3'];                
+                    $_POST['imgpresupuesto3'] = $params['imgpresupuesto3'];  
+                    $supervisorID = $_POST['supervisorID'];
                     $data = json_encode($_POST);
                     $rspta = $servicio->finalizarActividad($data);
 

@@ -2037,10 +2037,52 @@ switch ($_GET["op"]) {
                                 'actividad' => $idactividad
                             ];
 
-                            $params['imgfoso'] ='';
-                            $params['imgtecho'] ='';
-                            $params['imgmaquina'] ='';
-                            $params['imgoperador'] ='';
+
+                            $imgFoso = $_POST['imgfoso'];
+                            $imgTecho = $_POST['imgtecho'];
+                            $imgMaquina = $_POST['imgmaquina'];
+                            $imgOperador = $_POST['imgoperador'];
+                            
+                            $rutaDestino = '../files/images/';
+                            
+                            // Manejar las imágenes recibidas y guardarlas en el servidor
+                            $extension = 'jpg'; // O la extensión adecuada
+                            
+                            // Guardar imagen del Foso
+                            if (!empty($imgFoso)) {
+                                $imagenBinaria = base64_decode($imgFoso);
+                                $nombreImagenFoso = 'imgfoso_' . time() . '.' . $extension;
+                                file_put_contents($rutaDestino . $nombreImagenFoso, $imagenBinaria);
+                                $params['imgfoso'] = $nombreImagenFoso;
+                            }
+                            
+                            // Guardar imagen del Techo
+                            if (!empty($imgTecho)) {
+                                $imagenBinaria = base64_decode($imgTecho);
+                                $nombreImagenTecho = 'imgtecho_' . time() . '.' . $extension;
+                                file_put_contents($rutaDestino . $nombreImagenTecho, $imagenBinaria);
+                                $params['imgtecho'] = $nombreImagenTecho;
+                            }
+
+                            if (!empty($imgMaquina)) {
+                                $imagenBinaria = base64_decode($imgMaquina);
+                                $nombreImagenMaquina = 'imgmaquina_' . time() . '.' . $extension;
+                                file_put_contents($rutaDestino . $nombreImagenMaquina, $imagenBinaria);
+                                $params['imgmaquina'] = $nombreImagenMaquina;
+                            }
+
+                            if (!empty($imgOperador)) {
+                                $imagenBinaria = base64_decode($imgOperador);
+                                $nombreImagenOperador = 'imgoperador_' . time() . '.' . $extension;
+                                file_put_contents($rutaDestino . $nombreImagenOperador, $imagenBinaria);
+                                $params['imgoperador'] = $nombreImagenOperador;
+                            }
+                            
+                            // Repite el proceso para las otras imágenes (imgmaquina, imgoperador)
+                            
+                            // Responder con los nombres de las imágenes guardadas
+                            echo json_encode($params);
+
 
                             //SE MODIFICA LA VISITA
                             $rspvisita = $encuesta->nuevaVisita($params);

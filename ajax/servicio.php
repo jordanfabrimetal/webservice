@@ -2161,8 +2161,11 @@ switch ($_GET["op"]) {
                     $_POST['imgpresupuesto1'] = $params['imgpresupuesto1'];
                     $_POST['imgpresupuesto2'] = $params['imgpresupuesto2'];
                     $_POST['imgpresupuesto3'] = $params['imgpresupuesto3'];  
+                    $_POST['imgfoso'] = $params['imgfoso'];
+                    $_POST['imgtecho'] = $params['imgtecho'];
+                    $_POST['imgmaquina'] = $params['imgmaquina'];
+                    $_POST['imgoperador'] = $params['imgoperador'];  
                     $supervisorID = $_POST['supervisorID'];
-                    $comentario = $_POST['comentario'];
                     $data = json_encode($_POST);
                     $rspta = $servicio->finalizarActividad($data);
 

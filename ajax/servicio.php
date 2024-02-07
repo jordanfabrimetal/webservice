@@ -1960,8 +1960,9 @@ switch ($_GET["op"]) {
             $actividadIDfi = $_POST['actividadIDfi'];
             $codigoequipo = $_POST['codigoEquipo']; // FM
             $tipoequipo = $_POST['tipoEquipo']; // ASCENSOR o ESCALERA
-            $comentario = $_POST['comentario'];
             $idSAP = $_POST['idSAP'];
+            $comentario = $_POST['compreg'];
+
 
             if($tiposervicio == 'Mantención'){
 
@@ -2022,7 +2023,7 @@ switch ($_GET["op"]) {
                                 'servicio' => $idservicio . '',
                                 'periodo' => $periodo . '',
                                 // 'fecha' => date('Y-m-d H:i:s'), //es automatico pero se puede setear
-                                'observaciones' => 'Hola',
+                                'observaciones' => $comentario . '',
                                 'empleado' => $_POST['idSAP'] . '',
                                 'firmaempleado' => 'firmarmpleado.png',
                                 'cliente' => $idcliente . '',
@@ -2161,6 +2162,7 @@ switch ($_GET["op"]) {
                     $_POST['imgpresupuesto2'] = $params['imgpresupuesto2'];
                     $_POST['imgpresupuesto3'] = $params['imgpresupuesto3'];  
                     $supervisorID = $_POST['supervisorID'];
+                    $comentario = $_POST['comentario'];
                     $data = json_encode($_POST);
                     $rspta = $servicio->finalizarActividad($data);
 

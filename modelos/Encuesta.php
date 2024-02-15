@@ -104,44 +104,22 @@ class Encuesta {
 
     // function infoEquipo($idequipo) {
     function infoEquipo($idservicio) {
-        /*$sql = "Select p.idproyecto, p.idventa, p.nombre, a.codigo, a.idascensor, a.estadoins estado, DATE(p.created_time) as fecha, m.nombre AS modelo, t.nombre AS tipoascensor,
-            e.nombre as 'estadonomb', e.color, e.carga, c.codigo as 'ccnomb', 
-            concat(pm.nombre, ' ', pm.apellido) as 'pm', concat(s.nombre, ' ', s.apellido) as 'supervisor',
-            DATE_FORMAT(a.updated_time, '%d-%m-%Y') as 'updated_time', 
-            ifnull(datediff(curdate(), a.updated_time),0) as 'dias', 
-            ifnull(datediff(curdate(), a.created_time),0) as 'dias_comienzo',
-            cli.razon_social, edi.nombre AS nomedificio, edi.calle, edi.numero, cli.idcliente
-            from ascensor a
-            LEFT JOIN venta ve ON ve.idventa = a.idventa 
-            LEFT JOIN estadopro e on e.estado = a.estadoins 
-            LEFT JOIN centrocosto c on ve.idcentrocosto=c.idcentrocosto 
-            LEFT JOIN proyecto p on p.idventa = ve.idventa 
-            LEFT JOIN pm pm on pm.idpm = p.idpm 
-            LEFT JOIN supervisorins s on s.idsupervisorins = p.idsupervisor 
-            LEFT JOIN modelo m on m.marca = a.marca and m.idmodelo = a.modelo
-            LEFT JOIN tascensor t on t.idtascensor = a.idtascensor
-            LEFT JOIN contrato con on a.idcontrato = con.idcontrato
-            LEFT JOIN cliente cli on con.idcliente = cli.idcliente
-            LEFT JOIN edificio edi on a.idedificio = edi.idedificio
-            WHERE a.idascensor = $idequipo";
-        return ejecutarConsulta($sql);*/
-
         $query = 'sml.svc/LISTA_ACTIVIDADES?$filter=srvCodigo eq ' . $idservicio . '&$select=equEdificio,equSnInterno,artModelo,artTipoEquipo,artFabricante,cliNombre,equCalle,equCalleNro,equCiudad,cliCodigo,tecNombre,tecApellido';
-
         $rspta = Query($query);
-
         $rsptaJson = json_decode($rspta, true);
-
-        if (count($rsptaJson['value'])) { //para saber cuantas filas de datos vienen
-            $data = $rsptaJson['value'];
-
-            return json_encode($data);
-
+        if (is_array($rsptaJson['value'])) {
+            if (count($rsptaJson['value'])) { //para saber cuantas filas de datos vienen
+                $data = $rsptaJson['value'];
+                return json_encode($data);
+            } else {
+                return 'NODATASAP';
+            }
         }
         else
             return 'NODATASAP';
     }
 
+    
     function infoVisita($idvisita) {
         /*$sql = "Select p.idproyecto, p.idventa, p.nombre, a.codigo, a.idascensor, a.estadoins estado, DATE(p.created_time) as fecha, m.nombre AS modelo, t.nombre AS tipoascensor,
             i.infv_fecha, i.infv_ascensor, i.infv_observaciones, i.infv_cliente, i.infv_firmacliente, i.infv_empleado, i.infv_empresa, i.infv_direccion, u.firma, u.filefir, u.num_documento, concat(u.nombre, ' ', u.apellido) as 'nomusuario',

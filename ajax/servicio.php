@@ -2443,7 +2443,7 @@ switch ($_GET["op"]) {
                 }*/
 
 
-                //$Mailer->addCC('vvasquez@fabrimetal.cl');
+                $Mailer->addAddress('vvasquez@fabrimetal.cl');
                 $Mailer->send();
 
                 //ENVIO DE CORREO A CLIENTE POR SOLICITUD DE PPTO
@@ -2635,6 +2635,7 @@ switch ($_GET["op"]) {
                     //FALTA AGREGAR CORREO DEL SUPERVISOR, JEFE DE SERVICIO Y CLIENTE
                     $Mailer->addAddress($datosactividad['value'][0]['equSupEmail']);
                     $Mailer->addCC('jaguilera@fabrimetalsa.cl');
+                    $Mailer->addAddress('vvasquez@fabrimetal.cl');
                     //$Mailer->addAddress('dmediavilla@fabrimetal.cl');
                     
                     /*$select = 'ContactEmployees';
@@ -3394,6 +3395,7 @@ switch ($_GET["op"]) {
                     //        }
                     //    }
                     //}
+                    $Mailer->addAddress('vvasquez@fabrimetal.cl');
 
                     if (!$Mailer->send()) {
                         echo "Error al enviar correo: " . $Mailer->ErrorInfo . "<br>";
@@ -3593,6 +3595,7 @@ switch ($_GET["op"]) {
 
                 //$Mailer->addAddress('vvasquez@fabrimetal.cl');
                 $Mailer->addAddress('jaguilera@fabrimetalsa.cl');
+                $Mailer->addAddress('vvasquez@fabrimetal.cl');
 
                 //$select = 'ContactEmployees';
                 //$entity = "BusinessPartners";
@@ -4454,6 +4457,7 @@ switch ($_GET["op"]) {
                     $Mailer->Subject = "Guía de servicio N° " . $datosactividad['value'][0]['srvCodigo'];
                     //$Mailer->AddAttachment('../files/pdf/'.$resp["file"], $name = $resp["file"],  $encoding = 'base64', $type = 'application/pdf');
                     $Mailer->addAttachment('../files/pdf/' . $archivo);
+                    
                     $Mailer->msgHTML($body);
     
     
@@ -4493,7 +4497,8 @@ switch ($_GET["op"]) {
                     //        }
                     //    }
                     //}
-    
+                    $Mailer->addAddress('vvasquez@fabrimetal.cl');
+
                     if (!$Mailer->send()) {
                         echo "Error al enviar correo: " . $Mailer->ErrorInfo . "<br>";
                     } else {
@@ -4704,7 +4709,8 @@ switch ($_GET["op"]) {
                 //        }
                 //    }
                 //}
-                
+                $Mailer->addAddress('vvasquez@fabrimetal.cl');
+
                 $Mailer->send();
                 }
                 //FIN CORREO PPTO
@@ -5529,53 +5535,27 @@ switch ($_GET["op"]) {
         break;
 
         case 'formnewinforme':
-            $idascensor = isset($_REQUEST["idascensor"]) ? limpiarCadena($_REQUEST["idascensor"]) : "";
-            $idencuesta = isset($_REQUEST["tipoencuesta"]) ? limpiarCadena($_REQUEST["tipoencuesta"]) : "";
-            $periodo = isset($_REQUEST["periodo"]) ? limpiarCadena($_REQUEST["periodo"]) : "";
-            $idactividad = isset($_REQUEST["idactividad"]) ? limpiarCadena($_REQUEST["idactividad"]) : "";
+            $idascensor = isset($_GET["idascensor"]) ? limpiarCadena($_GET["idascensor"]) : "";
+            $idencuesta = isset($_GET["tipoencuesta"]) ? limpiarCadena($_GET["tipoencuesta"]) : "";
+            $periodo = date("Ym");
+            $idactividad = isset($_GET["idactividad"]) ? limpiarCadena($_GET["idactividad"]) : "";
+            $idservicio = $_GET['idservicio'];
             $idencuestatext = $idencuesta;
+
             if($idencuesta == 'informeservicioescalera'){
                 $idencuesta = 4;
             }else{
                 $idencuesta = 3;
             }
-            // $idproyecto = isset($_REQUEST["idproyecto"]) ? limpiarCadena($_REQUEST["idproyecto"]) : "";
-            // $idproyecto = isset($_POST["idproyecto"]) ? limpiarCadena($_POST["idproyecto"]) : "";
-
-            //Se ocupara sistema de plantillas TemplatePower
-            require_once("../public/build/lib/TemplatePower/class.TemplatePower.php7.inc.php");
-            if($idencuesta == 4){
-                $t = new TemplatePower("../production/pla_informe_mantenimiento_escalera.html");
-            }else{
-                //$t = new TemplatePower("../production/pla_informe_mantenimiento.html");
-                $t = new TemplatePower("../production/pla_informe_mantenimiento2.html");
-            }
-            $t->prepare();
-
-            // $html = $t->getOutputContent();
-            // $t->printToScreen();
-            // echo json_encode($data);
-            // echo $html;
-            // break;
-
-            /*$idencuesta = isset($_REQUEST["idencuesta"]) ? limpiarCadena($_REQUEST["idencuesta"]) : "";
-            $idencuesta = 1;*/
-
+            
             setlocale(LC_ALL, 'spanish');
 
             $arrMeses = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
 
-            $t->assign('periodo', $periodo .'');
-            $t->assign('periodotxt', '<strong>Período: ' . strtoupper(strftime('%B-%Y', strtotime($periodo . '01'))) . '</strong>');
-
-            $mesActual = substr($periodo, -2); //captura el mes actual o el anterior, segun seleccione
+            $mesActual = substr($periodo, -2);   
             $mesActual = $mesActual * 1;
 
             $mesActual = $arrMeses[$mesActual - 1];
-            // $mesActual = $arrMeses[date('n') - 1];
-            // $mesActual = 'Ene';
-
-            $t->assign('sel' . $mesActual, 'selcolumn');
 
             $arrMantenimiento['Ene'] = ['B-ST', 'C', 'M', 'SM', 'L'];
             $arrMantenimiento['Feb'] = ['B-ST', 'S', 'D', 'L', 'Z'];
@@ -5589,94 +5569,28 @@ switch ($_GET["op"]) {
             $arrMantenimiento['Oct'] = ['B-ST', 'S', 'D', 'L', 'Z'];
             $arrMantenimiento['Nov'] = ['B-ST', 'C', 'SM', 'L'];
             $arrMantenimiento['Dic'] = ['B-ST', 'MX', 'S', 'D', 'L', 'Z'];
-
             
-            $t->assign('idascensor', $idascensor . '');
-            $t->assign('idencuesta', $idencuesta . '');
-            $t->assign('idservicio', $idservicio . '');
-            $t->assign('idactividad', $idactividad . '');
-
-            $t->assign('fechanow', date('Y-m-d H:i:s') . '');
-
-            if ($idencuesta == 1)
-                $t->assign('tituloencuesta', 'INFORME DE VISITA A OBRA');
-            elseif ($idencuesta == 2)
-                $t->assign('tituloencuesta', 'INFORME GESTION DE SEGURIDAD Y SALUD OCUPACIONAL');
-            elseif ($idencuesta == 3)
-                $t->assign('tituloencuesta', 'INFORME DE MANTENIMIENTO');
-            else
-                $t->assign('tituloencuesta', 'PAUTA MANTENCION ESCALERAS MECANICAS');
-
-
-            //DATOS DEL PROYECTO
-            // $datos = $visita->pdfdatos($idproyecto);
-            /*echo '<pre>';
-            print_r($datos);
-            echo '</pre>';
-            exit();*/
-
-            /*$rspproyecto = $proyecto->mostrar($idproyecto);
-            $t->assign('obra', $rspproyecto['nombre'] . '');
-            $t->assign('supervisor', $rspproyecto['supervisor'] . '');
-            $t->assign('direccion', $rspproyecto['calle'] . ' ' . $rspproyecto['numero'] . '');*/
-
             $rspta = $encuesta->infoEquipo($idservicio);
             $rsptaJson = json_decode($rspta, true); //true para que sea array, no objeto
             $data = Array();
 
-            if ($rspta != 'NODATASAP') {
-                foreach($rsptaJson as $row){
-                    $t->assign('obra', $row['equEdificio'] . '');
-                    $t->assign('ascensor', $row['equSnInterno'] . '');
-                    $t->assign('modelo', $row['artModelo'] . '');
-                    $t->assign('tipoascensor', $row['artTipoEquipo'] . '');
-                    $t->assign('supervisor', $row['tecNombre'] . ' ' . $row['tecApellido'] . '');
-                    $t->assign('empresa', trim($row['cliNombre']) . '');
-                    $t->assign('direccion', trim($row['equCalle'] . ' ' . $row['equCalleNro']) . '');
-                    $t->assign('idcliente', trim($row['cliCodigo']) . '');
-                }
-            }
-
-            /*$rspequipo = $encuesta->infoEquipo($idascensor);
-            $rows = $rspequipo->fetch_all(MYSQLI_ASSOC);
-            $modelo = '';
-            $tipoascensor = '';
-            foreach($rows as $i => $item)
-            {
-                $t->assign('obra', $item['nomedificio'] . '');
-                $t->assign('ascensor', $item['codigo'] . '');
-                $modelo = $item['modelo'] . '';
-                $tipoascensor = $item['tipoascensor'] . '';
-                $t->assign('modelo', $modelo . '');
-                $t->assign('tipoascensor', $tipoascensor . '');
-                $t->assign('supervisor', $item['supervisor'] . '');
-                $t->assign('empresa', trim($item['razon_social']) . '');
-                $t->assign('direccion', trim($item['calle'] . ' ' . $item['numero']) . '');
-                $t->assign('idcliente', trim($item['idcliente']) . '');
-            }*/
-
-            //BLOQUES DE LA ENCUESTA
-            //$idencuesta = 5;
             if($idencuestatext == 'informeservicioescalera'){
                 $idencuesta = 4;
             }else{
                 $idencuesta = 5;
             }
             $rspbloques = $encuesta->bloques($idencuesta);
-            //$rspbloques = $encuesta->bloques(5);
 
             $rows = $rspbloques->fetch_all(MYSQLI_ASSOC);
+
+            $responseData = array(); // Inicializa un array para almacenar los datos
+
                 
-            $tabla = '<tbody>';
             foreach($rows as $i => $item){
                 if($idencuesta != 4){
                     $arrTipoMantencion = explode("/", $item['blq_tipoequipo']);
 
-                    // if(count(array_unique($array, SORT_REGULAR)) < count($array)) {
                     if (!empty(array_intersect($arrTipoMantencion, $arrMantenimiento[$mesActual]))) {
-                        $t->newBlock('bloques');
-
-                        $t->assign('nombloque', $item['blq_nombre'] . '');
 
                         $idbloque = $item['blq_id'] . '';
 
@@ -5686,83 +5600,23 @@ switch ($_GET["op"]) {
 
                         foreach($rows2 as $j => $item2)
                         {
-                            $t->newBlock('preguntas');
-                            if($item2['tipp_id'] == 1){
-                                $t->assign('pregunta', '<div class="col-md-6 col-sm-12 col-xs-12"><div class="checkbox"><label><input type="checkbox" name="preg['.$item2['preg_id'].']" value="SI">'.$item2['preg_nombre'].'</label></div></div>'.' ');
-                            }elseif($item2['tipp_id'] == 2){
-                                
-                                $t->assign('pregunta', '<div style="float:left !important;z-index:1;" class="col-md-6 col-sm-3 col-xs-3"><input type="radio" value="Si" id="preg['.$item2['preg_id'].']-si" name="preg['.$item2['preg_id'].']"><label style="padding-left:5px;padding-right: 5px;" for="preg['.$item2['preg_id'].']-si">Si</label><input type="radio" for="preg['.$item2['preg_id'].']-no" value="No" name="preg['.$item2['preg_id'].']"><label for="preg['.$item2['preg_id'].']-no" style="padding-left:5px;">No</label></div><div style="float:left !important;" class="col-sm-9 col-xs-9"><span>'.$item2['preg_nombre'].'</span></div>'.' ');
-                            }
-
-                            if ($item2['preg_comentario'])
-                                $t->assign('comentario', '<div class="col-md-6 col-sm-12 col-xs-12 py-1"><textarea class="form-control" rows="2" maxlength="80" name="compreg[' . $item2['preg_id'] . ']"></textarea></div>');
+                            $responseData[] = $item2;
                         }
                     }
                 }else{
-                    $t->newBlock('bloques');
-                    $t->assign('nombloque', $item['blq_nombre'] . '');
                     $idbloque = $item['blq_id'] . '';
                     //PREGUNTAS DEL BLOQUE
                     $rsppreguntas = $encuesta->preguntas($idbloque);
                     $rows2 = $rsppreguntas->fetch_all(MYSQLI_ASSOC);
                     foreach($rows2 as $j => $item2)
                     {
-                        $t->newBlock('preguntas');
-                        $t->assign('pregunta', $item2['preg_nombre'] . '');
-                        $idpregunta = $item2['preg_id'];
-                        $t->assign('idpreg', $idpregunta . '');
-
-                        if ($item2['preg_comentario'])
-                            $t->assign('comentario', '<div class="col-md-6 col-sm-12 col-xs-12 py-1"><textarea class="form-control" rows="2" maxlength="80" name="compreg[' . $item2['preg_id'] . ']"></textarea></div>');
+                        $responseData[] = $item2;
                     }
                 }
             }
-            $tabla .= '</tbody>';
 
-            /*foreach($rows as $i => $item)
-            {
-                $arrTipoMantencion = explode("/", $item['blq_tipoequipo']);
+            echo json_encode($responseData);
 
-                // if(count(array_unique($array, SORT_REGULAR)) < count($array)) {
-                if (!empty(array_intersect($arrTipoMantencion, $arrMantenimiento[$mesActual]))) {
-                    $t->newBlock('bloques');
-
-                    $t->assign('nombloque', $item['blq_nombre'] . '');
-
-                    $idbloque = $item['blq_id'] . '';
-
-                    //PREGUNTAS DEL BLOQUE
-                    $rsppreguntas = $encuesta->preguntas($idbloque);
-                    $rows2 = $rsppreguntas->fetch_all(MYSQLI_ASSOC);
-
-                    foreach($rows2 as $j => $item2)
-                    {
-                        $t->newBlock('preguntas');
-                        $t->assign('pregunta', $item2['preg_nombre'] . '');
-                        $idpregunta = $item2['preg_id'];
-                        $t->assign('idpreg', $idpregunta . '');
-
-                        if ($item2['preg_comentario'])
-                            $t->assign('comentario', '<div class="col-md-6 col-sm-12 col-xs-12 py-1"><textarea class="form-control" rows="2" maxlength="80" name="compreg[' . $item2['preg_id'] . ']"></textarea></div>');
-                    }
-                }
-            }*/
-            $anio = strtoupper(strftime('%Y', strtotime($periodo . '01')));
-            $mes = strtoupper(strftime('%m', strtotime($periodo . '01')));
-            $dataimagenMensual = $imagenMensual->periodo($mes,$anio);
-            $t->newBlock('imagenmensual');
-            foreach ($dataimagenMensual as $val) {
-                $t->assign('titulo',$val['titulo'] . '');
-                $t->assign('descripcion',nl2br($val['descripcion']) . '');
-                $t->assign('imagenmensualID',$val['imagenmensualID']);
-            }
-
-
-            //print the result
-            $html = $t->getOutputContent();
-            //$t->printToScreen();
-            // echo json_encode($data);
-            echo $html;
             break;
 
         case 'formguardarinforme':

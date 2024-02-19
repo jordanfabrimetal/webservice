@@ -334,111 +334,89 @@ switch ($_GET["op"]) {
             $idservicio = $_POST['idservicio'];
             error_log("El id del servicio es: ".$_POST['idservicio']);
             $response = array();
-            if($_POST['idservicio'] == 17){
-                $rspta=$ascensor->SelectVisitaandroid($idsap, $idrol);
-                foreach($rspta as $val){
-                    //echo '<option value='.$val['InternalSerialNum'].'>'.$val['InternalSerialNum'].' - '.$val['BuildingFloorRoom'].'</option>';
-                    $item = array(
-                        'value' => $val['InternalSerialNum'],
-                        'text' => $val['InternalSerialNum'].' - '.$val['BuildingFloorRoom']
-                    );
-                    array_push($response, $item);
-                }
-            }
-            else if($_POST['idservicio'] == 5){
-                $rspta=$ascensor->SelectNormalizacion();
-                foreach($rspta as $val){
-                   // echo '<option value='.$val['InternalSerialNum'].'>'.$val['InternalSerialNum'].' - '.$val['BuildingFloorRoom'].'</option>';
-                    $item = array(
-                        'value' => $val['InternalSerialNum'],
-                        'text' => $val['InternalSerialNum'].' - '.$val['BuildingFloorRoom']
-                    );
-                    array_push($response, $item);
-                }
-            }
-            else if($_POST['idservicio'] != 4){
-                $rspta=$ascensor->SelectAscensorServicioSAP($idservicio, $idsap);
-                foreach($rspta as $val){
-                    $item = array(
-                        'value' => $val['ServiceCallID'], // Cambiado a ServiceCallID como valor
-                        'text' => $val['InternalSerialNum'].' - '.$val['BuildingFloorRoom'],
-                        'paradas' => $val['Paradas'], // Agregado paradas como atributo adicional
-                        'tipoequipo' => $val['TipoEquipo'] // Agregado TipoEquipo como atributo adicional
-                    );
-                    array_push($response, $item);
-                }
-            }else{
-                $dataJSON = $ascensor->Holidays();
-                $feriados = array();
-                foreach ($dataJSON['HolidayDates'] as $val) {
-                    if($val['StartDate'] == $val['EndDate']){
-                        array_push($feriados, $val['StartDate']);
-                    }else{
-                        $fechaInicio=strtotime($val['StartDate']);
-                        $fechaFin=strtotime($val['EndDate']);
-                        for($i=$fechaInicio; $i<=$fechaFin; $i+=86400){
-                            array_push($feriados, date("Y-m-d", $i));
-                        }
+            switch($_POST['idservicio']){
+                case 1: 
+                    $rspta=$ascensor->SelectAscensorServicioSAP($idservicio, $idsap);
+                    foreach($rspta as $val){
+                        $item = array(
+                            'value' => $val['ServiceCallID'], // Cambiado a ServiceCallID como valor
+                            'text' => $val['InternalSerialNum'].' - '.$val['BuildingFloorRoom'],
+                            'paradas' => $val['Paradas'], // Agregado paradas como atributo adicional
+                            'tipoequipo' => $val['TipoEquipo'] // Agregado TipoEquipo como atributo adicional
+                        );
+                        array_push($response, $item);
                     }
-                }
-                $dia = date('Y-m-d');
-                $hora = date('H:i');
-                if(in_array($dia, $feriados) || date('N',strtotime($dia)) >= 6){
-                    $currentTime = strtotime($dia.' '.$hora);
-                    $startTime = strtotime($dia.' 08:00');
-                    $endTime = strtotime($dia.' 17:59');
-                    if($currentTime >= $startTime && $currentTime <= $endTime){
-                        $rspta=$ascensor->SelectEmergenciaSAP();
-                        foreach($rspta as $val){
-                            $item = array(
-                                'value' => $val['InternalSerialNum'],
-                                'text' => $val['InternalSerialNum'].' - '.$val['BuildingFloorRoom']
-                            );
-                            array_push($response, $item);
-                        }
-                    }else{
-                        $rspta=$ascensor->SelectEmergencia();
-                        foreach($rspta as $val){
-                            $item = array(
-                                'value' => $val['InternalSerialNum'],
-                                'text' => $val['InternalSerialNum'].' - '.$val['BuildingFloorRoom']
-                            );
-                            array_push($response, $item);
-                        }
+                    echo json_encode($response);
+                break;
+                case 17: 
+                    $rspta=$ascensor->SelectVisitaandroid($idsap, $idrol);
+                    foreach($rspta as $val){
+                        //echo '<option value='.$val['InternalSerialNum'].'>'.$val['InternalSerialNum'].' - '.$val['BuildingFloorRoom'].'</option>';
+                        $item = array(
+                            'value' => $val['InternalSerialNum'],
+                            'text' => $val['InternalSerialNum'].' - '.$val['BuildingFloorRoom']
+                        );
+                        array_push($response, $item);
                     }
-                }else{
-                    $currentTime = strtotime($dia.' '.$hora);
-                    $startTime = strtotime($dia.' 00:00');
-                    $endTime = strtotime($dia.' 06:59');
-                    if($currentTime >= $startTime && $currentTime <= $endTime){
-                        $rspta=$ascensor->SelectEmergencia();
-                        foreach($rspta as $val){
-                                $item = array(
-                                    'value' => $val['InternalSerialNum'],
-                                    'text' => $val['InternalSerialNum'].' - '.$val['BuildingFloorRoom']
-                                );
-                                array_push($response, $item);
-                            }
-                    }else{
-                        $rspta=$ascensor->SelectEmergenciaSAP();
-                        foreach($rspta as $val){
-                            $item = array(
-                                'value' => $val['InternalSerialNum'],
-                                'text' => $val['InternalSerialNum'].' - '.$val['BuildingFloorRoom']
-                            );
-                            array_push($response, $item); 
-                        }
+                    echo json_encode($response);
+                break;
+                case 4: 
+                    $rspta=$ascensor->SelectEmergenciaSAP();
+                    foreach($rspta as $val){
+                        $item = array(
+                            'value' => $val['InternalSerialNum'],
+                            'text' => $val['InternalSerialNum'].' - '.$val['BuildingFloorRoom']
+                        );
+                        array_push($response, $item); 
                     }
-                }
+                    echo json_encode($response);
+                break;
+                case 5: 
+                    $rspta=$ascensor->SelectNormalizacion();
+                    foreach($rspta as $val){
+                    // echo '<option value='.$val['InternalSerialNum'].'>'.$val['InternalSerialNum'].' - '.$val['BuildingFloorRoom'].'</option>';
+                        $item = array(
+                            'value' => $val['InternalSerialNum'],
+                            'text' => $val['InternalSerialNum'].' - '.$val['BuildingFloorRoom']
+                        );
+                        array_push($response, $item);
+                    }
+                    echo json_encode($response);
+                break;
+                case 18: 
+                    $rspta=$ascensor->SelectAscensorServicioSAP($idservicio, $idsap);
+                    foreach($rspta as $val){
+                        $item = array(
+                            'value' => $val['ServiceCallID'], // Cambiado a ServiceCallID como valor
+                            'text' => $val['InternalSerialNum'].' - '.$val['BuildingFloorRoom'],
+                            'paradas' => $val['Paradas'], // Agregado paradas como atributo adicional
+                            'tipoequipo' => $val['TipoEquipo'] // Agregado TipoEquipo como atributo adicional
+                        );
+                        array_push($response, $item);
+                    }
+                    echo json_encode($response);
+                break;
+                case 2: 
+                    $rspta=$ascensor->SelectAscensorServicioSAP($idservicio, $idsap);
+                    foreach($rspta as $val){
+                        $item = array(
+                            'value' => $val['ServiceCallID'], // Cambiado a ServiceCallID como valor
+                            'text' => $val['InternalSerialNum'].' - '.$val['BuildingFloorRoom'],
+                            'paradas' => $val['Paradas'], // Agregado paradas como atributo adicional
+                            'tipoequipo' => $val['TipoEquipo'] // Agregado TipoEquipo como atributo adicional
+                        );
+                        array_push($response, $item);
+                    }
+                    echo json_encode($response);
+                break;
+                default:
+                // Código a ejecutar si no coincide con ningún caso
+                break;
             }
-            
-            // print_r($rspta);
-        echo json_encode($response);
-        break;
-
+        break;            
 
 		case 'selectasc':
-			$rspta=$ascensor->SelectAscensor();
+            $rspta=$ascensor->SelectAscensorServicioSAP($idservicio, $idsap);
             // print_r($rspta);
 			echo '<option value="" selected disabled>SELECCIONE EQUIPO</option>';
 			foreach($rspta as $val){

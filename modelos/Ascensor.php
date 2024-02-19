@@ -243,6 +243,17 @@ require_once "../config/conexionSap.php";
 		  return $listado;
 		}
 		
+		public function SelectAuditoriaTecnicaSAP(){
+			$listado = array();
+		  $select = 'InternalSerialNum,BuildingFloorRoom,InstallLocation,U_NX_NCC';
+		  $entity = 'CustomerEquipmentCards';
+		  //$filter = "InternalSerialNum eq '".$data['InternalSerialNum']."' and ItemCode eq '".$data['ItemCode']."'";
+		  $rspta = json_decode(ConsultaEntity($entity,$select), true);
+		  foreach ($rspta['value'] as $val) {
+			  $listado[] =array("InternalSerialNum"=>$val["InternalSerialNum"],"BuildingFloorRoom"=>$val["U_NX_NCC"]);
+		  }
+		  return $listado;
+		}
   		
   		public function SelectAscensorServicio($idservicio){
   			/* verificamos la cantidad */

@@ -349,7 +349,7 @@ switch ($_GET["op"]) {
                     echo json_encode($response);
                 break;
                 case 17: 
-                    $rspta=$ascensor->SelectVisitaandroid($idsap, $idrol);
+                    $rspta=$ascensor->SelectAuditoriaTecnicaSAP();
                     foreach($rspta as $val){
                         //echo '<option value='.$val['InternalSerialNum'].'>'.$val['InternalSerialNum'].' - '.$val['BuildingFloorRoom'].'</option>';
                         $item = array(

@@ -5549,14 +5549,10 @@ switch ($_GET["op"]) {
             }
             
             setlocale(LC_ALL, 'spanish');
-
             $arrMeses = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
-
             $mesActual = substr($periodo, -2);   
             $mesActual = $mesActual * 1;
-
             $mesActual = $arrMeses[$mesActual - 1];
-
             $arrMantenimiento['Ene'] = ['B-ST', 'C', 'M', 'SM', 'L'];
             $arrMantenimiento['Feb'] = ['B-ST', 'S', 'D', 'L', 'Z'];
             $arrMantenimiento['Mar'] = ['B-ST', 'C', 'SM', 'L'];
@@ -5569,7 +5565,6 @@ switch ($_GET["op"]) {
             $arrMantenimiento['Oct'] = ['B-ST', 'S', 'D', 'L', 'Z'];
             $arrMantenimiento['Nov'] = ['B-ST', 'C', 'SM', 'L'];
             $arrMantenimiento['Dic'] = ['B-ST', 'MX', 'S', 'D', 'L', 'Z'];
-            
             $rspta = $encuesta->infoEquipo($idservicio);
             $rsptaJson = json_decode($rspta, true); //true para que sea array, no objeto
             $data = Array();
@@ -5585,21 +5580,22 @@ switch ($_GET["op"]) {
 
             $responseData = array(); // Inicializa un array para almacenar los datos
 
-                
+        
             foreach($rows as $i => $item){
                 if($idencuesta != 4){
                     $arrTipoMantencion = explode("/", $item['blq_tipoequipo']);
-
+        
                     if (!empty(array_intersect($arrTipoMantencion, $arrMantenimiento[$mesActual]))) {
-
+        
                         $idbloque = $item['blq_id'] . '';
-
+        
                         //PREGUNTAS DEL BLOQUE
                         $rsppreguntas = $encuesta->preguntas($idbloque);
                         $rows2 = $rsppreguntas->fetch_all(MYSQLI_ASSOC);
-
+        
                         foreach($rows2 as $j => $item2)
                         {
+                            $item2['blq_nombre'] = $item['blq_nombre']; // Agregar el nombre del bloque a cada pregunta
                             $responseData[] = $item2;
                         }
                     }
@@ -5610,14 +5606,15 @@ switch ($_GET["op"]) {
                     $rows2 = $rsppreguntas->fetch_all(MYSQLI_ASSOC);
                     foreach($rows2 as $j => $item2)
                     {
+                        $item2['blq_nombre'] = $item['blq_nombre']; // Agregar el nombre del bloque a cada pregunta
                         $responseData[] = $item2;
                     }
                 }
             }
-
+        
             echo json_encode($responseData);
 
-            break;
+        break;
 
         case 'formguardarinforme':
             ob_start();

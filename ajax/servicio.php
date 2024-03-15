@@ -1978,6 +1978,7 @@ switch ($_GET["op"]) {
                     $cliente = $servicio->SelectClientes($codigoequipo);
                     $idcliente = $_POST['customercodefi'];
 
+                    //Verifico si se añadio la opcion de firmar
                     $porfirmar = isset($_POST["porfirmar"]) ? limpiarCadena($_POST["porfirmar"]) : "";
                     if($_POST['opfirma'] == 1){
                         $porfirmar = 'true';
@@ -1985,6 +1986,7 @@ switch ($_GET["op"]) {
                         $porfirmar = 'false';
                     }
 
+                    //Recupero la informacion de la firma, para guardarla y luego enviarla al PDF para su muestra
                     $nomcli = isset($_POST['nombresfi']) ? limpiarCadena($_POST['nombresfi'] . ' '.$_POST['apellidosfi']) : "";
                     $rutcli = isset($_POST['rutfi']) ? limpiarCadena($_POST['rutfi']) : "";
                     $rspvisita = '';
@@ -2016,7 +2018,8 @@ switch ($_GET["op"]) {
         
                     switch($idencuesta)
                     {
-                        case 5: //informe de mantenimiento
+                        case 5:
+                            //informe de mantenimiento
                             $params = [
                                 'encuesta' => $idencuesta . '',
                                 'equipo' => $idascensor . '',
@@ -2038,7 +2041,7 @@ switch ($_GET["op"]) {
                                 'actividad' => $idactividad
                             ];
 
-
+                            //Recojo la informacion traida desde Android, estan base64
                             $imgFoso = $_POST['imgfoso'];
                             $imgTecho = $_POST['imgtecho'];
                             $imgMaquina = $_POST['imgmaquina'];
@@ -2079,10 +2082,11 @@ switch ($_GET["op"]) {
                                 $params['imgoperador'] = $nombreImagenOperador;
                             }
                             
+                            //Guardo la informaicon en la tabla visita, esta luego retorna para el PDF
                             $rspvisita = $encuesta->nuevaVisita($params);
-
                             $_POST['preg'] = json_decode($_POST['preg'], true);
                             
+                            //Array de las preguntas generadas por el bloque, este subseguido por el mes correspondiente
                             if (isset($_POST['preg'])) {
                                 $respuestas = array();
                                 if ($_POST['preg']) {
@@ -2106,10 +2110,12 @@ switch ($_GET["op"]) {
                     $params['obsfin'] = $_POST['observacionfi'];
                     $params['presupuesto'] = $_POST['oppre'];
 
+                    //Verifica si existe presupuesto por parte del cliente
                     if($_POST['oppre'] == 1){
                         $params['presupuestoobservacion'] = $_POST['descripcion'];
                     };
 
+                    //Guardo la data de la firma que se entregara al PDF
                     if($_POST['opfirma'] == 1){
                         $params['nombrecliente'] = $_POST['nombresfi'].' '.$_POST['apellidosfi'];
                         $params['rutcliente'] = $_POST['rutfi'];
@@ -2118,36 +2124,24 @@ switch ($_GET["op"]) {
                         $params['estadoobs'] = $_POST[''];
                     }
 
+                    //Guardo las imagenes que son las del Presupuesto
                     $jsonImages = $_POST['images'];
                     $data_imagen = json_decode($jsonImages, true);
                     $rutaDestino = '../files/images/';
                     
                     for ($i = 1; $i <= 3; $i++) {
                         $claveImagen = 'imagen' . $i;
-                    
                         if (isset($data_imagen[$claveImagen]) && !empty($data_imagen[$claveImagen])) {
                             $base64Image = $data_imagen[$claveImagen];
-                    
-                            // Decodificar la imagen Base64
                             $imagenBinaria = base64_decode($base64Image);
-                    
-                            // Obtener la extensión de la imagen
-                            $extension = 'jpg'; // O la extensión adecuada
-                    
-                            // Crear el nombre único de la imagen
+                            $extension = 'jpg'; 
                             $nombreImagen = 'imagen' . $i . '_' . time() . '.' . $extension;
-                    
-                            // Guardar la imagen en el servidor
                             file_put_contents($rutaDestino . $nombreImagen, $imagenBinaria);
-                    
-                            // Agregar el nombre de la imagen al array de parámetros
                             $params['imgpresupuesto' . $i] = $nombreImagen;
                         }
                     }
 
-                    $dataimagenmensual = ['actividadSAP'=>$idactividad,'servicioSAP'=>$idservicio,'equipoFM'=>$idascensor, 'tipoascensor' => $_POST['tipoelevador'], 'configuracion' => $_POST['configuracion']];
-                    echo $imagenMensual->insertar_imagen_mensual($dataimagenmensual);
-    
+                    //Traigo la data de la actividad filtrada por el ID
                     $datosactividad = $servicio->Actividad($_POST['actividadIDfi']);
     
                     $data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $firma));
@@ -2173,6 +2167,7 @@ switch ($_GET["op"]) {
                         //break;
                     }
 
+                    //En este punto genero el PDF, y mediante $params recoje los datos para rellenarlo
                     $params['actividadsap'] = $datosactividad['value'][0];
                     $result = newPdf('informemantencionnuevo', '', 'variable', $params);
                     $archivo = 'Informe_Servicio_' . $idservicio . '_' . $idascensor . '_' . $periodo . '.pdf';
@@ -2180,7 +2175,7 @@ switch ($_GET["op"]) {
     
                     $dataarchivo = array(array('name' => $archivo,'type'=>mime_content_type('../files/pdf/' . $archivo),'tmp_name'=>'../files/pdf/' . $archivo,'error'=>0,'size'=>filesize('../files/pdf/' . $archivo)));
     
-    
+                    //En esta instancia cierro la actividad en SAP 
                     $attachment = Query('Activities(' . $idactividad . ')?$select=AttachmentEntry,Closed');
                     $rspta = json_decode($attachment);
         

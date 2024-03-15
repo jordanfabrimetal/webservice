@@ -700,9 +700,6 @@ function newPdf($opcion, $data = '', $output = 'browser', $params = array()) {
                         $idpregunta = $item2['preg_id'];
 
                         if (($jk%2) == 0) {
-
-                            if (isset($resp['pregunta'][$idpregunta]))
-                            {
                                 $t->newBlock('preguntas');
                                 $jk++;
                                 $t->assign('pregunta1', $item2['preg_nombre'] . '');
@@ -711,12 +708,8 @@ function newPdf($opcion, $data = '', $output = 'browser', $params = array()) {
                                 }elseif($item2['tipp_id'] == 2){
                                     $t->assign('si1', $resp['pregunta'][$idpregunta]);
                                 }
-                            }
                         }
                         else {
-
-                            if (isset($resp['pregunta'][$idpregunta]))
-                            {
                                 $jk++;
                                 $t->assign('pregunta2', $item2['preg_nombre'] . '');
                                 if ($resp['pregunta'][$idpregunta] == 'SI' && $item2['tipp_id'] == 1){
@@ -724,7 +717,6 @@ function newPdf($opcion, $data = '', $output = 'browser', $params = array()) {
                                 }elseif($item2['tipp_id'] == 2){
                                     $t->assign('si2', $resp['pregunta'][$idpregunta]);
                                 }
-                            }
                         }
                         // $t->assign('num', $jk);
 

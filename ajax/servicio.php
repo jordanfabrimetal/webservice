@@ -1613,7 +1613,7 @@ switch ($_GET["op"]) {
         $customerCode = $_GET['customerCode'];
         $fm = $_GET['fm'];
         $subject = $_GET['subject'];
-        $itemCode = $_GET['itemCode'];
+        $itemCode = $_GET['itemcode'];
 
         error_log("ESTADUS: ".  $status);
         if(isset($_GET['nomen']) && isset($_GET['codascen'])){

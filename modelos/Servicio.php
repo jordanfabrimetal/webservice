@@ -17,6 +17,11 @@ class Servicio
 		return ejecutarConsulta($sql);
 	}
 
+	public function existepresupuestoPostegacion($idactividad){
+		$sql="SELECT * FROM presupuesto_sap WHERE actividadID = $idactividad ORDER BY presupuestosapID DESC LIMIT 1";
+		return ejecutarConsultaSimpleFila($sql);
+	}
+
 	public function iniciar($idtservicio, $iduser, $idtecnico, $idascensor, $estadoini, $observacionini, $latini, $lonini)
 	{
 		$sql = "INSERT INTO servicio (idtservicio, iduser, idtecnico, idascensor, estadoini, observacionini, latini, lonini) VALUES ('$idtservicio','$iduser','$idtecnico', '$idascensor', '$estadoini','$observacionini','$latini','$lonini')";

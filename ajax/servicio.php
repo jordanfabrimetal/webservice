@@ -3421,7 +3421,7 @@ switch ($_GET["op"]) {
                     }
 
                     //Elimina el PDF
-                    //unlink('../files/pdf/' . $archivo);
+                    unlink('../files/pdf/' . $archivo);
                 }
 
                 $data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $firma));
@@ -3748,17 +3748,6 @@ switch ($_GET["op"]) {
             $estadoascensor = $_POST['actEstEquiFin'];
             $observacionfi = $_POST['actComentario'];
             $email = $_POST['email'];
-            $obtenerinformes = $servicio->firmapendiente($idactividad);
-            $rowss = $obtenerinformes->fetch_all(MYSQLI_ASSOC);
-
-            $infv_id = $rowss[0]['infv_id'];
-            $enc_id = $rowss[0]['enc_id'];
-            $infv_servicio = $rowss[0]['infv_servicio'];
-            $infv_actividad = $rowss[0]['infv_actividad'];
-            $periodo = $rowss[0]['periodo'];
-
-            $idencuesta = $enc_id;
-            $idinforme = $infv_id;
 
             //Esto es si no es MANTENCIÓN----------------------------------------------------------------------
 
@@ -4440,7 +4429,7 @@ switch ($_GET["op"]) {
                     ';
                     $guiaPDF = new mPDF('c');
                     $guiaPDF->WriteHTML($bodypdf);
-                    $archivo = 'GSE - '.$_POST['servicecallIDfi'].' - '.$_POST["actividadIDfi"].".pdf";
+                    $archivo = 'GSE - '.$_POST['idservicio'].' - '.$_POST["actividadIDfi"].".pdf";
                     $rpdf = $guiaPDF->Output('../files/pdf/' . $archivo, 'F');
                     $data = array(array('name' => $archivo,'type'=>mime_content_type('../files/pdf/' . $archivo),'tmp_name'=>'../files/pdf/' . $archivo,'error'=>0,'size'=>filesize('../files/pdf/' . $archivo)));
     
@@ -4480,9 +4469,7 @@ switch ($_GET["op"]) {
     
     
                     //usuario logeado (tecnico)
-                    if ($_SESSION['email']){
-                        $Mailer->addAddress($_SESSION['email']);
-                    }else if($email){
+                    if($email){
                         $Mailer->addAddress($email);
                     }
     
@@ -4523,6 +4510,7 @@ switch ($_GET["op"]) {
                         echo "Correo enviado exitosamente<br>";
                     }
     
+                    //Elimina archvios del servidor
                     unlink('../files/pdf/' . $archivo);
                 }
     
@@ -4541,7 +4529,8 @@ switch ($_GET["op"]) {
                 echo $rspta ? "Servicio finalizado con exito" : "El servicio no pudo ser finalizado";
 
             }else{
-                //Esto es si no es MANTENCION-------------------------------------------------------------------
+                //Esto es MANTENCION-------------------------------------------------------------------
+    
 
                 $obtenerinformes = $servicio->firmapendiente($idactividad);
                 $rowss = $obtenerinformes->fetch_all(MYSQLI_ASSOC);
@@ -4551,6 +4540,8 @@ switch ($_GET["op"]) {
                 $infv_servicio = $rowss[0]['infv_servicio'];
                 $infv_actividad = $rowss[0]['infv_actividad'];
                 $periodo = $rowss[0]['periodo'];
+                $idencuesta = $enc_id;
+                $idinforme = $infv_id;
 
                 $idencuesta = $enc_id;
                 $idinforme = $infv_id;
@@ -4569,7 +4560,7 @@ switch ($_GET["op"]) {
 
                 $rspta = $servicio->firmapendiente($idactividad);
 
-                $rspta = $servicio->firmapendientes($idactividad, $rutcli, $firma3);
+                //$rspta = $servicio->firmapendientes($idactividad, $rutcli, $firma3);
 
                 $estadovisita = 'terminado';
 

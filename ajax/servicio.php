@@ -3315,16 +3315,38 @@ switch ($_GET["op"]) {
                     ';
                     $guiaPDF = new mPDF('c');
                     $guiaPDF->WriteHTML($bodypdf);
-                    $archivo = 'GSE - '.$_POST['servicecallIDfi'].' - '.$_POST["actividadIDfi"].".pdf";
-                    $rpdf = $guiaPDF->Output('../files/pdf/' . $archivo, 'F');
-                    $data = array(array('name' => $archivo,'type'=>mime_content_type('../files/pdf/' . $archivo),'tmp_name'=>'../files/pdf/' . $archivo,'error'=>0,'size'=>filesize('../files/pdf/' . $archivo)));
-
+                    $archivo = 'GSE_' . $_POST['servicecallIDfi'] . '_' . $_POST["actividadIDfi"] . ".pdf";
+                    $ruta_archivo = '../files/pdf/' . $archivo;
+                    
+                    // Depuración: Verifica la ruta del archivo
+                    echo "Ruta de archivo: $ruta_archivo <br>";
+                    
+                    // Intenta guardar el archivo PDF
+                    if ($guiaPDF->Output($ruta_archivo, 'F')) {
+                        echo "El archivo PDF se guardó correctamente. <br>";
+                    } else {
+                        echo "Error al guardar el archivo PDF. <br>";
+                    }
+                    
+                    // Verifica la información del archivo para su posterior procesamiento
+                    $data = array(
+                        array(
+                            'name' => $archivo,
+                            'type' => mime_content_type($ruta_archivo),
+                            'tmp_name' => $ruta_archivo,
+                            'error' => 0,
+                            'size' => filesize($ruta_archivo)
+                        )
+                    );
+                    
+                    // Depuración: Muestra la información del archivo
+                    print_r($data);
+                    
                     $attachment = Query('Activities(' . $_POST["actividadIDfi"] . ')?$select=AttachmentEntry');
                     $rspta = json_decode($attachment);
                     $idattachment = $rspta->AttachmentEntry . '';
 
-                    $rspta = UploadFile($data, true, $idattachment);//true: renombrar archivo y agregar timestamp
-                    // $rspta = UploadFile($data, true);//true: renombrar archivo y agregar timestamp
+                    $rspta = UploadFile($data, true, $idattachment);
 
                     if (!$idattachment) {
                         $rspta = json_decode($rspta);
@@ -3398,7 +3420,8 @@ switch ($_GET["op"]) {
                         echo "Correo enviado exitosamente<br>";
                     }
 
-                    unlink('../files/pdf/' . $archivo);
+                    //Elimina el PDF
+                    //unlink('../files/pdf/' . $archivo);
                 }
 
                 $data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $firma));

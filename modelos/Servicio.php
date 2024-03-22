@@ -45,10 +45,9 @@ class Servicio
 	}
 
 	public function firmapendiente($idactividad){
-		$sql = "SELECT * FROM informevisita WHERE infv_actividad = '$idactividad'";
+		$sql = "SELECT * FROM informevisita  WHERE infv_actividad = '$idactividad' ORDER BY infv_id DESC LIMIT 1";
 		return ejecutarConsulta($sql);
 	}
-
 
 	public function firmapendientes($idactividad, $rut, $firma){
 		$sql = "UPDATE informevisita 

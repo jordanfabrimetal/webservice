@@ -695,14 +695,13 @@ class Servicio
 		return json_decode(ConsultaEntity($entity, $select, $filter), true);
 	}
 
-	public function SelectClientes($fm)
+	public function SelectClientes($fm, $code)
 	{
 		$entity = 'CustomerEquipmentCards';
-		$select = 'InternalSerialNum,CustomerCode';
-		$filter = "InternalSerialNum eq '. $fm . ')";
+		$select = 'InternalSerialNum,CustomerCode,CustomerName,InstallLocation';
+		$filter = "InternalSerialNum eq '$fm' and CustomerCode eq '$code'";
 		return json_decode(ConsultaEntity($entity, $select, $filter), true);
 	}
-
 
 	public function CrearLlamada($data)
 	{

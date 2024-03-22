@@ -1962,6 +1962,14 @@ switch ($_GET["op"]) {
             $tipoequipo = $_POST['tipoEquipo']; // ASCENSOR o ESCALERA
             $idSAP = $_POST['idSAP'];
             $comentario = $_POST['compreg'];
+            $estadoascensor = $_POST['estadoascensor'];
+            if($estadoascensor == 01 || $estadoascensor == '01'){
+                $estadoascensor = "OPERATIVO";
+                $_POST['estadoascensor'] = "OPERATIVO";
+            }else{
+                $estadoascensor = "DETENIDO";
+                $_POST['estadoascensor'] = "DETENIDO";
+            }
 
             //MANTENCIÓN------------------------------------------------------
             if($tiposervicio == 'Mantención'){
@@ -1971,12 +1979,41 @@ switch ($_GET["op"]) {
                     $idactividad = $_POST["actividadIDfi"];
                     $idencuestatext = $idencuesta;
                     $idservicio = $_POST['servicecallIDfi'];
+                    $idserviciofi = $_POST['servicecallIDfi'];
 
                     $periodo = date("Ym");
+                    $idcliente = $_POST['customercodefi'];
+
+                    if($_POST['idestadofi'] == "01" || $_POST['idestadofi'] == 01){
+                        $_POST['idestadofi'] == "OPERATIVO";
+                        $idestadofi = "OPERATIVO";
+                    }else{
+                        $_POST['idestadofi'] == "DETENIDO";
+                        $idestadofi = "DETENIDO";
+                    }
+
+
+                    $rspta = $encuesta->infoEquipo($idservicio);
+                    $rsptaJson = json_decode($rspta, true); //true para que sea array, no objeto
+                    $data = Array();
+        
+                    if ($rspta != 'NODATASAP') {
+                        foreach($rsptaJson as $row){
+                            $obra = $row['equEdificio'];
+                            $ascensor = $row['equSnInterno'];
+                            $modelo = $row['artModelo'];
+                            $tipoascensor = $row['artTipoEquipo'];
+                            $supervisor = $row['tecNombre'] . ' ' . $row['tecApellido'];
+                            $empresa = trim($row['cliNombre']);
+                            $direccion = trim($row['equCalle'] . ' ' . $row['equCalleNro']);
+                            $idcliente = trim($row['cliCodigo']);
+                        }
+                    }
                     
                     //Recupero el ID del cliente
-                    $cliente = $servicio->SelectClientes($codigoequipo);
-                    $idcliente = $_POST['customercodefi'];
+                    $cliente = $servicio->SelectClientes($codigoequipo, $idcliente);
+                    $direccion = $cliente['value'][0]['InstallLocation'];
+                    $empresa = $cliente['value'][0]['CustomerName'];
 
                     //Verifico si se añadio la opcion de firmar
                     $porfirmar = isset($_POST["porfirmar"]) ? limpiarCadena($_POST["porfirmar"]) : "";
@@ -2014,8 +2051,6 @@ switch ($_GET["op"]) {
                     $patchfir = "../files/servicioequipo/firmas/" . $imgfirma;
                     file_put_contents($patchfir, $decoded_image);
         
-                    $estadovisita = 'terminado';
-        
                     switch($idencuesta)
                     {
                         case 5:
@@ -2031,12 +2066,12 @@ switch ($_GET["op"]) {
                                 'firmaempleado' => 'firmarmpleado.png',
                                 'cliente' => $idcliente . '',
                                 'firmacliente' => $imgfirma . '',
-                                'empresa' => 'circuntancial',
-                                'direccion' => 'circuntancial',
-                                'nomcli' => $_POST['nombresfi'] . ' '.$_POST['apellidosfi'],
-                                'rutcli' => $_POST['rutfi'] . '',
-                                'celularcli' => '586188440',
-                                'emailcli' => ' circuntancial@circuntancial.cl',
+                                'empresa' => $empresa,
+                                'direccion' => $direccion,
+                                'nomcli' => ' ',
+                                'rutcli' => ' ',
+                                'celularcli' => ' ',
+                                'emailcli' => ' ',
                                 'estado' => $estadovisita . '',
                                 'actividad' => $idactividad
                             ];
@@ -2102,11 +2137,11 @@ switch ($_GET["op"]) {
                         break;
                     }
 
-                    $params['idservicio'] = $idservicio . '';
+                    $params['idservicio'] = $idservicio . ''; 
                     $params['idascensor'] = $idascensor . '';
                     $params['idencuesta'] = $idencuesta . '';
                     $params['firmabase64'] = $firma . '';
-                    $params['estadofintext'] = $_POST['idestadofi'];
+                    $params['estadofintext'] = $idestadofi;
                     $params['obsfin'] = $_POST['observacionfi'];
                     $params['presupuesto'] = $_POST['oppre'];
 
@@ -2164,7 +2199,7 @@ switch ($_GET["op"]) {
                     $rspta = $servicio->finalizarActividad($data);
 
                     if ($porfirmar != "true"){
-                        //break;
+                        break;
                     }
 
                     //En este punto genero el PDF, y mediante $params recoje los datos para rellenarlo
@@ -3746,6 +3781,13 @@ switch ($_GET["op"]) {
             $llamada = $_POST['llamada'];
             $idactividad = $_POST['idactividad'];
             $estadoascensor = $_POST['actEstEquiFin'];
+            if($estadoascensor == 01 || $estadoascensor == '01'){
+                $estadoascensor = "OPERATIVO";
+                $_POST['estadoascensor'] = "OPERATIVO";
+            }else{
+                $estadoascensor = "DETENIDO";
+                $_POST['estadoascensor'] = "DETENIDO";
+            }
             $observacionfi = $_POST['actComentario'];
             $email = $_POST['email'];
 

@@ -1963,7 +1963,7 @@ switch ($_GET["op"]) {
             $idSAP = $_POST['idSAP'];
             $comentario = $_POST['compreg'];
             $estadoascensor = $_POST['estadoascensor'];
-            if($estadoascensor == 01 || $estadoascensor == '01'){
+            if($estadoascensor == 01 || $estadoascensor == '01' || $estadoascensor == "OPERATIVO"){
                 $estadoascensor = "OPERATIVO";
                 $_POST['estadoascensor'] = "OPERATIVO";
             }else{
@@ -2202,7 +2202,7 @@ switch ($_GET["op"]) {
                     }
                     
                     $data = json_encode($post_data);
-                    $rspta = $servicio->finalizarActividad($data);
+                    $rspta = $servicio->finalizarActividadMantencion($data);
 
                     if ($porfirmar != "true"){
                         break;
@@ -3477,7 +3477,8 @@ switch ($_GET["op"]) {
                 $_POST['codCenCosto'] = $datosactividad['value'][0]['equCcostoCod'];
                 $_POST['nomCenCosto'] = $datosactividad['value'][0]['equCcostoNombre'];
                 $data = json_encode($_POST);
-                $rspta = $servicio->finalizarActividad($data);
+                $actividadsap = $_POST['actividadIDfi'];
+                $rspta = $servicio->finalizarActividad($data, $actividadsap);
 
                 if($opfirma=='2' || $opfirma == 2){
                 }else{

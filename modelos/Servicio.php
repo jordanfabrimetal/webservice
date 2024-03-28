@@ -352,8 +352,7 @@ class Servicio
 		return true;
 	}
 
-	
-	public function finalizarActividad($data)
+	public function finalizarActividadMantencion($data)
 	{
 		error_log("Estamos en funcion finalizarActividad de Modelo Servicio.php");
 		error_log("El idSAP: ".$_POST['idSAP']);
@@ -385,11 +384,238 @@ class Servicio
 						   $estexto = false;
 						   Editardatos($entity,$id,$comercial,$estexto);*/
 			$datapresupuesto = json_encode($data, JSON_UNESCAPED_UNICODE);
+			echo $datapresupuesto;
 			error_log("Variable datapresupuesto en finalizarActividad: " . $datapresupuesto);
 			$actividadss = $data->actividadIDfi;
 			$supervisorss = $data->supervisorID;
+			$supervisorValue = $supervisorss !== null ? $supervisorss : NULL;
 			error_log("data actividadIDfi: " . $actividadss." data supervisorID: ".$supervisorss);
-			$sql = "INSERT INTO presupuesto_sap (actividadID, supervisorID, informacion) VALUES ('$data->actividadIDfi','$data->supervisorID','$datapresupuesto')";
+			echo $sql = "INSERT INTO presupuesto_sap (actividadID, supervisorID, informacion) VALUES ('$data->actividadIDf',$supervisorValue,'$datapresupuesto')";
+			ejecutarConsulta($sql);
+			if(ejecutarConsulta($sql)){
+				error_log("Se inserto correctamente en presupuesto_sap");
+			}else{
+				error_log("No se inserto correctamente en presupuesto_sap: ");
+			}
+			$entity = 'Activities';
+			$id = $data->actividadIDfi;
+			error_log("id actividad: ".$id);
+			error_log("data opfirma: ".$data->opfirma);
+			if ($data->opfirma == 2) {
+				$firma = 'Y';
+				$status = 5;
+				error_log("la opfirma que viene de data es 2m firma queda en Y y status es 5");
+			} else {
+				$firma = 'N';
+				$status = ((isset($data->terminado) && $data->terminado == 'y') ? 1 : '-3');
+				error_log("la opfirma que viene de data es 1 o 3 firma queda en N y status es: ".$status);
+
+			}
+			error_log("data guiafirmada: ".$data->guiafimada); 
+			if (isset($data->guiafimada)) {
+				error_log("guiafirmada que viene de data no es vacia");
+				//$actividad = array("HandledByEmployee"=>$_SESSION['idSAP'],"Closed"=>"Y","U_PorFirmar"=>$firma,"EndDueDate"=>date("Y-m-d"),"EndTime"=>date("H:i:s"),"AttachmentEntry"=>$data->guiafimada,"U_NX_OPP"=>$datosOpportunidad->SequentialNo,"Notes"=>$data->txtObsFin,"U_EstadoFin"=>$data->estadoascensor,"U_GPSFin"=>$data->latitudfi.','.$data->longitudfi,"U_OBSINTERNA"=>$data->observacionint);
+				if($_SESSION['idSAP']){
+					$actividad = array("HandledByEmployee" => $_SESSION['idSAP'], "Closed" => "Y", "U_PorFirmar" => $firma, "EndDueDate" => date("Y-m-d"), "EndTime" => date("H:i:s"), "AttachmentEntry" => $data->guiafimada, "Notes" => $data->observacionfi, "U_EstadoFin" => $estadofintext, "U_GPSFin" => $data->latitudfi . ',' . $data->longitudfi, "U_OBSINTERNA" => $data->observacionint);	
+					error_log("variable acrividad de presupuesto: ".print_r($actividad, true));
+				}elseif($_POST['idSAP']){
+					$actividad = array("HandledByEmployee" => $_POST['idSAP'], "Closed" => "Y", "U_PorFirmar" => $firma, "EndDueDate" => date("Y-m-d"), "EndTime" => date("H:i:s"), "AttachmentEntry" => $data->guiafimada, "Notes" => $data->observacionfi, "U_EstadoFin" => $estadofintext, "U_GPSFin" => $data->latitudfi . ',' . $data->longitudfi, "U_OBSINTERNA" => $data->observacionint);
+					error_log("variable acrividad de presupuesto: ".print_r($actividad, true));
+				}
+				error_log("data opayu: ".$data->opayu);
+				error_log("data idayud1: ".$data->idayud1);
+				error_log("data idayud2: ".$data->idayud2);
+				if ($data->opayu == 'S') {
+					error_log("opayu es S, existen ayudantes");
+					$actividad["U_TieneAyudante"] = $data->opayu;
+					if (isset($data->idayud1) && !empty($data->idayud1)) {
+						$actividad["U_AYUDANTE1"] = $data->idayud1;
+					}
+					if (isset($data->idayud2) && !empty($data->idayud2)) {
+						$actividad["U_AYUDANTE2"] = $data->idayud2;
+					}
+				}
+				$actividad = json_encode($actividad);
+				error_log("Variable actividad en finalizarActividad: " . $actividad);
+			} else {
+				if($_SESSION['idSAP']){
+					$actividad = array("HandledByEmployee" => $_SESSION['idSAP'], "Closed" => "Y", "U_PorFirmar" => $firma, "EndDueDate" => date("Y-m-d"), "EndTime" => date("H:i:s"), "U_NX_OPP" => $datosOpportunidad->SequentialNo, "Notes" => $data->observacionfi, "U_EstadoFin" => $estadofintext, "U_GPSFin" => $data->latitudfi . ',' . $data->longitudfi, "U_OBSINTERNA" => $data->observacionint);
+					error_log("variable acrividad de presupuesto: ".$actividad);
+				}elseif($_POST['idSAP']){
+					$actividad = array("HandledByEmployee" => $_POST['idSAP'], "Closed" => "Y", "U_PorFirmar" => $firma, "EndDueDate" => date("Y-m-d"), "EndTime" => date("H:i:s"), "U_NX_OPP" => $datosOpportunidad->SequentialNo, "Notes" => $data->observacionfi, "U_EstadoFin" => $estadofintext, "U_GPSFin" => $data->latitudfi . ',' . $data->longitudfi, "U_OBSINTERNA" => $data->observacionint);
+					error_log("variable acrividad de presupuesto: ".$actividad);
+				}
+				if ($data->opayu == 'S') {
+					$actividad["U_TieneAyudante"] = $data->opayu;
+					if (isset($data->idayud1) && !empty($data->idayud1)) {
+						$actividad["U_AYUDANTE1"] = $data->idayud1;
+					}
+					if (isset($data->idayud2) && !empty($data->idayud2)) {
+						$actividad["U_AYUDANTE2"] = $data->idayud2;
+					}
+				}
+				$actividad = json_encode($actividad);
+				error_log("Variable actividad post ayudante: " . $actividad);
+			}
+			$rsptaactv = EditardatosNum($entity, $id, $actividad);
+			error_log("rsptaactv: ".$rsptaactv);
+
+			$sql = "INSERT INTO logactividad (actividadID,data) VALUES ('$data->actividadIDfi','$actividad')";
+			ejecutarConsulta($sql);
+
+			$entity = 'CustomerEquipmentCards';
+			$id = $data->ascensorIDfi;
+			error_log("id ascensor: ".$id);
+			$servicecall = json_encode(array("U_NX_ESTADOFM" => $data->idestadofi));
+			error_log("variable servicecall: ".$servicecall);
+			$rsptaservcall = EditardatosNum($entity, $id, $servicecall);
+			error_log("rsptaservcall 1: ".$rsptaservcall);
+
+			$entity = 'ServiceCalls';
+			$id = $data->servicecallIDfi;
+			error_log("nuevo id: ".$id);
+			$servicecall = json_encode(array("Status" => $status, "U_FallaTercero" => $terceros));
+			error_log("nuevo servicecakk: ".$servicecall);
+			$rsptaservcall = EditardatosNum($entity, $id, $servicecall);
+			error_log("rsptaservcall 2: ".$rsptaservcall);
+
+		} else {
+			error_log("estamos fuera de la opcion 1 de oppre");
+			error_log("data estadofintext: ".$data->estadofintext);
+			error_log("data estadoascensor: ".$data->estadoascensor);
+			if (isset($data->estadofintext)) {
+				$estadofintext = $data->estadofintext;
+			} else {
+				$estadofintext = $data->estadoascensor;
+			}
+			$entity = 'Activities';
+			$id = $data->actividadIDfi;
+			error_log("id actividad en el else oppre: ".$id);
+			error_log("data opfirma en el else oppre: ".$data->opfirma);
+			if ($data->opfirma == 2) {
+				$firma = 'Y';
+				$status = 5;
+			} else {
+				$firma = 'N';
+				$status = ((isset($data->terminado) && $data->terminado == 'y') ? 1 : '-3');
+			}
+			error_log("data guiafimada en el else oppre: ".$data->guiafimada);
+			if (isset($data->guiafimada)) {
+				//$mifecha= date('Y-m-d H:i:s'); 
+				//$NuevaFecha = strtotime ( '-4 hour' , strtotime ($mifecha) ) ; 
+
+				if($_SESSION['idSAP']){
+					$actividad = array("HandledByEmployee" => $_SESSION['idSAP'], "Closed" => "Y", "U_PorFirmar" => $firma, "EndDueDate" => date("Y-m-d"), "EndTime" => date("H:i:s"), "AttachmentEntry" => $data->guiafimada, "Notes" => $data->observacionfi, "U_EstadoFin" => $estadofintext, "U_GPSFin" => $data->latitudfi . ',' . $data->longitudfi, "U_OBSINTERNA" => $data->observacionint);
+					error_log("variable actividad en el else oppre: ".$actividad);
+				}elseif($_POST['idSAP']){
+					$actividad = array("HandledByEmployee" => $_POST['idSAP'], "Closed" => "Y", "U_PorFirmar" => $firma, "EndDueDate" => date("Y-m-d"), "EndTime" => date("H:i:s"), "AttachmentEntry" => $data->guiafimada, "Notes" => $data->observacionfi, "U_EstadoFin" => $estadofintext, "U_GPSFin" => $data->latitudfi . ',' . $data->longitudfi, "U_OBSINTERNA" => $data->observacionint);
+					error_log("variable actividad en el else oppre: ".$actividad);
+				}
+				error_log("data opayu en el else oppre: ".$data->opayu);
+				if ($data->opayu == 'S') {
+					$actividad["U_TieneAyudante"] = $data->opayu;
+					error_log("data idayud1 en el else oppre: ".$data->idayud1);
+					error_log("data idayud2 en el else oppre: ".$data->idayud2);
+					if (isset($data->idayud1) && !empty($data->idayud1)) {
+						$actividad["U_AYUDANTE1"] = $data->idayud1;
+					}
+					if (isset($data->idayud2) && !empty($data->idayud2)) {
+						$actividad["U_AYUDANTE2"] = $data->idayud2;
+					}
+				}
+				$actividad = json_encode($actividad);
+				error_log("variable actividad en el else oppre: ".$actividad);
+			} else {
+				//$mifecha= date('Y-m-d H:i:s'); 
+				//$NuevaFecha = strtotime ( '-4 hour' , strtotime ($mifecha) ) ; 
+				if($_SESSION['idSAP']){
+					$actividad = array("HandledByEmployee" => $_SESSION['idSAP'], "Closed" => "Y", "U_PorFirmar" => $firma, "EndDueDate" => date("Y-m-d"), "EndTime" => date("H:i:s"), "Notes" => $data->observacionfi, "U_EstadoFin" => $estadofintext, "U_GPSFin" => $data->latitudfi . ',' . $data->longitudfi, "U_OBSINTERNA" => $data->observacionint);
+					error_log("variable actividad en el else oppre y sin firma: ".$actividad);
+				}if($_POST['idSAP']){
+					$actividad = array("HandledByEmployee" => $_POST['idSAP'], "Closed" => "Y", "U_PorFirmar" => $firma, "EndDueDate" => date("Y-m-d"), "EndTime" => date("H:i:s"), "Notes" => $data->observacionfi, "U_EstadoFin" => $estadofintext, "U_GPSFin" => $data->latitudfi . ',' . $data->longitudfi, "U_OBSINTERNA" => $data->observacionint);
+					error_log("variable actividad en el else oppre y sin firma: ".$actividad);
+				}
+				error_log("data opayu en  el else oppre y sin firma: ".$data->opayu);
+				error_log("data idayud1 en  el else oppre y sin firma: ".$data->idayud1);
+				error_log("data idayud2 en  el else oppre y sin firma: ".$data->idayud2);
+				if ($data->opayu == 'S') {
+					$actividad["U_TieneAyudante"] = $data->opayu;
+					if (isset($data->idayud1) && !empty($data->idayud1)) {
+						$actividad["U_AYUDANTE1"] = $data->idayud1;
+					}
+					if (isset($data->idayud2) && !empty($data->idayud2)) {
+						$actividad["U_AYUDANTE2"] = $data->idayud2;
+					}
+				}
+				$actividad = json_encode($actividad);
+				error_log("variable actividad en el else oppre y sin firma: ".$actividad);
+			}
+			//echo '<pre>';print_r($actividad);echo '</pre><br><br>'.$terceros;die;
+			$rsptaactv = EditardatosNum($entity, $id, $actividad);
+			error_log("variable rsptaactv en  el else oppre y sin firma: ".$rsptaactv);
+
+			$sql = "INSERT INTO logactividad (actividadID,data) VALUES ('$data->actividadIDfi','$actividad')";
+			ejecutarConsulta($sql);
+
+			$entity = 'CustomerEquipmentCards';
+			error_log("id ascensor  en el else oppre y sin firma: ".$data->ascensorIDfi);
+			$id = $data->ascensorIDfi;
+			$servicecall = json_encode(array("U_NX_ESTADOFM" => $data->idestadofi));
+			error_log("variable servicecall en  el else oppre y sin firma: ".$servicecall);
+			$rsptaservcall = EditardatosNum($entity, $id, $servicecall);
+			error_log("variable rsptaservcall en  el else oppre y sin firma: ".$rsptaservcall);
+
+			$entity = 'ServiceCalls';
+			$id = $data->servicecallIDfi;
+			$servicecall = json_encode(array("Status" => $status, "U_FallaTercero" => $terceros));
+			error_log("variable servicecall en  el else oppre y sin firma: ".$servicecall);
+			$rsptaservcall = EditardatosNum($entity, $id, $servicecall);
+			error_log("variable rsptaservcall en  el else oppre y sin firma: ".$rsptaservcall);
+		}
+		return true;
+	}
+
+
+	
+	public function finalizarActividad($data, $actividadsap)
+	{
+		error_log("Estamos en funcion finalizarActividad de Modelo Servicio.php");
+		error_log("El idSAP: ".$_POST['idSAP']);
+		$data = json_decode($data);
+		error_log("variable data en finalizarActividad: " . print_r($data, true));
+		if (isset($data->estadofintext)) {
+			$estadofintext = $data->estadofintext;
+			error_log("variable estadofintext en finalizarActividad: " . $estadofintext);	
+		} else {
+			$estadofintext = $data->estadoascensor;
+			error_log("variable estadofintext en finalizarActividad: " . $estadofintext);	
+		}
+		if (isset($data->terceros) && $data->terceros == "true") {
+			$terceros = 'Si';
+			error_log("variable tercero es SI: " . $terceros);
+		} else {
+			$terceros = 'No';
+			error_log("variable tercero es NO: " . $terceros);
+		}
+		if ($data->oppre == 1) {
+			error_log("Estamos en 1 de oppre");
+			/*$presupuesto = json_encode(array("U_NX_AREA"=>"VTA_PPTO","OpportunityName"=>"GSE - ".$data->servicecallIDfi." - ".$data->actividadIDfi,"Remarks"=>$data->descripcion,"CardCode"=>$data->customercodefi,"U_NX_CODIGOFM"=>$data->codigofmfi,"AttachmentEntry"=>$data->attachments,"SalesOpportunitiesLines"=>array(array("MaxLocalTotal"=>"1.0"))));
+						   $entity = 'SalesOpportunities';
+						   $rsptapre = InsertarDatos($entity,$presupuesto);
+						   $datosOpportunidad = json_decode($rsptapre);
+
+						   $comercial = json_encode(array("DataOwnershipfield"=>$data->comercialID));
+						   $id = $datosOpportunidad->SequentialNo;
+						   $estexto = false;
+						   Editardatos($entity,$id,$comercial,$estexto);*/
+			$datapresupuesto = json_encode($data, JSON_UNESCAPED_UNICODE);
+			echo $datapresupuesto;
+			error_log("Variable datapresupuesto en finalizarActividad: " . $datapresupuesto);
+			$actividadss = $data->actividadIDfi;
+			$supervisorss = $data->supervisorID;
+			$supervisorValue = $supervisorss !== null ? $supervisorss : NULL;
+			error_log("data actividadIDfi: " . $actividadss." data supervisorID: ".$supervisorss);
+			echo $sql = "INSERT INTO presupuesto_sap (actividadID, supervisorID, informacion) VALUES ('$actividadsap',$supervisorValue,'$datapresupuesto')";
 			ejecutarConsulta($sql);
 			if(ejecutarConsulta($sql)){
 				error_log("Se inserto correctamente en presupuesto_sap");

@@ -1950,10 +1950,6 @@ switch ($_GET["op"]) {
             $firma = $_POST['firma'];
             $data = json_encode($_POST);
             $tiposervicio = $_POST['tiposervicio'];
-            $imagen_presupuesto[] = isset($_POST["file01"]) ? limpiarCadena($_POST["file01"]) : "";
-            $imagen_presupuesto[] = isset($_POST["file02"]) ? limpiarCadena($_POST["file02"]) : "";
-            $imagen_presupuesto[] = isset($_POST["file03"]) ? limpiarCadena($_POST["file03"]) : "";
-            error_log("El json de lo que llega desde l POST: ".$data);         
             $datosactividad = $servicio->Actividad($_POST['actividadIDfi']);
             $idactividad = $_POST['actividadIDfi'];
             $opfirma = $_POST['opfirma'];
@@ -2701,6 +2697,9 @@ switch ($_GET["op"]) {
                 }      
             //OTROS SERVICIOS------------------------------------------------------        
             }else{
+                $imagen_presupuesto[] = isset($_POST["file01"]) ? limpiarCadena($_POST["file01"]) : "";
+                $imagen_presupuesto[] = isset($_POST["file02"]) ? limpiarCadena($_POST["file02"]) : "";
+                $imagen_presupuesto[] = isset($_POST["file03"]) ? limpiarCadena($_POST["file03"]) : "";
                 if($opfirma=='1' || $opfirma=='3'){
                     error_log("opfirma es igual a 1 o 3");
                     $bodypdf = '

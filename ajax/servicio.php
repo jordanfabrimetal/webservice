@@ -2207,6 +2207,8 @@ switch ($_GET["op"]) {
                     if ($porfirmar != "true"){
                         break;
                     }
+                    
+                    error_log("paso finalizaractividad");
 
                     //En este punto genero el PDF, y mediante $params recoje los datos para rellenarlo
                     $params['actividadsap'] = $datosactividad['value'][0];

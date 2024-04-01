@@ -390,7 +390,7 @@ class Servicio
 			$supervisorss = $data->supervisorID;
 			$supervisorValue = $supervisorss !== null ? $supervisorss : NULL;
 			error_log("data actividadIDfi: " . $actividadss." data supervisorID: ".$supervisorss);
-			echo $sql = "INSERT INTO presupuesto_sap (actividadID, supervisorID, informacion) VALUES ('$data->actividadIDf',$supervisorValue,'$datapresupuesto')";
+			echo $sql = "INSERT INTO presupuesto_sap (actividadID, supervisorID, informacion) VALUES ('$data->actividadIDfi',$supervisorValue,'$datapresupuesto')";
 			ejecutarConsulta($sql);
 			if(ejecutarConsulta($sql)){
 				error_log("Se inserto correctamente en presupuesto_sap");
@@ -413,7 +413,6 @@ class Servicio
 			}
 			error_log("data guiafirmada: ".$data->guiafimada); 
 			if (isset($data->guiafimada)) {
-				error_log("guiafirmada que viene de data no es vacia");
 				//$actividad = array("HandledByEmployee"=>$_SESSION['idSAP'],"Closed"=>"Y","U_PorFirmar"=>$firma,"EndDueDate"=>date("Y-m-d"),"EndTime"=>date("H:i:s"),"AttachmentEntry"=>$data->guiafimada,"U_NX_OPP"=>$datosOpportunidad->SequentialNo,"Notes"=>$data->txtObsFin,"U_EstadoFin"=>$data->estadoascensor,"U_GPSFin"=>$data->latitudfi.','.$data->longitudfi,"U_OBSINTERNA"=>$data->observacionint);
 				if($_SESSION['idSAP']){
 					$actividad = array("HandledByEmployee" => $_SESSION['idSAP'], "Closed" => "Y", "U_PorFirmar" => $firma, "EndDueDate" => date("Y-m-d"), "EndTime" => date("H:i:s"), "AttachmentEntry" => $data->guiafimada, "Notes" => $data->observacionfi, "U_EstadoFin" => $estadofintext, "U_GPSFin" => $data->latitudfi . ',' . $data->longitudfi, "U_OBSINTERNA" => $data->observacionint);	
@@ -439,10 +438,10 @@ class Servicio
 				error_log("Variable actividad en finalizarActividad: " . $actividad);
 			} else {
 				if($_SESSION['idSAP']){
-					$actividad = array("HandledByEmployee" => $_SESSION['idSAP'], "Closed" => "Y", "U_PorFirmar" => $firma, "EndDueDate" => date("Y-m-d"), "EndTime" => date("H:i:s"), "U_NX_OPP" => $datosOpportunidad->SequentialNo, "Notes" => $data->observacionfi, "U_EstadoFin" => $estadofintext, "U_GPSFin" => $data->latitudfi . ',' . $data->longitudfi, "U_OBSINTERNA" => $data->observacionint);
+					$actividad = array("HandledByEmployee" => $_SESSION['idSAP'], "Closed" => "Y", "U_PorFirmar" => $firma, "EndDueDate" => date("Y-m-d"), "EndTime" => date("H:i:s"), "Notes" => $data->observacionfi, "U_EstadoFin" => $estadofintext, "U_GPSFin" => $data->latitudfi . ',' . $data->longitudfi, "U_OBSINTERNA" => $data->observacionint);
 					error_log("variable acrividad de presupuesto: ".$actividad);
 				}elseif($_POST['idSAP']){
-					$actividad = array("HandledByEmployee" => $_POST['idSAP'], "Closed" => "Y", "U_PorFirmar" => $firma, "EndDueDate" => date("Y-m-d"), "EndTime" => date("H:i:s"), "U_NX_OPP" => $datosOpportunidad->SequentialNo, "Notes" => $data->observacionfi, "U_EstadoFin" => $estadofintext, "U_GPSFin" => $data->latitudfi . ',' . $data->longitudfi, "U_OBSINTERNA" => $data->observacionint);
+					$actividad = array("HandledByEmployee" => $_POST['idSAP'], "Closed" => "Y", "U_PorFirmar" => $firma, "EndDueDate" => date("Y-m-d"), "EndTime" => date("H:i:s"), "Notes" => $data->observacionfi, "U_EstadoFin" => $estadofintext, "U_GPSFin" => $data->latitudfi . ',' . $data->longitudfi, "U_OBSINTERNA" => $data->observacionint);
 					error_log("variable acrividad de presupuesto: ".$actividad);
 				}
 				if ($data->opayu == 'S') {
@@ -460,8 +459,17 @@ class Servicio
 			$rsptaactv = EditardatosNum($entity, $id, $actividad);
 			error_log("rsptaactv: ".$rsptaactv);
 
+			error_log("valor data->activiaddiDfi".$data->actividadIDfi);
+			error_log("valor actividad".$actividad);
+
+
 			$sql = "INSERT INTO logactividad (actividadID,data) VALUES ('$data->actividadIDfi','$actividad')";
 			ejecutarConsulta($sql);
+			if(ejecutarConsulta($sql)){
+				error_log("se inserto logactividad");
+			}else{
+				error_log("No se inserto logactividad: ");
+			}
 
 			$entity = 'CustomerEquipmentCards';
 			$id = $data->ascensorIDfi;

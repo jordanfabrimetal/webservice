@@ -1951,12 +1951,13 @@ switch ($_GET["op"]) {
             $data = json_encode($_POST);
             $tiposervicio = $_POST['tiposervicio'];
             $datosactividad = $servicio->Actividad($_POST['actividadIDfi']);
-            $idactividad = $_POST['actividadIDfi'];
+            $idactividad = intval($_POST['actividadIDfi']);
+            $_POST['actividadIDfi'] = $idactividad;
             $opfirma = $_POST['opfirma'];
-            $actividadIDfi = $_POST['actividadIDfi'];
+            $actividadIDfi = intval($_POST['actividadIDfi']);
             $codigoequipo = $_POST['codigoEquipo']; // FM
             $tipoequipo = $_POST['tipoEquipo']; // ASCENSOR o ESCALERA
-            $idSAP = $_POST['idSAP'];
+            $idSAP = intval($_POST['idSAP']);
             $comentario = $_POST['compreg'];
             $estadoascensor = $_POST['estadoascensor'];
             if($estadoascensor == 01 || $estadoascensor == '01' || $estadoascensor == "OPERATIVO"){
@@ -1975,10 +1976,10 @@ switch ($_GET["op"]) {
 
                     $idascensor = isset($codigoequipo) ? limpiarCadena($codigoequipo) : "";
                     $idencuesta = 5;
-                    $idactividad = $_POST["actividadIDfi"];
+                    $idactividad = intval($_POST["actividadIDfi"]);
                     $idencuestatext = $idencuesta;
-                    $idservicio = $_POST['servicecallIDfi'];
-                    $idserviciofi = $_POST['servicecallIDfi'];
+                    $idservicio = intval($_POST['servicecallIDfi']);
+                    $idserviciofi = intval($_POST['servicecallIDfi']);
 
                     $periodo = date("Ym");
                     $idcliente = $_POST['customercodefi'];
@@ -2207,8 +2208,6 @@ switch ($_GET["op"]) {
                         break;
                     }
                     
-                    error_log("paso finalizaractividad");
-
                     //En este punto genero el PDF, y mediante $params recoje los datos para rellenarlo
                     $params['actividadsap'] = $datosactividad['value'][0];
                     $result = newPdf('informemantencionnuevo', '', 'variable', $params);

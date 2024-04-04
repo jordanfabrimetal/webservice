@@ -327,6 +327,31 @@ class Servicio
 		return json_encode($data);
 	}
 
+	public function finalizarActividadAndroid($data, $actividadIDfi, $guiafimada){
+			$data = json_decode($data);
+
+			$entity = 'Activities';
+			$id = $actividadIDfi;
+			$firma = 'N';
+			$status = 1;
+			if (isset($guiafimada)) {
+					$actividad = json_encode(array("Closed" => "Y", "U_PorFirmar" => $firma, "AttachmentEntry" => $guiafimada));
+			} else {
+					$actividad = json_encode(array("Closed" => "Y", "U_PorFirmar" => $firma));
+			}
+			$rsptaactv = EditardatosNum($entity, $id, $actividad);
+
+			$entity = 'ServiceCalls';
+			$id = $data->servicecallIDfi;
+			$terceros = 'no';
+			$servicecall = json_encode(array("Status" => $status, "U_FallaTercero" => $terceros));
+			$rsptaservcall = EditardatosNum($entity, $id, $servicecall);
+
+			$sql = "INSERT INTO logactividad (actividadID,data) VALUES ('$data->actividadIDfi','$actividad')";
+			ejecutarConsulta($sql);
+		return true;
+	}
+
 	public function finalizarActividadMantencion($data)
 	{
 		$data = json_decode($data);
@@ -342,16 +367,10 @@ class Servicio
 		}
 		if ($data->oppre == 1) {
 
-			$arrayData = json_decode(json_encode($data), true);
+			 // Decodificar el JSON en un array asociativo
+			$arrayData = json_decode($data, true);
 
-
-			// Verificar y obtener actividadID
-			$actividadID = isset($data->actividadIDfi) ? intval($data->actividadIDfi) : 0;
-
-			// Verificar y obtener supervisorID
-			$supervisorValue = ($data->supervisorID === null || $data->supervisorID === '' || $data->supervisorID === ' ') ? 'NULL' : intval($data->supervisorID);
-		
-			// Eliminar las laves específicas del array
+			// Eliminar las claves específicas
 			unset($arrayData['preg']);
 			unset($arrayData['estadofintext']);
 			unset($arrayData['empresa']);
@@ -360,12 +379,13 @@ class Servicio
 			unset($arrayData['idencuesta']);
 			unset($arrayData['observaciones']);
 			unset($arrayData['chkCertifica']);
-		
+
 			// Codificar el array modificado a JSON
 			$datapresupuesto = json_encode($arrayData, JSON_UNESCAPED_UNICODE);
-		
-			// Construir y ejecutar la consulta SQL
-			$sql = "INSERT INTO presupuesto_sap (actividadID, supervisorID, informacion) VALUES ({$actividadID}, {$supervisorValue}, '{$datapresupuesto}')";
+
+			$supervisorValue = $data->supervisorID !== null ? $data->supervisorID : NULL;
+			$actividadID = $data->actividadIDfi !== null || $data->actividadIDfi !== '' ? intval($data->actividadIDfi) : 0;
+			$sql = "INSERT INTO presupuesto_sap (actividadID, supervisorID, informacion) VALUES ($actividadID,$supervisorValue,'$datapresupuesto')";
 			ejecutarConsulta($sql);
 
 			$entity = 'Activities';
@@ -410,9 +430,10 @@ class Servicio
 			}
 			$rsptaactv = EditardatosNum($entity, $id, $actividad);
 			
-			$ActividadValue = ($data->actividadIDfi !== null && $data->actividadIDfi !== '' && $data->actividadIDfi !== ' ') ? intval($data->actividadIDfi) : 0;
-			$sql = "INSERT INTO logactividad (actividadID,data) VALUES ({$actividadID},'{$actividad}')";
+			$actividadID = $data->actividadIDfi !== null || $data->actividadIDfi !== '' ? intval($data->actividadIDfi) : 0;
+			$sql = "INSERT INTO logactividad (actividadID,data) VALUES ($actividadID,'$actividad')";
 			ejecutarConsulta($sql);
+			
 
 			$entity = 'CustomerEquipmentCards';
 			$id = $data->ascensorIDfi;
@@ -423,7 +444,6 @@ class Servicio
 			$id = $data->servicecallIDfi;
 			$servicecall = json_encode(array("Status" => $status, "U_FallaTercero" => $terceros));
 			$rsptaservcall = EditardatosNum($entity, $id, $servicecall);
-			
 		} else {
 			if (isset($data->estadofintext)) {
 				$estadofintext = $data->estadofintext;
@@ -471,8 +491,8 @@ class Servicio
 			//echo '<pre>';print_r($actividad);echo '</pre><br><br>'.$terceros;die;
 			$rsptaactv = EditardatosNum($entity, $id, $actividad);
 
-			$ActividadValue = ($data->actividadIDfi !== null && $data->actividadIDfi !== '' && $data->actividadIDfi !== ' ') ? intval($data->actividadIDfi) : 0;
-			$sql = "INSERT INTO logactividad (actividadID,data) VALUES ({$ActividadValue},'{$actividad}')";
+			$actividadID = $data->actividadIDfi !== null || $data->actividadIDfi !== '' ? intval($data->actividadIDfi) : 0;
+			$sql = "INSERT INTO logactividad (actividadID,data) VALUES ($actividadID,'$actividad')";
 			ejecutarConsulta($sql);
 
 			$entity = 'CustomerEquipmentCards';
@@ -526,9 +546,10 @@ class Servicio
 			error_log("Variable datapresupuesto en finalizarActividad: " . $datapresupuesto);
 			$actividadss = $data->actividadIDfi;
 			$supervisorss = $data->supervisorID;
-			$supervisorValue = $supervisorss !== null ? $supervisorss : 0;
+			$supervisorValue = $supervisorss !== null ? $supervisorss : NULL;
+			$actividadID = $data->actividadIDfi !== null || $data->actividadIDfi !== '' ? intval($data->actividadIDfi) : 0;
 			error_log("data actividadIDfi: " . $actividadss." data supervisorID: ".$supervisorss);
-			echo $sql = "INSERT INTO presupuesto_sap (actividadID, supervisorID, informacion) VALUES ({$actividadsap},{$supervisorValue},'{$datapresupuesto}')";
+			echo $sql = "INSERT INTO presupuesto_sap (actividadID, supervisorID, informacion) VALUES ($actividadID,$supervisorValue,'$datapresupuesto')";
 			ejecutarConsulta($sql);
 			if(ejecutarConsulta($sql)){
 				error_log("Se inserto correctamente en presupuesto_sap");
@@ -598,7 +619,8 @@ class Servicio
 			$rsptaactv = EditardatosNum($entity, $id, $actividad);
 			error_log("rsptaactv: ".$rsptaactv);
 
-			$sql = "INSERT INTO logactividad (actividadID,data) VALUES ({$data->actividadIDfi},'{$actividad}')";
+			$actividadID = $data->actividadIDfi !== null || $data->actividadIDfi !== '' ? intval($data->actividadIDfi) : 0;
+			$sql = "INSERT INTO logactividad (actividadID,data) VALUES ($actividadID,'$actividad')";
 			ejecutarConsulta($sql);
 
 			$entity = 'CustomerEquipmentCards';
@@ -692,7 +714,8 @@ class Servicio
 			$rsptaactv = EditardatosNum($entity, $id, $actividad);
 			error_log("variable rsptaactv en  el else oppre y sin firma: ".$rsptaactv);
 
-			$sql = "INSERT INTO logactividad (actividadID,data) VALUES ({$data->actividadIDfi},'{$actividad}')";
+			$actividadID = $data->actividadIDfi !== null || $data->actividadIDfi !== '' ? intval($data->actividadIDfi) : 0;
+			$sql = "INSERT INTO logactividad (actividadID,data) VALUES ($actividadID,'$actividad')";
 			ejecutarConsulta($sql);
 
 			$entity = 'CustomerEquipmentCards';

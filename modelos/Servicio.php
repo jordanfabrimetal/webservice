@@ -11,6 +11,12 @@ class Servicio
 
 	}
 
+	public function Dispositivo($actividad, $servicio, $responsable){
+		$dispositivo = "Aplicación Nueva";
+		$sql = "INSERT INTO registro_dispositivo (dispositivo,actividad,servicio,responsable) VALUES ('$dispositivo', $actividad, $servicio, '$responsable')";
+		ejecutarConsulta($sql);
+	}
+
 	public function existepresupuesto($idactividad)
 	{
 		$sql = "SELECT * FROM presupuesto_sap WHERE actividadID = $idactividad ORDER BY presupuestosapID DESC LIMIT 1";
@@ -354,37 +360,46 @@ class Servicio
 
 	public function finalizarActividadMantencion($data)
 	{
-		$data = json_decode($data);
-		if (isset($data->estadofintext)) {
-			$estadofintext = $data->estadofintext;
+		$dataObject = json_decode($data);
+	
+		if (isset($dataObject->estadofintext)) {
+			$estadofintext = $dataObject->estadofintext;
 		} else {
-			$estadofintext = $data->estadoascensor;
+			$estadofintext = $dataObject->estadoascensor;
 		}
-		if (isset($data->terceros) && $data->terceros == "true") {
+	
+		if (isset($dataObject->terceros) && $dataObject->terceros == "true") {
 			$terceros = 'Si';
 		} else {
 			$terceros = 'No';
 		}
-		if ($data->oppre == 1) {
-
-			 // Decodificar el JSON en un array asociativo
-			$arrayData = json_decode($data, true);
-
+	
+		if ($dataObject->oppre == 1) {
+			// No es necesario decodificar el JSON nuevamente
+			// $arrayData = json_decode($data, true);
+			$arrayData = $dataObject; // Usa $dataObject directamente
+	
 			// Eliminar las claves específicas
-			unset($arrayData['preg']);
-			unset($arrayData['estadofintext']);
-			unset($arrayData['empresa']);
-			unset($arrayData['direccion']);
-			unset($arrayData['periodo']);
-			unset($arrayData['idencuesta']);
-			unset($arrayData['observaciones']);
-			unset($arrayData['chkCertifica']);
+			unset($arrayData->preg);
+			unset($arrayData->estadofintext);
+			unset($arrayData->empresa);
+			unset($arrayData->direccion);
+			unset($arrayData->periodo);
+			unset($arrayData->idencuesta);
+			unset($arrayData->observaciones);
+			unset($arrayData->chkCertifica);
+			unset($arrayData->imgfoso);
+			unset($arrayData->imgtecho);
+			unset($arrayData->imgmaquina);
+			unset($arrayData->imgoperador);
 
+			$data = $arrayData;
+	
 			// Codificar el array modificado a JSON
 			$datapresupuesto = json_encode($arrayData, JSON_UNESCAPED_UNICODE);
-
-			$supervisorValue = $data->supervisorID !== null ? $data->supervisorID : NULL;
-			$actividadID = $data->actividadIDfi !== null || $data->actividadIDfi !== '' ? intval($data->actividadIDfi) : 0;
+	
+			$supervisorValue = $dataObject->supervisorID !== null ? $dataObject->supervisorID : NULL;
+			$actividadID = $dataObject->actividadIDfi !== null || $dataObject->actividadIDfi !== '' ? intval($dataObject->actividadIDfi) : 0;
 			$sql = "INSERT INTO presupuesto_sap (actividadID, supervisorID, informacion) VALUES ($actividadID,$supervisorValue,'$datapresupuesto')";
 			ejecutarConsulta($sql);
 
@@ -433,7 +448,6 @@ class Servicio
 			$actividadID = $data->actividadIDfi !== null || $data->actividadIDfi !== '' ? intval($data->actividadIDfi) : 0;
 			$sql = "INSERT INTO logactividad (actividadID,data) VALUES ($actividadID,'$actividad')";
 			ejecutarConsulta($sql);
-			
 
 			$entity = 'CustomerEquipmentCards';
 			$id = $data->ascensorIDfi;

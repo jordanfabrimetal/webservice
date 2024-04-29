@@ -147,13 +147,6 @@ switch ($_GET["op"]) {
         $rspta = $servicio->finalizar($idserviciofi, $estadofin, $observacionfin, $nrodocumento, $nombre, $apellidos, $rut, $cargo, $firma, $latfin, $lonfin);
         $rspta ? $ascensor->UpEstado($idascensorfi, $estadofin) : '';
 
-        if ($oppre == '1' && $rspta) {
-            $descripcion = isset($_POST["descripcion"]) ? limpiarCadena($_POST["descripcion"]) : "";
-            $idsts = $servicio->Idsts($idserviciofi);
-            // $respre = $servicio->SolPre($idserviciofi, $idascensorfi, $idsts['idsupervisor'], $idsts['idtecnico'] , $descripcion);
-            $respre = $servicio->SolPreWithImg($idserviciofi, $idascensorfi, $idsts['idsupervisor'], $idsts['idtecnico'] , $descripcion, $imgs, $dTime);
-            echo $respre ? "Solicitud de presupuesto ingresada <br>" : "Solicitud no pudo ser ingresada <br>";
-        }
 
         if ($opfirma == '1' || $opfirma == '3' && $rspta) {
             $resp = $servicio->pdf($idserviciofi);
@@ -1946,6 +1939,25 @@ switch ($_GET["op"]) {
             echo $rspta;
         break;
 
+        case  'imagenesMantencion':
+            if ($_FILES['file']['error'][0] == UPLOAD_ERR_OK) {
+                $uploadDirectory = '../files/images/';
+                foreach ($_FILES['file']['tmp_name'] as $index => $tmpName) {
+                    $originalName = $_FILES['file']['name'][$index];
+                    $originalName;
+                    $uploadFilePath = $uploadDirectory . $originalName;
+                    if (move_uploaded_file($tmpName, $uploadFilePath)) {
+                        echo "Archivo '$originalName' subido con éxito. Nombre en el servidor: $originalName";
+                    } else {
+                        echo "Error al subir el archivo '$originalName'";
+                    }
+                }
+            } else {
+                // No se recibieron archivos o ocurrió un error al subirlos
+                echo "No se recibieron archivos o ocurrió un error al subirlos";
+            }
+        break;
+
         case  'finalizarsap':
             $firma = $_POST['firma'];
             $data = json_encode($_POST);
@@ -1968,11 +1980,24 @@ switch ($_GET["op"]) {
                 $_POST['estadoascensor'] = "DETENIDO";
             }
 
+            //Vaciamos el log
+            //$logFile = fopen("../log.txt", 'w') or die("Error creando archivo");
+            //fclose($logFile);
+
+            //Log
+            $logFile = fopen("../log.txt", 'a') or die("Error creando archivo");
+            fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Aun no inicia ningun servicio, pero el tipo es : ".$tiposervicio) or die("Error escribiendo en el archivo");
+            fclose($logFile);
+
             //MANTENCIÓN--------------------------------------------------------------------------------------------------------------
             //MANTENCIÓN--------------------------------------------------------------------------------------------------------------
             //MANTENCIÓN--------------------------------------------------------------------------------------------------------------
 
-            if($tiposervicio == 'Mantención'){
+            if($tiposervicio == 'Mantención' || $tiposervicio == 'Mantenci\u00f3n' || $tiposervicio == 'MantenciÃ³n'){
+                    //Log
+                    $logFile = fopen("../log.txt", 'a') or die("Error creando archivo");
+                    fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Ha entrado al servicio de : ".$tiposervicio) or die("Error escribiendo en el archivo");
+                    fclose($logFile);
 
                     $idascensor = isset($codigoequipo) ? limpiarCadena($codigoequipo) : "";
                     $idencuesta = 5;
@@ -1992,10 +2017,14 @@ switch ($_GET["op"]) {
                         $idestadofi = "DETENIDO";
                     }
 
-
                     $rspta = $encuesta->infoEquipo($idservicio);
                     $rsptaJson = json_decode($rspta, true); //true para que sea array, no objeto
                     $data = Array();
+                    
+                    //Log
+                    $logFile = fopen("../log.txt", 'a') or die("Error creando archivo");
+                    fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Información Equipo : ".$rsptaJson) or die("Error escribiendo en el archivo");
+                    fclose($logFile);
         
                     if ($rspta != 'NODATASAP') {
                         foreach($rsptaJson as $row){
@@ -2050,6 +2079,10 @@ switch ($_GET["op"]) {
                     $imgfirma = round(microtime(true)) . ".png";
                     $patchfir = "../files/servicioequipo/firmas/" . $imgfirma;
                     file_put_contents($patchfir, $decoded_image);
+                    //LOG
+                    $logFile = fopen("../log.txt", 'a') or die("Error creando archivo");
+                    fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Firma guardada como : ".$patchfir) or die("Error escribiendo en el archivo");
+                    fclose($logFile);
         
                     switch($idencuesta)
                     {
@@ -2076,51 +2109,55 @@ switch ($_GET["op"]) {
                                 'actividad' => $idactividad
                             ];
 
-                            //Recojo la informacion traida desde Android, estan base64
-                            $imgFoso = $_POST['imgfoso'];
-                            $imgTecho = $_POST['imgtecho'];
-                            $imgMaquina = $_POST['imgmaquina'];
-                            $imgOperador = $_POST['imgoperador'];
-                            
-                            $rutaDestino = '../files/images/';
-                            
-                            // Manejar las imágenes recibidas y guardarlas en el servidor
-                            $extension = 'jpg'; // O la extensión adecuada
-                            
-                            // Guardar imagen del Foso
-                            if (!empty($imgFoso)) {
-                                $imagenBinaria = base64_decode($imgFoso);
-                                $nombreImagenFoso = $idactividad.'_imgfoso_'.time().'.'.$extension;
-                                file_put_contents($rutaDestino . $nombreImagenFoso, $imagenBinaria);
-                                $params['imgfoso'] = $nombreImagenFoso;
-                            }
-                            
-                            // Guardar imagen del Techo
-                            if (!empty($imgTecho)) {
-                                $imagenBinaria = base64_decode($imgTecho);
-                                $nombreImagenTecho = $idactividad.'_imgtecho_'.time().'.'.$extension;
-                                file_put_contents($rutaDestino . $nombreImagenTecho, $imagenBinaria);
-                                $params['imgtecho'] = $nombreImagenTecho;
+                            if (!empty($_POST['imgfoso'])) {
+                                $file1 = $_POST["imgfoso"];
+                                $existe = file_exists("../files/images/$file1");
+                                //LOG
+                                $logFile = fopen("../log.txt", 'a') or die("Error creando archivo");
+                                fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Imagen Foso : ".$existe) or die("Error escribiendo en el archivo");
+                                fclose($logFile);
+                                $params['imgfoso'] = $_POST['imgfoso'];
                             }
 
-                            if (!empty($imgMaquina)) {
-                                $imagenBinaria = base64_decode($imgMaquina);
-                                $nombreImagenMaquina = $idactividad.'_imgmaquina_'.time().'.'.$extension;
-                                file_put_contents($rutaDestino . $nombreImagenMaquina, $imagenBinaria);
-                                $params['imgmaquina'] = $nombreImagenMaquina;
+                            if (!empty($_POST['imgtecho'])) {
+                                $file1 = $_POST["imgtecho"];
+                                $existe = file_exists("../files/images/$file1");
+                                //LOG
+                                $logFile = fopen("../log.txt", 'a') or die("Error creando archivo");
+                                fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Imagen Techo : ".$existe) or die("Error escribiendo en el archivo");
+                                fclose($logFile);
+                                $params['imgtecho'] = $_POST['imgtecho'];
                             }
 
-                            if (!empty($imgOperador)) {
-                                $imagenBinaria = base64_decode($imgOperador);
-                                $nombreImagenOperador = $idactividad.'_imgoperador_'.time().'.'.$extension;
-                                file_put_contents($rutaDestino . $nombreImagenOperador, $imagenBinaria);
-                                $params['imgoperador'] = $nombreImagenOperador;
+                            if (!empty($_POST['imgmaquina'])) {
+                                $file1 = $_POST["imgmaquina"];
+                                $existe = file_exists("../files/images/$file1");
+                                //LOG
+                                $logFile = fopen("../log.txt", 'a') or die("Error creando archivo");
+                                fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Imagen Maquina : ".$existe) or die("Error escribiendo en el archivo");
+                                fclose($logFile);
+                                $params['imgmaquina'] = $_POST['imgmaquina'];
                             }
+
+                            if (!empty($_POST['imgoperador'])) {
+                                $file1 = $_POST["imgoperador"];
+                                $existe = file_exists("../files/images/$file1");
+                                $params['imgoperador'] = $_POST['imgoperador'];
+                                //LOG
+                                $logFile = fopen("../log.txt", 'a') or die("Error creando archivo");
+                                fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Imagen Operador : ".$existe) or die("Error escribiendo en el archivo");
+                                fclose($logFile);
+                            }
+
                             
                             //Guardo la informaicon en la tabla visita, esta luego retorna para el PDF
                             $rspvisita = $encuesta->nuevaVisita($params);
                             $_POST['preg'] = json_decode($_POST['preg'], true);
-                            
+                            //LOG
+                            $logFile = fopen("../log.txt", 'a') or die("Error creando archivo");
+                            fwrite($logFile, "\n".date("d/m/Y H:i:s")." - ID Visita : ".$rspvisita) or die("Error escribiendo en el archivo");
+                            fclose($logFile);
+
                             //Array de las preguntas generadas por el bloque, este subseguido por el mes correspondiente
                             if (isset($_POST['preg'])) {
                                 $respuestas = array();
@@ -2132,7 +2169,11 @@ switch ($_GET["op"]) {
                                     $resp02 = array("tipo" => "comentario", "data" => $_POST['compreg']);
                                     $respuestas[] = $resp02; 
                                 }
-                                $rsppregvisita = $encuesta->nuevaRespuestaVisita($rspvisita, $respuestas);   
+                                $rsppregvisita = $encuesta->nuevaRespuestaVisita($rspvisita, $respuestas); 
+                                //LOG
+                                $logFile = fopen("../log.txt", 'a') or die("Error creando archivo");
+                                fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Respuesta Encuesta : ".$rsppregvisita) or die("Error escribiendo en el archivo");
+                                fclose($logFile);  
                             }
                         break;
                     }
@@ -2178,7 +2219,11 @@ switch ($_GET["op"]) {
 
                     //Traigo la data de la actividad filtrada por el ID
                     $datosactividad = $servicio->Actividad($_POST['actividadIDfi']);
-    
+                    //LOG
+                    $logFile = fopen("../log.txt", 'a') or die("Error creando archivo");
+                    fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Actividad : ".$datosactividad) or die("Error escribiendo en el archivo");
+                    fclose($logFile);  
+
                     $data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $firma));
                     $archivofirma = "cli".time().".png";
                     $filepath = "../files/firma/".$archivofirma; // or image.jpg
@@ -2200,9 +2245,20 @@ switch ($_GET["op"]) {
                     if (isset($post_data['images'])) {
                         unset($post_data['images']);
                     }
-                    
+
                     $data = json_encode($post_data);
+
+                    //LOG
+                    $logFile = fopen("../log.txt", 'a') or die("Error creando archivo");
+                    fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Data : ".$data) or die("Error escribiendo en el archivo");
+                    fclose($logFile);  
+                    
                     $rspta = $servicio->finalizarActividadMantencion($data);
+
+                    //LOG
+                    $logFile = fopen("../log.txt", 'a') or die("Error creando archivo");
+                    fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Respuesta finalizar Mantención  : ".$rspta ) or die("Error escribiendo en el archivo");
+                    fclose($logFile);  
 
                     if ($porfirmar != "true"){
                         break;
@@ -2695,6 +2751,15 @@ switch ($_GET["op"]) {
                     }  
                 }      
             //OTROS SERVICIOS------------------------------------------------------        
+            //OTROS SERVICIOS------------------------------------------------------        
+            //OTROS SERVICIOS------------------------------------------------------        
+            //OTROS SERVICIOS------------------------------------------------------        
+            //OTROS SERVICIOS------------------------------------------------------        
+            //OTROS SERVICIOS------------------------------------------------------        
+            //OTROS SERVICIOS------------------------------------------------------        
+            //OTROS SERVICIOS------------------------------------------------------        
+            //OTROS SERVICIOS------------------------------------------------------        
+
             }else{
                 $imagen_presupuesto = array();
                 if (isset($_POST["file01"])) {
@@ -3703,6 +3768,10 @@ switch ($_GET["op"]) {
                     }
                 }
             }
+            //LOG
+			$logFile = fopen("../log.txt", 'a') or die("Error creando archivo");
+			fwrite($logFile, "\n".date("d/m/Y H:i:s")." Finalizo Exitosamente ") or die("Error escribiendo en el archivo");
+			fclose($logFile);  
             echo $rspta ? "Servicio finalizado con exito" : "El servicio no pudo ser finalizado";
         break;
 
@@ -6187,8 +6256,6 @@ switch ($_GET["op"]) {
 
             if (!$idcliente)
                 $idcliente = 0;
-                
-            
 
             switch($idencuesta)
             {

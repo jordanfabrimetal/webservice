@@ -12,9 +12,19 @@ class Servicio
 	}
 
 	public function Dispositivo($actividad, $servicio, $responsable){
-		$dispositivo = "Aplicación Nueva";
-		$sql = "INSERT INTO registro_dispositivo (dispositivo,actividad,servicio,responsable) VALUES ('$dispositivo', $actividad, $servicio, '$responsable')";
-		ejecutarConsulta($sql);
+		if($actividad !== ' ' || $actividad !== ''){
+			$dispositivo = "Aplicación Nueva";
+			// Escapar los valores de las variables y agregar comillas solo para los valores de tipo cadena
+			$actividad = is_numeric($actividad) ? $actividad : "'$actividad'";
+			$servicio = is_numeric($servicio) ? $servicio : "'$servicio'";
+			$responsable = "'$responsable'";
+			
+			// Construir la consulta SQL
+			$sql = "INSERT INTO registro_dispositivo (dispositivo, actividad, servicio, responsable) VALUES ('$dispositivo', $actividad, $servicio, $responsable)";
+			
+			// Ejecutar la consulta SQL
+			return ejecutarConsulta($sql);
+		}
 	}
 
 	public function existepresupuesto($idactividad)
@@ -131,53 +141,6 @@ class Servicio
 		return ejecutarConsulta($sql);
 	}
 
-	public function SolPreWithImg($idservicio, $idascensor, $idsupervisor, $idtecnico, $descripcion, $imgs, $dTime)
-	{
-		$sql = "INSERT INTO presupuesto (idservicio, idascensor, idsupervisor, idtecnico, descripcion) VALUES ('$idservicio','$idascensor','$idsupervisor','$idtecnico','$descripcion')";
-		$result = ejecutarConsu_retornarID($sql);
-		if ($result) {
-			//$imgs es array
-			foreach ($imgs as $imgname) {
-				if ($imgname) {
-					$i++;
-					$extension = end(explode(".", $imgname));
-					$imgname = $imgname . '___' . $dTime . '.TMP';
-					$newImgName = 'presupuesto-' . $result . '-' . $i . '-' . date('YmdHis') . '.' . $extension;
-					rename("../../appfabrimetal/files/docsasociados/$imgname", "../../appfabrimetal/files/docsasociados/$newImgName");
-
-					/*
-														   $path_parts = pathinfo('/www/htdocs/index.html');
-														   echo $path_parts['dirname'], "\n";
-														   echo $path_parts['basename'], "\n";
-														   echo $path_parts['extension'], "\n";
-														   echo $path_parts['filename'], "\n"; // since PHP 5.2.0*/
-
-					/*$filename=$_FILES["picture"]["tmp_name"];
-														   $extension=end(explode(".", $filename));
-														   $newfilename="$_POST[lastname]" . '&#95;' . "$_POST[firstname]".".".$extension;
-														   move_uploaded_file($filename, "peopleimages/" .$newfilename);*/
-
-					$sql = "INSERT INTO docsasociados (tabla, datoid, documento) VALUES ('presupuesto','$result','$newImgName')";
-
-					ejecutarConsulta($sql);
-				}
-			}
-
-		}
-		return 1;
-	}
-
-	public function camfirma($idservicio)
-	{
-		$sql = "SELECT firma FROM servicio WHERE idservicio = '$idservicio' ";
-		return ejecutarConsultaSimpleFila($sql);
-	}
-
-	public function Idsts($idservicio)
-	{
-		$sql = "SELECT ser.idtecnico, tec.idsupervisor FROM servicio ser INNER JOIN tecnico tec ON ser.idtecnico = tec.idtecnico WHERE ser.idservicio = '$idservicio'";
-		return ejecutarConsultaSimpleFila($sql);
-	}
 
 	public function verificarservicioSAP()
 	{
@@ -358,6 +321,7 @@ class Servicio
 		return true;
 	}
 
+
 	public function finalizarActividadMantencion($data)
 	{
 		$dataObject = json_decode($data);
@@ -373,7 +337,7 @@ class Servicio
 		} else {
 			$terceros = 'No';
 		}
-	
+
 		if ($dataObject->oppre == 1) {
 			// No es necesario decodificar el JSON nuevamente
 			// $arrayData = json_decode($data, true);
@@ -385,16 +349,11 @@ class Servicio
 			unset($arrayData->empresa);
 			unset($arrayData->direccion);
 			unset($arrayData->periodo);
-			unset($arrayData->idencuesta);
 			unset($arrayData->observaciones);
 			unset($arrayData->chkCertifica);
-			unset($arrayData->imgfoso);
-			unset($arrayData->imgtecho);
-			unset($arrayData->imgmaquina);
-			unset($arrayData->imgoperador);
 
 			$data = $arrayData;
-	
+
 			// Codificar el array modificado a JSON
 			$datapresupuesto = json_encode($arrayData, JSON_UNESCAPED_UNICODE);
 	
@@ -402,6 +361,11 @@ class Servicio
 			$actividadID = $dataObject->actividadIDfi !== null || $dataObject->actividadIDfi !== '' ? intval($dataObject->actividadIDfi) : 0;
 			$sql = "INSERT INTO presupuesto_sap (actividadID, supervisorID, informacion) VALUES ($actividadID,$supervisorValue,'$datapresupuesto')";
 			ejecutarConsulta($sql);
+
+			//LOG
+			$logFile = fopen("../log.txt", 'a') or die("Error creando archivo");
+			fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Presupuesto  : ".ejecutarConsulta($sql)." - Actividad ".$actividadID." - Supervisor".$supervisorValue) or die("Error escribiendo en el archivo");
+			fclose($logFile);  
 
 			$entity = 'Activities';
 			$id = $data->actividadIDfi;
@@ -443,22 +407,58 @@ class Servicio
 				}
 				$actividad = json_encode($actividad);
 			}
-			$rsptaactv = EditardatosNum($entity, $id, $actividad);
+			$editarActividad = EditardatosNum($entity, $id, $actividad);
+
+			//LOG
+			$logFile = fopen("../log.txt", 'a') or die("Error creando archivo");
+			fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Editar Actividad  : ".$editarActividad." - Entity ".$entity." - ID ".$id." - Actividad ".$actividad) or die("Error escribiendo en el archivo");
+			fclose($logFile);  
 			
 			$actividadID = $data->actividadIDfi !== null || $data->actividadIDfi !== '' ? intval($data->actividadIDfi) : 0;
 			$sql = "INSERT INTO logactividad (actividadID,data) VALUES ($actividadID,'$actividad')";
 			ejecutarConsulta($sql);
-
+			error_log($sql);
+			//LOG
+			$logFile = fopen("../log.txt", 'a') or die("Error creando archivo");
+			fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Log Actividad  : ".ejecutarConsulta($sql)." - ActividadID ".$actividadID." - Actividad ".$actividad ) or die("Error escribiendo en el archivo");
+			fclose($logFile);  
+			
 			$entity = 'CustomerEquipmentCards';
-			$id = $data->ascensorIDfi;
+			$select = '*';
+			$filter = "CustomerCode eq '".$data->customercodefi."' and InternalSerialNum eq '".$data->codigoEquipo."'";
+			$equipo = json_decode(ConsultaEntity($entity,$select,$filter), true);
+			$idascensor = $equipo['value'][0]['EquipmentCardNum'];
+			//LOG
+			$logFile = fopen("../log.txt", 'a') or die("Error creando archivo");
+			fwrite($logFile, "\n".date("d/m/Y H:i:s")." - ID Ascensor  : ".$idascensor ) or die("Error escribiendo en el archivo");
+			fclose($logFile);  
+			
+			$entity = 'CustomerEquipmentCards';
+			$id = $idascensor;
 			$servicecall = json_encode(array("U_NX_ESTADOFM" => $data->idestadofi));
-			$rsptaservcall = EditardatosNum($entity, $id, $servicecall);
+			$editarEquipo = EditardatosNum($entity, $id, $servicecall);
+			error_log($editarEquipo);
+			//LOG
+			$logFile = fopen("../log.txt", 'a') or die("Error creando archivo");
+			fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Editar Tarjeta de Equipo  : ".$editarEquipo." - Entidad ".$entity." - ID ".$id." - Servicecall ".$servicecall) or die("Error escribiendo en el archivo");
+			fclose($logFile);  
 
 			$entity = 'ServiceCalls';
-			$id = $data->servicecallIDfi;
+			$id = intval($data->servicecallIDfi);
 			$servicecall = json_encode(array("Status" => $status, "U_FallaTercero" => $terceros));
-			$rsptaservcall = EditardatosNum($entity, $id, $servicecall);
-		} else {
+			$EditarServicio = EditardatosNum($entity, $id, $servicecall);
+			error_log($EditarServicio);
+			//LOG
+			$logFile = fopen("../log.txt", 'a') or die("Error creando archivo");
+			fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Editar Servicio  : ".$EditarServicio." - Entidad ".$entity." - ID ".$id." - Servicecall ".$servicecall) or die("Error escribiendo en el archivo");
+			fclose($logFile);  
+		} 
+		else 
+		{
+			/*
+			--------------------------- SI NO HAY PRESUPUESTO POR AQUI-------------------------------------------------------------------------------
+			*/
+		
 			if (isset($data->estadofintext)) {
 				$estadofintext = $data->estadofintext;
 			} else {
@@ -612,10 +612,10 @@ class Servicio
 				error_log("Variable actividad en finalizarActividad: " . $actividad);
 			} else {
 				if($_SESSION['idSAP']){
-					$actividad = array("HandledByEmployee" => $_SESSION['idSAP'], "Closed" => "Y", "U_PorFirmar" => $firma, "EndDueDate" => date("Y-m-d"), "EndTime" => date("H:i:s"), "U_NX_OPP" => $datosOpportunidad->SequentialNo, "Notes" => $data->observacionfi, "U_EstadoFin" => $estadofintext, "U_GPSFin" => $data->latitudfi . ',' . $data->longitudfi, "U_OBSINTERNA" => $data->observacionint);
+					$actividad = array("HandledByEmployee" => $_SESSION['idSAP'], "Closed" => "Y", "U_PorFirmar" => $firma, "EndDueDate" => date("Y-m-d"), "EndTime" => date("H:i:s"), "Notes" => $data->observacionfi, "U_EstadoFin" => $estadofintext, "U_GPSFin" => $data->latitudfi . ',' . $data->longitudfi, "U_OBSINTERNA" => $data->observacionint);
 					error_log("variable acrividad de presupuesto: ".$actividad);
 				}elseif($_POST['idSAP']){
-					$actividad = array("HandledByEmployee" => $_POST['idSAP'], "Closed" => "Y", "U_PorFirmar" => $firma, "EndDueDate" => date("Y-m-d"), "EndTime" => date("H:i:s"), "U_NX_OPP" => $datosOpportunidad->SequentialNo, "Notes" => $data->observacionfi, "U_EstadoFin" => $estadofintext, "U_GPSFin" => $data->latitudfi . ',' . $data->longitudfi, "U_OBSINTERNA" => $data->observacionint);
+					$actividad = array("HandledByEmployee" => $_POST['idSAP'], "Closed" => "Y", "U_PorFirmar" => $firma, "EndDueDate" => date("Y-m-d"), "EndTime" => date("H:i:s"), "Notes" => $data->observacionfi, "U_EstadoFin" => $estadofintext, "U_GPSFin" => $data->latitudfi . ',' . $data->longitudfi, "U_OBSINTERNA" => $data->observacionint);
 					error_log("variable acrividad de presupuesto: ".$actividad);
 				}
 				if ($data->opayu == 'S') {

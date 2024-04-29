@@ -45,6 +45,11 @@ class Encuesta {
                 {
                     $sql = "INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES ({$visita}, '{$tipo}', {$idtipo}, '{$respuesta}')";
                     ejecutarConsulta($sql);
+                    error_log($sql);
+                    //LOG
+                    $logFile = fopen("../log.txt", 'a') or die("Error creando archivo");
+                    fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Respuesta : ".$sql) or die("Error escribiendo en el archivo");
+                    fclose($logFile);  
                 }
             }
         }
@@ -53,6 +58,7 @@ class Encuesta {
         $sql = "INSERT INTO `informevisita`(`enc_id`, `infv_ascensor`, `infv_observaciones`, `infv_empleado`, `infv_firmaempleado`, `infv_cliente`, `infv_firmacliente`, `infv_comentario`) VALUES ({$arrParams['encuesta']}, {$arrParams['equipo']}, '{$arrParams['observaciones']}', {$arrParams['empleado']}, '{$arrParams['firmaempleado']}', {$arrParams['cliente']}, '{$arrParams['firmacliente']}', '{$arrParams['comentario']}')";
         return ejecutarConsu_retornarID($sql);*/
         // return ejecutarConsulta($sql);
+        return true;
     }
     
     /*function Insertar($nombre, $descripcion, $vigencia){

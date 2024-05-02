@@ -324,6 +324,10 @@ class Servicio
 
 	public function finalizarActividadMantencion($data)
 	{
+		$logFile = fopen("../log.txt", 'a') or die("Error creando archivo");
+		fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Data dentro de modelo : ".$data) or die("Error escribiendo en el archivo");
+		fclose($logFile);  
+
 		$dataObject = json_decode($data);
 	
 		if (isset($dataObject->estadofintext)) {
@@ -458,6 +462,20 @@ class Servicio
 			/*
 			--------------------------- SI NO HAY PRESUPUESTO POR AQUI-------------------------------------------------------------------------------
 			*/
+			// No es necesario decodificar el JSON nuevamente
+			// $arrayData = json_decode($data, true);
+			$arrayData = $dataObject; // Usa $dataObject directamente
+	
+			// Eliminar las claves específicas
+			unset($arrayData->preg);
+			unset($arrayData->estadofintext);
+			unset($arrayData->empresa);
+			unset($arrayData->direccion);
+			unset($arrayData->periodo);
+			unset($arrayData->observaciones);
+			unset($arrayData->chkCertifica);
+
+			$data = $arrayData;
 		
 			if (isset($data->estadofintext)) {
 				$estadofintext = $data->estadofintext;
@@ -517,7 +535,7 @@ class Servicio
 			//LOG
 			$logFile = fopen("../log.txt", 'a') or die("Error creando archivo");
 			fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Log Actividad  : ".ejecutarConsulta($sql)." - ActividadID ".$actividadID." - Actividad ".$actividad ) or die("Error escribiendo en el archivo");
-			fclose($logFile);  
+			fclose($logFile);
 
 			$entity = 'CustomerEquipmentCards';
 			$select = '*';

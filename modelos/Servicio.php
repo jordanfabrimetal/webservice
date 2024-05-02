@@ -505,25 +505,56 @@ class Servicio
 			//echo '<pre>';print_r($actividad);echo '</pre><br><br>'.$terceros;die;
 			$rsptaactv = EditardatosNum($entity, $id, $actividad);
 
+			//LOG
+			$logFile = fopen("../log.txt", 'a') or die("Error creando archivo");
+			fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Actividad  : ".$entity." - ID :".$id." - Info :".$actividad) or die("Error escribiendo en el archivo");
+			fclose($logFile);  
+
 			$actividadID = $data->actividadIDfi !== null || $data->actividadIDfi !== '' ? intval($data->actividadIDfi) : 0;
 			$sql = "INSERT INTO logactividad (actividadID,data) VALUES ($actividadID,'$actividad')";
 			ejecutarConsulta($sql);
+			error_log($sql);
+			//LOG
+			$logFile = fopen("../log.txt", 'a') or die("Error creando archivo");
+			fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Log Actividad  : ".ejecutarConsulta($sql)." - ActividadID ".$actividadID." - Actividad ".$actividad ) or die("Error escribiendo en el archivo");
+			fclose($logFile);  
 
 			$entity = 'CustomerEquipmentCards';
-			$id = $data->ascensorIDfi;
+			$select = '*';
+			$filter = "CustomerCode eq '".$data->customercodefi."' and InternalSerialNum eq '".$data->codigoEquipo."'";
+			$equipo = json_decode(ConsultaEntity($entity,$select,$filter), true);
+			$idascensor = $equipo['value'][0]['EquipmentCardNum'];
+			//LOG
+			$logFile = fopen("../log.txt", 'a') or die("Error creando archivo");
+			fwrite($logFile, "\n".date("d/m/Y H:i:s")." - ID Ascensor  : ".$idascensor ) or die("Error escribiendo en el archivo");
+			fclose($logFile);  
+			
+			$entity = 'CustomerEquipmentCards';
+			$id = $idascensor;
 			$servicecall = json_encode(array("U_NX_ESTADOFM" => $data->idestadofi));
-			$rsptaservcall = EditardatosNum($entity, $id, $servicecall);
+			$editarEquipo = EditardatosNum($entity, $id, $servicecall);
+			error_log($editarEquipo);
+			//LOG
+			$logFile = fopen("../log.txt", 'a') or die("Error creando archivo");
+			fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Editar Tarjeta de Equipo  : ".$editarEquipo." - Entidad ".$entity." - ID ".$id." - Servicecall ".$servicecall) or die("Error escribiendo en el archivo");
+			fclose($logFile);  
+
 
 			$entity = 'ServiceCalls';
-			$id = $data->servicecallIDfi;
+			$id = intval($data->servicecallIDfi);
 			$servicecall = json_encode(array("Status" => $status, "U_FallaTercero" => $terceros));
-			$rsptaservcall = EditardatosNum($entity, $id, $servicecall);
+			$EditarServicio = EditardatosNum($entity, $id, $servicecall);
+			error_log($EditarServicio);
+			//LOG
+			$logFile = fopen("../log.txt", 'a') or die("Error creando archivo");
+			fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Editar Servicio  : ".$EditarServicio." - Entidad ".$entity." - ID ".$id." - Servicecall ".$servicecall) or die("Error escribiendo en el archivo");
+			fclose($logFile);  
+
 		}
 		return true;
 	}
 
 
-	
 	public function finalizarActividad($data, $actividadsap)
 	{
 		error_log("Estamos en funcion finalizarActividad de Modelo Servicio.php");

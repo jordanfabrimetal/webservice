@@ -1,14 +1,2 @@
 
-14/05/2024 09:54:20 - Aun no inicia ningun servicio, pero el tipo es : Mantención
-14/05/2024 09:54:20 - Ha entrado al servicio de : Mantención
-14/05/2024 09:54:20 - Información Equipo : Array
-14/05/2024 09:54:21 - Firma guardada como : ../files/servicioequipo/firmas/1715694861.png
-14/05/2024 09:54:21 - Imagen Foso : 1
-14/05/2024 09:54:21 - Imagen Techo : 1
-14/05/2024 09:54:21 - Imagen Maquina : 1
-14/05/2024 09:54:21 - Imagen Operador : 1
-14/05/2024 09:54:21 - ID Visita : 42276
-14/05/2024 09:54:21 - Respuesta Encuesta : 1
-14/05/2024 09:54:21 - Actividad : Array
-14/05/2024 09:54:21 - Data : {"codigoEquipo":"FMPRUEBAS","descripcion":"jhhjh","servicecallIDfi":"511562","imgtecho":"55550_imgtecho_511562.jpg","compreg":"jlhyj","actividadIDfi":55550,"attachments":"","tiposervicio":"Mantenci\u00f3n","tipoelevador":"KCE","cantayu":"0","supervisorID":"null","configuracion":"Duplex","tipoEquipo":"Ascensor","preg":{"190":"SI","191":"SI","192":"SI","193":"SI","194":"SI","195":"SI","196":"SI","197":"SI","230":"SI","198":"SI","199":"SI","200":"SI","201":"SI","202":"SI","203":"SI","204":"SI","248":"SI","205":"SI","249":"SI","206":"SI","207":"SI","208":"SI","209":"SI","250":"SI","251":"SI","252":"SI","253":"SI","254":"SI","255":"SI","256":"SI","257":"SI","258":"SI","259":"SI","217":"SI","218":"SI","219":"SI","260":"SI","261":"SI","262":"SI","187":"SI","220":"SI","188":"SI","221":"SI","189":"SI","222":"SI","223":"SI","224":"SI","225":"SI","226":"SI","227":"SI","228":"SI","229":"SI"},"idestadofi":"01","idserviciofi":"","imgoperador":"55550_imgoperador_511562.jpg","observacionfi":"ndkd","latitudfi":"-33.3843782","codclifi":"FMPRUEBASbbhh","imgmaquina":"55550_imgmaquina_511562.jpg","email":"jaguilera@fabrimetalsa.cl","terminado":"y","edificiofi":"PRUEBA","imgfoso":"55550_imgfoso_511562.jpg","opfirma":"2","codigofmfi":"FMPRUEBAS","customercodefi":"C85233500","longitudfi":"-70.7761974","ascensorIDfi":"12640","opayu":"N","txtObsFin":"","idSAP":"2242","idascensorfi":"","estadoascensor":"OPERATIVO","oppre":"1","file01":"","file02":"","file03":"","dTime":"20240514095412","actCodigo":"55550","firma":"cli1715694861.png","comercialID":null,"codCenCosto":null,"nomCenCosto":null,"imgpresupuesto1":"imagen1_1715694861.jpg","imgpresupuesto2":"imagen2_1715694861.jpg","imgpresupuesto3":"imagen3_1715694861.jpg"}
-14/05/2024 09:54:22 - Respuesta finalizar Mantención  : 1
+14/05/2024 10:56:13 - Aun no inicia ningun servicio, pero el tipo es : Visita

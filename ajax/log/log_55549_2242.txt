@@ -1,6 +1,0 @@
-
-14/05/2024 08:34:15 - Este es un servicio que fue pospuesto su firma
-14/05/2024 08:34:15 - Aun no inicia ningun servicio, pero el tipo es : Mantención
-14/05/2024 08:34:15 Entro a : Mantención
-14/05/2024 08:34:15 - ID ENCUESTA: 5 - ID INFORME: 42275 - SERVICIO: 511552 - ACTIVIDAD: 55549
-14/05/2024 08:34:15 - InfoVisita -> ID ENCUESTA: 5 - ID INFORME: 42275

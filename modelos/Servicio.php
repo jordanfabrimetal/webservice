@@ -17,10 +17,10 @@ class Servicio
 			// Escapar los valores de las variables y agregar comillas solo para los valores de tipo cadena
 			$actividad = is_numeric($actividad) ? $actividad : "'$actividad'";
 			$servicio = is_numeric($servicio) ? $servicio : "'$servicio'";
-			$responsable = "'$responsable'";
-			
+			$creado = date("Y-m-d H:i:s");
+
 			// Construir la consulta SQL
-			$sql = "INSERT INTO registro_dispositivo (dispositivo, actividad, servicio, responsable, tipo_servicio, modulo, creado) VALUES ('$dispositivo', $actividad, $servicio, $responsable, $tiposervicio, $modulo, NOW())";
+			$sql = "INSERT INTO registro_dispositivo (dispositivo, actividad, servicio, responsable, tipo_servicio, modulo, creado) VALUES ('$dispositivo', $actividad, $servicio, '$responsable', '$tiposervicio', '$modulo', '$creado')";
 			
 			// Ejecutar la consulta SQL
 			return ejecutarConsulta($sql);
@@ -809,6 +809,17 @@ class Servicio
 		error_log("Respuesta de SelectTecnico: " . json_encode($response));
 		return json_decode(Query($query), true);
 	}
+
+	public function UsuarioCompleto($idSAP)
+	{
+		$query = '$crossjoin(EmployeesInfo, EmployeesInfo/EmployeeRolesInfoLines, EmployeeRolesSetup)?$expand=EmployeesInfo($select=EmployeeID,FirstName,LastName)&$filter=EmployeesInfo/EmployeeID eq EmployeesInfo/EmployeeRolesInfoLines/EmployeeID and EmployeesInfo/EmployeeRolesInfoLines/RoleID eq EmployeeRolesSetup/TypeID and EmployeeRolesSetup/TypeID eq -2';
+
+		$entity = 'EmployeesInfo';
+		$select = 'LastName,FirstName';
+		$filter = 'EmployeeID eq ' . $idSAP;
+		return json_decode(ConsultaEntity($entity, $select, $filter), true);
+	}
+
 
 	public function LSFSAP($id)
 	{

@@ -747,7 +747,7 @@ switch ($_GET["op"]) {
             $Mailer->Debugoutput = 'html';
             $Mailer->Host = "smtp.gmail.com";
             $Mailer->Username = "emergencia@fabrimetal.cl";
-            $Mailer->Password = "fm818820";
+            $Mailer->Password = "fm818820$2024";
             $Mailer->From = "emergencia@fabrimetal.cl";
             $Mailer->FromName = "Sistema guía de servicio -> Fabrimetal";
             $Mailer->Subject = "Guía de servicio N° " . $resp["idservicio"];
@@ -1385,7 +1385,7 @@ switch ($_GET["op"]) {
             $Mailer->Debugoutput = 'html';
             $Mailer->Host = "smtp.gmail.com";
             $Mailer->Username = "emergencia@fabrimetal.cl";
-            $Mailer->Password = "fm818820";
+            $Mailer->Password = "fm818820$2024";
             $Mailer->From = "emergencia@fabrimetal.cl";
             
             $Mailer->FromName = "Sistema guía de servicio -> Fabrimetal";
@@ -2258,6 +2258,13 @@ switch ($_GET["op"]) {
                     
                     $rspta = $servicio->finalizarActividadMantencion($data);
 
+                    $nombre_tecnico = $_SESSION['nombre']; 
+                    $apellido_tecnico = $_SESSION['apellido']; 
+                    $nombre_completo = $nombre_tecnico.' '.$apellido_tecnico;
+
+                    $modulo = "finalizarsap";
+                    $log_dispositivo = $servicio->Dispositivo($actividadIDfi, $idservicio, $nombre_completo, $tiposervicio, $modulo);
+
                     //LOG
                     $logFile = fopen("../log.txt", 'a') or die("Error creando archivo");
                     fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Respuesta finalizar Mantención  : ".$rspta ) or die("Error escribiendo en el archivo");
@@ -2498,7 +2505,7 @@ switch ($_GET["op"]) {
 
                         $Mailer->Host = "smtp.gmail.com";
                         $Mailer->Username = "emergencia@fabrimetal.cl";
-                        $Mailer->Password = "fm818820";
+                        $Mailer->Password = "fm818820$2024";
                         $Mailer->From = "emergencia@fabrimetal.cl";
                         $Mailer->FromName = "Sistema Fabrimetal";
                         $Mailer->Subject = "Informe de Mantenimiento N° " . $idservicio;
@@ -2724,7 +2731,7 @@ switch ($_GET["op"]) {
                             // $Mailer->Host = "www.fabrimetalsa.cl";
                             $Mailer->Host = "smtp.gmail.com";
                             $Mailer->Username = "emergencia@fabrimetal.cl";
-                            $Mailer->Password = "fm818820";
+                            $Mailer->Password = "fm818820$2024";
                             $Mailer->From = "emergencia@fabrimetal.cl";
                 
                             //$Mailer->From = "notificaciones@fabrimetalsa.cl"; //"emergencia@fabrimetal.cl";
@@ -2801,12 +2808,6 @@ switch ($_GET["op"]) {
                     }
                     $imagen_presupuesto[] = $file3;
                 }
-                
-                $nombre_tecnico = $datosactividad['value'][0]['tecNombre'];
-                $apellido_tecnico = $datosactividad['value'][0]['tecApellido'];
-                $nombre_completo = $nombre_tecnico.' '.$apellido_tecnico;
-
-                $log_dispositivo = $servicio->Dispositivo($_POST['actCodigo'], $_POST['servicecallIDfi'], $nombre_completo);
 
                 if($opfirma=='1' || $opfirma=='3'){
                     error_log("opfirma es igual a 1 o 3");
@@ -3519,7 +3520,7 @@ switch ($_GET["op"]) {
                     $Mailer->Debugoutput = 'html';
                     $Mailer->Host = "smtp.gmail.com";
                     $Mailer->Username = "emergencia@fabrimetal.cl";
-                    $Mailer->Password = "fm818820";
+                    $Mailer->Password = "fm818820$2024";
                     $Mailer->From = "emergencia@fabrimetal.cl";
                     $Mailer->FromName = "Sistema guía de servicio -> Fabrimetal";
                     $Mailer->Subject = "Guía de servicio N° " . $datosactividad['value'][0]['srvCodigo'];
@@ -3590,6 +3591,14 @@ switch ($_GET["op"]) {
                 $data = json_encode($_POST);
                 $actividadsap = $_POST['actividadIDfi'];
                 $rspta = $servicio->finalizarActividad($data, $actividadsap);
+
+                
+                $nombre_tecnico = $_SESSION['nombre']; 
+                $apellido_tecnico = $_SESSION['apellido']; 
+                $nombre_completo = $nombre_tecnico.' '.$apellido_tecnico;
+
+                $modulo = "finalizarsap";
+                $log_dispositivo = $servicio->Dispositivo($_POST["actividadIDfi"], $datosactividad['value'][0]['srvCodigo'], $nombre_completo, $tiposervicio, $modulo);
 
                 if($opfirma=='2' || $opfirma == 2){
                 }else{
@@ -3763,7 +3772,7 @@ switch ($_GET["op"]) {
                         $Mailer->Debugoutput = 'html';
                         $Mailer->Host = "smtp.gmail.com";
                         $Mailer->Username = "emergencia@fabrimetal.cl";
-                        $Mailer->Password = "fm818820";
+                        $Mailer->Password = "fm818820$2024";
                         $Mailer->From = "emergencia@fabrimetal.cl";
                         $Mailer->FromName = "Sistema Fabrimetal";
                         $Mailer->Subject = "Solicitud de Presupuesto generada - FABRIMETAL";
@@ -3834,7 +3843,11 @@ switch ($_GET["op"]) {
         break;
 
         case 'lsfsap':
-            $id = $_GET['id'];
+            if(isset($_GET['id'])){
+                $id = $_GET['id'];
+            }else{
+                $id = $_SESSION['idSAP'];
+            }
             //Para probar $id = 2242;
             $rspta = $servicio->LSFSAP($id);
             $data = Array();
@@ -3917,7 +3930,7 @@ switch ($_GET["op"]) {
             $llamada = $_POST['llamada'];
             $idactividad = $_POST['idactividad'];
             $estadoascensor = $_POST['actEstEquiFin'];
-            if($estadoascensor == 01 || $estadoascensor == '01'){
+            if($estadoascensor == 01 || $estadoascensor == '01' || $estadoascensor == "OPERATIVO"){
                 $estadoascensor = "OPERATIVO";
                 $_POST['estadoascensor'] = "OPERATIVO";
             }else{
@@ -3926,6 +3939,27 @@ switch ($_GET["op"]) {
             }
             $observacionfi = $_POST['actComentario'];
             $email = $_POST['email'];
+
+            $nombre_log = "log_".$idactividad."_".$idSAP.".txt";
+
+            if(file_exists($nombre_log)){
+                $logFile = fopen("log/".$nombre_log, 'w') or die("Error creando archivo");
+                fclose($logFile);
+            }else{
+                $logFile = fopen("log/".$nombre_log, 'w') or die("Error creando archivo");
+            }
+
+            $logFile = fopen("log/".$nombre_log, 'w') or die("Error creando archivo");
+
+            $logFile = fopen("log/".$nombre_log, 'a') or die("Error creando archivo");
+            fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Este es un servicio que fue pospuesto su firma") or die("Error escribiendo en el archivo");
+            fclose($logFile);
+
+            //Log
+            $logFile = fopen("log/".$nombre_log, 'a') or die("Error creando archivo");
+            fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Aun no inicia ningun servicio, pero el tipo es : ".$llamada) or die("Error escribiendo en el archivo");
+            fclose($logFile);
+
 
             //Esto es si no es MANTENCIÓN----------------------------------------------------------------------
 
@@ -3947,6 +3981,7 @@ switch ($_GET["op"]) {
                 $data = json_encode($_POST);
                 error_log("El json de lo que llega desde l POST: ".$data);         
                 $datosactividad = $servicio->Actividad($actividadIDfi);
+
                 if($opfirma=='1' || $opfirma=='3'){
                     error_log("opfirma es igual a 1 o 3");
                     $bodypdf = '
@@ -4636,7 +4671,7 @@ switch ($_GET["op"]) {
                     $Mailer->Debugoutput = 'html';
                     $Mailer->Host = "smtp.gmail.com";
                     $Mailer->Username = "emergencia@fabrimetal.cl";
-                    $Mailer->Password = "fm818820";
+                    $Mailer->Password = "fm818820$2024";
                     $Mailer->From = "emergencia@fabrimetal.cl";
                     $Mailer->FromName = "Sistema guía de servicio -> Fabrimetal";
                     $Mailer->Subject = "Guía de servicio N° " . $datosactividad['value'][0]['srvCodigo'];
@@ -4858,7 +4893,7 @@ switch ($_GET["op"]) {
                             $Mailer->Debugoutput = 'html';
                             $Mailer->Host = "smtp.gmail.com";
                             $Mailer->Username = "emergencia@fabrimetal.cl";
-                            $Mailer->Password = "fm818820";
+                            $Mailer->Password = "fm818820$2024";
                             $Mailer->From = "emergencia@fabrimetal.cl";
                             $Mailer->FromName = "Sistema Fabrimetal";
                             $Mailer->Subject = "Solicitud de Presupuesto generada - FABRIMETAL";
@@ -4897,6 +4932,15 @@ switch ($_GET["op"]) {
                 $_POST['nomCenCosto'] = $datosactividad['value'][0]['equCcostoNombre'];
                 $data = json_encode($_POST);
                 $rspta = $servicio->finalizarActividadPorFirmar($data);
+
+                $nombre_tecnico = $datoactividad['value'][0]['tecNombre'];
+                $apellido_tecnico = $datoactividad['value'][0]['tecApellido'];
+                $nombre_completo = $nombre_tecnico.' '.$apellido_tecnico;
+
+
+                $modulo = "firmapendiente";
+                $log_dispositivo = $servicio->Dispositivo($actividadIDfi , $srvCodigo, $nombre_completo, $llamada, $modulo);
+
     
                 //FIN CORREO PPTO
                 echo $rspta ? "Servicio finalizado con exito" : "El servicio no pudo ser finalizado";
@@ -4993,6 +5037,13 @@ switch ($_GET["op"]) {
                 
                 $srvCodigo = $_POST['idservicio'];
                 $rspta_finalizar = $servicio->finalizarActividadPorFirmarM($data, $srvCodigo);
+
+                $nombre_tecnico = $_SESSION['nombre'];
+                $apellido_tecnico = $_SESSION['apellido'];
+                $nombre_completo = $nombre_tecnico.' '.$apellido_tecnico;
+                
+                $modulo = "firmapendiente";
+                $log_dispositivo = $servicio->Dispositivo($actividadIDfi ,$srvCodigo ,$nombre_completo ,$llamada , $modulo);
 
                 $result = newPdf('informemantencionnuevo', '', 'variable', $params);
 
@@ -5210,7 +5261,7 @@ switch ($_GET["op"]) {
 
                 $Mailer->Host = "smtp.gmail.com";
                 $Mailer->Username = "emergencia@fabrimetal.cl";
-                $Mailer->Password = "fm818820";
+                $Mailer->Password = "fm818820$2024";
                 $Mailer->From = "emergencia@fabrimetal.cl";
                 $Mailer->FromName = "Sistema Fabrimetal";
                 $Mailer->Subject = "Informe de Mantenimiento N° " . $idservicio;
@@ -5436,7 +5487,7 @@ switch ($_GET["op"]) {
                     // $Mailer->Host = "www.fabrimetalsa.cl";
                     $Mailer->Host = "smtp.gmail.com";
                     $Mailer->Username = "emergencia@fabrimetal.cl";
-                    $Mailer->Password = "fm818820";
+                    $Mailer->Password = "fm818820$2024";
                     $Mailer->From = "emergencia@fabrimetal.cl";
 
                     //$Mailer->From = "notificaciones@fabrimetalsa.cl"; //"emergencia@fabrimetal.cl";
@@ -6065,7 +6116,7 @@ switch ($_GET["op"]) {
                 $Mailer->Debugoutput = 'html';
                 $Mailer->Host = "smtp.gmail.com";
                 $Mailer->Username = "emergencia@fabrimetal.cl";
-                $Mailer->Password = "fm818820";
+                $Mailer->Password = "fm818820$2024";
                 $Mailer->From = "emergencia@fabrimetal.cl";
                 
                 $Mailer->FromName = "Sistema guía de servicio -> Fabrimetal";
@@ -6601,7 +6652,7 @@ switch ($_GET["op"]) {
             // $Mailer->Host = "www.fabrimetalsa.cl";
             $Mailer->Host = "smtp.gmail.com";
             $Mailer->Username = "emergencia@fabrimetal.cl";
-            $Mailer->Password = "fm818820";
+            $Mailer->Password = "fm818820$2024";
             $Mailer->From = "emergencia@fabrimetal.cl";
 
             //$Mailer->From = "notificaciones@fabrimetalsa.cl"; //"emergencia@fabrimetal.cl";
@@ -7107,7 +7158,7 @@ switch ($_GET["op"]) {
             // $Mailer->Host = "www.fabrimetalsa.cl";
             $Mailer->Host = "smtp.gmail.com";
             $Mailer->Username = "emergencia@fabrimetal.cl";
-            $Mailer->Password = "fm818820";
+            $Mailer->Password = "fm818820$2024";
             $Mailer->From = "emergencia@fabrimetal.cl";
             $Mailer->FromName = "Sistema Fabrimetal";
             $Mailer->Subject = "Informe de Mantenimiento N° " . $idvisita;
@@ -7725,7 +7776,7 @@ switch ($_GET["op"]) {
 
                 $Mailer->Host = "smtp.gmail.com";
                 $Mailer->Username = "emergencia@fabrimetal.cl";
-                $Mailer->Password = "fm818820";
+                $Mailer->Password = "fm818820$2024";
                 $Mailer->From = "emergencia@fabrimetal.cl";
                 $Mailer->FromName = "Sistema Fabrimetal";
                 $Mailer->Subject = "Informe de Mantenimiento N° " . $idservicio;
@@ -7950,7 +8001,7 @@ switch ($_GET["op"]) {
             // $Mailer->Host = "www.fabrimetalsa.cl";
             $Mailer->Host = "smtp.gmail.com";
             $Mailer->Username = "emergencia@fabrimetal.cl";
-            $Mailer->Password = "fm818820";
+            $Mailer->Password = "fm818820$2024";
             $Mailer->From = "emergencia@fabrimetal.cl";
 
             //$Mailer->From = "notificaciones@fabrimetalsa.cl"; //"emergencia@fabrimetal.cl";
@@ -8494,7 +8545,7 @@ switch ($_GET["op"]) {
 
                 $Mailer->Host = "smtp.gmail.com";
                 $Mailer->Username = "emergencia@fabrimetal.cl";
-                $Mailer->Password = "fm818820";
+                $Mailer->Password = "fm818820$2024";
                 $Mailer->From = "emergencia@fabrimetal.cl";
                 $Mailer->FromName = "Sistema Fabrimetal";
                 $Mailer->Subject = "Informe de Mantenimiento N° " . $idservicio;
@@ -8721,7 +8772,7 @@ switch ($_GET["op"]) {
             // $Mailer->Host = "www.fabrimetalsa.cl";
             $Mailer->Host = "smtp.gmail.com";
             $Mailer->Username = "emergencia@fabrimetal.cl";
-            $Mailer->Password = "fm818820";
+            $Mailer->Password = "fm818820$2024";
             $Mailer->From = "emergencia@fabrimetal.cl";
 
             //$Mailer->From = "notificaciones@fabrimetalsa.cl"; //"emergencia@fabrimetal.cl";

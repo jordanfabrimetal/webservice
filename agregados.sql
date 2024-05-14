@@ -8,3 +8,7 @@ CREATE TABLE registro_dispositivo(
     responsable    VARCHAR(50) NOT NULL,
     fecha          DATETIME DEFAULT CURRENT_TIMESTAMP
 )ENGINE=InnoDB;
+
+ALTER TABLE registro_dispositivo ADD modulo VARCHAR(30);
+ALTER TABLE registro_dispositivo ADD tipo_servicio VARCHAR(30);
+ALTER TABLE registro_dispositivo ADD creado DATETIME;

@@ -1,128 +1,14 @@
 
-02/05/2024 10:19:00 - Aun no inicia ningun servicio, pero el tipo es : Mantención
-02/05/2024 10:19:00 - Ha entrado al servicio de : Mantención
-02/05/2024 10:19:00 - Información Equipo : Array
-02/05/2024 10:19:00 - Firma guardada como : ../files/servicioequipo/firmas/1714659541.png
-02/05/2024 10:19:00 - Imagen Foso : 1
-02/05/2024 10:19:00 - Imagen Techo : 1
-02/05/2024 10:19:00 - Imagen Maquina : 1
-02/05/2024 10:19:00 - Imagen Operador : 1
-02/05/2024 10:19:00 - ID Visita : 42272
-02/05/2024 10:19:00 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 47715079, 'SI')
-02/05/2024 10:19:00 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 190, 'SI')
-02/05/2024 10:19:00 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 191, 'SI')
-02/05/2024 10:19:00 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 535218924, 'SI')
-02/05/2024 10:19:00 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 192, 'SI')
-02/05/2024 10:19:00 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 193, 'SI')
-02/05/2024 10:19:00 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 194, 'SI')
-02/05/2024 10:19:00 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 195, 'SI')
-02/05/2024 10:19:00 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 196, 'SI')
-02/05/2024 10:19:00 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 1878784690, 'SI')
-02/05/2024 10:19:00 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 197, 'SI')
-02/05/2024 10:19:00 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 230, 'SI')
-02/05/2024 10:19:00 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 198, 'SI')
-02/05/2024 10:19:00 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 199, 'SI')
-02/05/2024 10:19:00 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', -1690501907, 'SI')
-02/05/2024 10:19:00 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 1808297458, 'SI')
-02/05/2024 10:19:00 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 1146569383, 'SI')
-02/05/2024 10:19:00 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 1412552557, 'SI')
-02/05/2024 10:19:00 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', -725324923, 'SI')
-02/05/2024 10:19:00 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 117735508, 'SI')
-02/05/2024 10:19:00 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 414545887, 'SI')
-02/05/2024 10:19:00 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', -754039486, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 248, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 249, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 1413150868, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', -1567287519, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', -1779532991, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 250, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 251, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 252, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 633782505, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 253, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 254, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', -1551919311, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 343483675, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 255, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 256, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 257, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 258, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 1614865349, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 259, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', -1758036712, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', -1571310245, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', -17451086, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', -1997982197, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 260, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 2129384239, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 261, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 262, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', -556261735, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 1451949871, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', -1427373296, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', -1901305512, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 491145646, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 1348688883, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', -1453488421, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', -1349002794, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', -1132461676, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', -12519703, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', -210169096, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', -1771372451, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 52515253, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 1144037094, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 200, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 201, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 202, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 203, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 204, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 205, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 206, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', -2067291647, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 207, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', -790574014, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 208, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 209, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', -767693268, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', -83924360, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 1447509224, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', -1177640519, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 691369990, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 217, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 218, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 219, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 433816070, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', -1982750233, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 1351346733, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 1386631897, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 366520522, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 187, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 220, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 188, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 221, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 189, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 222, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 223, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 224, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 225, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 1971089780, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 226, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 1303311582, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 227, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 228, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 229, 'SI')
-02/05/2024 10:19:01 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42272, 'pregunta', 238458191, 'SI')
-02/05/2024 10:19:01 - Respuesta Encuesta : 1
-02/05/2024 10:19:01 - Actividad : Array
-02/05/2024 10:19:01 - Data : {"codigoEquipo":"FMPRUEBAS","descripcion":"jdjz","servicecallIDfi":"511505","imgtecho":"55515_imgtecho_511505.jpg","compreg":"jajaj","actividadIDfi":55515,"attachments":"","tiposervicio":"Mantenci\u00f3n","tipoelevador":"KCE","cantayu":"0","supervisorID":"null","configuracion":"Cuadruplex","tipoEquipo":"Ascensor","nombresfi":"hdjd","preg":{"47715079":"SI","190":"SI","191":"SI","535218924":"SI","192":"SI","193":"SI","194":"SI","195":"SI","196":"SI","1878784690":"SI","197":"SI","230":"SI","198":"SI","199":"SI","-1690501907":"SI","1808297458":"SI","1146569383":"SI","1412552557":"SI","-725324923":"SI","117735508":"SI","414545887":"SI","-754039486":"SI","248":"SI","249":"SI","1413150868":"SI","-1567287519":"SI","-1779532991":"SI","250":"SI","251":"SI","252":"SI","633782505":"SI","253":"SI","254":"SI","-1551919311":"SI","343483675":"SI","255":"SI","256":"SI","257":"SI","258":"SI","1614865349":"SI","259":"SI","-1758036712":"SI","-1571310245":"SI","-17451086":"SI","-1997982197":"SI","260":"SI","2129384239":"SI","261":"SI","262":"SI","-556261735":"SI","1451949871":"SI","-1427373296":"SI","-1901305512":"SI","491145646":"SI","1348688883":"SI","-1453488421":"SI","-1349002794":"SI","-1132461676":"SI","-12519703":"SI","-210169096":"SI","-1771372451":"SI","52515253":"SI","1144037094":"SI","200":"SI","201":"SI","202":"SI","203":"SI","204":"SI","205":"SI","206":"SI","-2067291647":"SI","207":"SI","-790574014":"SI","208":"SI","209":"SI","-767693268":"SI","-83924360":"SI","1447509224":"SI","-1177640519":"SI","691369990":"SI","217":"SI","218":"SI","219":"SI","433816070":"SI","-1982750233":"SI","1351346733":"SI","1386631897":"SI","366520522":"SI","187":"SI","220":"SI","188":"SI","221":"SI","189":"SI","222":"SI","223":"SI","224":"SI","225":"SI","1971089780":"SI","226":"SI","1303311582":"SI","227":"SI","228":"SI","229":"SI","238458191":"SI"},"idestadofi":"01","idserviciofi":"","imgoperador":"55515_imgoperador_511505.jpg","observacionfi":"jsj","apellidosfi":"bfhd","latitudfi":"-33.3843782","codclifi":"FMPRUEBASbbhh","imgmaquina":"55515_imgmaquina_511505.jpg","email":"jaguilera@fabrimetalsa.cl","terminado":"y","edificiofi":"PRUEBA","imgfoso":"55515_imgfoso_511505.jpg","opfirma":"1","codigofmfi":"FMPRUEBAS","customercodefi":"C85233500","porfirmar":"true","longitudfi":"-70.7761974","ascensorIDfi":"12640","rutfi":"bbd","opayu":"N","firma":"cli1714659541.png","txtObsFin":"","idSAP":"2242","idascensorfi":"","estadoascensor":"OPERATIVO","oppre":"1","file01":"","file02":"","file03":"","dTime":"20240502101854","cargofi":"ydy","actCodigo":"55515","comercialID":null,"codCenCosto":null,"nomCenCosto":null,"imgpresupuesto1":"imagen1_1714659541.jpg","imgpresupuesto2":"imagen2_1714659541.jpg","imgpresupuesto3":null}
-02/05/2024 10:19:01 - Presupuesto  : 1 - Actividad 55515 - Supervisornull
-02/05/2024 10:19:01 - Editar Actividad  :  - Entity Activities - ID 55515 - Actividad {"HandledByEmployee":"2242","Closed":"Y","U_PorFirmar":"N","EndDueDate":"2024-05-02","EndTime":"10:19:01","Notes":"jsj","U_EstadoFin":"OPERATIVO","U_GPSFin":"-33.3843782,-70.7761974","U_OBSINTERNA":null}
-02/05/2024 10:19:01 - Log Actividad  : 1 - ActividadID 55515 - Actividad {"HandledByEmployee":"2242","Closed":"Y","U_PorFirmar":"N","EndDueDate":"2024-05-02","EndTime":"10:19:01","Notes":"jsj","U_EstadoFin":"OPERATIVO","U_GPSFin":"-33.3843782,-70.7761974","U_OBSINTERNA":null}
-02/05/2024 10:19:01 - ID Ascensor  : 12640
-02/05/2024 10:19:01 - Editar Tarjeta de Equipo  :  - Entidad CustomerEquipmentCards - ID 12640 - Servicecall {"U_NX_ESTADOFM":"01"}
-02/05/2024 10:19:02 - Editar Servicio  :  - Entidad ServiceCalls - ID 511505 - Servicecall {"Status":1,"U_FallaTercero":"No"}
-02/05/2024 10:19:02 - Respuesta finalizar Mantención  : 1
-02/05/2024 10:19:04 - Se ha creado el PDF :Informe_Servicio_511505_FMPRUEBAS_202405.pdf
-02/05/2024 10:19:11 - Ha sido enviado a tu correo con PDF
-02/05/2024 10:20:26 - Ha sido enviado a tu correo, notificando presupuesto
-02/05/2024 10:20:29 Finalizo Exitosamente 
+14/05/2024 09:54:20 - Aun no inicia ningun servicio, pero el tipo es : Mantención
+14/05/2024 09:54:20 - Ha entrado al servicio de : Mantención
+14/05/2024 09:54:20 - Información Equipo : Array
+14/05/2024 09:54:21 - Firma guardada como : ../files/servicioequipo/firmas/1715694861.png
+14/05/2024 09:54:21 - Imagen Foso : 1
+14/05/2024 09:54:21 - Imagen Techo : 1
+14/05/2024 09:54:21 - Imagen Maquina : 1
+14/05/2024 09:54:21 - Imagen Operador : 1
+14/05/2024 09:54:21 - ID Visita : 42276
+14/05/2024 09:54:21 - Respuesta Encuesta : 1
+14/05/2024 09:54:21 - Actividad : Array
+14/05/2024 09:54:21 - Data : {"codigoEquipo":"FMPRUEBAS","descripcion":"jhhjh","servicecallIDfi":"511562","imgtecho":"55550_imgtecho_511562.jpg","compreg":"jlhyj","actividadIDfi":55550,"attachments":"","tiposervicio":"Mantenci\u00f3n","tipoelevador":"KCE","cantayu":"0","supervisorID":"null","configuracion":"Duplex","tipoEquipo":"Ascensor","preg":{"190":"SI","191":"SI","192":"SI","193":"SI","194":"SI","195":"SI","196":"SI","197":"SI","230":"SI","198":"SI","199":"SI","200":"SI","201":"SI","202":"SI","203":"SI","204":"SI","248":"SI","205":"SI","249":"SI","206":"SI","207":"SI","208":"SI","209":"SI","250":"SI","251":"SI","252":"SI","253":"SI","254":"SI","255":"SI","256":"SI","257":"SI","258":"SI","259":"SI","217":"SI","218":"SI","219":"SI","260":"SI","261":"SI","262":"SI","187":"SI","220":"SI","188":"SI","221":"SI","189":"SI","222":"SI","223":"SI","224":"SI","225":"SI","226":"SI","227":"SI","228":"SI","229":"SI"},"idestadofi":"01","idserviciofi":"","imgoperador":"55550_imgoperador_511562.jpg","observacionfi":"ndkd","latitudfi":"-33.3843782","codclifi":"FMPRUEBASbbhh","imgmaquina":"55550_imgmaquina_511562.jpg","email":"jaguilera@fabrimetalsa.cl","terminado":"y","edificiofi":"PRUEBA","imgfoso":"55550_imgfoso_511562.jpg","opfirma":"2","codigofmfi":"FMPRUEBAS","customercodefi":"C85233500","longitudfi":"-70.7761974","ascensorIDfi":"12640","opayu":"N","txtObsFin":"","idSAP":"2242","idascensorfi":"","estadoascensor":"OPERATIVO","oppre":"1","file01":"","file02":"","file03":"","dTime":"20240514095412","actCodigo":"55550","firma":"cli1715694861.png","comercialID":null,"codCenCosto":null,"nomCenCosto":null,"imgpresupuesto1":"imagen1_1715694861.jpg","imgpresupuesto2":"imagen2_1715694861.jpg","imgpresupuesto3":"imagen3_1715694861.jpg"}
+14/05/2024 09:54:22 - Respuesta finalizar Mantención  : 1

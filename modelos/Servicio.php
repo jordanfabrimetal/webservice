@@ -11,7 +11,7 @@ class Servicio
 
 	}
 
-	public function Dispositivo($actividad, $servicio, $responsable){
+	public function Dispositivo($actividad, $servicio, $responsable, $tiposervicio, $modulo){
 		if($actividad !== ' ' || $actividad !== ''){
 			$dispositivo = "Aplicación Nueva";
 			// Escapar los valores de las variables y agregar comillas solo para los valores de tipo cadena
@@ -20,7 +20,7 @@ class Servicio
 			$responsable = "'$responsable'";
 			
 			// Construir la consulta SQL
-			$sql = "INSERT INTO registro_dispositivo (dispositivo, actividad, servicio, responsable) VALUES ('$dispositivo', $actividad, $servicio, $responsable)";
+			$sql = "INSERT INTO registro_dispositivo (dispositivo, actividad, servicio, responsable, tipo_servicio, modulo, creado) VALUES ('$dispositivo', $actividad, $servicio, $responsable, $tiposervicio, $modulo, NOW())";
 			
 			// Ejecutar la consulta SQL
 			return ejecutarConsulta($sql);
@@ -324,7 +324,7 @@ class Servicio
 
 	public function finalizarActividadMantencion($data)
 	{
-		$logFile = fopen("../log.txt", 'a') or die("Error creando archivo");
+		$logFile = fopen("log/log.txt", 'a') or die("Error creando archivo");
 		fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Data dentro de modelo : ".$data) or die("Error escribiendo en el archivo");
 		fclose($logFile);  
 
@@ -367,7 +367,7 @@ class Servicio
 			ejecutarConsulta($sql);
 
 			//LOG
-			$logFile = fopen("../log.txt", 'a') or die("Error creando archivo");
+			$logFile = fopen("log/log.txt", 'a') or die("Error creando archivo");
 			fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Presupuesto  : ".ejecutarConsulta($sql)." - Actividad ".$actividadID." - Supervisor".$supervisorValue) or die("Error escribiendo en el archivo");
 			fclose($logFile);  
 
@@ -414,7 +414,7 @@ class Servicio
 			$editarActividad = EditardatosNum($entity, $id, $actividad);
 
 			//LOG
-			$logFile = fopen("../log.txt", 'a') or die("Error creando archivo");
+			$logFile = fopen("log/log.txt", 'a') or die("Error creando archivo");
 			fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Editar Actividad  : ".$editarActividad." - Entity ".$entity." - ID ".$id." - Actividad ".$actividad) or die("Error escribiendo en el archivo");
 			fclose($logFile);  
 			
@@ -423,7 +423,7 @@ class Servicio
 			ejecutarConsulta($sql);
 			error_log($sql);
 			//LOG
-			$logFile = fopen("../log.txt", 'a') or die("Error creando archivo");
+			$logFile = fopen("log/log.txt", 'a') or die("Error creando archivo");
 			fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Log Actividad  : ".ejecutarConsulta($sql)." - ActividadID ".$actividadID." - Actividad ".$actividad ) or die("Error escribiendo en el archivo");
 			fclose($logFile);  
 			
@@ -433,7 +433,7 @@ class Servicio
 			$equipo = json_decode(ConsultaEntity($entity,$select,$filter), true);
 			$idascensor = $equipo['value'][0]['EquipmentCardNum'];
 			//LOG
-			$logFile = fopen("../log.txt", 'a') or die("Error creando archivo");
+			$logFile = fopen("log/log.txt", 'a') or die("Error creando archivo");
 			fwrite($logFile, "\n".date("d/m/Y H:i:s")." - ID Ascensor  : ".$idascensor ) or die("Error escribiendo en el archivo");
 			fclose($logFile);  
 			
@@ -443,7 +443,7 @@ class Servicio
 			$editarEquipo = EditardatosNum($entity, $id, $servicecall);
 			error_log($editarEquipo);
 			//LOG
-			$logFile = fopen("../log.txt", 'a') or die("Error creando archivo");
+			$logFile = fopen("log/log.txt", 'a') or die("Error creando archivo");
 			fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Editar Tarjeta de Equipo  : ".$editarEquipo." - Entidad ".$entity." - ID ".$id." - Servicecall ".$servicecall) or die("Error escribiendo en el archivo");
 			fclose($logFile);  
 
@@ -453,7 +453,7 @@ class Servicio
 			$EditarServicio = EditardatosNum($entity, $id, $servicecall);
 			error_log($EditarServicio);
 			//LOG
-			$logFile = fopen("../log.txt", 'a') or die("Error creando archivo");
+			$logFile = fopen("log/log.txt", 'a') or die("Error creando archivo");
 			fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Editar Servicio  : ".$EditarServicio." - Entidad ".$entity." - ID ".$id." - Servicecall ".$servicecall) or die("Error escribiendo en el archivo");
 			fclose($logFile);  
 		} 
@@ -524,7 +524,7 @@ class Servicio
 			$rsptaactv = EditardatosNum($entity, $id, $actividad);
 
 			//LOG
-			$logFile = fopen("../log.txt", 'a') or die("Error creando archivo");
+			$logFile = fopen("log/log.txt", 'a') or die("Error creando archivo");
 			fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Actividad  : ".$entity." - ID :".$id." - Info :".$actividad) or die("Error escribiendo en el archivo");
 			fclose($logFile);  
 
@@ -533,7 +533,7 @@ class Servicio
 			ejecutarConsulta($sql);
 			error_log($sql);
 			//LOG
-			$logFile = fopen("../log.txt", 'a') or die("Error creando archivo");
+			$logFile = fopen("log/log.txt", 'a') or die("Error creando archivo");
 			fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Log Actividad  : ".ejecutarConsulta($sql)." - ActividadID ".$actividadID." - Actividad ".$actividad ) or die("Error escribiendo en el archivo");
 			fclose($logFile);
 
@@ -543,7 +543,7 @@ class Servicio
 			$equipo = json_decode(ConsultaEntity($entity,$select,$filter), true);
 			$idascensor = $equipo['value'][0]['EquipmentCardNum'];
 			//LOG
-			$logFile = fopen("../log.txt", 'a') or die("Error creando archivo");
+			$logFile = fopen("log/log.txt", 'a') or die("Error creando archivo");
 			fwrite($logFile, "\n".date("d/m/Y H:i:s")." - ID Ascensor  : ".$idascensor ) or die("Error escribiendo en el archivo");
 			fclose($logFile);  
 			
@@ -553,7 +553,7 @@ class Servicio
 			$editarEquipo = EditardatosNum($entity, $id, $servicecall);
 			error_log($editarEquipo);
 			//LOG
-			$logFile = fopen("../log.txt", 'a') or die("Error creando archivo");
+			$logFile = fopen("log/log.txt", 'a') or die("Error creando archivo");
 			fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Editar Tarjeta de Equipo  : ".$editarEquipo." - Entidad ".$entity." - ID ".$id." - Servicecall ".$servicecall) or die("Error escribiendo en el archivo");
 			fclose($logFile);  
 
@@ -564,7 +564,7 @@ class Servicio
 			$EditarServicio = EditardatosNum($entity, $id, $servicecall);
 			error_log($EditarServicio);
 			//LOG
-			$logFile = fopen("../log.txt", 'a') or die("Error creando archivo");
+			$logFile = fopen("log/log.txt", 'a') or die("Error creando archivo");
 			fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Editar Servicio  : ".$EditarServicio." - Entidad ".$entity." - ID ".$id." - Servicecall ".$servicecall) or die("Error escribiendo en el archivo");
 			fclose($logFile);  
 
@@ -845,7 +845,7 @@ class Servicio
 		$rsptaactv = EditardatosNum($entity, $id, $actividad);
 
 		$entity = 'ServiceCalls';
-		$id = $srvCodigo;
+		$id = $data->idserfirma;
 		$servicecall = json_encode(array("Status" => $status));
 		$rsptaservcall = EditardatosNum($entity, $id, $servicecall);
 		return true;

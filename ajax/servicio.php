@@ -1975,39 +1975,52 @@ switch ($_GET["op"]) {
             $idSAP = intval($_POST['idSAP']);
             $comentario = $_POST['compreg'];
             $estadoascensor = $_POST['estadoascensor'];
+
+            $nombre_log = "log_".$idactividad."_".$idSAP.".txt";
+
+            if(file_exists($nombre_log)){
+                $logFile = fopen("log/".$nombre_log, 'w') or die("Error creando archivo");
+                fclose($logFile);
+            }else{
+                $logFile = fopen("log/".$nombre_log, 'w') or die("Error creando archivo");
+            }
+
             if($estadoascensor == 01 || $estadoascensor == '01' || $estadoascensor == "OPERATIVO"){
                 $estadoascensor = "OPERATIVO";
                 $_POST['estadoascensor'] = "OPERATIVO";
+                $logFile = fopen("log/".$nombre_log, 'a') or die("Error creando archivo");
+                fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Estado Operativo") or die("Error escribiendo en el archivo");
+                fclose($logFile);    
             }else{
                 $estadoascensor = "DETENIDO";
                 $_POST['estadoascensor'] = "DETENIDO";
+                $logFile = fopen("log/".$nombre_log, 'a') or die("Error creando archivo");
+                fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Estado Detenido") or die("Error escribiendo en el archivo");
+                fclose($logFile);
             }
 
-            //Vaciamos el log
-            $logFile = fopen("../log.txt", 'w') or die("Error creando archivo");
+            $logFile = fopen("log/".$nombre_log, 'a') or die("Error creando archivo");
+            fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Tu servicio es ".$tiposervicio." y es un/a ".$tipoequipo) or die("Error escribiendo en el archivo");
             fclose($logFile);
 
-            //Log
-            $logFile = fopen("../log.txt", 'a') or die("Error creando archivo");
-            fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Aun no inicia ningun servicio, pero el tipo es : ".$tiposervicio) or die("Error escribiendo en el archivo");
-            fclose($logFile);
 
             //MANTENCIÓN--------------------------------------------------------------------------------------------------------------
             //MANTENCIÓN--------------------------------------------------------------------------------------------------------------
             //MANTENCIÓN--------------------------------------------------------------------------------------------------------------
 
             if($tiposervicio == 'Mantención' || $tiposervicio == 'Mantenci\u00f3n' || $tiposervicio == 'MantenciÃ³n'){
-                    //Log
-                    $logFile = fopen("../log.txt", 'a') or die("Error creando archivo");
-                    fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Ha entrado al servicio de : ".$tiposervicio) or die("Error escribiendo en el archivo");
+                    $logFile = fopen("log/".$nombre_log, 'a') or die("Error creando archivo");
+                    fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Ha entrado a Mantención") or die("Error escribiendo en el archivo");
                     fclose($logFile);
-
                     $idascensor = isset($codigoequipo) ? limpiarCadena($codigoequipo) : "";
                     $idencuesta = 5;
                     $idactividad = intval($_POST["actividadIDfi"]);
                     $idencuestatext = $idencuesta;
                     $idservicio = intval($_POST['servicecallIDfi']);
                     $idserviciofi = intval($_POST['servicecallIDfi']);
+                    $logFile = fopen("log/".$nombre_log, 'a') or die("Error creando archivo");
+                    fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Actividad: ".$idactividad." - Servicio: ".$idservicio) or die("Error escribiendo en el archivo");
+                    fclose($logFile);
 
                     $periodo = date("Ym");
                     $idcliente = $_POST['customercodefi'];
@@ -2023,11 +2036,6 @@ switch ($_GET["op"]) {
                     $rspta = $encuesta->infoEquipo($idservicio);
                     $rsptaJson = json_decode($rspta, true); //true para que sea array, no objeto
                     $data = Array();
-                    
-                    //Log
-                    $logFile = fopen("../log.txt", 'a') or die("Error creando archivo");
-                    fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Información Equipo : ".$rsptaJson) or die("Error escribiendo en el archivo");
-                    fclose($logFile);
         
                     if ($rspta != 'NODATASAP') {
                         foreach($rsptaJson as $row){
@@ -2071,6 +2079,10 @@ switch ($_GET["op"]) {
                         $imgfirma = '';
                         $estadovisita = 'porfirmar';
                     }
+
+                    $logFile = fopen("log/".$nombre_log, 'a') or die("Error creando archivo");
+                    fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Estado decidido por Usuario es: ".$estadovisita) or die("Error escribiendo en el archivo");
+                    fclose($logFile);
     
                     if (!$idcliente){
                         $idcliente = 0;
@@ -2082,11 +2094,11 @@ switch ($_GET["op"]) {
                     $imgfirma = round(microtime(true)) . ".png";
                     $patchfir = "../files/servicioequipo/firmas/" . $imgfirma;
                     file_put_contents($patchfir, $decoded_image);
-                    //LOG
-                    $logFile = fopen("../log.txt", 'a') or die("Error creando archivo");
-                    fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Firma guardada como : ".$patchfir) or die("Error escribiendo en el archivo");
+
+                    $logFile = fopen("log/".$nombre_log, 'a') or die("Error creando archivo");
+                    fwrite($logFile, "\n".date("d/m/Y H:i:s")." - ID Encuesta: ".$idencuesta) or die("Error escribiendo en el archivo");
                     fclose($logFile);
-        
+                    
                     switch($idencuesta)
                     {
                         case 5:
@@ -2115,8 +2127,8 @@ switch ($_GET["op"]) {
                             if (!empty($_POST['imgfoso'])) {
                                 $file1 = $_POST["imgfoso"];
                                 $existe = file_exists("../files/images/$file1");
-                                //LOG
-                                $logFile = fopen("../log.txt", 'a') or die("Error creando archivo");
+
+                                $logFile = fopen("log/".$nombre_log, 'a') or die("Error creando archivo");
                                 fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Imagen Foso : ".$existe) or die("Error escribiendo en el archivo");
                                 fclose($logFile);
                                 $params['imgfoso'] = $_POST['imgfoso'];
@@ -2125,8 +2137,7 @@ switch ($_GET["op"]) {
                             if (!empty($_POST['imgtecho'])) {
                                 $file1 = $_POST["imgtecho"];
                                 $existe = file_exists("../files/images/$file1");
-                                //LOG
-                                $logFile = fopen("../log.txt", 'a') or die("Error creando archivo");
+                                $logFile = fopen("log/".$nombre_log, 'a') or die("Error creando archivo");
                                 fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Imagen Techo : ".$existe) or die("Error escribiendo en el archivo");
                                 fclose($logFile);
                                 $params['imgtecho'] = $_POST['imgtecho'];
@@ -2135,8 +2146,7 @@ switch ($_GET["op"]) {
                             if (!empty($_POST['imgmaquina'])) {
                                 $file1 = $_POST["imgmaquina"];
                                 $existe = file_exists("../files/images/$file1");
-                                //LOG
-                                $logFile = fopen("../log.txt", 'a') or die("Error creando archivo");
+                                $logFile = fopen("log/".$nombre_log, 'a') or die("Error creando archivo");
                                 fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Imagen Maquina : ".$existe) or die("Error escribiendo en el archivo");
                                 fclose($logFile);
                                 $params['imgmaquina'] = $_POST['imgmaquina'];
@@ -2146,8 +2156,7 @@ switch ($_GET["op"]) {
                                 $file1 = $_POST["imgoperador"];
                                 $existe = file_exists("../files/images/$file1");
                                 $params['imgoperador'] = $_POST['imgoperador'];
-                                //LOG
-                                $logFile = fopen("../log.txt", 'a') or die("Error creando archivo");
+                                $logFile = fopen("log/".$nombre_log, 'a') or die("Error creando archivo");
                                 fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Imagen Operador : ".$existe) or die("Error escribiendo en el archivo");
                                 fclose($logFile);
                             }
@@ -2156,8 +2165,7 @@ switch ($_GET["op"]) {
                             //Guardo la informaicon en la tabla visita, esta luego retorna para el PDF
                             $rspvisita = $encuesta->nuevaVisita($params);
                             $_POST['preg'] = json_decode($_POST['preg'], true);
-                            //LOG
-                            $logFile = fopen("../log.txt", 'a') or die("Error creando archivo");
+                            $logFile = fopen("log/".$nombre_log, 'a') or die("Error creando archivo");
                             fwrite($logFile, "\n".date("d/m/Y H:i:s")." - ID Visita : ".$rspvisita) or die("Error escribiendo en el archivo");
                             fclose($logFile);
 
@@ -2173,10 +2181,9 @@ switch ($_GET["op"]) {
                                     $respuestas[] = $resp02; 
                                 }
                                 $rsppregvisita = $encuesta->nuevaRespuestaVisita($rspvisita, $respuestas); 
-                                //LOG
-                                $logFile = fopen("../log.txt", 'a') or die("Error creando archivo");
+                                $logFile = fopen("log/".$nombre_log, 'a') or die("Error creando archivo");
                                 fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Respuesta Encuesta : ".$rsppregvisita) or die("Error escribiendo en el archivo");
-                                fclose($logFile);  
+                                fclose($logFile);
                             }
                         break;
                     }
@@ -2222,10 +2229,6 @@ switch ($_GET["op"]) {
 
                     //Traigo la data de la actividad filtrada por el ID
                     $datosactividad = $servicio->Actividad($_POST['actividadIDfi']);
-                    //LOG
-                    $logFile = fopen("../log.txt", 'a') or die("Error creando archivo");
-                    fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Actividad : ".$datosactividad) or die("Error escribiendo en el archivo");
-                    fclose($logFile);  
 
                     $data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $firma));
                     $archivofirma = "cli".time().".png";
@@ -2251,23 +2254,24 @@ switch ($_GET["op"]) {
 
                     $data = json_encode($post_data);
 
-                    //LOG
-                    $logFile = fopen("../log.txt", 'a') or die("Error creando archivo");
-                    fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Data : ".$data) or die("Error escribiendo en el archivo");
-                    fclose($logFile);  
+                    $logFile = fopen("log/".$nombre_log, 'a') or die("Error creando archivo");
+                    fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Data por POST : ".$data) or die("Error escribiendo en el archivo");
+                    fclose($logFile);
                     
                     $rspta = $servicio->finalizarActividadMantencion($data);
 
                     $nombre_completo = $_POST['nombre_completo'];
                     $modulo = "finalizarsap";
-                    $log_dispositivo = $servicio->Dispositivo($actividadIDfi, $idservicio, $nombre_completo, $tiposervicio, $modulo);
+                    $log_dispositivo = $servicio->Dispositivo($actividadIDfi, $idservicio, $nombre_completo, $tiposervicio, $modulo, $nombre_log);
 
-                    //LOG
-                    $logFile = fopen("../log.txt", 'a') or die("Error creando archivo");
-                    fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Respuesta finalizar Mantención  : ".$rspta ) or die("Error escribiendo en el archivo");
+                    $logFile = fopen("log/".$nombre_log, 'a') or die("Error creando archivo");
+                    fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Respuesta de finalizar actividad : ".$rspta) or die("Error escribiendo en el archivo");
                     fclose($logFile);  
 
                     if ($porfirmar != "true"){
+                        $logFile = fopen("log/".$nombre_log, 'a') or die("Error creando archivo");
+                        fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Se cierra actividad por Posponer Firma") or die("Error escribiendo en el archivo");
+                        fclose($logFile);  
                         break;
                     }
 
@@ -2278,9 +2282,9 @@ switch ($_GET["op"]) {
                         $archivo = 'Informe_Servicio_' . $idservicio . '_' . $idascensor . '_' . $periodo . '.pdf';
                         file_put_contents('../files/pdf/' . $archivo, $result);
                         if(file_exists("../files/pdf/$archivo")){
-                            $logFile = fopen("../log.txt", 'a') or die("Error creando archivo");
-                            fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Se ha creado el PDF :".$archivo) or die("Error escribiendo en el archivo");
-                            fclose($logFile);
+                            $logFile = fopen("log/".$nombre_log, 'a') or die("Error creando archivo");
+                            fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Se ha creado el archivo PDF : ".$archivo) or die("Error escribiendo en el archivo");
+                            fclose($logFile);  
                         }
 
                         $dataarchivo = array(array('name' => $archivo,'type'=>mime_content_type('../files/pdf/' . $archivo),'tmp_name'=>'../files/pdf/' . $archivo,'error'=>0,'size'=>filesize('../files/pdf/' . $archivo)));
@@ -2536,6 +2540,7 @@ switch ($_GET["op"]) {
                              // $Mailer->addAddress('paraneda@fabrimetal.cl','');
                          }
                         
+                        $Mailer->addAddress('jaguilera@fabrimetalsa.cl','');
                         
                         //contactos del cliente
                          $select = 'ContactEmployees';
@@ -2552,7 +2557,19 @@ switch ($_GET["op"]) {
 
 
                         // $Mailer->addAddress('vvasquez@fabrimetal.cl');
-                        $Mailer->send();
+                        if (!$Mailer->send()) {
+                            echo "Error al enviar correo: " . $Mailer->ErrorInfo . "<br>";
+                            //Log
+                            $logFile = fopen("log/".$nombre_log, 'a') or die("Error creando archivo");
+                            fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Correo no pudo ser enviado  : ".$Mailer->ErrorInfo) or die("Error escribiendo en el archivo");
+                            fclose($logFile);
+                        } else {
+                            echo "Correo enviado exitosamente<br>";
+                            //Log
+                            $logFile = fopen("log/".$nombre_log, 'a') or die("Error creando archivo");
+                            fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Correo pudo ser enviado exitosamente") or die("Error escribiendo en el archivo");
+                            fclose($logFile);
+                        }           
 
                         if($opfirma == 2 || $opfirma == "2"){
 
@@ -2744,9 +2761,6 @@ switch ($_GET["op"]) {
 
                             if ($_POST['email']){
                                 // $Mailer->addAddress($_POST['email']);
-                                $logFile = fopen("../log.txt", 'a') or die("Error creando archivo");
-                                fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Ha sido enviado a tu correo, notificando presupuesto") or die("Error escribiendo en el archivo");
-                                fclose($logFile);
                             }
                              // $Mailer->addAddress('dmediavilla@fabrimetal.cl');
                             
@@ -2767,7 +2781,19 @@ switch ($_GET["op"]) {
                                  //$Mailer->addCC('dario@remant.cl');
                              }
                             
-                            $Mailer->send();
+                             if (!$Mailer->send()) {
+                                echo "Error al enviar correo: " . $Mailer->ErrorInfo . "<br>";
+                                //Log
+                                $logFile = fopen("log/".$nombre_log, 'a') or die("Error creando archivo");
+                                fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Correo no pudo ser enviado  : ".$Mailer->ErrorInfo) or die("Error escribiendo en el archivo");
+                                fclose($logFile);
+                            } else {
+                                echo "Correo enviado exitosamente<br>";
+                                //Log
+                                $logFile = fopen("log/".$nombre_log, 'a') or die("Error creando archivo");
+                                fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Correo pudo ser enviado exitosamente") or die("Error escribiendo en el archivo");
+                                fclose($logFile);
+                            }                                
                         }  
                     }  
                 }    
@@ -2781,6 +2807,11 @@ switch ($_GET["op"]) {
                 //OTROS SERVICIOS------------------------------------------------------        
                 //OTROS SERVICIOS------------------------------------------------------        
                 //OTROS SERVICIOS------------------------------------------------------     
+
+                $logFile = fopen("log/".$nombre_log, 'a') or die("Error creando archivo");
+                fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Ha ingresado al servicio: ".$tiposervicio) or die("Error escribiendo en el archivo");
+                fclose($logFile);
+
                 $imagen_presupuesto = array();
                 if (isset($_POST["file01"])) {
                     $file1 = limpiarCadena($_POST["file01"]);
@@ -2805,6 +2836,12 @@ switch ($_GET["op"]) {
                     }
                     $imagen_presupuesto[] = $file3;
                 }
+
+                $logFile = fopen("log/".$nombre_log, 'a') or die("Error creando archivo");
+                fwrite($logFile, "\n".date("d/m/Y H:i:s")." - imagen 1 - ".$file1) or die("Error escribiendo en el archivo");
+                fwrite($logFile, "\n".date("d/m/Y H:i:s")." - imagen 2 - ".$file2) or die("Error escribiendo en el archivo");
+                fwrite($logFile, "\n".date("d/m/Y H:i:s")." - imagen 3 - ".$file3) or die("Error escribiendo en el archivo");
+                fclose($logFile);
 
                 if($opfirma=='1' || $opfirma=='3'){
                     error_log("opfirma es igual a 1 o 3");
@@ -3563,16 +3600,19 @@ switch ($_GET["op"]) {
                      }
                     // $Mailer->addAddress('vvasquez@fabrimetal.cl');
 
-                    try {
-                        $Mailer->send();
-                        $logFile = fopen("../log.txt", 'a') or die("Error creando archivo");
-                        fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Correo enviado Exitosamente con PDF") or die("Error escribiendo en el archivo");
-                        fclose($logFile);                         
-                    } catch (\Exception $e) {
-                        $logFile = fopen("../log.txt", 'a') or die("Error creando archivo");
-                        fwrite($logFile, "\n".date("d/m/Y H:i:s")." - No pudo ser enviado el correo ".$Mailer->ErrorInfo) or die("Error escribiendo en el archivo");
-                        fclose($logFile);                    
-                    }            
+                    if (!$Mailer->send()) {
+                        echo "Error al enviar correo: " . $Mailer->ErrorInfo . "<br>";
+                        //Log
+                        $logFile = fopen("log/".$nombre_log, 'a') or die("Error creando archivo");
+                        fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Correo no pudo ser enviado  : ".$Mailer->ErrorInfo) or die("Error escribiendo en el archivo");
+                        fclose($logFile);
+                    } else {
+                        echo "Correo enviado exitosamente<br>";
+                        //Log
+                        $logFile = fopen("log/".$nombre_log, 'a') or die("Error creando archivo");
+                        fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Correo pudo ser enviado exitosamente") or die("Error escribiendo en el archivo");
+                        fclose($logFile);
+                    }        
 
                     unlink('../files/pdf/' . $archivo);
                 }
@@ -3591,7 +3631,7 @@ switch ($_GET["op"]) {
 
                 $nombre_completo = $_POST['nombre_completo'];
                 $modulo = "finalizarsap";
-                $log_dispositivo = $servicio->Dispositivo($_POST["actividadIDfi"], $datosactividad['value'][0]['srvCodigo'], $nombre_completo, $tiposervicio, $modulo);
+                $log_dispositivo = $servicio->Dispositivo($_POST["actividadIDfi"], $datosactividad['value'][0]['srvCodigo'], $nombre_completo, $tiposervicio, $modulo, $nombre_log);
 
                 if($opfirma=='2' || $opfirma == 2){
                 }else{
@@ -3786,24 +3826,27 @@ switch ($_GET["op"]) {
                              }
                          }
                         
-                        try {
-                            $Mailer->send();
-                            $logFile = fopen("../log.txt", 'a') or die("Error creando archivo");
-                            fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Correo enviado Exitosamente de presupuesto") or die("Error escribiendo en el archivo");
-                            fclose($logFile);                         
-                        } catch (\Exception $e) {
-                            $logFile = fopen("../log.txt", 'a') or die("Error creando archivo");
-                            fwrite($logFile, "\n".date("d/m/Y H:i:s")." - No pudo ser enviado el correo de presupuesto") or die("Error escribiendo en el archivo");
-                            fclose($logFile);                    
-                        }                    
+                         if (!$Mailer->send()) {
+                            echo "Error al enviar correo: " . $Mailer->ErrorInfo . "<br>";
+                            //Log
+                            $logFile = fopen("log/".$nombre_log, 'a') or die("Error creando archivo");
+                            fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Correo de presupuesto no pudo ser enviado  : ".$Mailer->ErrorInfo) or die("Error escribiendo en el archivo");
+                            fclose($logFile);
+                        } else {
+                            echo "Correo enviado exitosamente<br>";
+                            //Log
+                            $logFile = fopen("log/".$nombre_log, 'a') or die("Error creando archivo");
+                            fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Correo de presupuesto pudo ser enviado exitosamente") or die("Error escribiendo en el archivo");
+                            fclose($logFile);
+                        }                  
                     }
                 }
             }
             $respuesta_final = $rspta ? "Servicio finalizado con exito" : "El servicio no pudo ser finalizado";
             //LOG
-			$logFile = fopen("../log.txt", 'a') or die("Error creando archivo");
-			fwrite($logFile, "\n".date("d/m/Y H:i:s")." - ".$respuesta_final) or die("Error escribiendo en el archivo");
-			fclose($logFile);  
+            $logFile = fopen("log/".$nombre_log, 'a') or die("Error creando archivo");
+            fwrite($logFile, "\n".date("d/m/Y H:i:s")." - ".$respuesta_final) or die("Error escribiendo en el archivo");
+            fclose($logFile);
             echo $rspta ? "Servicio finalizado con exito" : "El servicio no pudo ser finalizado";
         break;
 
@@ -3958,6 +4001,11 @@ switch ($_GET["op"]) {
 
             if($llamada != 'Mantención'){
 
+                //Log
+                $logFile = fopen("log/".$nombre_log, 'a') or die("Error creando archivo");
+                fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Entro a : ".$llamada) or die("Error escribiendo en el archivo");
+                fclose($logFile);
+
                 $firma = isset($_POST["firma"]) ? limpiarCadena($_POST["firma"]) : '';
                 $dataPresupuesto = $servicio->existepresupuesto($idactividad);
                 $rowspresupuesto = $dataPresupuesto->fetch_all(MYSQLI_ASSOC);
@@ -3972,8 +4020,19 @@ switch ($_GET["op"]) {
                 }
 
                 $data = json_encode($_POST);
+
+                //Log
+                $logFile = fopen("log/".$nombre_log, 'a') or die("Error creando archivo");
+                fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Data entrega por POST : ".$data) or die("Error escribiendo en el archivo");
+                fclose($logFile);
+
                 error_log("El json de lo que llega desde l POST: ".$data);         
                 $datosactividad = $servicio->Actividad($actividadIDfi);
+
+                //Log
+                $logFile = fopen("log/".$nombre_log, 'a') or die("Error creando archivo");
+                fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Respuesta de Actividad : ".$datosactividad) or die("Error escribiendo en el archivo");
+                fclose($logFile);                
 
                 if($opfirma=='1' || $opfirma=='3'){
                     error_log("opfirma es igual a 1 o 3");
@@ -4712,8 +4771,16 @@ switch ($_GET["op"]) {
 
                     if (!$Mailer->send()) {
                         echo "Error al enviar correo: " . $Mailer->ErrorInfo . "<br>";
+                        //Log
+                        $logFile = fopen("log/".$nombre_log, 'a') or die("Error creando archivo");
+                        fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Correo no pudo ser enviado : ".$Mailer->ErrorInfo) or die("Error escribiendo en el archivo");
+                        fclose($logFile);
                     } else {
                         echo "Correo enviado exitosamente<br>";
+                        //Log
+                        $logFile = fopen("log/".$nombre_log, 'a') or die("Error creando archivo");
+                        fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Correo pudo ser enviado exitosamente") or die("Error escribiendo en el archivo");
+                        fclose($logFile);
                     }
 
                     if ($contadorpresupuesto == 1 || $contadorpresupuesto == "1"){
@@ -4908,8 +4975,20 @@ switch ($_GET["op"]) {
                             //    }
                             //}
                             
-                            $Mailer->send();
-                    }
+                            if (!$Mailer->send()) {
+                                echo "Error al enviar correo: " . $Mailer->ErrorInfo . "<br>";
+                                //Log
+                                $logFile = fopen("log/".$nombre_log, 'a') or die("Error creando archivo");
+                                fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Correo no pudo ser enviado de presupuesto : ".$Mailer->ErrorInfo) or die("Error escribiendo en el archivo");
+                                fclose($logFile);
+                            } else {
+                                echo "Correo enviado exitosamente<br>";
+                                //Log
+                                $logFile = fopen("log/".$nombre_log, 'a') or die("Error creando archivo");
+                                fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Correo  de Presupuesto pudo ser enviado exitosamente") or die("Error escribiendo en el archivo");
+                                fclose($logFile);
+                            }                    
+                        }
     
                     //Elimina archvios del servidor
                     unlink('../files/pdf/' . $archivo);
@@ -4926,6 +5005,11 @@ switch ($_GET["op"]) {
                 $data = json_encode($_POST);
                 $rspta = $servicio->finalizarActividadPorFirmar($data);
 
+                //Log
+                $logFile = fopen("log/".$nombre_log, 'a') or die("Error creando archivo");
+                fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Respuesta de finalizar actividad : ".$rspta) or die("Error escribiendo en el archivo");
+                fclose($logFile);               
+
                 $idSAP = $_POST['idSAP'];
                 $obteniendo_usuario = $servicio->UsuarioCompleto($idSAP);
                 $nombre_usuario = $obteniendo_usuario['value'][0]['FirstName'];
@@ -4933,7 +5017,7 @@ switch ($_GET["op"]) {
 
                 $nombre_completo = $nombre_usuario.' '.$apellido_usuario;
                 $modulo = "firmapendiente";
-                $log_dispositivo = $servicio->Dispositivo($actividadIDfi , $srvCodigo, $nombre_completo, $llamada, $modulo);
+                $log_dispositivo = $servicio->Dispositivo($actividadIDfi , $srvCodigo, $nombre_completo, $llamada, $modulo, $nombre_log);
 
     
                 //FIN CORREO PPTO
@@ -4942,6 +5026,10 @@ switch ($_GET["op"]) {
             }else{
                 //Esto es MANTENCION-------------------------------------------------------------------
     
+                //Log
+                $logFile = fopen("log/".$nombre_log, 'a') or die("Error creando archivo");
+                fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Has entrado a firmar Mantención") or die("Error escribiendo en el archivo");
+                fclose($logFile);  
 
                 $obtenerinformes = $servicio->firmapendiente($idactividad);
                 $rowss = $obtenerinformes->fetch_all(MYSQLI_ASSOC);
@@ -4953,7 +5041,7 @@ switch ($_GET["op"]) {
                 $periodo = $rowss[0]['infv_periodo'];
                 $idencuesta = $enc_id;
                 $idinforme = $infv_id;
-
+                
                 $idencuesta = $enc_id;
                 $idinforme = $infv_id;
                 $idencuesta = isset($enc_id) ? limpiarCadena($enc_id) : "";
@@ -4995,6 +5083,12 @@ switch ($_GET["op"]) {
                 $idactividad = $rows[0]['infv_actividad'] . '';
                 $periodo = $rows[0]['infv_periodo'] . '';
 
+                //Log
+                $logFile = fopen("log/".$nombre_log, 'a') or die("Error creando archivo");
+                fwrite($logFile, "\n".date("d/m/Y H:i:s")." - ID Ascensor: ".$idascensor." - ID Encuesta: ".$idencuesta." - ID Servicio: ".$idservicio." - ID Actividad: ".$idactividad) or die("Error escribiendo en el archivo");
+                fclose($logFile);  
+                
+
                 $params['actividadsap'] = $datosactividad['value'][0];
                 $params['idservicio'] = $idservicio . '';
                 $params['idascensor'] = $idascensor . '';
@@ -5007,6 +5101,11 @@ switch ($_GET["op"]) {
                 $dataPresupuesto = $servicio->existepresupuesto($datosactividad['value'][0]['actCodigo']);
                 $rowspresupuesto = $dataPresupuesto->fetch_all(MYSQLI_ASSOC);
                 $contadorpresupuesto =count($rowspresupuesto);
+
+                //Log
+                $logFile = fopen("log/".$nombre_log, 'a') or die("Error creando archivo");
+                fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Asignado presupuesto : ".$contadorpresupuesto) or die("Error escribiendo en el archivo");
+                fclose($logFile);               
 
                 if($contadorpresupuesto == 1){
                     $params['presupuesto'] = $contadorpresupuesto;
@@ -5028,13 +5127,28 @@ switch ($_GET["op"]) {
                 $_POST['idserfirma'] = $idservicio;
                 $idservicio = $_POST['idservicio'];
                 $data = json_encode($_POST);
+
+                //Log
+                $logFile = fopen("log/".$nombre_log, 'a') or die("Error creando archivo");
+                fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Data de POST : ".$data) or die("Error escribiendo en el archivo");
+                fclose($logFile);   
                 
                 $srvCodigo = $_POST['idservicio'];
                 $rspta_finalizar = $servicio->finalizarActividadPorFirmarM($data, $srvCodigo);
 
-                $nombre_completo = $_POST['nombre_completo'];             
+                //Log
+                $logFile = fopen("log/".$nombre_log, 'a') or die("Error creando archivo");
+                fwrite($logFile, "\n".date("d/m/Y H:i:s")." - respuesta de finalizar actividad: ".$rspta_finalizar) or die("Error escribiendo en el archivo");
+                fclose($logFile);   
+
+                $idSAP = $_POST['idSAP'];
+                $obteniendo_usuario = $servicio->UsuarioCompleto($idSAP);
+                $nombre_usuario = $obteniendo_usuario['value'][0]['FirstName'];
+                $apellido_usuario = $obteniendo_usuario['value'][0]['LastName'];
+
+                $nombre_completo = $nombre_usuario.' '.$apellido_usuario;
                 $modulo = "firmapendiente";
-                $log_dispositivo = $servicio->Dispositivo($actividadIDfi ,$srvCodigo ,$nombre_completo ,$llamada , $modulo);
+                $log_dispositivo = $servicio->Dispositivo($actividadIDfi , $srvCodigo, $nombre_completo, $llamada, $modulo, $nombre_log);
 
                 $result = newPdf('informemantencionnuevo', '', 'variable', $params);
 
@@ -5303,7 +5417,19 @@ switch ($_GET["op"]) {
                     // // // $Mailer->addAddress($reg->email, '');
                     
                     //$Mailer->addCC('vvasquez@fabrimetal.cl');
-                    $Mailer->send();
+                    if (!$Mailer->send()) {
+                        echo "Error al enviar correo: " . $Mailer->ErrorInfo . "<br>";
+                        //Log
+                        $logFile = fopen("log/".$nombre_log, 'a') or die("Error creando archivo");
+                        fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Correo no pudo ser enviado : ".$Mailer->ErrorInfo) or die("Error escribiendo en el archivo");
+                        fclose($logFile);
+                    } else {
+                        echo "Correo enviado exitosamente<br>";
+                        //Log
+                        $logFile = fopen("log/".$nombre_log, 'a') or die("Error creando archivo");
+                        fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Correo pudo ser enviado exitosamente") or die("Error escribiendo en el archivo");
+                        fclose($logFile);
+                    }      
 
 
                     $body = '
@@ -5512,8 +5638,20 @@ switch ($_GET["op"]) {
                      }
                     
                     //$Mailer->addCC("vvasquez@fabrimetal.cl");
-                    $Mailer->send();
-        }
+                    if (!$Mailer->send()) {
+                        echo "Error al enviar correo: " . $Mailer->ErrorInfo . "<br>";
+                        //Log
+                        $logFile = fopen("log/".$nombre_log, 'a') or die("Error creando archivo");
+                        fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Correo no pudo ser enviado de presupuesto : ".$Mailer->ErrorInfo) or die("Error escribiendo en el archivo");
+                        fclose($logFile);
+                    } else {
+                        echo "Correo enviado exitosamente<br>";
+                        //Log
+                        $logFile = fopen("log/".$nombre_log, 'a') or die("Error creando archivo");
+                        fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Correo  de Presupuesto pudo ser enviado exitosamente") or die("Error escribiendo en el archivo");
+                        fclose($logFile);
+                    }              
+                }
 
         break;// FM131715 54916
 

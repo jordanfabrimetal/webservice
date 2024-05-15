@@ -11,7 +11,13 @@ class Servicio
 
 	}
 
-	public function Dispositivo($actividad, $servicio, $responsable, $tiposervicio, $modulo, $nombre_log){
+	public function ObtenerImagenBase64($num_documento){
+
+		$sql = "SELECT * FROM user WHERE num_documento = '$num_documento'";
+		return ejecutarConsultaSimpleFila($sql);
+	}
+
+	public function Dispositivo($actividad, $servicio, $responsable, $tiposervicio, $modulo, $nombre_log, $tipoequipo){
 		if($actividad !== ' ' || $actividad !== ''){
 			$dispositivo = "Aplicación Nueva";
 			// Escapar los valores de las variables y agregar comillas solo para los valores de tipo cadena
@@ -20,7 +26,7 @@ class Servicio
 			$creado = date("Y-m-d H:i:s");
 
 			// Construir la consulta SQL
-			$sql = "INSERT INTO registro_dispositivo (dispositivo, actividad, servicio, responsable, tipo_servicio, modulo, creado, log) VALUES ('$dispositivo', $actividad, $servicio, '$responsable', '$tiposervicio', '$modulo', '$creado', '$nombre_log')";
+			$sql = "INSERT INTO registro_dispositivo (dispositivo, actividad, servicio, responsable, tipo_servicio, modulo, creado, log, tipo_equipo) VALUES ('$dispositivo', $actividad, $servicio, '$responsable', '$tiposervicio', '$modulo', '$creado', '$nombre_log', '$tipoequipo')";
 			
 			// Ejecutar la consulta SQL
 			return ejecutarConsulta($sql);

@@ -13,3 +13,4 @@ ALTER TABLE registro_dispositivo ADD modulo VARCHAR(30);
 ALTER TABLE registro_dispositivo ADD tipo_servicio VARCHAR(30);
 ALTER TABLE registro_dispositivo ADD creado DATETIME;
 ALTER TABLE registro_dispositivo ADD log VARCHAR(50);
+ALTER TABLE registro_dispositivo ADD tipo_equipo VARCHAR(50);

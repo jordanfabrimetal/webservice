@@ -417,27 +417,38 @@ function newPdf($opcion, $data = '', $output = 'browser', $params = array()) {
                     $t->assign('textoporfirmar', '<table style="margin-top: 30px;"><tr><td style="padding: 20px">PENDIENTE FIRMA DEL CLIENTE (Técnico: ' . $item['nomusuario'] . ')</td></tr></table>');
                 }else{
                     $t->newBlock('firmacliente');
-                    $t->assign('nomuser', $item['nomusuario'] . '');
-                    $t->assign('nomcli', mb_strtoupper($item['infv_nomcli']) . '');
-                    $t->assign('rutuser', $item['num_documento'] . '');
+                    $t->assign('nomuser', $params['nombre_completo'] . '');
+                    $t->assign('nomcli', mb_strtoupper($params['nombrecliente']) . '');
+                    $t->assign('rutuser', $params['num_documento'] . '');
                     if(@$firmabase64)
                         $t->assign('firmacliente', '<img src="' . @$firmabase64 . '" alt="firmacliente" height="70">' . '');
                     else{
-                        $path_firmacliente = '../files/servicioequipo/firmas/';
-                        $firmacliente = $path_firmacliente . $item['infv_firmacliente'];
+                        $path_firmacliente = '../files/usuarios/firmas/';
+                        $firmacliente = $path_firmacliente . $params['firmacliente'];
                         if(file_exists($firmacliente)){
                             if(is_file($firmacliente))
                                 $t->assign('firmacliente', '<img src="' . $firmacliente . '" alt="firmacliente" height="70">' . '');
                         }
                     }
 
-                    $path_firmausuario = '../files/usuarios/firmas/';
-                    $firmausuario = $path_firmausuario . $item['filefir'];
-                    if(file_exists($firmausuario)){
-                        if(is_file($firmausuario))
-                            $t->assign('firmausuario', '<img src="' . $firmausuario . '" alt="firmausuario" height="70">' . '');
+                    if(file_exists('../files/usuarios/firmas/'.$params['filefir'])){
+                        $path_firmausuario = '../files/usuarios/firmas/';
+                        $firmausuario = $path_firmausuario . $params['filefir'];
+                        if(file_exists($firmausuario)){
+                            if(is_file($firmausuario))
+                                $t->assign('firmausuario', '<img src="' . $firmausuario . '" alt="firmausuario" height="70">' . '');
+                        }
+                        $t->assign('fechafirmacliente', @$fechamod . '');
+                    }else{
+                        $path_firmausuario = '../files/firma/';
+                        $firmausuario = $path_firmausuario . $params['archivofirma'];
+                        if(file_exists($firmausuario)){
+                            if(is_file($firmausuario))
+                                $t->assign('firmausuario', '<img src="' . $firmausuario . '" alt="firmausuario" height="70">' . '');
+                        }
+                        $t->assign('fechafirmacliente', @$fechamod . '');
                     }
-                    $t->assign('fechafirmacliente', @$fechamod . '');
+
                 }
             }
 

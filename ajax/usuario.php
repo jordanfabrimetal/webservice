@@ -124,6 +124,8 @@ switch ($_GET["op"]) {
 				$_SESSION['imagen']=$fecth->imagen;
 				$_SESSION['username']=$fecth->username;
 				$_SESSION['idrole']=$fecth->idrole;
+				$_SESSION['filefir']=$fecth->filefir;
+				$_SESSION['num_documento']=$fecth->num_documento;
 
 				$iduser = $_SESSION['iduser'];
 				$nombre = $_SESSION['nombre'];
@@ -131,7 +133,8 @@ switch ($_GET["op"]) {
 				$imagen = $_SESSION['imagen'];
 				$username = $_SESSION['username'];
 				$idrole = $_SESSION['idrole'];
-				
+				$filefir = $_SESSION['filefir'];
+				$num_documento = $_SESSION['num_documento'];
 
 				$role= new Role();
 				$permisos = $role->listarmarcados($fecth->idrole);
@@ -184,6 +187,8 @@ switch ($_GET["op"]) {
 					'email' => $email, 
 					'iduser' => $iduser,
 					'idrole' => $idrole,
+					'filefir' => $filefir,
+					'num_documento' => $num_documento,
 					'message' => 'Inicio de sesión exitoso',
 					'user_data' => $fecth // o cualquier otro dato que desees enviar
 				);

@@ -2286,8 +2286,11 @@ switch ($_GET["op"]) {
 
                     $data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $_POST['firma']));
                     $archivofirma = "cli".time().".png";
-                    $filepath = '../files/usuarios/firmas/'.$archivofirma;
+                    $filepath = '../files/servicioequipo/firmas/'.$archivofirma;
                     $params['firmacliente'] = $archivofirma;
+                    $params['firmabase64'] = $archivofirma;
+                    $params['firmacliente_ascensor'] = $filepath;
+
 
                     file_put_contents($filepath, $data);
                     $_POST['comercialID'] = $datosactividad['value'][0]['equComercialId'];

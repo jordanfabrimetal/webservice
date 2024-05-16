@@ -423,7 +423,7 @@ function newPdf($opcion, $data = '', $output = 'browser', $params = array()) {
                     if(@$firmabase64)
                         $t->assign('firmacliente', '<img src="' . @$firmabase64 . '" alt="firmacliente" height="70">' . '');
                     else{
-                        $path_firmacliente = '../files/usuarios/firmas/';
+                        $path_firmacliente = '../files/servicioequipo/firmas/';
                         $firmacliente = $path_firmacliente . $params['firmacliente'];
                         if(file_exists($firmacliente)){
                             if(is_file($firmacliente))
@@ -819,7 +819,7 @@ function newPdf($opcion, $data = '', $output = 'browser', $params = array()) {
                     <td width=210 colspan=9 >'.$params['cargocliente'].'</td>
                 </tr>
                 <tr>
-                    <td width=623 colspan=32 align="center"><img style="margin: 0 auto !important;" src="'.$params['firmacliente'].'"></td>
+                    <td width=623 colspan=32 align="center"><img style="margin: 0 auto !important;" src="'.$params['firmacliente_ascensor'].'"></td>
                 </tr>
             </table>';
             $mpdf->WriteHTML($firma,2);

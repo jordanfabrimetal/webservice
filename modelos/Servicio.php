@@ -17,16 +17,16 @@ class Servicio
 		return ejecutarConsultaSimpleFila($sql);
 	}
 
-	public function Dispositivo($actividad, $servicio, $responsable, $tiposervicio, $modulo, $nombre_log, $tipoequipo){
+	public function Dispositivo($actividad, $servicio, $responsable, $tiposervicio, $modulo, $nombre_log, $tipoequipo, $resultado){
 		if($actividad !== ' ' || $actividad !== ''){
-			$dispositivo = "Aplicación Nueva";
+			$dispositivo = "Aplicación Movil";
 			// Escapar los valores de las variables y agregar comillas solo para los valores de tipo cadena
 			$actividad = is_numeric($actividad) ? $actividad : "'$actividad'";
 			$servicio = is_numeric($servicio) ? $servicio : "'$servicio'";
 			$creado = date("Y-m-d H:i:s");
 
 			// Construir la consulta SQL
-			$sql = "INSERT INTO registro_dispositivo (dispositivo, actividad, servicio, responsable, tipo_servicio, modulo, creado, log, tipo_equipo) VALUES ('$dispositivo', $actividad, $servicio, '$responsable', '$tiposervicio', '$modulo', '$creado', '$nombre_log', '$tipoequipo')";
+			$sql = "INSERT INTO registro_dispositivo (dispositivo, actividad, servicio, responsable, tipo_servicio, modulo, creado, log, tipo_equipo, resultado) VALUES ('$dispositivo', $actividad, $servicio, '$responsable', '$tiposervicio', '$modulo', '$creado', '$nombre_log', '$tipoequipo', '$resultado')";
 			
 			// Ejecutar la consulta SQL
 			return ejecutarConsulta($sql);
@@ -904,6 +904,12 @@ class Servicio
 	public function formfirmasap($idactividad)
 	{
 		$sql = "sml.svc/LISTA_ACTIVIDADES?\$select=srvCodigo,actCodigo,equSnInterno,artTipoEquipo,artFabricante,artModelo,equEdificio,equCalle,equCalleNro,actFechaIni,actHoraIni,srvTipoLlamada,actEstEquiIni,srvAsunto,actFechaFin,actHoraFin,actEstEquiFin,actComentario,equSupId&\$filter=actCodigo eq " . $idactividad;
+		return json_decode(Query($sql), true);
+	}
+
+	public function formfirmasap2($idservicio)
+	{
+		$sql = "sml.svc/LISTA_ACTIVIDADES?\$select=srvCodigo,actCodigo,equSnInterno,artTipoEquipo,artFabricante,artModelo,equEdificio,equCalle,equCalleNro,actFechaIni,actHoraIni,srvTipoLlamada,actEstEquiIni,srvAsunto,actFechaFin,actHoraFin,actEstEquiFin,actComentario,equSupId&\$filter=srvCodigo eq " . $idservicio;
 		return json_decode(Query($sql), true);
 	}
 

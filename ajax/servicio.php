@@ -2316,18 +2316,6 @@ switch ($_GET["op"]) {
                     fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Data por POST : ".$data) or die("Error escribiendo en el archivo");
                     fclose($logFile);
 
-                    $nombre_completo = $_POST['nombre_completo'];
-                    $modulo = "finalizarsap";
-                    $log_dispositivo = $servicio->Dispositivo($actividadIDfi, $idservicio, $nombre_completo, $tiposervicio, $modulo, $nombre_log, $tipoequipo);
-
-
-                    if ($porfirmar != "true"){
-                        $logFile = fopen("log/".$nombre_log, 'a') or die("Error creando archivo");
-                        fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Se cierra actividad por Posponer Firma") or die("Error escribiendo en el archivo");
-                        fclose($logFile);  
-                        break;
-                    }
-
                     //////////////////////////////////////////////////////////// ESCALERA
                     ////////////////////////////////////////////////////////////
                     ////////////////////////////////////////////////////////////
@@ -2361,6 +2349,7 @@ switch ($_GET["op"]) {
     
                         $data_escalera = json_encode($post_data);
                         $rspta = $servicio->finalizarActividadMantencion($data_escalera);
+                        $respuestamantencion = $rspta;
 
                         $logFile = fopen("log/".$nombre_log, 'a') or die("Error creando archivo");
                         fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Respuesta de finalizar actividad : ".$rspta) or die("Error escribiendo en el archivo");
@@ -2376,6 +2365,24 @@ switch ($_GET["op"]) {
                         $activityclosed = $rspta->Closed . '';
                 
                         $rspta = UploadFile($dataarchivo, true, $idattachment);
+                        
+                        if ($porfirmar != "true"){
+                            $resultado = "Posponer";
+                            $nombre_completo = $_POST['nombre_completo'];
+                            $modulo = "finalizarsap";
+                            $log_dispositivo = $servicio->Dispositivo($actividadIDfi, $idservicio, $nombre_completo, $tiposervicio, $modulo, $nombre_log, $tipoequipo, $resultado);
+        
+                            $logFile = fopen("log/".$nombre_log, 'a') or die("Error creando archivo");
+                            fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Se cierra actividad por Posponer Firma") or die("Error escribiendo en el archivo");
+                            fclose($logFile);  
+                            break;
+                        }
+
+                        $respuesta = $respuestamantencion ? "Servicio finalizado con exito" : "El servicio no pudo ser finalizado";
+                        $resultado = $respuesta;
+                        $nombre_completo = $_POST['nombre_completo'];
+                        $modulo = "finalizarsap";
+                        $log_dispositivo = $servicio->Dispositivo($actividadIDfi, $idservicio, $nombre_completo, $tiposervicio, $modulo, $nombre_log, $tipoequipo, $resultado);
 
                         if (!$idattachment) {
                             $swActClosed = true;
@@ -2614,13 +2621,21 @@ switch ($_GET["op"]) {
                         //////////////////////////////////////////////////////////// ASCENSOR
                         ////////////////////////////////////////////////////////////
                         ////////////////////////////////////////////////////////////
-                        $rspta = $servicio->finalizarActividadMantencion($data);
+
+                        $datas = json_encode($post_data);
+
+                        $rspta = $servicio->finalizarActividadMantencion($datas);
 
                         $logFile = fopen("log/".$nombre_log, 'a') or die("Error creando archivo");
                         fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Respuesta de finalizar actividad : ".$rspta) or die("Error escribiendo en el archivo");
                         fclose($logFile);  
 
                         if ($porfirmar != "true"){
+                            $resultado = "Posponer";
+                            $nombre_completo = $_POST['nombre_completo'];
+                            $modulo = "finalizarsap";
+                            $log_dispositivo = $servicio->Dispositivo($actividadIDfi, $idservicio, $nombre_completo, $tiposervicio, $modulo, $nombre_log, $tipoequipo, $resultado);
+        
                             $logFile = fopen("log/".$nombre_log, 'a') or die("Error creando archivo");
                             fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Se cierra actividad por Posponer Firma") or die("Error escribiendo en el archivo");
                             fclose($logFile);  
@@ -3973,9 +3988,11 @@ switch ($_GET["op"]) {
                 $actividadsap = $_POST['actividadIDfi'];
                 $rspta = $servicio->finalizarActividad($data, $actividadsap);
 
+                $respuesta = $rspta ? "Servicio finalizado con exito" : "El servicio no pudo ser finalizado";
+                $resultado = $respuesta;
                 $nombre_completo = $_POST['nombre_completo'];
                 $modulo = "finalizarsap";
-                $log_dispositivo = $servicio->Dispositivo($_POST["actividadIDfi"], $datosactividad['value'][0]['srvCodigo'], $nombre_completo, $tiposervicio, $modulo, $nombre_log, $tipoequipo);
+                $log_dispositivo = $servicio->Dispositivo($_POST["actividadIDfi"], $datosactividad['value'][0]['srvCodigo'], $nombre_completo, $tiposervicio, $modulo, $nombre_log, $tipoequipo, $resultado);
 
                 if($opfirma=='2' || $opfirma == 2){
                 }else{
@@ -4255,20 +4272,24 @@ switch ($_GET["op"]) {
         break;
 
         case 'encxfirmar':
-            $rspta = $encuesta->encuestasPorFirmar();
+            if(isset($_GET['id'])){
+                $iduser = $_GET['id'];
+            }else{
+                $iduser = $_SESSION['idSAP'];
+            }
+            $rspta = $encuesta->encuestasPorFirmar($iduser);
             $data = Array();
             while ($reg = $rspta->fetch_object()) {
                 $data[] = array(
-                    "0" => '<button class="btn btn-info btn-xs" onclick="formfirmarinforme(' . $reg->infv_id . ')"><i class="fa fa-pencil"></i></button><button class="btn btn-info btn-xs" onclick="MostrarPreview(\'informeservicio\',\'' . $reg->infv_servicio . ',' . $reg->infv_ascensor . ',' . $reg->enc_id . '\')"><i class="fa fa-file-pdf-o"></i></button>',
                     "1" => $reg->infv_id . '',
                     "2" => $reg->infv_servicio . '',
                     "3" => 'Mantención',
                     "4" => $reg->infv_ascensor . '',
                     "5" => $reg->infv_periodo . '',
-                    "6" => $reg->infv_fecha . '',
                     "7" => $reg->infv_cliente . '',
                 );
             }
+
             $results = array(
                 "sEcho" => 1,
                 "iTotalRecords" => count($data),
@@ -4292,6 +4313,13 @@ switch ($_GET["op"]) {
             $rspta = $servicio->formfirmasap($idactividad);
             echo json_encode($rspta['value'][0]);
         break;
+
+        case 'ffirmasap2':
+		    $idservicio = $_GET['id'];
+            $rspta = $servicio->formfirmasap2($idservicio);
+            echo json_encode($rspta['value'][0]);
+        break;
+
 
         case 'firmapendiente':
             //Este es para cerrar la firma cuando esta pendiente
@@ -5360,9 +5388,11 @@ switch ($_GET["op"]) {
                 $nombre_usuario = $obteniendo_usuario['value'][0]['FirstName'];
                 $apellido_usuario = $obteniendo_usuario['value'][0]['LastName'];
 
+                $respuesta = $rspta ? "Servicio finalizado con exito" : "El servicio no pudo ser finalizado";
+                $resultado = $respuesta;
                 $nombre_completo = $nombre_usuario.' '.$apellido_usuario;
                 $modulo = "firmapendiente";
-                $log_dispositivo = $servicio->Dispositivo($actividadIDfi , $srvCodigo, $nombre_completo, $llamada, $modulo, $nombre_log, $tipoequipo);
+                $log_dispositivo = $servicio->Dispositivo($actividadIDfi , $srvCodigo, $nombre_completo, $llamada, $modulo, $nombre_log, $tipoequipo, $resultado);
 
     
                 //FIN CORREO PPTO
@@ -5396,14 +5426,12 @@ switch ($_GET["op"]) {
                 $carcli = isset($_POST["cargo"]) ? limpiarCadena($_POST["cargo"]) : "";
                 $rutcli = isset($_POST["rut"]) ? limpiarCadena($_POST["rut"]) : "";
                 $firma3 = isset($_POST["firma"]) ? limpiarCadena($_POST["firma"]) : '';
-                $encoded_image = explode(",", $firma3) [1];
+                $encoded_image = explode(",", $_POST["firma"]) [1];
                 $decoded_image = base64_decode($encoded_image);
                 $imgfirma = round(microtime(true)) . ".png";
                 $patchfir = "../files/servicioequipo/firmas/" . $imgfirma;
                 file_put_contents($patchfir, $decoded_image);
 
-                //$rspta = $servicio->firmapendiente($idactividad);
-                //$rspta = $servicio->firmapendientes($idactividad, $rutcli, $firma3);
                 $estadovisita = 'terminado';
 
                 $rspinforme = $encuesta->infoVisita($idinforme);
@@ -5464,8 +5492,8 @@ switch ($_GET["op"]) {
                 $params['nombrecliente'] = $_POST['nombre'].' '.$_POST['apellido'];
                 $params['rutcliente'] = $_POST['rut'];
                 $params['cargocliente'] = $_POST['cargo'];
-                $params['firmacliente'] = $_POST['firma'];
-
+                $params['firmacliente'] = $imgfirma;
+                $params['firmacliente_ascensor'] = $patchfir;
                 $_POST['actividadIDfi'] = $datosactividad['value'][0]['actCodigo'];
                 $_POST['idactividad'] = $datosactividad['value'][0]['actCodigo'];
                 $_POST['servicecallIDfi'] = $idservicio;
@@ -5491,9 +5519,11 @@ switch ($_GET["op"]) {
                 $nombre_usuario = $obteniendo_usuario['value'][0]['FirstName'];
                 $apellido_usuario = $obteniendo_usuario['value'][0]['LastName'];
 
+                $respuesta = $rspta_finalizar ? "Servicio finalizado con exito" : "El servicio no pudo ser finalizado";
+                $resultado = $respuesta;
                 $nombre_completo = $nombre_usuario.' '.$apellido_usuario;
                 $modulo = "firmapendiente";
-                $log_dispositivo = $servicio->Dispositivo($actividadIDfi , $srvCodigo, $nombre_completo, $llamada, $modulo, $nombre_log, $tipoequipo);
+                $log_dispositivo = $servicio->Dispositivo($actividadIDfi , $srvCodigo, $nombre_completo, $llamada, $modulo, $nombre_log, $tipoequipo, $resultado);
 
                 $result = newPdf('informemantencionnuevo', '', 'variable', $params);
 

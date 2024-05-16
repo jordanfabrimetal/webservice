@@ -198,8 +198,8 @@ class Encuesta {
         return ejecutarConsultaSimpleFila($sql);
     }
 
-    function encuestasPorFirmar() {
-        $sql = "SELECT * FROM informevisita WHERE infv_estado = 'porfirmar' AND infv_empleado = '371' AND enc_id < 5 ORDER BY infv_id";
+    function encuestasPorFirmar($iduser) {
+        $sql = "SELECT * FROM informevisita WHERE infv_estado = 'porfirmar' AND infv_empleado = '$iduser' AND enc_id < 5 ORDER BY infv_id";
         return ejecutarConsulta($sql);
     }
 

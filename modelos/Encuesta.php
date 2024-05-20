@@ -125,6 +125,10 @@ class Encuesta {
             return 'NODATASAP';
     }
 
+    function obtenerInforme($actividad, $servicio){
+        $sql = "SELECT * FROM informevisita WHERE infv_actividad = $actividad and infv_servicio = $servicio and enc_id = 4";
+        return ejecutarConsultaSimpleFila($sql);
+    }
     
     function infoVisita($idvisita) {
         /*$sql = "Select p.idproyecto, p.idventa, p.nombre, a.codigo, a.idascensor, a.estadoins estado, DATE(p.created_time) as fecha, m.nombre AS modelo, t.nombre AS tipoascensor,
@@ -202,6 +206,7 @@ class Encuesta {
         $sql = "SELECT * FROM informevisita WHERE infv_estado = 'porfirmar' AND infv_empleado = '$iduser' AND enc_id < 5 ORDER BY infv_id";
         return ejecutarConsulta($sql);
     }
+
 
     //se obtiene el total de informes pendientes de firmar para un id de actividad
     function informesPendientes($idactividad)

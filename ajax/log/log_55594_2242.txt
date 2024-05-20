@@ -1,9 +1,6 @@
 
-20/05/2024 09:14:47 - Estado Operativo
-20/05/2024 09:14:47 - Tu servicio es Mantención y es un/a Escalera
-20/05/2024 09:14:47 - Ha entrado a Mantención
-20/05/2024 09:14:47 - Actividad: 55594 - Servicio: 511623
-20/05/2024 09:14:47 - Estado decidido por Usuario es: porfirmar
-20/05/2024 09:14:47 - ID Encuesta: 4
-20/05/2024 09:14:47 - ID Visita : 42352
-20/05/2024 09:14:47 - Respuesta Encuesta : 1
+20/05/2024 14:56:58 - Este es un servicio que fue pospuesto su firma
+20/05/2024 14:56:58 - Aun no inicia ningun servicio, pero el tipo es : Mantención
+20/05/2024 14:56:58 - Has entrado a firmar Mantención
+20/05/2024 14:57:04 - ID Ascensor: FM020022 - ID Encuesta: 4 - ID Servicio: 511623 - ID Actividad: 55594
+20/05/2024 14:57:05 - Asignado presupuesto : 0

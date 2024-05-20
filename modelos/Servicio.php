@@ -362,6 +362,11 @@ class Servicio
 			unset($arrayData->observaciones);
 			unset($arrayData->chkCertifica);
 
+			if($estadofintext = "OPERATIVO"){
+				$idestadofi = "01";
+				$data->idestadofi = $idestadofi;
+			}
+
 			$data = $arrayData;
 
 			// Codificar el array modificado a JSON
@@ -480,6 +485,7 @@ class Servicio
 			unset($arrayData->periodo);
 			unset($arrayData->observaciones);
 			unset($arrayData->chkCertifica);
+			unset($arrayData->nombreArchivo);
 
 			$data = $arrayData;
 		
@@ -487,7 +493,14 @@ class Servicio
 				$estadofintext = $data->estadofintext;
 			} else {
 				$estadofintext = $data->estadoascensor;
+
 			}
+
+			if($estadofintext = "OPERATIVO"){
+				$idestadofi = "01";
+				$data->idestadofi = $idestadofi;
+			}
+
 			$entity = 'Activities';
 			$id = $data->actividadIDfi;
 			if ($data->opfirma == 2) {

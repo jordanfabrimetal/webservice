@@ -1,8 +1,0 @@
-
-15/05/2024 16:31:52 - Estado Detenido
-15/05/2024 16:31:52 - Tu servicio es  y es un/a 
-15/05/2024 16:31:52 - Ha ingresado al servicio: 
-15/05/2024 16:31:52 - imagen 1 - 
-15/05/2024 16:31:52 - imagen 2 - 
-15/05/2024 16:31:52 - imagen 3 - 
-15/05/2024 16:31:54 - Servicio finalizado con exito

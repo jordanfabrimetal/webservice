@@ -1,0 +1,12 @@
+
+16/05/2024 16:07:37 - Estado Operativo
+16/05/2024 16:07:37 - Tu servicio es Mantención y es un/a Escalera
+16/05/2024 16:07:37 - Ha entrado a Mantención
+16/05/2024 16:07:37 - Actividad: 55575 - Servicio: 511600
+16/05/2024 16:07:37 - Estado decidido por Usuario es: porfirmar
+16/05/2024 16:07:37 - ID Encuesta: 4
+16/05/2024 16:07:37 - ID Visita : 42317
+16/05/2024 16:07:37 - Respuesta Encuesta : 1
+16/05/2024 16:07:38 - Data por POST : {"codigoEquipo":"FM020022","nombre_completo":"Jordan ariel Aguilera labra","servicecallIDfi":"511600","compreg":"udjdjd","actividadIDfi":55575,"attachments":"","tiposervicio":"Mantenci\u00f3n","cantayu":"0","supervisorID":"2137","tipoEquipo":"Escalera","preg":{"170":"SI","171":"SI","172":"SI","173":"SI","174":"SI","175":"SI","176":"SI","155":"SI","177":"SI","156":"SI","178":"SI","157":"SI","179":"SI","158":"SI","159":"SI","180":"SI","181":"SI","160":"SI","182":"SI","161":"SI","183":"SI","162":"SI","184":"SI","163":"SI","185":"SI","164":"SI","186":"SI","165":"SI","166":"SI","167":"SI","168":"SI","169":"SI"},"idestadofi":"01","idserviciofi":"","observacionfi":"hdh","latitudfi":"-33.3843782","codclifi":"null","filefir":"1712927125.png","email":"jaguilera@fabrimetalsa.cl","num_documento":"19.419.161-8","terminado":"y","edificiofi":"BOULEVARD","opfirma":"2","codigofmfi":"FM020022","customercodefi":"C76717610","longitudfi":"-70.7761974","ascensorIDfi":"11713","opayu":"N","txtObsFin":"","idSAP":"2242","idascensorfi":"","estadoascensor":"OPERATIVO","oppre":"2","dTime":"20240516160734","actCodigo":"55575","comercialID":2135,"codCenCosto":"7250000","nomCenCosto":"APART HOTEL CALAMA","imgpresupuesto1":null,"imgpresupuesto2":null,"imgpresupuesto3":null,"imgfoso":null,"imgtecho":null,"imgmaquina":null,"imgoperador":null}
+16/05/2024 16:07:40 - Respuesta de finalizar actividad : 1
+16/05/2024 16:07:40 - Se cierra actividad por Posponer Firma

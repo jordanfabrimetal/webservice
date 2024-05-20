@@ -21,6 +21,28 @@ define("DB_NAMES", "es_ES");
 //Nombre proyecto
 define("PRO_NOMBRE","Fabrimetal");
 
+//PERMISOS CENTRAL ASTERISK
+//Ip del servidor de BD
+define("DB_HOST2","172.16.30.10");
+
+//Nombre de la Base de datos
+define("DB_NAME2","asteriskcdrdb");
+
+//Usuario BD
+define("DB_USERNAME2","root");
+
+//Password Usuario
+define("DB_PASSWORD2","carrier125..");
+
+//Codificacion 
+define("DB_ENCODE2","utf8");
+
+//Idiomar consultas fechas
+define("DB_NAMES2", "es_ES");
+
+//Nombre proyecto
+define("PRO_NOMBRE2","Asterisk");
+
 /*  Sistema SAP */
 
 //Nombre de la Base de datos

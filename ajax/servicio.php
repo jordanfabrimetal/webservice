@@ -2092,17 +2092,19 @@ switch ($_GET["op"]) {
                         $idcliente = 0;
                     }
 
-                    $firma3 = isset($_POST["firma"]) ? limpiarCadena($_POST["firma"]) : '';
-                    $encoded_image = explode(",", $firma3) [1];
-                    $decoded_image = base64_decode($encoded_image);
-                    $imgfirma = round(microtime(true)) . ".png";
-                    $patchfir = "../files/servicioequipo/firmas/" . $imgfirma;
-                    file_put_contents($patchfir, $decoded_image);
+                    if($estadovisita !== "porfirmar"){
+                        $firma3 = isset($_POST["firma"]) ? limpiarCadena($_POST["firma"]) : '';
+                        $encoded_image = explode(",", $firma3) [1];
+                        $decoded_image = base64_decode($encoded_image);
+                        $imgfirma = round(microtime(true)) . ".png";
+                        $patchfir = "../files/servicioequipo/firmas/" . $imgfirma;
+                        file_put_contents($patchfir, $decoded_image);
+                    }
 
-                    $logFile = fopen("log/".$nombre_log, 'a') or die("Error creando archivo");
-                    fwrite($logFile, "\n".date("d/m/Y H:i:s")." - ID Encuesta: ".$idencuesta) or die("Error escribiendo en el archivo");
-                    fclose($logFile);
-                    
+                                            $logFile = fopen("log/".$nombre_log, 'a') or die("Error creando archivo");
+                        fwrite($logFile, "\n".date("d/m/Y H:i:s")." - ID Encuesta: ".$idencuesta) or die("Error escribiendo en el archivo");
+                        fclose($logFile);
+
                     switch($idencuesta)
                     {
                         case 5:
@@ -2200,7 +2202,7 @@ switch ($_GET["op"]) {
                                 'periodo' => $periodo . '',
                                 // 'fecha' => date('Y-m-d H:i:s'), //es automatico pero se puede setear
                                 'observaciones' => $comentario . '',
-                                'empleado' => $_POST['idSAP'] . '',
+                                'empleado' => $_POST['iduser'] . '',
                                 'firmaempleado' => 'firmarmpleado.png',
                                 'cliente' => $idcliente . '',
                                 'firmacliente' => $imgfirma . '',
@@ -2242,6 +2244,8 @@ switch ($_GET["op"]) {
                         break;
                     }
 
+
+
                     $params['idservicio'] = $idservicio . ''; 
                     $params['idascensor'] = $idascensor . '';
                     $params['idencuesta'] = $idencuesta . '';
@@ -2264,20 +2268,23 @@ switch ($_GET["op"]) {
                         $params['estadoobs'] = $_POST[''];
                     }
 
-                    //Guardo las imagenes que son las del Presupuesto
-                    $jsonImages = $_POST['images'];
-                    $data_imagen = json_decode($jsonImages, true);
-                    $rutaDestino = '../files/images/';
-                    
-                    for ($i = 1; $i <= 3; $i++) {
-                        $claveImagen = 'imagen' . $i;
-                        if (isset($data_imagen[$claveImagen]) && !empty($data_imagen[$claveImagen])) {
-                            $base64Image = $data_imagen[$claveImagen];
-                            $imagenBinaria = base64_decode($base64Image);
-                            $extension = 'jpg'; 
-                            $nombreImagen = 'imagen' . $i . '_' . time() . '.' . $extension;
-                            file_put_contents($rutaDestino . $nombreImagen, $imagenBinaria);
-                            $params['imgpresupuesto' . $i] = $nombreImagen;
+                    if($_POST['oppre'] == 1){
+
+                        //Guardo las imagenes que son las del Presupuesto
+                        $jsonImages = $_POST['images'];
+                        $data_imagen = json_decode($jsonImages, true);
+                        $rutaDestino = '../files/images/';
+                        
+                        for ($i = 1; $i <= 3; $i++) {
+                            $claveImagen = 'imagen' . $i;
+                            if (isset($data_imagen[$claveImagen]) && !empty($data_imagen[$claveImagen])) {
+                                $base64Image = $data_imagen[$claveImagen];
+                                $imagenBinaria = base64_decode($base64Image);
+                                $extension = 'jpg'; 
+                                $nombreImagen = 'imagen' . $i . '_' . time() . '.' . $extension;
+                                file_put_contents($rutaDestino . $nombreImagen, $imagenBinaria);
+                                $params['imgpresupuesto' . $i] = $nombreImagen;
+                            }
                         }
                     }
 
@@ -2290,9 +2297,8 @@ switch ($_GET["op"]) {
                     $params['firmacliente'] = $archivofirma;
                     $params['firmabase64'] = $archivofirma;
                     $params['firmacliente_ascensor'] = $filepath;
-
-
                     file_put_contents($filepath, $data);
+
                     $_POST['comercialID'] = $datosactividad['value'][0]['equComercialId'];
                     $_POST['codCenCosto'] = $datosactividad['value'][0]['equCcostoCod'];
                     $_POST['nomCenCosto'] = $datosactividad['value'][0]['equCcostoNombre'];
@@ -2321,7 +2327,7 @@ switch ($_GET["op"]) {
                     ////////////////////////////////////////////////////////////
 
                     if($idencuesta == 4){
-                        
+
                         $obtener_imagen_base64_firma = $servicio->ObtenerImagenBase64($_POST['num_documento']);
                         $firma64 = $obtener_imagen_base64_firma['firma'];      
                         
@@ -2335,74 +2341,74 @@ switch ($_GET["op"]) {
                         $params['filefir'] = $_POST['filefir'];
                         $params['num_documento'] = $_POST['num_documento'];
 
+                        $data_escalera = json_encode($post_data);
+                        $rspta = $servicio->finalizarActividadMantencion($data_escalera);
 
                         $result = newPdf('informemantencion'.(($idencuesta == 4) ? 'escalera': ''), '', 'variable', $params);
                         $archivo = 'FM_IM-' . $rspvisita . '_EQ-' . $idascensor . '_' . $periodo . '.pdf';
                         file_put_contents('../files/pdf/' . $archivo, $result);
                         $data = array(array('name' => $archivo,'type'=>mime_content_type('../files/pdf/' . $archivo),'tmp_name'=>'../files/pdf/' . $archivo,'error'=>0,'size'=>filesize('../files/pdf/' . $archivo)));
 
-
                         $post_data = $_POST;
                         if (isset($post_data['images'])) {
                             unset($post_data['images']);
+                        
                         }
-    
-                        $data_escalera = json_encode($post_data);
-                        $rspta = $servicio->finalizarActividadMantencion($data_escalera);
-                        $respuestamantencion = $rspta;
 
                         $logFile = fopen("log/".$nombre_log, 'a') or die("Error creando archivo");
                         fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Respuesta de finalizar actividad : ".$rspta) or die("Error escribiendo en el archivo");
                         fclose($logFile);  
 
-                        $dataarchivo = array(array('name' => $archivo,'type'=>mime_content_type('../files/pdf/' . $archivo),'tmp_name'=>'../files/pdf/' . $archivo,'error'=>0,'size'=>filesize('../files/pdf/' . $archivo)));
-                
-                        //En esta instancia cierro la actividad en SAP 
+
+                        //consulto si la actividad esta cerrada y su lista de attachment
                         $attachment = Query('Activities(' . $idactividad . ')?$select=AttachmentEntry,Closed');
                         $rspta = json_decode($attachment);
-                
+            
+                        // echo $idactividad;
+            
                         $idattachment = $rspta->AttachmentEntry . '';
                         $activityclosed = $rspta->Closed . '';
-                
-                        $rspta = UploadFile($dataarchivo, true, $idattachment);
-                        
-                        if ($porfirmar != "true"){
-                            $resultado = "Posponer";
-                            $nombre_completo = $_POST['nombre_completo'];
-                            $modulo = "finalizarsap";
-                            $log_dispositivo = $servicio->Dispositivo($actividadIDfi, $idservicio, $nombre_completo, $tiposervicio, $modulo, $nombre_log, $tipoequipo, $resultado);
-        
-                            $logFile = fopen("log/".$nombre_log, 'a') or die("Error creando archivo");
-                            fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Se cierra actividad por Posponer Firma") or die("Error escribiendo en el archivo");
-                            fclose($logFile);  
-                            break;
-                        }
-
-                        $respuesta = $respuestamantencion ? "Servicio finalizado con exito" : "El servicio no pudo ser finalizado";
-                        $resultado = $respuesta;
-                        $nombre_completo = $_POST['nombre_completo'];
-                        $modulo = "finalizarsap";
-                        $log_dispositivo = $servicio->Dispositivo($actividadIDfi, $idservicio, $nombre_completo, $tiposervicio, $modulo, $nombre_log, $tipoequipo, $resultado);
-
+            
+                        $rspta = UploadFile($data, true, $idattachment);//true: renombrar archivo y agregar timestamp
+            
                         if (!$idattachment) {
+                            //si la actividad esta cerrada y no existe lista de attachment asociada
+                            //la abro, actualizo la lista y luego se vuelve a cerrar
                             $swActClosed = true;
                             if (strtolower($activityclosed) == 'tyes') {
                                 $abrir = json_encode(array("Closed"=>"N"));
                                 EditardatosNum('Activities',$idactividad,$abrir);
-                                $swActClosed = false; 
+                                $swActClosed = false;
                             }
-                
+            
                             $rspta = json_decode($rspta);
                             if (isset($rspta->AbsoluteEntry)){
                                 $newattachment = Editardatos('Activities', $idactividad, '{AttachmentEntry:' . $rspta->AbsoluteEntry . '}', false);
                             }
-                
+            
                             if (!$swActClosed) {
                                 $abrir = json_encode(array("Closed"=>"Y"));
                                 EditardatosNum('Activities',$idactividad,$abrir);
                             }
                         }
-                        //unlink('../files/pdf/' . $archivo);
+
+                        if($porfirmar == true){
+                            $respuesta = "Posponer";
+                            $resultado = $respuesta;
+                            $nombre_completo = $_POST['nombre_completo'];
+                            $modulo = "finalizarsap";
+                            $log_dispositivo = $servicio->Dispositivo($actividadIDfi, $idservicio, $nombre_completo, $tiposervicio, $modulo, $nombre_log, $tipoequipo, $resultado);
+                        }else{
+                            $respuestamantencion = $rspta;
+                            $respuesta = $respuestamantencion ? "Servicio finalizado con exito" : "El servicio no pudo ser finalizado";
+                            $resultado = $respuesta;
+                            $nombre_completo = $_POST['nombre_completo'];
+                            $modulo = "finalizarsap";
+                            $log_dispositivo = $servicio->Dispositivo($actividadIDfi, $idservicio, $nombre_completo, $tiposervicio, $modulo, $nombre_log, $tipoequipo, $resultado);
+                
+                        }
+
+                        unlink('../files/pdf/' . $archivo);
 
                         $body = '
                         <html>
@@ -2616,7 +2622,13 @@ switch ($_GET["op"]) {
                             $logFile = fopen("log/".$nombre_log, 'a') or die("Error creando archivo");
                             fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Correo pudo ser enviado exitosamente") or die("Error escribiendo en el archivo");
                             fclose($logFile);
-                        }                         
+                        }                     
+                        
+                        if($idencuesta == 4){
+                            //no genero pdf ni envio por email si informe no es por firmar
+                            if ($porfirmar != "true")
+                                break;  
+                        }
                     }else{
                         //////////////////////////////////////////////////////////// ASCENSOR
                         ////////////////////////////////////////////////////////////
@@ -3995,6 +4007,7 @@ switch ($_GET["op"]) {
                 $log_dispositivo = $servicio->Dispositivo($_POST["actividadIDfi"], $datosactividad['value'][0]['srvCodigo'], $nombre_completo, $tiposervicio, $modulo, $nombre_log, $tipoequipo, $resultado);
 
                 if($opfirma=='2' || $opfirma == 2){
+
                 }else{
                     if ($_POST["oppre"] == "1"){
                         $body = '
@@ -5401,7 +5414,7 @@ switch ($_GET["op"]) {
             }else{
                 //Esto es MANTENCION-------------------------------------------------------------------
     
-                //Log
+
                 $logFile = fopen("log/".$nombre_log, 'a') or die("Error creando archivo");
                 fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Has entrado a firmar Mantención") or die("Error escribiendo en el archivo");
                 fclose($logFile);  
@@ -5461,7 +5474,6 @@ switch ($_GET["op"]) {
                 fwrite($logFile, "\n".date("d/m/Y H:i:s")." - ID Ascensor: ".$idascensor." - ID Encuesta: ".$idencuesta." - ID Servicio: ".$idservicio." - ID Actividad: ".$idactividad) or die("Error escribiendo en el archivo");
                 fclose($logFile);  
                 
-
                 $params['actividadsap'] = $datosactividad['value'][0];
                 $params['idservicio'] = $idservicio . '';
                 $params['idascensor'] = $idascensor . '';
@@ -5532,18 +5544,15 @@ switch ($_GET["op"]) {
 
                 $data = array(array('name' => $archivo,'type'=>mime_content_type('../files/pdf/' . $archivo),'tmp_name'=>'../files/pdf/' . $archivo,'error'=>0,'size'=>filesize('../files/pdf/' . $archivo)));
 
-                //consulto si la actividad esta cerrada y su lista de attachment
                 $attachment = Query('Activities(' . $idactividad . ')?$select=AttachmentEntry,Closed');
                 $rspta = json_decode($attachment);
 
                 $idattachment = $rspta->AttachmentEntry . '';
                 $activityclosed = $rspta->Closed . '';
 
-                $rspta = UploadFile($data, true, $idattachment);//true: renombrar archivo y agregar timestamp
+                $rspta = UploadFile($data, true, $idattachment);
 
                 if (!$idattachment) {
-                    //si la actividad esta cerrada y no existe lista de attachment asociada
-                    //la abro, actualizo la lista y luego se vuelve a cerrar
                     $swActClosed = true;
                     if (strtolower($activityclosed) == 'tyes') {
                         $abrir = json_encode(array("Closed"=>"N"));
@@ -7365,15 +7374,15 @@ switch ($_GET["op"]) {
 
         case 'formguardarfirmarinforme':
             ob_start();
-            $idencuesta = isset($_POST["idencuesta"]) ? limpiarCadena($_POST["idencuesta"]) : "";
-            $idinforme = isset($_REQUEST["idinforme"]) ? limpiarCadena($_REQUEST["idinforme"]) : "";
-            $nomcli = isset($_POST["nomcli"]) ? limpiarCadena($_POST["nomcli"]) : "";
-            $rutcli = isset($_POST["rutcli"]) ? limpiarCadena($_POST["rutcli"]) : "";
-            $celularcli = isset($_POST["celularcli"]) ? limpiarCadena($_POST["celularcli"]) : "";
-            $emailcli = isset($_POST["emailcli"]) ? limpiarCadena($_POST["emailcli"]) : "";
+            $idencuesta = 4;
+            $idinforme = isset($_POST["idinforme"]) ? limpiarCadena($_POST["idinforme"]) : "";
+            $nomcli = $_POST["nombre"];
+            $rutcli = isset($_POST["apellido"]) ? limpiarCadena($_POST["apellido"]) : "";
+            $celularcli = isset($_POST["rut"]) ? limpiarCadena($_POST["rut"]) : "";
+            $emailcli = isset($_POST["cargo"]) ? limpiarCadena($_POST["cargo"]) : "";
 
-            $firma2 = isset($_POST["firma2"]) ? limpiarCadena($_POST["firma2"]) : '';
-            $encoded_image = explode(",", $firma2) [1];
+            $firma2 = isset($_POST["firma"]) ? limpiarCadena($_POST["firma"]) : '';
+            $encoded_image = explode(",", $_POST["firma"]) [1];
             $decoded_image = base64_decode($encoded_image);
             $imgfirma = round(microtime(true)) . ".png";
             $patchfir = "../files/servicioequipo/firmas/" . $imgfirma;
@@ -7381,39 +7390,41 @@ switch ($_GET["op"]) {
 
             $estadovisita = 'terminado';
 
+            $nombre_log = "log_".$idinforme.".txt";
+
+            if(file_exists($nombre_log)){
+                $logFile = fopen("log/".$nombre_log, 'w') or die("Error creando archivo");
+                fclose($logFile);
+            }else{
+                $logFile = fopen("log/".$nombre_log, 'w') or die("Error creando archivo");
+            }
+
+            $logFile = fopen("log/".$nombre_log, 'w') or die("Error creando archivo");
+
+            $logFile = fopen("log/".$nombre_log, 'a') or die("Error creando archivo");
+            fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Este es un servicio que fue pospuesto su firma") or die("Error escribiendo en el archivo");
+            fclose($logFile);
+
             /*if (!$idcliente)
                 $idcliente = 0;*/
 
             switch($idencuesta)
             {
-                case 3: //informe de mantenimiento
-                    $params = [
-                        'firmacliente' => $imgfirma . '',
-                        'nomcli' => $nomcli . '',
-                        'rutcli' => $rutcli . '',
-                        'celularcli' => $celularcli . '',
-                        'emailcli' => $emailcli . '',
-                        'estado' => $estadovisita . '',
-                        'idinforme' => $idinforme . ''
-                    ];
-
-                    //SE MODIFICA LA VISITA
-                    $rspvisita = $encuesta->firmarVisita($params);
-
-                    echo '<br>FIRMA GUARDADA CORRECTAMENTE PARA EL INFORME Nº ' . $idinforme . '<br>';
-
-                break;
-
                 case 4: //informe de mantenimiento
                     $params = [
                         'firmacliente' => $imgfirma . '',
-                        'nomcli' => $nomcli . '',
+                        'nombrecliente' => $nomcli . '',
                         'rutcli' => $rutcli . '',
                         'celularcli' => $celularcli . '',
                         'emailcli' => $emailcli . '',
                         'estado' => $estadovisita . '',
                         'idinforme' => $idinforme . ''
                     ];
+
+                    
+                    $logFile = fopen("log/".$nombre_log, 'a') or die("Error creando archivo");
+                    fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Valores de params en caso 4 ". $params) or die("Error escribiendo en el archivo");
+                    fclose($logFile);
                     //SE MODIFICA LA VISITA
                     $rspvisita = $encuesta->firmarVisita($params);
 
@@ -7439,8 +7450,28 @@ switch ($_GET["op"]) {
             $params['idservicio'] = $idservicio . '';
             $params['idascensor'] = $idascensor . '';
             $params['idencuesta'] = $idencuesta . '';
+            $params['porfirmarescalera'] = "Por firmar";
 
             $params['firmabase64'] = $firma2 . '';
+
+            //Obtengo informacion de ID registrado
+            $obtener_imagen_base64_firma = $servicio->ObtenerImagenBase64($_POST['num_documento']);
+            $firma64 = $obtener_imagen_base64_firma['firma'];  
+            
+            $firmapng = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $firma64));
+            $archivofirma = "cli".time().".png";
+            $filepath = "../files/firma/".$archivofirma; // or image.jpg
+            file_put_contents($filepath, $firmapng);
+
+            $params['nombre_completo'] = $_POST['nombre_completo'];
+            $params['archivofirma'] = $archivofirma;
+            $params['filefir'] = $_POST['filefir'];
+            $params['num_documento'] = $_POST['num_documento'];
+
+            //Obtengo informacion de subida, del PDF
+            $params['modelo'] = $_POST['modelo'];
+            $params['interno'] = $_POST['interno'];
+            $params['edificio'] = $_POST['edificio'];
 
             $result = newPdf('informemantencion'.(($idencuesta == 4) ? 'escalera': ''), '', 'variable', $params);
 
@@ -7480,8 +7511,15 @@ switch ($_GET["op"]) {
                     EditardatosNum('Activities',$idactividad,$abrir);
                 }
             }
-
             unlink('../files/pdf/' . $archivo);
+
+            $respuesta = "Se ha cerrado con exito";
+            $resultado = $respuesta;
+            $nombre_completo = $_POST['nombre_completo'];
+            $modulo = "formguardarfirmarinforme";
+            $tiposervicio = "Mantención";
+            $tipoequipo = "Escalera";
+            $log_dispositivo = $servicio->Dispositivo($idactividad, $idservicio, $nombre_completo, $tiposervicio, $modulo, $nombre_log, $tipoequipo, $resultado);
 
             $body = '
                 <html>
@@ -7675,6 +7713,7 @@ switch ($_GET["op"]) {
             // $Mailer->AddStringAttachment($result, 'FM_IM' . $idvisita . '_EQ' . $idascensor . '_' . $periodo . '.pdf', 'base64', 'application/pdf');
 
             // // $Mailer->addAddress('vvasquez@fabrimetalsa.cl');
+            $Mailer->addAddress('jaguilera@fabrimetalsa.cl');
             //correo con copia al que recibe el equipo
             // // $Mailer->addAddress('ocmchile@gmail.com');
             if (trim($emailcli)) {

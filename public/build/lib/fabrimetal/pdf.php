@@ -391,18 +391,31 @@ function newPdf($opcion, $data = '', $output = 'browser', $params = array()) {
                         $t->assign('idcliente', trim($row['cliCodigo']) . '');
                     }
                 }
+
+                if(isset($params['porfirmarescalera'])){
+                    $t->assign('modelo', $params['modelo'] . '');
+                    $t->assign('obra', $params['edificio'] . '');
+                    $t->assign('ascensor', $params['interno'] . '');
+                }else{
+                    $modelo = $item['modelo'] . '';
+                }
+
                 //$t->assign('obra', $item['nomedificio'] . '');
                 //$t->assign('ascensor', $item['codigo'] . '');
-                $modelo = $item['modelo'] . '';
                 //$tipoascensor = $item['tipoascensor'] . '';
                 $idascensor = $item['infv_ascensor'] . '';
                 $fechavisita = $item['infv_fecha'] . '';
                 //$t->assign('modelo', $modelo . '');
-                $t->assign('tipoascensor', $tipoascensor . '');
                 $t->assign('supervisor', $item['supervisor'] . '');
                 $t->assign('nomuser', $item['nomusuario'] . '');
                 $t->assign('rutuser', $item['num_documento'] . '');
                 $t->assign('nomcli', mb_strtoupper($item['infv_nomcli']) . '');
+                if($item['infv_nomcli'] !== "" || $item['infv_nomcli'] == " "){
+                    $t->assign('nomcli', mb_strtoupper($item['infv_nomcli']) . '');
+                }else{
+                    $t->assign('nomcli', mb_strtoupper($params['nombrecliente']) . '');
+                }
+
                 $t->assign('rutcli', mb_strtoupper($item['infv_rutcli']) . '');
                 $t->assign('celularcli', mb_strtoupper($item['infv_celularcli']) . '');
                 $t->assign('emailcli', mb_strtoupper($item['infv_emailcli']) . '');

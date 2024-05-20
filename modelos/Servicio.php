@@ -805,6 +805,133 @@ class Servicio
 		return true;
 	}
 
+
+	
+	public function finalizarActividadMantencionEscalera($data)
+	{
+		$logFile = fopen("log/log.txt", 'a') or die("Error creando archivo");
+		fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Data dentro de modelo : ".$data) or die("Error escribiendo en el archivo");
+		fclose($logFile);  
+
+		$dataObject = json_decode($data);
+	
+		if (isset($dataObject->estadofintext)) {
+			$estadofintext = $dataObject->estadofintext;
+		} else {
+			$estadofintext = $dataObject->estadoascensor;
+		}
+	
+		if (isset($dataObject->terceros) && $dataObject->terceros == "true") {
+			$terceros = 'Si';
+		} else {
+			$terceros = 'No';
+		}
+
+			$arrayData = $dataObject; // Usa $dataObject directamente
+	
+			// Eliminar las claves específicas
+			unset($arrayData->preg);
+			unset($arrayData->firma);
+			unset($arrayData->nombreArchivo);
+			unset($arrayData->nombreArchivo);
+
+			$data = $arrayData;
+		
+			if (isset($data->estadofintext)) {
+				$estadofintext = $data->estadofintext;
+			} else {
+				$estadofintext = $data->estadoascensor;
+			}
+			$entity = 'Activities';
+			$id = $data->actividadIDfi;
+			if ($data->opfirma == 2) {
+				$firma = 'Y';
+				$status = 5;
+			} else {
+				$firma = 'N';
+				$status = ((isset($data->terminado) && $data->terminado == 'y') ? 1 : '-3');
+			}
+			if (isset($data->guiafimada)) {
+				if($_POST['idSAP']){
+					$actividad = array("HandledByEmployee" => $_POST['idSAP'], "Closed" => "Y", "U_PorFirmar" => $firma, "EndDueDate" => date("Y-m-d"), "EndTime" => date("H:i:s"), "AttachmentEntry" => $data->guiafimada, "Notes" => $data->observacionfi, "U_EstadoFin" => $estadofintext, "U_GPSFin" => $data->latitudfi . ',' . $data->longitudfi, "U_OBSINTERNA" => $data->observacionint);
+				}
+				if ($data->opayu == 'S') {
+					$actividad["U_TieneAyudante"] = $data->opayu;
+					if (isset($data->idayud1) && !empty($data->idayud1)) {
+						$actividad["U_AYUDANTE1"] = $data->idayud1;
+					}
+					if (isset($data->idayud2) && !empty($data->idayud2)) {
+						$actividad["U_AYUDANTE2"] = $data->idayud2;
+					}
+				}
+				$actividad = json_encode($actividad);
+			} else {
+				if($_POST['idSAP']){
+					$actividad = array("HandledByEmployee" => $_POST['idSAP'], "Closed" => "Y", "U_PorFirmar" => $firma, "EndDueDate" => date("Y-m-d"), "EndTime" => date("H:i:s"), "Notes" => $data->observacionfi, "U_EstadoFin" => $estadofintext, "U_GPSFin" => $data->latitudfi . ',' . $data->longitudfi, "U_OBSINTERNA" => $data->observacionint);
+				}
+				if ($data->opayu == 'S') {
+					$actividad["U_TieneAyudante"] = $data->opayu;
+					if (isset($data->idayud1) && !empty($data->idayud1)) {
+						$actividad["U_AYUDANTE1"] = $data->idayud1;
+					}
+					if (isset($data->idayud2) && !empty($data->idayud2)) {
+						$actividad["U_AYUDANTE2"] = $data->idayud2;
+					}
+				}
+				$actividad = json_encode($actividad);
+			}
+			//echo '<pre>';print_r($actividad);echo '</pre><br><br>'.$terceros;die;
+			$rsptaactv = EditardatosNum($entity, $id, $actividad);
+
+			//LOG
+			$logFile = fopen("log/log.txt", 'a') or die("Error creando archivo");
+			fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Actividad  : ".$entity." - ID :".$id." - Info :".$actividad) or die("Error escribiendo en el archivo");
+			fclose($logFile);  
+
+			$actividadID = $data->actividadIDfi !== null || $data->actividadIDfi !== '' ? intval($data->actividadIDfi) : 0;
+			$sql = "INSERT INTO logactividad (actividadID,data) VALUES ($actividadID,'$actividad')";
+			ejecutarConsulta($sql);
+			error_log($sql);
+			//LOG
+			$logFile = fopen("log/log.txt", 'a') or die("Error creando archivo");
+			fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Log Actividad  : ".ejecutarConsulta($sql)." - ActividadID ".$actividadID." - Actividad ".$actividad ) or die("Error escribiendo en el archivo");
+			fclose($logFile);
+
+			$entity = 'CustomerEquipmentCards';
+			$select = '*';
+			$filter = "CustomerCode eq '".$data->customercodefi."' and InternalSerialNum eq '".$data->codigoEquipo."'";
+			$equipo = json_decode(ConsultaEntity($entity,$select,$filter), true);
+			$idascensor = $equipo['value'][0]['EquipmentCardNum'];
+			//LOG
+			$logFile = fopen("log/log.txt", 'a') or die("Error creando archivo");
+			fwrite($logFile, "\n".date("d/m/Y H:i:s")." - ID Ascensor  : ".$idascensor ) or die("Error escribiendo en el archivo");
+			fclose($logFile);  
+			
+			$entity = 'CustomerEquipmentCards';
+			$id = $idascensor;
+			$servicecall = json_encode(array("U_NX_ESTADOFM" => $data->idestadofi));
+			$editarEquipo = EditardatosNum($entity, $id, $servicecall);
+			error_log($editarEquipo);
+			//LOG
+			$logFile = fopen("log/log.txt", 'a') or die("Error creando archivo");
+			fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Editar Tarjeta de Equipo  : ".$editarEquipo." - Entidad ".$entity." - ID ".$id." - Servicecall ".$servicecall) or die("Error escribiendo en el archivo");
+			fclose($logFile);  
+
+
+			$entity = 'ServiceCalls';
+			$id = intval($data->servicecallIDfi);
+			$servicecall = json_encode(array("Status" => $status, "U_FallaTercero" => $terceros));
+			$EditarServicio = EditardatosNum($entity, $id, $servicecall);
+			error_log($EditarServicio);
+			//LOG
+			$logFile = fopen("log/log.txt", 'a') or die("Error creando archivo");
+			fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Editar Servicio  : ".$EditarServicio." - Entidad ".$entity." - ID ".$id." - Servicecall ".$servicecall) or die("Error escribiendo en el archivo");
+			fclose($logFile);  
+
+		return true;
+	}
+
+
 	public function SelectTecnico()
 	{
 		$query = '$crossjoin(EmployeesInfo, EmployeesInfo/EmployeeRolesInfoLines, EmployeeRolesSetup)?$expand=EmployeesInfo($select=EmployeeID,FirstName,LastName)&$filter=EmployeesInfo/EmployeeID eq EmployeesInfo/EmployeeRolesInfoLines/EmployeeID and EmployeesInfo/EmployeeRolesInfoLines/RoleID eq EmployeeRolesSetup/TypeID and EmployeeRolesSetup/TypeID eq -2';

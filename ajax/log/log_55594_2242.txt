@@ -1,0 +1,9 @@
+
+20/05/2024 09:14:47 - Estado Operativo
+20/05/2024 09:14:47 - Tu servicio es Mantención y es un/a Escalera
+20/05/2024 09:14:47 - Ha entrado a Mantención
+20/05/2024 09:14:47 - Actividad: 55594 - Servicio: 511623
+20/05/2024 09:14:47 - Estado decidido por Usuario es: porfirmar
+20/05/2024 09:14:47 - ID Encuesta: 4
+20/05/2024 09:14:47 - ID Visita : 42352
+20/05/2024 09:14:47 - Respuesta Encuesta : 1

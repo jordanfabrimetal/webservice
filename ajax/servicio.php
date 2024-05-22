@@ -4341,6 +4341,7 @@ switch ($_GET["op"]) {
             $firma_real = $_POST['firma_real'];
             $idservicio = $_POST['idservicio'];
             $opfirma = 1;
+            $_POST['opfirma'] = $opfirma;
             $nombresfi = $_POST['nombre'];
             $apellidosfi = $_POST['apellido'];
             $rut = $_POST['rut']; 
@@ -4351,6 +4352,10 @@ switch ($_GET["op"]) {
             $idactividad = $_POST['idactividad'];
             $estadoascensor = $_POST['actEstEquiFin'];
             $tipoequipo = $_POST['Tipoequipo'];
+            $latitudfi = "-33.3843642";
+            $longitudfi = "-70.7761638";
+            $_POST['latitudfi'] = $latitudfi;
+            $_POST['longitudfi'] = $longitudfi;
             if($estadoascensor == 01 || $estadoascensor == '01' || $estadoascensor == "OPERATIVO"){
                 $estadoascensor = "OPERATIVO";
                 $_POST['estadoascensor'] = "OPERATIVO";
@@ -4359,6 +4364,7 @@ switch ($_GET["op"]) {
                 $_POST['estadoascensor'] = "DETENIDO";
             }
             $observacionfi = $_POST['actComentario'];
+            $_POST['observacionfi'] = $_POST['actComentario'];
             $email = $_POST['email'];
 
             $nombre_log = "log_".$idactividad."_".$idSAP.".txt";

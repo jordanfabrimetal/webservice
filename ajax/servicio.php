@@ -5115,6 +5115,13 @@ switch ($_GET["op"]) {
                         }
                     }
 
+                    if (!$idattachment) {
+                        $_POST['guiafimada'] = intval($rspta->AbsoluteEntry);
+                    }else{
+                        $_POST['guiafimada'] = intval($idattachment);
+                    }
+
+
                     $Mailer = new PHPMailer();
     
                     $Mailer->isSMTP();
@@ -5559,6 +5566,47 @@ switch ($_GET["op"]) {
                     $_POST['servicecallIDfi'] = $idservicio;
                     $_POST['idserfirma'] = $idservicio;
                     $idservicio = $_POST['idservicio'];
+
+                    $result = newPdf('informemantencionnuevo', '', 'variable', $params);
+    
+                    $archivo = 'Informe_Servicio_' . $idservicio . '_' . $idascensor . '_' . $periodo . '.pdf';
+                    file_put_contents('../files/pdf/' . $archivo, $result);
+    
+                    $data = array(array('name' => $archivo,'type'=>mime_content_type('../files/pdf/' . $archivo),'tmp_name'=>'../files/pdf/' . $archivo,'error'=>0,'size'=>filesize('../files/pdf/' . $archivo)));
+    
+                    $attachment = Query('Activities(' . $idactividad . ')?$select=AttachmentEntry,Closed');
+                    $rspta = json_decode($attachment);
+    
+                    $idattachment = $rspta->AttachmentEntry . '';
+                    $activityclosed = $rspta->Closed . '';
+    
+                    $rspta = UploadFile($data, true, $idattachment);
+
+                    if (!$idattachment) {
+                        $swActClosed = true;
+                        if (strtolower($activityclosed) == 'tyes') {
+                            $abrir = json_encode(array("Closed"=>"N"));
+                            EditardatosNum('Activities',$idactividad,$abrir);
+                            $swActClosed = false;
+                        }
+    
+                        $rspta = json_decode($rspta);
+                        if (isset($rspta->AbsoluteEntry)){
+                            $newattachment = Editardatos('Activities', $idactividad, '{AttachmentEntry:' . $rspta->AbsoluteEntry . '}', false);
+                        }
+    
+                        if (!$swActClosed) {
+                            $abrir = json_encode(array("Closed"=>"Y"));
+                            EditardatosNum('Activities',$idactividad,$abrir);
+                        }
+                    }
+
+                    if (!$idattachment) {
+                        $_POST['guiafimada'] = intval($rspta->AbsoluteEntry);
+                    }else{
+                        $_POST['guiafimada'] = intval($idattachment);
+                    }
+
                     $data = json_encode($_POST);
 
                     //Log
@@ -5583,40 +5631,6 @@ switch ($_GET["op"]) {
                     $nombre_completo = $nombre_usuario.' '.$apellido_usuario;
                     $modulo = "firmapendiente";
                     $log_dispositivo = $servicio->Dispositivo($actividadIDfi , $srvCodigo, $nombre_completo, $llamada, $modulo, $nombre_log, $tipoequipo, $resultado);
-    
-                    $result = newPdf('informemantencionnuevo', '', 'variable', $params);
-    
-                    $archivo = 'Informe_Servicio_' . $idservicio . '_' . $idascensor . '_' . $periodo . '.pdf';
-                    file_put_contents('../files/pdf/' . $archivo, $result);
-    
-                    $data = array(array('name' => $archivo,'type'=>mime_content_type('../files/pdf/' . $archivo),'tmp_name'=>'../files/pdf/' . $archivo,'error'=>0,'size'=>filesize('../files/pdf/' . $archivo)));
-    
-                    $attachment = Query('Activities(' . $idactividad . ')?$select=AttachmentEntry,Closed');
-                    $rspta = json_decode($attachment);
-    
-                    $idattachment = $rspta->AttachmentEntry . '';
-                    $activityclosed = $rspta->Closed . '';
-    
-                    $rspta = UploadFile($data, true, $idattachment);
-    
-                    if (!$idattachment) {
-                        $swActClosed = true;
-                        if (strtolower($activityclosed) == 'tyes') {
-                            $abrir = json_encode(array("Closed"=>"N"));
-                            EditardatosNum('Activities',$idactividad,$abrir);
-                            $swActClosed = false;
-                        }
-    
-                        $rspta = json_decode($rspta);
-                        if (isset($rspta->AbsoluteEntry)){
-                            $newattachment = Editardatos('Activities', $idactividad, '{AttachmentEntry:' . $rspta->AbsoluteEntry . '}', false);
-                        }
-    
-                        if (!$swActClosed) {
-                            $abrir = json_encode(array("Closed"=>"Y"));
-                            EditardatosNum('Activities',$idactividad,$abrir);
-                        }
-                    }
     
                     $body = '<html>
                             <head>
@@ -6183,35 +6197,6 @@ switch ($_GET["op"]) {
                         $params['modelo'] = $_POST['modelo'];
                         $params['interno'] = $_POST['interno'];
                         $params['edificio'] = $_POST['edificio'];
-
-                        $rspta = $encuesta->infoEquipo($idservicio);
-                        $rsptaJson = json_decode($rspta, true); //true para que sea array, no objeto
-                        $data = Array();
-            
-                        if ($rspta != 'NODATASAP') {
-                            foreach($rsptaJson as $row){
-                                $obra = $row['equEdificio'];
-                                $ascensor = $row['equSnInterno'];
-                                $modelo = $row['artModelo'];
-                                $tipoascensor = $row['artTipoEquipo'];
-                                $supervisor = $row['tecNombre'] . ' ' . $row['tecApellido'];
-                                $empresa = trim($row['cliNombre']);
-                                $direccion = trim($row['equCalle'] . ' ' . $row['equCalleNro']);
-                                $idcliente = trim($row['cliCodigo']);
-                            }
-                        }
-                                                
-                        $_POST['customercodefi'] = $idcliente;
-                        $_POST['codigoEquipo'] = $params['interno'];
-                        $_POST['servicecallIDfi'] = $idservicio;
-
-                        $data = json_encode($_POST);
-                        $rspta_finalizar = $servicio->finalizarActividadPorFirmar($data);
-
-                        //Log
-                        $logFile = fopen("log/".$nombre_log, 'a') or die("Error creando archivo");
-                        fwrite($logFile, "\n".date("d/m/Y H:i:s")." - respuesta de finalizar actividad: ".$rspta_finalizar) or die("Error escribiendo en el archivo");
-                        fclose($logFile);   
         
                         $result = newPdf('informemantencion'.(($idencuesta == 4) ? 'escalera': ''), '', 'variable', $params);
 
@@ -6223,7 +6208,7 @@ switch ($_GET["op"]) {
                         $attachment = Query('Activities(' . $idactividad . ')?$select=AttachmentEntry,Closed');
                         $rspta = json_decode($attachment);
         
-                        $idattachment = $rspta->AttachmentEntry . '';
+                        $idattachment = intval($rspta->AttachmentEntry) . '';
                         $activityclosed = $rspta->Closed . '';
         
                         $rspta = UploadFile($data, true, $idattachment);
@@ -6246,22 +6231,15 @@ switch ($_GET["op"]) {
                                 EditardatosNum('Activities',$idactividad,$abrir);
                             }
                         }
+    
+                        if (!$idattachment) {
+                            $_POST['guiafimada'] = intval($rspta->AbsoluteEntry);
+                        }else{
+                            $_POST['guiafimada'] = intval($idattachment);
+                        }
+    
 
                         unlink('../files/pdf/' . $archivo);
-
-                        $idSAP = $_POST['idSAP'];
-                        $obteniendo_usuario = $servicio->UsuarioCompleto($idSAP);
-                        $nombre_usuario = $obteniendo_usuario['value'][0]['FirstName'];
-                        $apellido_usuario = $obteniendo_usuario['value'][0]['LastName'];
-                        $nombre_completo = $nombre_usuario.' '.$apellido_usuario;
-
-                        $respuesta = "Se ha cerrado con exito";
-                        $resultado = $respuesta;
-                        $nombre_completo = $_POST['nombre_completo'];
-                        $modulo = "formguardarfirmarinforme";
-                        $tiposervicio = "Mantención";
-                        $tipoequipo = "Escalera";
-                        $log_dispositivo = $servicio->Dispositivo($idactividad, $idservicio, $nombre_completo, $tiposervicio, $modulo, $nombre_log, $tipoequipo, $resultado);
 
                         $body = '
                             <html>
@@ -6473,6 +6451,49 @@ switch ($_GET["op"]) {
                         // // $Mailer->addAddress($reg->email, '');
                         $Mailer->send();
 
+                        $rspta = $encuesta->infoEquipo($idservicio);
+                        $rsptaJson = json_decode($rspta, true); //true para que sea array, no objeto
+                        $data = Array();
+            
+                        if ($rspta != 'NODATASAP') {
+                            foreach($rsptaJson as $row){
+                                $obra = $row['equEdificio'];
+                                $ascensor = $row['equSnInterno'];
+                                $modelo = $row['artModelo'];
+                                $tipoascensor = $row['artTipoEquipo'];
+                                $supervisor = $row['tecNombre'] . ' ' . $row['tecApellido'];
+                                $empresa = trim($row['cliNombre']);
+                                $direccion = trim($row['equCalle'] . ' ' . $row['equCalleNro']);
+                                $idcliente = trim($row['cliCodigo']);
+                            }
+                        }
+                                                
+                        $_POST['customercodefi'] = $idcliente;
+                        $_POST['codigoEquipo'] = $params['interno'];
+                        $_POST['servicecallIDfi'] = $idservicio;
+
+                        $data = json_encode($_POST);
+                        $rspta_finalizar = $servicio->finalizarActividadPorFirmar($data);
+
+                        //Log
+                        $logFile = fopen("log/".$nombre_log, 'a') or die("Error creando archivo");
+                        fwrite($logFile, "\n".date("d/m/Y H:i:s")." - respuesta de finalizar actividad: ".$rspta_finalizar) or die("Error escribiendo en el archivo");
+                        fclose($logFile);   
+
+
+                        $idSAP = $_POST['idSAP'];
+                        $obteniendo_usuario = $servicio->UsuarioCompleto($idSAP);
+                        $nombre_usuario = $obteniendo_usuario['value'][0]['FirstName'];
+                        $apellido_usuario = $obteniendo_usuario['value'][0]['LastName'];
+                        $nombre_completo = $nombre_usuario.' '.$apellido_usuario;
+
+                        $respuesta = "Se ha cerrado con exito";
+                        $resultado = $respuesta;
+                        $nombre_completo = $_POST['nombre_completo'];
+                        $modulo = "formguardarfirmarinforme";
+                        $tiposervicio = "Mantención";
+                        $tipoequipo = "Escalera";
+                        $log_dispositivo = $servicio->Dispositivo($idactividad, $idservicio, $nombre_completo, $tiposervicio, $modulo, $nombre_log, $tipoequipo, $resultado);
                     }
                 }
 

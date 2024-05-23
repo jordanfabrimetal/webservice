@@ -1038,7 +1038,7 @@ class Servicio
 		}
 
 		/////////////////////////////////////////////////////////////
-		$rsptaactv = EditardatosNum($entity, $id, $actividad);///////---------------------------> Aqui Falla.
+		$rsptaactv = EditardatosNum($entity, $id, $actividad);///////
 		/////////////////////////////////////////////////////////////
 
 		$entity = 'ServiceCalls';

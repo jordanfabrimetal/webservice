@@ -302,15 +302,15 @@ class Servicio
 		return json_encode($data);
 	}
 
-	public function finalizarActividadAndroid($data, $actividadIDfi, $guiafimada){
+	public function finalizarActividadAndroid($data){
 			$data = json_decode($data);
 
 			$entity = 'Activities';
-			$id = $actividadIDfi;
+			$id = $data->actividadIDfi;
 			$firma = 'N';
 			$status = 1;
-			if (isset($guiafimada)) {
-					$actividad = json_encode(array("Closed" => "Y", "U_PorFirmar" => $firma, "AttachmentEntry" => $guiafimada));
+			if (isset($data->guiafimada)) {
+					$actividad = json_encode(array("Closed" => "Y", "U_PorFirmar" => $firma, "AttachmentEntry" => $data->guiafimada));
 			} else {
 					$actividad = json_encode(array("Closed" => "Y", "U_PorFirmar" => $firma));
 			}
@@ -318,7 +318,7 @@ class Servicio
 
 			$entity = 'ServiceCalls';
 			$id = $data->servicecallIDfi;
-			$terceros = 'no';
+			$terceros = 'No';
 			$servicecall = json_encode(array("Status" => $status, "U_FallaTercero" => $terceros));
 			$rsptaservcall = EditardatosNum($entity, $id, $servicecall);
 
@@ -999,7 +999,8 @@ class Servicio
 
 		$abrir = json_encode(array("Closed" => "N"));
 		EditardatosNum($entity, $id, $abrir);
-		$rsptaactv = EditardatosNum($entity, $id, $actividad);
+
+		//$rsptaactv = EditardatosNum($entity, $id, $actividad);
 
 		$entity = 'ServiceCalls';
 		$id = $data->idserfirma;
@@ -1011,27 +1012,40 @@ class Servicio
 	public function finalizarActividadPorFirmar($data)
 	{
 		$data = json_decode($data);
-		//echo '<pre>';print_r($data);echo '</pre>';die;
 
 		$entity = 'Activities';
-		$id = $data->idactividad;
+		$id = intval($data->idactividad);
 		$firma = 'N';
 		$status = 1;
 
-		if (isset($data->guiafimada)) {
-			$actividad = json_encode(array("Closed" => "Y", "U_PorFirmar" => $firma, "AttachmentEntry" => $data->guiafimada));
-		} else {
-			$actividad = json_encode(array("Closed" => "Y", "U_PorFirmar" => $firma));
-		}
-
+		// Crear el array de datos para actualizar en SAP
 		$abrir = json_encode(array("Closed" => "N"));
 		EditardatosNum($entity, $id, $abrir);
-		$rsptaactv = EditardatosNum($entity, $id, $actividad);
+
+		if (isset($data->guiafimada)) {
+			$actividad = json_encode(array(
+				"HandledByEmployee" => intval($data->idSAP),
+				"Closed" => "Y",
+				"U_PorFirmar" => $firma,
+				"AttachmentEntry" => $data->guiafimada
+			));
+		} else {
+			$actividad = json_encode(array(
+				"HandledByEmployee" => intval($data->idSAP),
+				"Closed" => "Y",
+				"U_PorFirmar" => $firma
+			));
+		}
+
+		/////////////////////////////////////////////////////////////
+		$rsptaactv = EditardatosNum($entity, $id, $actividad);///////---------------------------> Aqui Falla.
+		/////////////////////////////////////////////////////////////
 
 		$entity = 'ServiceCalls';
 		$id = $data->idserfirma;
 		$servicecall = json_encode(array("Status" => $status));
 		$rsptaservcall = EditardatosNum($entity, $id, $servicecall);
+
 		return true;
 	}
 

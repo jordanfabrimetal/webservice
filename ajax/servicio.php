@@ -764,10 +764,10 @@ switch ($_GET["op"]) {
             }
 
             $respemail = $tecnico->Email($idserviciofi);
-            $Mailer->addAddress($respemail["email"], '');
+            //$Mailer->addAddress($respemail["email"], '');
 
             $respsup = $tecnico->EmailSup($idserviciofi);
-            $Mailer->addAddress($respsup["email"], '');
+            //$Mailer->addAddress($respsup["email"], '');
 
 
             if (!$Mailer->send()) {
@@ -1399,14 +1399,14 @@ switch ($_GET["op"]) {
             $rspta = $email->email($idserfirma);
 
             while ($reg = $rspta->fetch_object()) {
-            //    $Mailer->addAddress($reg->email, '');
+            //    //$Mailer->addAddress($reg->email, '');
             }
 
             $respemail = $tecnico->Email($idserfirma);
-            $Mailer->addAddress($respemail["email"], '');
+            ////$Mailer->addAddress($respemail["email"], '');
 
             $respsup = $tecnico->EmailSup($idserfirma);
-            $Mailer->addAddress($respsup["email"], '');
+            //$Mailer->addAddress($respsup["email"], '');
 
 
             if (!$Mailer->send()) {
@@ -2593,12 +2593,12 @@ switch ($_GET["op"]) {
                         $Mailer->Subject = "Informe de Mantenimiento N° " . $idservicio;
                         $Mailer->msgHTML($body);
                         $Mailer->AddStringAttachment($result, $archivo, 'base64', 'application/pdf');
-                        $Mailer->addAddress('vvasquez@fabrimetalsa.cl');
-                        $Mailer->addAddress($_POST['email']);
+                        //$Mailer->addAddress('vvasquez@fabrimetalsa.cl');
+                        //$Mailer->addAddress($_POST['email']);
                         $Mailer->addAddress('jaguilera@fabrimetalsa.cl');
 
                         if (trim($emailcli)) {
-                            $Mailer->addAddress(trim($emailcli)); //to: cliente que firmo
+                            //$Mailer->addAddress(trim($emailcli)); //to: cliente que firmo
                             if ($_SESSION['email']){
                                 $Mailer->addCC($_SESSION['email']); //cc: usuario logeado
                             }else{
@@ -2607,7 +2607,7 @@ switch ($_GET["op"]) {
                         }
                         else {
                             if ($_SESSION['email'])
-                                $Mailer->addAddress($_SESSION['email']);
+                                //$Mailer->addAddress($_SESSION['email']);
                         }
                         if (!$Mailer->send()) {
                             echo "Error al enviar correo: " . $Mailer->ErrorInfo . "<br>";
@@ -2887,7 +2887,7 @@ switch ($_GET["op"]) {
                             $Mailer->addAttachment('../files/pdf/' . $archivo);
                             //usuario logeado (tecnico)
                             if ($_POST['email']){
-                                $Mailer->addAddress($_POST['email']);
+                                //$Mailer->addAddress($_POST['email']);
                                 $logFile = fopen("../log.txt", 'a') or die("Error creando archivo");
                                 fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Ha sido enviado a tu correo con PDF") or die("Error escribiendo en el archivo");
                                 fclose($logFile);
@@ -2895,22 +2895,22 @@ switch ($_GET["op"]) {
 
                             //supervisor del tecnico
                             if(!empty($datosactividad['value'][0]['equSupEmail'])){
-                                $Mailer->addAddress($datosactividad['value'][0]['equSupEmail'], '');
+                                //$Mailer->addAddress($datosactividad['value'][0]['equSupEmail'], '');
                             }
                                 
                             //agrega cuando sea Ingenieria de Campo
                             if($datosactividad['value'][0]['srvTipoLlamadaId'] == 16){
-                                $Mailer->addAddress('finostroza@fabrimetal.cl','');
-                                $Mailer->addAddress('igalvez@fabrimetal.cl','');
+                                //$Mailer->addAddress('finostroza@fabrimetal.cl','');
+                                //$Mailer->addAddress('igalvez@fabrimetal.cl','');
                             }
                                 
                             // agrega cuando sea Reparaciones
                             if($datosactividad['value'][0]['srvTipoLlamadaId'] == 2){
-                                $Mailer->addAddress('mmonares@fabrimetal.cl','');
-                                $Mailer->addAddress('paraneda@fabrimetal.cl','');
+                                //$Mailer->addAddress('mmonares@fabrimetal.cl','');
+                                //$Mailer->addAddress('paraneda@fabrimetal.cl','');
                             }
                                 
-                            $Mailer->addAddress('jaguilera@fabrimetalsa.cl','');
+                            //$Mailer->addAddress('jaguilera@fabrimetalsa.cl','');
                                 
                             //contactos del cliente
                             $select = 'ContactEmployees';
@@ -2920,12 +2920,12 @@ switch ($_GET["op"]) {
                             if(count($contactos['ContactEmployees']) > 0){
                                 foreach($contactos['ContactEmployees']  as $key => $val){
                                     if(!empty($val['E_Mail']) && $val['EmailGroupCode'] == 'GSE'){
-                                        $Mailer->addAddress($val['E_Mail'], $val['FirstName'].' '.$val['LastName']);
+                                        //$Mailer->addAddress($val['E_Mail'], $val['FirstName'].' '.$val['LastName']);
                                     }
                                 }
                             }
 
-                            $Mailer->addAddress('vvasquez@fabrimetal.cl');
+                            //$Mailer->addAddress('vvasquez@fabrimetal.cl');
                             if (!$Mailer->send()) {
                                 echo "Error al enviar correo: " . $Mailer->ErrorInfo . "<br>";
                                 //Log
@@ -3124,14 +3124,14 @@ switch ($_GET["op"]) {
                                 $Mailer->msgHTML($body);
                         
                                 //FALTA AGREGAR CORREO DEL SUPERVISOR, JEFE DE SERVICIO Y CLIENTE
-                                $Mailer->addAddress($datosactividad['value'][0]['equSupEmail']);
+                                //$Mailer->addAddress($datosactividad['value'][0]['equSupEmail']);
                                 $Mailer->addCC('jaguilera@fabrimetalsa.cl');
-                                $Mailer->addAddress('vvasquez@fabrimetal.cl');
+                                //$Mailer->addAddress('vvasquez@fabrimetal.cl');
 
                                 if ($_POST['email']){
-                                    $Mailer->addAddress($_POST['email']);
+                                    //$Mailer->addAddress($_POST['email']);
                                 }
-                                $Mailer->addAddress('dmediavilla@fabrimetal.cl');
+                                //$Mailer->addAddress('dmediavilla@fabrimetal.cl');
                                     
                                 $select = 'ContactEmployees';
                                 $entity = "BusinessPartners";
@@ -3140,7 +3140,7 @@ switch ($_GET["op"]) {
                                 if(count($contactos['ContactEmployees']) > 0){
                                     foreach($contactos['ContactEmployees']  as $key => $val){
                                         if(!empty($val['E_Mail']) && $val['EmailGroupCode'] == 'GSE'){
-                                            $Mailer->addAddress($val['E_Mail'], $val['FirstName'].' '.$val['LastName']);
+                                            //$Mailer->addAddress($val['E_Mail'], $val['FirstName'].' '.$val['LastName']);
                                         }
                                     }
                                 }
@@ -3934,26 +3934,26 @@ switch ($_GET["op"]) {
 
                     //usuario logeado (tecnico)
                     if ($_SESSION['email']){
-                        $Mailer->addAddress($_SESSION['email']);
+                        //$Mailer->addAddress($_SESSION['email']);
                     }else if($_POST['email']){
-                        $Mailer->addAddress($_POST['email']);
+                        //$Mailer->addAddress($_POST['email']);
                     }
 
                     //supervisor del tecnico
                     if(!empty($datosactividad['value'][0]['equSupEmail'])){
-                         $Mailer->addAddress($datosactividad['value'][0]['equSupEmail'], '');
+                         //$Mailer->addAddress($datosactividad['value'][0]['equSupEmail'], '');
                     }
 
                      $Mailer->addAddress('jaguilera@fabrimetalsa.cl');
 
                     if($datosactividad['value'][0]['srvTipoLlamadaId'] == 16){
-                         $Mailer->addAddress('upino@fabrimetal.cl','');
+                         //$Mailer->addAddress('upino@fabrimetal.cl','');
                     }
                     
                     //agrega cuando sea Reparaciones
                     if($datosactividad['value'][0]['srvTipoLlamadaId'] == 2){
-                         $Mailer->addAddress('mmonares@fabrimetal.cl','');
-                        $Mailer->addAddress('paraneda@fabrimetal.cl','');                
+                         //$Mailer->addAddress('mmonares@fabrimetal.cl','');
+                        //$Mailer->addAddress('paraneda@fabrimetal.cl','');                
                     }
                     
                     //contactos del cliente
@@ -3964,11 +3964,11 @@ switch ($_GET["op"]) {
                      if(count($contactos['ContactEmployees']) > 0){
                         foreach($contactos['ContactEmployees']  as $key => $val){
                              if(!empty($val['E_Mail']) && $val['EmailGroupCode'] == 'GSE'){
-                                 $Mailer->addAddress($val['E_Mail'], $val['FirstName'].' '.$val['LastName']);
+                                 //$Mailer->addAddress($val['E_Mail'], $val['FirstName'].' '.$val['LastName']);
                              }
                          }
                      }
-                    $Mailer->addAddress('vvasquez@fabrimetal.cl');
+                    //$Mailer->addAddress('vvasquez@fabrimetal.cl');
 
                     if (!$Mailer->send()) {
                         echo "Error al enviar correo: " . $Mailer->ErrorInfo . "<br>";
@@ -4185,7 +4185,7 @@ switch ($_GET["op"]) {
                         $Mailer->msgHTML($body);
 
                          $Mailer->addAddress('jaguilera@fabrimetalsa.cl');
-                        $Mailer->addAddress('vvasquez@fabrimetal.cl');
+                        //$Mailer->addAddress('vvasquez@fabrimetal.cl');
 
                          $select = 'ContactEmployees';
                          $entity = "BusinessPartners";
@@ -4194,7 +4194,7 @@ switch ($_GET["op"]) {
                          if(count($contactos['ContactEmployees']) > 0){
                              foreach($contactos['ContactEmployees']  as $key => $val){
                                  if(!empty($val['E_Mail']) && $val['EmailGroupCode'] == 'GSE'){
-                                     $Mailer->addAddress($val['E_Mail'], $val['FirstName'].' '.$val['LastName']);
+                                     //$Mailer->addAddress($val['E_Mail'], $val['FirstName'].' '.$val['LastName']);
                                  }
                              }
                          }
@@ -5146,24 +5146,24 @@ switch ($_GET["op"]) {
     
                     //usuario logeado (tecnico)
                     if($email){
-                        $Mailer->addAddress($email);
+                        //$Mailer->addAddress($email);
                     }
     
                     //supervisor del tecnico
                     if(!empty($datosactividad['value'][0]['equSupEmail'])){
-                        //$Mailer->addAddress($datosactividad['value'][0]['equSupEmail'], '');
+                        ////$Mailer->addAddress($datosactividad['value'][0]['equSupEmail'], '');
                     }
     
                     $Mailer->addAddress('jaguilera@fabrimetalsa.cl');
     
                     if($datosactividad['value'][0]['srvTipoLlamadaId'] == 16){
-                        //$Mailer->addAddress('upino@fabrimetal.cl','');
+                        ////$Mailer->addAddress('upino@fabrimetal.cl','');
                     }
                     
                     //agrega cuando sea Reparaciones
                     if($datosactividad['value'][0]['srvTipoLlamadaId'] == 2){
-                        //$Mailer->addAddress('mmonares@fabrimetal.cl','');
-                        //$Mailer->addAddress('paraneda@fabrimetal.cl','');                
+                        ////$Mailer->addAddress('mmonares@fabrimetal.cl','');
+                        ////$Mailer->addAddress('paraneda@fabrimetal.cl','');                
                     }
                     
                     //contactos del cliente
@@ -5174,11 +5174,11 @@ switch ($_GET["op"]) {
                     if(count($contactos['ContactEmployees']) > 0){
                        foreach($contactos['ContactEmployees']  as $key => $val){
                             if(!empty($val['E_Mail']) && $val['EmailGroupCode'] == 'GSE'){
-                                $Mailer->addAddress($val['E_Mail'], $val['FirstName'].' '.$val['LastName']);
+                                //$Mailer->addAddress($val['E_Mail'], $val['FirstName'].' '.$val['LastName']);
                             }
                         }
                     }
-                    $Mailer->addAddress('vvasquez@fabrimetal.cl');
+                    //$Mailer->addAddress('vvasquez@fabrimetal.cl');
 
                     if (!$Mailer->send()) {
                         echo "Error al enviar correo: " . $Mailer->ErrorInfo . "<br>";
@@ -5421,7 +5421,7 @@ switch ($_GET["op"]) {
                             $Mailer->msgHTML($body);
         
                             $Mailer->addAddress('jaguilera@fabrimetalsa.cl');
-                            $Mailer->addAddress('vvasquez@fabrimetal.cl');
+                            //$Mailer->addAddress('vvasquez@fabrimetal.cl');
         
                             $select = 'ContactEmployees';
                             $entity = "BusinessPartners";
@@ -5430,7 +5430,7 @@ switch ($_GET["op"]) {
                             if(count($contactos['ContactEmployees']) > 0){
                                 foreach($contactos['ContactEmployees']  as $key => $val){
                                     if(!empty($val['E_Mail']) && $val['EmailGroupCode'] == 'GSE'){
-                                        $Mailer->addAddress($val['E_Mail'], $val['FirstName'].' '.$val['LastName']);
+                                        //$Mailer->addAddress($val['E_Mail'], $val['FirstName'].' '.$val['LastName']);
                                     }
                                 }
                             }
@@ -5822,26 +5822,26 @@ switch ($_GET["op"]) {
                 
                     //usuario logeado (tecnico)
                     if ($_SESSION['email']){
-                        $Mailer->addAddress($_SESSION['email']);
+                        //$Mailer->addAddress($_SESSION['email']);
                     }
     
                     $Mailer->addAddress('jaguilera@fabrimetalsa.cl');
     
                         //supervisor del tecnico
                          if(!empty($datosactividad['value'][0]['equSupEmail'])){
-                             $Mailer->addAddress($datosactividad['value'][0]['equSupEmail'], '');
+                             //$Mailer->addAddress($datosactividad['value'][0]['equSupEmail'], '');
                          }
                         
                         //agrega cuando sea Ingenieria de Campo
                          if($datosactividad['value'][0]['srvTipoLlamadaId'] == 16){
-                             $Mailer->addAddress('finostroza@fabrimetal.cl','');
-                             $Mailer->addAddress('igalvez@fabrimetal.cl','');
+                             //$Mailer->addAddress('finostroza@fabrimetal.cl','');
+                             //$Mailer->addAddress('igalvez@fabrimetal.cl','');
                          }
                         
                         //agrega cuando sea Reparaciones
                          if($datosactividad['value'][0]['srvTipoLlamadaId'] == 2){
-                             $Mailer->addAddress('mmonares@fabrimetal.cl','');
-                             $Mailer->addAddress('paraneda@fabrimetal.cl','');
+                             //$Mailer->addAddress('mmonares@fabrimetal.cl','');
+                             //$Mailer->addAddress('paraneda@fabrimetal.cl','');
                          }
                         
                         
@@ -5853,12 +5853,12 @@ switch ($_GET["op"]) {
                          if(count($contactos['ContactEmployees']) > 0){
                              foreach($contactos['ContactEmployees']  as $key => $val){
                                  if(!empty($val['E_Mail']) && $val['EmailGroupCode'] == 'GSE'){
-                                     $Mailer->addAddress($val['E_Mail'], $val['FirstName'].' '.$val['LastName']);
+                                     //$Mailer->addAddress($val['E_Mail'], $val['FirstName'].' '.$val['LastName']);
                                  }
                              }
                          }
     
-                        //$Mailer->addAddress($reg->email, '');
+                        ////$Mailer->addAddress($reg->email, '');
                         
                         $Mailer->addCC('vvasquez@fabrimetal.cl');
                         if (!$Mailer->send()) {
@@ -6057,11 +6057,11 @@ switch ($_GET["op"]) {
                         // $Mailer->addAttachment("$uploads_dir/$name");
                         $Mailer->msgHTML($body);
     
-                         $Mailer->addAddress('aramirez@fabrimetalsa.cl');
+                         //$Mailer->addAddress('aramirez@fabrimetalsa.cl');
     
                         //FALTA AGREGAR CORREO DEL SUPERVISOR, JEFE DE SERVICIO Y CLIENTE
-                         $Mailer->addAddress($datosactividad['value'][0]['equSupEmail']);
-                         $Mailer->addAddress('dmediavilla@fabrimetal.cl');
+                         //$Mailer->addAddress($datosactividad['value'][0]['equSupEmail']);
+                         //$Mailer->addAddress('dmediavilla@fabrimetal.cl');
                         
                          $select = 'ContactEmployees';
                          $entity = "BusinessPartners";
@@ -6070,7 +6070,7 @@ switch ($_GET["op"]) {
                          if(count($contactos['ContactEmployees']) > 0){
                              foreach($contactos['ContactEmployees']  as $key => $val){
                                  if(!empty($val['E_Mail']) && $val['EmailGroupCode'] == 'GSE'){
-                                     $Mailer->addAddress($val['E_Mail'], $val['FirstName'].' '.$val['LastName']);
+                                     //$Mailer->addAddress($val['E_Mail'], $val['FirstName'].' '.$val['LastName']);
                                  }
                              }
                          }
@@ -6431,23 +6431,23 @@ switch ($_GET["op"]) {
                         $Mailer->AddStringAttachment($result, $archivo, 'base64', 'application/pdf');
                         // $Mailer->AddStringAttachment($result, 'FM_IM' . $idvisita . '_EQ' . $idascensor . '_' . $periodo . '.pdf', 'base64', 'application/pdf');
 
-                        $Mailer->addAddress('vvasquez@fabrimetalsa.cl');
+                        //$Mailer->addAddress('vvasquez@fabrimetalsa.cl');
                         $Mailer->addAddress('jaguilera@fabrimetalsa.cl');
                         //correo con copia al que recibe el equipo
-                        $Mailer->addAddress('ocmchile@gmail.com');
+                        //$Mailer->addAddress('ocmchile@gmail.com');
                         if (trim($emailcli)) {
-                            $Mailer->addAddress(trim($emailcli)); //to: cliente que firmo
+                            //$Mailer->addAddress(trim($emailcli)); //to: cliente que firmo
                             if ($_SESSION['email'])
                                 $Mailer->addCC($_SESSION['email']); //cc: usuario logeado
                         }
                         else {
                             //si no viene el mail del cliente que firmo se envia solo al usuario logeado
                             if ($_SESSION['email'])
-                                $Mailer->addAddress($_SESSION['email']);
+                                //$Mailer->addAddress($_SESSION['email']);
                         }
                         //correo con copia al que entrega el equipo
                         $Mailer->addCC('ocontreras@fabrimetalsa.cl');
-                        //$Mailer->addAddress($reg->email, '');
+                        ////$Mailer->addAddress($reg->email, '');
                         $Mailer->send();
 
                         $rspta = $encuesta->infoEquipo($idservicio);
@@ -7100,23 +7100,23 @@ switch ($_GET["op"]) {
 
                 //usuario logeado (tecnico)
                 if ($_SESSION['email']){
-                    $Mailer->addAddress($_SESSION['email']);
+                    //$Mailer->addAddress($_SESSION['email']);
                 }
 
                 //supervisor del tecnico
                 if(!empty($datosactividad['value'][0]['equSupEmail'])){
-                    $Mailer->addAddress($datosactividad['value'][0]['equSupEmail'], '');
+                    //$Mailer->addAddress($datosactividad['value'][0]['equSupEmail'], '');
                 }
                 
                 //agrega cuando sea Ingenieria de Campo
                 if($datosactividad['value'][0]['srvTipoLlamadaId'] == 16){
-                    $Mailer->addAddress('finostroza@fabrimetal.cl','');
-                    $Mailer->addAddress('hhernandez@fabrimetal.cl','');
+                    //$Mailer->addAddress('finostroza@fabrimetal.cl','');
+                    //$Mailer->addAddress('hhernandez@fabrimetal.cl','');
                 }
                 
                 //agrega cuando sea Reparaciones
                 if($datosactividad['value'][0]['srvTipoLlamadaId'] == 2){
-                    $Mailer->addAddress('mmonares@fabrimetal.cl','');
+                    //$Mailer->addAddress('mmonares@fabrimetal.cl','');
                 }
                 
                 //contactos del cliente
@@ -7127,7 +7127,7 @@ switch ($_GET["op"]) {
                 if(count($contactos['ContactEmployees']) > 0){
                     foreach($contactos['ContactEmployees']  as $key => $val){
                         if(!empty($val['E_Mail']) && $val['EmailGroupCode'] == 'GSE'){
-                            $Mailer->addAddress($val['E_Mail'], $val['FirstName'].' '.$val['LastName']);
+                            //$Mailer->addAddress($val['E_Mail'], $val['FirstName'].' '.$val['LastName']);
                         }
                     }
                 }
@@ -7638,11 +7638,11 @@ switch ($_GET["op"]) {
             $Mailer->AddStringAttachment($result, $archivo, 'base64', 'application/pdf');
             // $Mailer->AddStringAttachment($result, 'FM_IM' . $idvisita . '_EQ' . $idascensor . '_' . $periodo . '.pdf', 'base64', 'application/pdf');
 
-            $Mailer->addAddress('vvasquez@fabrimetalsa.cl');
+            //$Mailer->addAddress('vvasquez@fabrimetalsa.cl');
             //correo con copia al que recibe el equipo
-            $Mailer->addAddress('ocmchile@gmail.com');
+            //$Mailer->addAddress('ocmchile@gmail.com');
             if (trim($emailcli)) {
-                $Mailer->addAddress(trim($emailcli)); //to: cliente que firmo
+                //$Mailer->addAddress(trim($emailcli)); //to: cliente que firmo
                 if ($_SESSION['email']){
                     $Mailer->addCC($_SESSION['email']); //cc: usuario logeado
                 }else{
@@ -7652,11 +7652,11 @@ switch ($_GET["op"]) {
             else {
                 //si no viene el mail del cliente que firmo se envia solo al usuario logeado
                 if ($_SESSION['email'])
-                    $Mailer->addAddress($_SESSION['email']);
+                    //$Mailer->addAddress($_SESSION['email']);
             }
             //correo con copia al que entrega el equipo
             $Mailer->addCC('ocontreras@fabrimetalsa.cl');
-            //$Mailer->addAddress($reg->email, '');
+            ////$Mailer->addAddress($reg->email, '');
             $Mailer->send();
 
             break;
@@ -8174,23 +8174,23 @@ switch ($_GET["op"]) {
             $Mailer->AddStringAttachment($result, $archivo, 'base64', 'application/pdf');
             // $Mailer->AddStringAttachment($result, 'FM_IM' . $idvisita . '_EQ' . $idascensor . '_' . $periodo . '.pdf', 'base64', 'application/pdf');
 
-            $Mailer->addAddress('vvasquez@fabrimetalsa.cl');
+            //$Mailer->addAddress('vvasquez@fabrimetalsa.cl');
             $Mailer->addAddress('jaguilera@fabrimetalsa.cl');
             //correo con copia al que recibe el equipo
-            $Mailer->addAddress('ocmchile@gmail.com');
+            //$Mailer->addAddress('ocmchile@gmail.com');
             if (trim($emailcli)) {
-                $Mailer->addAddress(trim($emailcli)); //to: cliente que firmo
+                //$Mailer->addAddress(trim($emailcli)); //to: cliente que firmo
                 if ($_SESSION['email'])
                     $Mailer->addCC($_SESSION['email']); //cc: usuario logeado
             }
             else {
                 //si no viene el mail del cliente que firmo se envia solo al usuario logeado
                 if ($_SESSION['email'])
-                    $Mailer->addAddress($_SESSION['email']);
+                    //$Mailer->addAddress($_SESSION['email']);
             }
             //correo con copia al que entrega el equipo
             $Mailer->addCC('ocontreras@fabrimetalsa.cl');
-            // $Mailer->addAddress($reg->email, '');
+            // //$Mailer->addAddress($reg->email, '');
             $Mailer->send();
 
             break;
@@ -8792,23 +8792,23 @@ switch ($_GET["op"]) {
                 $Mailer->addAttachment('../files/pdf/' . $archivo);
                 //usuario logeado (tecnico)
                 if ($_SESSION['email']){
-                    $Mailer->addAddress($_SESSION['email']);
+                    //$Mailer->addAddress($_SESSION['email']);
                 }
 
                 //supervisor del tecnico
                 if(!empty($datosactividad['value'][0]['equSupEmail'])){
-                    $Mailer->addAddress($datosactividad['value'][0]['equSupEmail'], '');
+                    //$Mailer->addAddress($datosactividad['value'][0]['equSupEmail'], '');
                 }
                 
                 //agrega cuando sea Ingenieria de Campo
                 if($datosactividad['value'][0]['srvTipoLlamadaId'] == 16){
-                    $Mailer->addAddress('finostroza@fabrimetal.cl','');
-                    $Mailer->addAddress('hhernandez@fabrimetal.cl','');
+                    //$Mailer->addAddress('finostroza@fabrimetal.cl','');
+                    //$Mailer->addAddress('hhernandez@fabrimetal.cl','');
                 }
                 
                 //agrega cuando sea Reparaciones
                 if($datosactividad['value'][0]['srvTipoLlamadaId'] == 2){
-                    $Mailer->addAddress('mmonares@fabrimetal.cl','');
+                    //$Mailer->addAddress('mmonares@fabrimetal.cl','');
                 }
                 
                 
@@ -8820,12 +8820,12 @@ switch ($_GET["op"]) {
                 if(count($contactos['ContactEmployees']) > 0){
                     foreach($contactos['ContactEmployees']  as $key => $val){
                         if(!empty($val['E_Mail']) && $val['EmailGroupCode'] == 'GSE'){
-                            $Mailer->addAddress($val['E_Mail'], $val['FirstName'].' '.$val['LastName']);
+                            //$Mailer->addAddress($val['E_Mail'], $val['FirstName'].' '.$val['LastName']);
                         }
                     }
                 }
 
-                // // $Mailer->addAddress($reg->email, '');
+                // // //$Mailer->addAddress($reg->email, '');
                 
             $Mailer->addCC('vvasquez@fabrimetal.cl');
                 $Mailer->send();
@@ -9015,11 +9015,11 @@ switch ($_GET["op"]) {
             // $Mailer->addAttachment("$uploads_dir/$name");
             $Mailer->msgHTML($body);
 
-            $Mailer->addAddress('aramirez@fabrimetalsa.cl');
+            //$Mailer->addAddress('aramirez@fabrimetalsa.cl');
 
             //FALTA AGREGAR CORREO DEL SUPERVISOR, JEFE DE SERVICIO Y CLIENTE
-            $Mailer->addAddress($datosactividad['value'][0]['equSupEmail']);
-            $Mailer->addAddress('dmediavilla@fabrimetal.cl');
+            //$Mailer->addAddress($datosactividad['value'][0]['equSupEmail']);
+            //$Mailer->addAddress('dmediavilla@fabrimetal.cl');
             
             $select = 'ContactEmployees';
             $entity = "BusinessPartners";
@@ -9028,7 +9028,7 @@ switch ($_GET["op"]) {
             if(count($contactos['ContactEmployees']) > 0){
                 foreach($contactos['ContactEmployees']  as $key => $val){
                     if(!empty($val['E_Mail']) && $val['EmailGroupCode'] == 'GSE'){
-                        $Mailer->addAddress($val['E_Mail'], $val['FirstName'].' '.$val['LastName']);
+                        //$Mailer->addAddress($val['E_Mail'], $val['FirstName'].' '.$val['LastName']);
                     }
                 }
             }
@@ -9562,23 +9562,23 @@ switch ($_GET["op"]) {
            
                 //usuario logeado (tecnico)
                 if ($_SESSION['email']){
-                    $Mailer->addAddress($_SESSION['email']);
+                    //$Mailer->addAddress($_SESSION['email']);
                 }
 
                 //supervisor del tecnico
                 if(!empty($datosactividad['value'][0]['equSupEmail'])){
-                    $Mailer->addAddress($datosactividad['value'][0]['equSupEmail'], '');
+                    //$Mailer->addAddress($datosactividad['value'][0]['equSupEmail'], '');
                 }
                 
                 //agrega cuando sea Ingenieria de Campo
                 if($datosactividad['value'][0]['srvTipoLlamadaId'] == 16){
-                    $Mailer->addAddress('finostroza@fabrimetal.cl','');
-                    $Mailer->addAddress('hhernandez@fabrimetal.cl','');
+                    //$Mailer->addAddress('finostroza@fabrimetal.cl','');
+                    //$Mailer->addAddress('hhernandez@fabrimetal.cl','');
                 }
                 
                 //agrega cuando sea Reparaciones
                 if($datosactividad['value'][0]['srvTipoLlamadaId'] == 2){
-                    $Mailer->addAddress('mmonares@fabrimetal.cl','');
+                    //$Mailer->addAddress('mmonares@fabrimetal.cl','');
                 }
                 
                 
@@ -9590,13 +9590,13 @@ switch ($_GET["op"]) {
                 if(count($contactos['ContactEmployees']) > 0){
                     foreach($contactos['ContactEmployees']  as $key => $val){
                         if(!empty($val['E_Mail']) && $val['EmailGroupCode'] == 'GSE'){
-                            $Mailer->addAddress($val['E_Mail'], $val['FirstName'].' '.$val['LastName']);
+                            //$Mailer->addAddress($val['E_Mail'], $val['FirstName'].' '.$val['LastName']);
                         }
                     }
                 }
 
 
-                // // $Mailer->addAddress($reg->email, '');
+                // // //$Mailer->addAddress($reg->email, '');
                 
             $Mailer->addCC('vvasquez@fabrimetal.cl');
                 $Mailer->send();
@@ -9786,11 +9786,11 @@ switch ($_GET["op"]) {
             // $Mailer->addAttachment("$uploads_dir/$name");
             $Mailer->msgHTML($body);
 
-            $Mailer->addAddress('aramirez@fabrimetalsa.cl');
+            //$Mailer->addAddress('aramirez@fabrimetalsa.cl');
 
             //FALTA AGREGAR CORREO DEL SUPERVISOR, JEFE DE SERVICIO Y CLIENTE
-            $Mailer->addAddress($datosactividad['value'][0]['equSupEmail']);
-            $Mailer->addAddress('dmediavilla@fabrimetal.cl');
+            //$Mailer->addAddress($datosactividad['value'][0]['equSupEmail']);
+            //$Mailer->addAddress('dmediavilla@fabrimetal.cl');
             
             $select = 'ContactEmployees';
             $entity = "BusinessPartners";
@@ -9799,7 +9799,7 @@ switch ($_GET["op"]) {
             if(count($contactos['ContactEmployees']) > 0){
                 foreach($contactos['ContactEmployees']  as $key => $val){
                     if(!empty($val['E_Mail']) && $val['EmailGroupCode'] == 'GSE'){
-                        $Mailer->addAddress($val['E_Mail'], $val['FirstName'].' '.$val['LastName']);
+                        //$Mailer->addAddress($val['E_Mail'], $val['FirstName'].' '.$val['LastName']);
                     }
                 }
             }

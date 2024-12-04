@@ -2607,7 +2607,7 @@ switch ($_GET["op"]) {
                         }
                         else {
                             if ($_SESSION['email'])
-                                //$Mailer->addAddress($_SESSION['email']);
+                                $Mailer->addAddress($_SESSION['email']);
                         }
                         if (!$Mailer->send()) {
                             echo "Error al enviar correo: " . $Mailer->ErrorInfo . "<br>";
@@ -6443,7 +6443,7 @@ switch ($_GET["op"]) {
                         else {
                             //si no viene el mail del cliente que firmo se envia solo al usuario logeado
                             if ($_SESSION['email'])
-                                //$Mailer->addAddress($_SESSION['email']);
+                                $Mailer->addAddress($_SESSION['email']);
                         }
                         //correo con copia al que entrega el equipo
                         $Mailer->addCC('ocontreras@fabrimetalsa.cl');
@@ -7652,7 +7652,7 @@ switch ($_GET["op"]) {
             else {
                 //si no viene el mail del cliente que firmo se envia solo al usuario logeado
                 if ($_SESSION['email'])
-                    //$Mailer->addAddress($_SESSION['email']);
+                    $Mailer->addAddress($_SESSION['email']);
             }
             //correo con copia al que entrega el equipo
             $Mailer->addCC('ocontreras@fabrimetalsa.cl');
@@ -8133,8 +8133,7 @@ switch ($_GET["op"]) {
                         </table>
                     </div>
                 </body>
-
-                </html>';
+            </html>';
 
             /*$rsptaservicio = $encuesta->ultimoInforme($idencuesta, $idascensor, $idservicio);
             $idvisita = $rsptaservicio['infv_id'];*/
@@ -8186,7 +8185,7 @@ switch ($_GET["op"]) {
             else {
                 //si no viene el mail del cliente que firmo se envia solo al usuario logeado
                 if ($_SESSION['email'])
-                    //$Mailer->addAddress($_SESSION['email']);
+                    $Mailer->addAddress($_SESSION['email']);
             }
             //correo con copia al que entrega el equipo
             $Mailer->addCC('ocontreras@fabrimetalsa.cl');

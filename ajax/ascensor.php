@@ -327,6 +327,44 @@ switch ($_GET["op"]) {
             // print_r($rspta);
         break;
 
+        case 'mantencionFM':
+            $idSAP = $_GET['idSAP'];
+            $fm = $_GET['fm'];
+            $rspta=$ascensor->informacionFMMantencion($idSAP,$fm);
+
+            $results = array(
+                "sEcho" => 1,
+                "iTotalRecords" => count($rspta),
+                "iTotalDisplayRecords" => count($rspta),
+                "aaData" => $rspta
+            );
+
+            echo json_encode($results);
+        break;
+
+        case 'iniciarMantencionQR':
+            $status = $_GET['estado'];
+            $gps = $_GET['gps'];
+            $servicecallID = $_GET['servicecallID'];
+            $customerCode = $_GET['customerCode'];
+            $fm = $_GET['fm'];
+            $subject = $_GET['subject'];
+            $itemCode = $_GET['itemCode'];
+    
+            if(isset($_GET['nomen']) && isset($_GET['codascen'])){
+                $ascensor->ModificaNomenclatura($_GET['codascen'],$_GET['nomen']);
+            }
+    
+            if($_GET['idSAP']){
+                $idSAP = $_GET['idSAP'];
+                error_log("ESTA NOCHE IREMOS DE SAP: ".$idSAP);
+                $rspta = $ascensor->IniciarServicioAndroid($servicecallID,$customerCode,$status,$gps,$idSAP);
+            }else{
+                $rspta = $ascensor->IniciarServicio($servicecallID,$customerCode,$status,$gps);
+            }
+
+            echo $rspta ? "El servicio no pudo ser iniciado" : "Servicio iniciado con exito";
+        break;
         
         case 'selectascfiltroandroid':
             $idsap= $_POST['idSAP_form'];

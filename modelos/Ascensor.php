@@ -10,7 +10,7 @@ class Ascensor
 
 	public function informacionFMMantencion($idsap, $fm)
 	{
-		$query = "\$crossjoin(ServiceCalls,ServiceCallTypes,CustomerEquipmentCards,Items)?\$expand=ServiceCalls(\$select=ServiceCallID, CustomerName, CustomerCode,CallType,ItemCode,InternalSerialNum,Subject),ServiceCallTypes(\$select=Name),CustomerEquipmentCards(\$select=InternalSerialNum,BuildingFloorRoom,Street,StreetNo,InstallLocation,U_NX_NOMENCLATURACL, U_NX_NCC),Items(\$select=U_NX_TIPEQUIPO,U_NX_PARADAS, U_NX_MODELO)&\$filter=ServiceCalls/CallType eq ServiceCallTypes/CallTypeID and ServiceCalls/InternalSerialNum eq CustomerEquipmentCards/InternalSerialNum and ServiceCalls/Status eq -3 and ServiceCalls/TechnicianCode eq " . $idsap . " and ServiceCalls/ItemCode eq CustomerEquipmentCards/ItemCode and CustomerEquipmentCards/InternalSerialNum eq Items/ItemCode and CustomerEquipmentCards/InternalSerialNum eq '" . $fm . "' &\$orderby=ServiceCalls/ServiceCallID";
+		$query = "\$crossjoin(ServiceCalls,ServiceCallTypes,CustomerEquipmentCards,Items)?\$expand=ServiceCalls(\$select=ServiceCallID, CustomerName, CustomerCode,CallType,ItemCode,InternalSerialNum,Subject),ServiceCallTypes(\$select=Name),CustomerEquipmentCards(\$select=U_NX_ESTADOFM, InternalSerialNum,BuildingFloorRoom,Street,StreetNo,InstallLocation,U_NX_NOMENCLATURACL, U_NX_NCC),Items(\$select=U_NX_TIPEQUIPO,U_NX_PARADAS, U_NX_MODELO)&\$filter=ServiceCalls/CallType eq ServiceCallTypes/CallTypeID and ServiceCalls/InternalSerialNum eq CustomerEquipmentCards/InternalSerialNum and ServiceCalls/Status eq -3 and ServiceCalls/TechnicianCode eq " . $idsap . " and ServiceCalls/ItemCode eq CustomerEquipmentCards/ItemCode and CustomerEquipmentCards/InternalSerialNum eq Items/ItemCode and CustomerEquipmentCards/InternalSerialNum eq '" . $fm . "' &\$orderby=ServiceCalls/ServiceCallID";
 		$rsptaJson = json_decode(Query($query));
 		$listado = array();
 		foreach ($rsptaJson->value as $val) {
@@ -24,6 +24,7 @@ class Ascensor
 				"InstallLocation" => isset($val->CustomerEquipmentCards->InstallLocation) ? $val->CustomerEquipmentCards->InstallLocation : '',
 				"Street" => isset($val->CustomerEquipmentCards->Street) ? $val->CustomerEquipmentCards->Street : '',
 				"StreetNo" => isset($val->CustomerEquipmentCards->StreetNo) ? $val->CustomerEquipmentCards->StreetNo : '',
+				"U_NX_ESTADOFM" => isset($val->CustomerEquipmentCards->U_NX_ESTADOFM) ? $val->CustomerEquipmentCards->U_NX_ESTADOFM : '',
 				"CallType" => isset($val->ServiceCallTypes->Name) ? $val->ServiceCallTypes->Name : '',
 				"TipoEquipo" => isset($val->Items->U_NX_TIPEQUIPO) ? $val->Items->U_NX_TIPEQUIPO : '',
 				"Paradas" => isset($val->Items->U_NX_PARADAS) ? $val->Items->U_NX_PARADAS : 0,

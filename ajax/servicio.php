@@ -1070,7 +1070,7 @@ switch ($_GET["op"]) {
                     </tr>
                 </table>
             </div>
-        </body>
+        </body> 
         </html>
         ';
 
@@ -1080,7 +1080,6 @@ switch ($_GET["op"]) {
             $rpdf = $guiaPDF->Output('../files/pdf/' . $archivo, 'F');
             $servicio->UpFile($archivo, $idserfirma);
             $resp = $servicio->email($idserfirma);
-
             $body = '
     <html>
         <head>
@@ -1394,8 +1393,6 @@ switch ($_GET["op"]) {
             $Mailer->addAttachment('../files/pdf/' . $resp["file"]);
             $Mailer->msgHTML($body);
 
-
-
             $rspta = $email->email($idserfirma);
 
             while ($reg = $rspta->fetch_object()) {
@@ -1417,12 +1414,12 @@ switch ($_GET["op"]) {
         }
 
         echo $rspta ? "Servicio validado con exito" : "El servicio no pudo ser validado";
-        break;
+    break;
 
     case 'infoguia':
         $rspta = $servicio->infoguia($idserviciofi);
         echo json_encode($rspta);
-        break;
+    break;
 
     case 'lsf':
         $iduser = $_SESSION['iduser'];
@@ -1447,12 +1444,12 @@ switch ($_GET["op"]) {
         );
 
         echo json_encode($results);
-        break;
+    break;
 
     case 'ffirma':
         $rspta = $servicio->formfirma($idservicio);
         echo json_encode($rspta);
-        break;
+    break;
 
     case 'Verificar':
         $iduser = $_SESSION['iduser'];
@@ -2888,6 +2885,7 @@ switch ($_GET["op"]) {
                             //usuario logeado (tecnico)
                             if ($_POST['email']){
                                 //$Mailer->addAddress($_POST['email']);
+                                $Mailer->addCC('jaguilera@fabrimetalsa.cl');
                                 $logFile = fopen("../log.txt", 'a') or die("Error creando archivo");
                                 fwrite($logFile, "\n".date("d/m/Y H:i:s")." - Ha sido enviado a tu correo con PDF") or die("Error escribiendo en el archivo");
                                 fclose($logFile);
@@ -3146,8 +3144,8 @@ switch ($_GET["op"]) {
                                 }
                                     
                                 if($_SESSION['subcontrato'] == 1){
-                                    $Mailer->addCC('fanny@remant.cl');
-                                    $Mailer->addCC('dario@remant.cl');
+                                    //$Mailer->addCC('fanny@remant.cl');
+                                    //$Mailer->addCC('dario@remant.cl');
                                 }
                                     
                                 if (!$Mailer->send()) {

@@ -1031,14 +1031,14 @@ class Servicio
 			));
 		} else {
 			$actividad = json_encode(array(
-				"HandledByEmployee" => intval($data->idSAP),
+				"HandledByEmployee" => intval($_SESSION['idSAP']),
 				"Closed" => "Y",
 				"U_PorFirmar" => $firma
 			));
 		}
 
 		/////////////////////////////////////////////////////////////
-		$rsptaactv = EditardatosNum($entity, $id, $actividad);///////
+		$rsptaactv = EditardatosNum($entity, $id, $actividad);
 		/////////////////////////////////////////////////////////////
 
 		$entity = 'ServiceCalls';

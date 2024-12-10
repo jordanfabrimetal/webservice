@@ -1,0 +1,10 @@
+
+04/12/2024 15:59:50 - Estado Operativo
+04/12/2024 15:59:50 - Tu servicio es Reparación y es un/a Ascensor
+04/12/2024 15:59:50 - Ha ingresado al servicio: Reparación
+04/12/2024 15:59:50 - imagen 1 - 1000001261.jpg
+04/12/2024 15:59:50 - imagen 2 - 1000001260.jpg
+04/12/2024 15:59:50 - imagen 3 - 1000001259.jpg
+04/12/2024 16:00:56 - Correo pudo ser enviado exitosamente
+04/12/2024 16:01:03 - Correo de presupuesto pudo ser enviado exitosamente
+04/12/2024 16:01:03 - Servicio finalizado con exito

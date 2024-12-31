@@ -1,0 +1,8 @@
+
+12/12/2024 14:25:05 - Estado Operativo
+12/12/2024 14:25:05 - Tu servicio es Reparación y es un/a Ascensor
+12/12/2024 14:25:05 - Ha ingresado al servicio: Reparación
+12/12/2024 14:25:06 - imagen 1 - 1000001258.jpg
+12/12/2024 14:25:06 - imagen 2 - 1000001259.jpg
+12/12/2024 14:25:06 - imagen 3 - 1000001257.jpg
+12/12/2024 14:25:07 - Servicio finalizado con exito

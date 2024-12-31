@@ -1,0 +1,10 @@
+
+12/12/2024 09:49:29 - Estado Operativo
+12/12/2024 09:49:29 - Tu servicio es Emergencia y es un/a Ascensor
+12/12/2024 09:49:29 - Ha ingresado al servicio: Emergencia
+12/12/2024 09:49:29 - imagen 1 - 1000001289.jpg
+12/12/2024 09:49:29 - imagen 2 - 1000001288.jpg
+12/12/2024 09:49:29 - imagen 3 - 1000001293.jpg
+12/12/2024 09:49:44 - Correo pudo ser enviado exitosamente
+12/12/2024 09:49:53 - Correo de presupuesto pudo ser enviado exitosamente
+12/12/2024 09:49:53 - Servicio finalizado con exito

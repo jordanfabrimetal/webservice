@@ -1,0 +1,6 @@
+
+11/12/2024 17:19:41 - Este es un servicio que fue pospuesto su firma
+11/12/2024 17:19:41 - Aun no inicia ningun servicio, pero el tipo es : Mantención
+11/12/2024 17:19:41 - Has entrado a firmar Mantención
+11/12/2024 17:19:48 - ID Ascensor: FM020022 - ID Encuesta: 4 - ID Servicio: 511603 - ID Actividad: 55578
+11/12/2024 17:19:48 - Asignado presupuesto : 1

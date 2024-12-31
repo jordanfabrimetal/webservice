@@ -276,6 +276,15 @@ switch ($_GET["op"]) {
                     echo '<option paradas="'.$val['Paradas'].'" tipoequipo="'.$val['TipoEquipo'].'" value='.$val['ServiceCallID'].'>'.$val['InternalSerialNum'].' - '.$val['BuildingFloorRoom'].'</option>';
                 }
             }else{
+                // EN CASO DE SISMO DESCOMENTAR LAS LINEAS SIGUIENTES COMENTADAS PARA QUE CUALQUIER TECNICO PUEDA LEVANTAR GSE EMERGENCIAS
+
+                /*
+                	$rspta=$ascensor->SelectEmergencia();
+						foreach($rspta as $val){
+							echo '<option value='.$val['InternalSerialNum'].'>'.$val['InternalSerialNum'].' - '.$val['BuildingFloorRoom'].'</option>';
+						}
+				*/
+
                 $dataJSON = $ascensor->Holidays();
 				$feriados = array();
 				foreach ($dataJSON['HolidayDates'] as $val) {

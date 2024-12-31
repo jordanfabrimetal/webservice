@@ -592,7 +592,7 @@ class Servicio
 	}
 
 
-	public function finalizarActividad($data, $actividadsap)
+	public function finalizarActividad($data)
 	{
 		error_log("Estamos en funcion finalizarActividad de Modelo Servicio.php");
 		error_log("El idSAP: ".$_POST['idSAP']);
@@ -1031,7 +1031,7 @@ class Servicio
 			));
 		} else {
 			$actividad = json_encode(array(
-				"HandledByEmployee" => intval($_SESSION['idSAP']),
+				"HandledByEmployee" => intval($data->idSAP),
 				"Closed" => "Y",
 				"U_PorFirmar" => $firma
 			));

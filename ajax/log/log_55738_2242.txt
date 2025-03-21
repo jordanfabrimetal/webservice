@@ -1,0 +1,11 @@
+
+13/03/2025 14:39:12 - Estado Detenido
+13/03/2025 14:39:12 - Tu servicio es Mantención y es un/a Ascensor
+13/03/2025 14:39:12 - Ha entrado a Mantención
+13/03/2025 14:39:12 - Actividad: 55738 - Servicio: 511790
+13/03/2025 14:39:13 - Estado decidido por Usuario es: porfirmar
+13/03/2025 14:39:13 - ID Encuesta: 5
+13/03/2025 14:39:13 - ID Visita : 42403
+13/03/2025 14:39:13 - Data por POST : {"codigoEquipo":"FM131409","nombre_completo":"Jordan ariel Aguilera labra","servicecallIDfi":"511790","iduser":"371","actividadIDfi":55738,"attachments":"","tiposervicio":"Mantenci\u00f3n","cantayu":"0","supervisorID":"1977","tipoEquipo":"Ascensor","idestadofi":"07","idserviciofi":"","observacionfi":"jsjd","latitudfi":"-33.3843782","codclifi":"ASC 1","filefir":"1729863681.png","email":"jaguilera@fabrimetalsa.cl","num_documento":"19.419.161-8","terminado":"y","edificiofi":"FABRIMETAL LO BOZA","opfirma":"2","codigofmfi":"FM131409","customercodefi":"C85233500","longitudfi":"-70.7761974","ascensorIDfi":"11897","opayu":"N","txtObsFin":"","idSAP":"2242","idascensorfi":"","estadoascensor":"DETENIDO","oppre":"2","dTime":"20250313143843","actCodigo":"55738","preg":null,"comercialID":2209,"codCenCosto":null,"nomCenCosto":null,"imgpresupuesto1":null,"imgpresupuesto2":null,"imgpresupuesto3":null,"imgfoso":null,"imgtecho":null,"imgmaquina":null,"imgoperador":null}
+13/03/2025 14:39:16 - Respuesta de finalizar actividad : 1
+13/03/2025 14:39:16 - Se cierra actividad por Posponer Firma

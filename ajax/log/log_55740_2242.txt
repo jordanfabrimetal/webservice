@@ -1,0 +1,8 @@
+
+13/03/2025 16:37:08 - Estado Operativo
+13/03/2025 16:37:08 - Tu servicio es Modernización y es un/a Ascensor
+13/03/2025 16:37:08 - Ha ingresado al servicio: Modernización
+13/03/2025 16:37:08 - imagen 1 - 
+13/03/2025 16:37:08 - imagen 2 - 
+13/03/2025 16:37:08 - imagen 3 - 
+13/03/2025 16:37:08 - Servicio finalizado con exito

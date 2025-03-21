@@ -1,0 +1,9 @@
+
+31/12/2024 11:32:20 - Estado Operativo
+31/12/2024 11:32:20 - Tu servicio es Emergencia y es un/a Ascensor
+31/12/2024 11:32:20 - Ha ingresado al servicio: Emergencia
+31/12/2024 11:32:20 - imagen 1 - 
+31/12/2024 11:32:20 - imagen 2 - 
+31/12/2024 11:32:20 - imagen 3 - 
+31/12/2024 11:32:24 - Correo pudo ser enviado exitosamente
+31/12/2024 11:32:25 - Servicio finalizado con exito

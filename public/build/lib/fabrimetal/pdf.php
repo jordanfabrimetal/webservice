@@ -321,9 +321,8 @@ function newPdf($opcion, $data = '', $output = 'browser', $params = array()) {
 
         		return $html;
         	}
-
-
         	break;
+
         case 'informemantencionescalera': //mantencionescalera
             $idservicio = $params['idservicio'];
             $idascensor = $params['idascensor'];
@@ -761,7 +760,7 @@ function newPdf($opcion, $data = '', $output = 'browser', $params = array()) {
             $t->assign('imgoperador',$params['imgoperador']);
 
             $t->newBlock('servicio');
-            $t->assign('estadofin',$params['estadofintext']);
+            $t->assign('estadofin',$params['estadoascensor']);
             $t->assign('observacionfin',$params['obsfin']);
             //print the result
             // $t->printToScreen();

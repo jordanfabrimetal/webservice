@@ -1,0 +1,9 @@
+
+08/04/2025 09:24:48 - Estado Detenido
+08/04/2025 09:24:48 - Tu servicio es Garantia Tecnica y es un/a Ascensor
+08/04/2025 09:24:48 - Ha ingresado al servicio: Garantia Tecnica
+08/04/2025 09:24:48 - imagen 1 - 
+08/04/2025 09:24:48 - imagen 2 - 
+08/04/2025 09:24:48 - imagen 3 - 
+08/04/2025 09:24:59 - Correo pudo ser enviado exitosamente
+08/04/2025 09:25:04 - Servicio finalizado con exito

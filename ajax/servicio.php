@@ -5529,8 +5529,8 @@ switch ($_GET["op"]) {
             $params['idencuesta'] = $idencuesta . '';
             $params['firmabase64'] = $firma3 . '';
 
-            $params['obsfin'] = isset($_POST['observacionfinnuevo']) ? $_POST['observacionfinnuevo'] : '';
-            $params['estadofintext'] = $_POST['actEstEquiFin'];
+            $params['obsfin'] = $observacionfi;
+            $params['estadoascensor'] = $estadoascensor;
 
             $dataPresupuesto = $servicio->existepresupuesto($datosactividad['value'][0]['actCodigo']);
             $rowspresupuesto = $dataPresupuesto->fetch_all(MYSQLI_ASSOC);

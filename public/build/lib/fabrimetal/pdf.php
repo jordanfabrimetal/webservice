@@ -10,7 +10,7 @@ function newPdf($opcion, $data = '', $output = 'browser', $params = array()) {
 
 
 	switch ($opcion) {
-        case 'informemantencion': //gservicio
+        case 'informemantencion': 
         	$idservicio = $params['idservicio'];
         	$idascensor = $params['idascensor'];
         	$idencuesta = $params['idencuesta'];
@@ -18,9 +18,7 @@ function newPdf($opcion, $data = '', $output = 'browser', $params = array()) {
 
         	$rsptaservicio = $encuesta->ultimoInforme($idencuesta, $idascensor, $idservicio);
         	$periodo = $rsptaservicio['infv_periodo'] . '';
-        	// $periodo = '202112';
-        	$idvisita = $rsptaservicio['infv_id'];
-        	// $idvisita = 120;
+            $idvisita = $rsptaservicio['infv_id'];
 
         	//Se ocupara sistema de plantillas TemplatePower
         	require_once("../public/build/lib/TemplatePower/class.TemplatePower.php7.inc.php");
@@ -246,6 +244,7 @@ function newPdf($opcion, $data = '', $output = 'browser', $params = array()) {
         	        }
         	    }
         	}
+
 
         	//print the result
         	 $t->printToScreen();

@@ -1,0 +1,16 @@
+
+09/04/2025 17:31:57 - Estado Detenido
+09/04/2025 17:31:57 - Tu servicio es Mantención y es un/a Ascensor
+09/04/2025 17:31:57 - Ha entrado a Mantención
+09/04/2025 17:31:57 - Actividad: 55757 - Servicio: 511829
+09/04/2025 17:31:57 - Estado decidido por Usuario es: porfirmar
+09/04/2025 17:31:57 - ID Encuesta: 5
+09/04/2025 17:31:57 - Imagen Foso : 1
+09/04/2025 17:31:57 - Imagen Techo : 1
+09/04/2025 17:31:57 - Imagen Maquina : 1
+09/04/2025 17:31:57 - Imagen Operador : 1
+09/04/2025 17:31:57 - ID Visita : 42416
+09/04/2025 17:31:57 - Respuesta Encuesta : 1
+09/04/2025 17:32:00 - Data por POST : {"codigoEquipo":"FM131409","descripcion":"hj","nombre_completo":"Jordan ariel Aguilera labra","servicecallIDfi":"511829","imgtecho":"55757_imgtecho_511829.jpg","iduser":"371","compreg":"hfut","actividadIDfi":55757,"attachments":"","tiposervicio":"Mantenci\u00f3n","tipoelevador":"LCE","cantayu":"0","supervisorID":"1977","configuracion":"Triplex","tipoEquipo":"Ascensor","preg":{"190":"SI","191":"SI","192":"SI","193":"SI","270":"SI","194":"SI","271":"SI","195":"SI","272":"SI","196":"SI","273":"SI","197":"SI","274":"SI","198":"SI","231":"SI","275":"SI","199":"SI","232":"SI","276":"SI","233":"SI","277":"SI","234":"SI","235":"SI","236":"SI","237":"SI","238":"SI","239":"SI","240":"SI","200":"SI","201":"SI","202":"SI","203":"SI","204":"SI","205":"SI","206":"SI","207":"SI","208":"SI","209":"SI","210":"SI","211":"SI","212":"SI","213":"SI","214":"SI","215":"SI","216":"SI","263":"SI","187":"SI","264":"SI","188":"SI","265":"SI","189":"SI","266":"SI","267":"SI","268":"SI","269":"SI"},"idestadofi":"07","idserviciofi":"","imgoperador":"55757_imgoperador_511829.jpg","observacionfi":"rh","latitudfi":"-33.3843782","codclifi":"ASC 1","imgmaquina":"55757_imgmaquina_511829.jpg","filefir":"1729863681.png","email":"jaguilera@fabrimetalsa.cl","num_documento":"19.419.161-8","terminado":"y","edificiofi":"FABRIMETAL LO BOZA","imgfoso":"55757_imgfoso_511829.jpg","opfirma":"2","codigofmfi":"FM131409","customercodefi":"C85233500","longitudfi":"-70.7761974","ascensorIDfi":"11897","opayu":"N","txtObsFin":"","idSAP":"2242","idascensorfi":"","estadoascensor":"DETENIDO","oppre":"1","file01":"","file02":"","file03":"","dTime":"20250409173154","actCodigo":"55757","comercialID":2209,"codCenCosto":null,"nomCenCosto":null,"imgpresupuesto1":"imagen1_1744234317.jpg","imgpresupuesto2":"imagen2_1744234317.jpg","imgpresupuesto3":"imagen3_1744234317.jpg"}
+09/04/2025 17:32:01 - Respuesta de finalizar actividad : 1
+09/04/2025 17:32:01 - Se cierra actividad por Posponer Firma

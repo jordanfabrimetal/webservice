@@ -572,3 +572,141 @@
 08/04/2025 11:30:54 - ID Ascensor  : 11897
 08/04/2025 11:30:54 - Editar Tarjeta de Equipo  :  - Entidad CustomerEquipmentCards - ID 11897 - Servicecall {"U_NX_ESTADOFM":"07"}
 08/04/2025 11:30:54 - Editar Servicio  :  - Entidad ServiceCalls - ID 511817 - Servicecall {"Status":1,"U_FallaTercero":"No"}
+09/04/2025 11:30:25 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42413, 'pregunta', 190, 'SI')
+09/04/2025 11:30:25 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42413, 'pregunta', 191, 'SI')
+09/04/2025 11:30:25 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42413, 'pregunta', 192, 'SI')
+09/04/2025 11:30:25 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42413, 'pregunta', 193, 'SI')
+09/04/2025 11:30:25 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42413, 'pregunta', 270, 'SI')
+09/04/2025 11:30:25 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42413, 'pregunta', 194, 'SI')
+09/04/2025 11:30:25 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42413, 'pregunta', 271, 'SI')
+09/04/2025 11:30:25 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42413, 'pregunta', 195, 'SI')
+09/04/2025 11:30:25 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42413, 'pregunta', 272, 'SI')
+09/04/2025 11:30:25 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42413, 'pregunta', 196, 'SI')
+09/04/2025 11:30:25 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42413, 'pregunta', 273, 'SI')
+09/04/2025 11:30:25 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42413, 'pregunta', 197, 'SI')
+09/04/2025 11:30:25 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42413, 'pregunta', 274, 'SI')
+09/04/2025 11:30:25 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42413, 'pregunta', 198, 'SI')
+09/04/2025 11:30:25 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42413, 'pregunta', 231, 'SI')
+09/04/2025 11:30:25 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42413, 'pregunta', 275, 'SI')
+09/04/2025 11:30:25 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42413, 'pregunta', 199, 'SI')
+09/04/2025 11:30:25 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42413, 'pregunta', 232, 'SI')
+09/04/2025 11:30:25 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42413, 'pregunta', 276, 'SI')
+09/04/2025 11:30:25 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42413, 'pregunta', 233, 'SI')
+09/04/2025 11:30:25 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42413, 'pregunta', 277, 'SI')
+09/04/2025 11:30:25 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42413, 'pregunta', 234, 'SI')
+09/04/2025 11:30:25 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42413, 'pregunta', 235, 'SI')
+09/04/2025 11:30:25 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42413, 'pregunta', 236, 'SI')
+09/04/2025 11:30:25 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42413, 'pregunta', 237, 'SI')
+09/04/2025 11:30:25 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42413, 'pregunta', 238, 'SI')
+09/04/2025 11:30:25 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42413, 'pregunta', 239, 'SI')
+09/04/2025 11:30:25 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42413, 'pregunta', 240, 'SI')
+09/04/2025 11:30:25 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42413, 'pregunta', 200, 'SI')
+09/04/2025 11:30:25 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42413, 'pregunta', 201, 'SI')
+09/04/2025 11:30:25 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42413, 'pregunta', 202, 'SI')
+09/04/2025 11:30:25 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42413, 'pregunta', 203, 'SI')
+09/04/2025 11:30:25 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42413, 'pregunta', 204, 'SI')
+09/04/2025 11:30:25 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42413, 'pregunta', 205, 'SI')
+09/04/2025 11:30:25 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42413, 'pregunta', 206, 'SI')
+09/04/2025 11:30:25 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42413, 'pregunta', 207, 'SI')
+09/04/2025 11:30:25 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42413, 'pregunta', 208, 'SI')
+09/04/2025 11:30:25 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42413, 'pregunta', 209, 'SI')
+09/04/2025 11:30:25 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42413, 'pregunta', 210, 'SI')
+09/04/2025 11:30:25 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42413, 'pregunta', 211, 'SI')
+09/04/2025 11:30:25 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42413, 'pregunta', 212, 'SI')
+09/04/2025 11:30:25 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42413, 'pregunta', 213, 'SI')
+09/04/2025 11:30:25 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42413, 'pregunta', 214, 'SI')
+09/04/2025 11:30:25 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42413, 'pregunta', 215, 'SI')
+09/04/2025 11:30:25 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42413, 'pregunta', 216, 'SI')
+09/04/2025 11:30:25 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42413, 'pregunta', 263, 'SI')
+09/04/2025 11:30:25 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42413, 'pregunta', 187, 'SI')
+09/04/2025 11:30:25 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42413, 'pregunta', 264, 'SI')
+09/04/2025 11:30:25 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42413, 'pregunta', 188, 'SI')
+09/04/2025 11:30:25 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42413, 'pregunta', 265, 'SI')
+09/04/2025 11:30:26 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42413, 'pregunta', 189, 'SI')
+09/04/2025 11:30:26 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42413, 'pregunta', 266, 'SI')
+09/04/2025 11:30:26 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42413, 'pregunta', 267, 'SI')
+09/04/2025 11:30:26 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42413, 'pregunta', 268, 'SI')
+09/04/2025 11:30:26 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42413, 'pregunta', 269, 'SI')
+09/04/2025 11:30:26 - Data dentro de modelo : {"codigoEquipo":"FM131409","descripcion":"gjh","servicecallIDfi":"511825","imgtecho":"55753_imgtecho_511825.jpg","iduser":"371","compreg":"guh","tipoelevador":"LCE","supervisorID":"1977","configuracion":"Triplex","cantAyud":"1","preg":{"190":"SI","191":"SI","192":"SI","193":"SI","270":"SI","194":"SI","271":"SI","195":"SI","272":"SI","196":"SI","273":"SI","197":"SI","274":"SI","198":"SI","231":"SI","275":"SI","199":"SI","232":"SI","276":"SI","233":"SI","277":"SI","234":"SI","235":"SI","236":"SI","237":"SI","238":"SI","239":"SI","240":"SI","200":"SI","201":"SI","202":"SI","203":"SI","204":"SI","205":"SI","206":"SI","207":"SI","208":"SI","209":"SI","210":"SI","211":"SI","212":"SI","213":"SI","214":"SI","215":"SI","216":"SI","263":"SI","187":"SI","264":"SI","188":"SI","265":"SI","189":"SI","266":"SI","267":"SI","268":"SI","269":"SI"},"idserviciofi":"","imgoperador":"55753_imgoperador_511825.jpg","observacionfi":"hols","filefir":"1729863681.png","terminado":"y","idayud1":"2173","txtObsFin":"","idSAP":"2242","estadoascensor":"DETENIDO","actCodigo":"55753","nombre_completo":"Jordan ariel Aguilera labra","actividadIDfi":55753,"attachments":"","tiposervicio":"Mantenci\u00f3n","cantayu":"1","tipoEquipo":"Ascensor","idestadofi":"07","latitudfi":"-33.3843782","codclifi":"ASC 1","imgmaquina":"55753_imgmaquina_511825.jpg","email":"jaguilera@fabrimetalsa.cl","num_documento":"19.419.161-8","edificiofi":"FABRIMETAL LO BOZA","imgfoso":"55753_imgfoso_511825.jpg","opfirma":"2","codigofmfi":"FM131409","customercodefi":"C85233500","longitudfi":"-70.7761974","ayudante1":"JOHN GONZALEZ MORALES","ascensorIDfi":"11897","opayu":"S","idascensorfi":"","oppre":"1","file01":"","file02":"","file03":"","dTime":"20250409113021","comercialID":2209,"codCenCosto":null,"nomCenCosto":null,"imgpresupuesto1":"imagen1_1744212626.jpg","imgpresupuesto2":"imagen2_1744212626.jpg","imgpresupuesto3":"imagen3_1744212626.jpg"}
+09/04/2025 11:30:26 - Presupuesto  : 1 - Actividad 55753 - Supervisor1977
+09/04/2025 11:30:26 - Editar Actividad  :  - Entity Activities - ID 55753 - Actividad {"HandledByEmployee":"2242","Closed":"Y","U_PorFirmar":"Y","EndDueDate":"2025-04-09","EndTime":"11:30:26","Notes":"hols","U_EstadoFin":"OPERATIVO","U_GPSFin":"-33.3843782,-70.7761974","U_OBSINTERNA":null,"U_TieneAyudante":"S","U_AYUDANTE1":"2173"}
+09/04/2025 11:30:26 - Log Actividad  : 1 - ActividadID 55753 - Actividad {"HandledByEmployee":"2242","Closed":"Y","U_PorFirmar":"Y","EndDueDate":"2025-04-09","EndTime":"11:30:26","Notes":"hols","U_EstadoFin":"OPERATIVO","U_GPSFin":"-33.3843782,-70.7761974","U_OBSINTERNA":null,"U_TieneAyudante":"S","U_AYUDANTE1":"2173"}
+09/04/2025 11:30:26 - ID Ascensor  : 11897
+09/04/2025 11:30:26 - Editar Tarjeta de Equipo  :  - Entidad CustomerEquipmentCards - ID 11897 - Servicecall {"U_NX_ESTADOFM":"07"}
+09/04/2025 11:30:26 - Editar Servicio  :  - Entidad ServiceCalls - ID 511825 - Servicecall {"Status":5,"U_FallaTercero":"No"}
+09/04/2025 11:35:08 - Data dentro de modelo : {"codigoEquipo":"FM131409","descripcion":"kckgif","nombre_completo":"Jordan ariel Aguilera labra","servicecallIDfi":"511827","iduser":"371","actividadIDfi":55754,"attachments":"","tiposervicio":"Mantenci\u00f3n","cantayu":"1","supervisorID":"1977","cantAyud":"1","tipoEquipo":"Ascensor","idestadofi":"07","idserviciofi":"","observacionfi":"fhfkg","latitudfi":"-33.3843782","codclifi":"ASC 1","filefir":"1729863681.png","email":"jaguilera@fabrimetalsa.cl","num_documento":"19.419.161-8","terminado":"y","edificiofi":"FABRIMETAL LO BOZA","opfirma":"2","codigofmfi":"FM131409","customercodefi":"C85233500","longitudfi":"-70.7761974","ayudante1":"JORDAN AGUILERA","ascensorIDfi":"11897","opayu":"S","idayud1":"2242","txtObsFin":"","idSAP":"2242","idascensorfi":"","estadoascensor":"DETENIDO","oppre":"1","file01":"1000001488.jpg","file02":"1000001487.jpg","file03":"1000001486.jpg","dTime":"20250409113501","actCodigo":"55754","preg":null,"comercialID":2209,"codCenCosto":null,"nomCenCosto":null,"imgpresupuesto1":"imagen1_1744212904.jpg","imgpresupuesto2":"imagen2_1744212904.jpg","imgpresupuesto3":"imagen3_1744212904.jpg","imgfoso":null,"imgtecho":null,"imgmaquina":null,"imgoperador":null}
+09/04/2025 11:35:08 - Presupuesto  : 1 - Actividad 55754 - Supervisor1977
+09/04/2025 11:35:08 - Editar Actividad  :  - Entity Activities - ID 55754 - Actividad {"HandledByEmployee":"2242","Closed":"Y","U_PorFirmar":"Y","EndDueDate":"2025-04-09","EndTime":"11:35:08","Notes":"fhfkg","U_EstadoFin":"OPERATIVO","U_GPSFin":"-33.3843782,-70.7761974","U_OBSINTERNA":null,"U_TieneAyudante":"S","U_AYUDANTE1":"2242"}
+09/04/2025 11:35:08 - Log Actividad  : 1 - ActividadID 55754 - Actividad {"HandledByEmployee":"2242","Closed":"Y","U_PorFirmar":"Y","EndDueDate":"2025-04-09","EndTime":"11:35:08","Notes":"fhfkg","U_EstadoFin":"OPERATIVO","U_GPSFin":"-33.3843782,-70.7761974","U_OBSINTERNA":null,"U_TieneAyudante":"S","U_AYUDANTE1":"2242"}
+09/04/2025 11:35:08 - ID Ascensor  : 11897
+09/04/2025 11:35:08 - Editar Tarjeta de Equipo  :  - Entidad CustomerEquipmentCards - ID 11897 - Servicecall {"U_NX_ESTADOFM":"07"}
+09/04/2025 11:35:09 - Editar Servicio  :  - Entidad ServiceCalls - ID 511827 - Servicecall {"Status":5,"U_FallaTercero":"No"}
+09/04/2025 17:29:47 - Data dentro de modelo : {"codigoEquipo":"FM131409","descripcion":"gjh","nombre_completo":"Jordan ariel Aguilera labra","servicecallIDfi":"511828","iduser":"371","actividadIDfi":55756,"attachments":"","tiposervicio":"Mantenci\u00f3n","cantayu":"0","supervisorID":"1977","tipoEquipo":"Ascensor","idestadofi":"07","idserviciofi":"","observacionfi":"cb","latitudfi":"-33.3843782","codclifi":"ASC 1","filefir":"1729863681.png","email":"jaguilera@fabrimetalsa.cl","num_documento":"19.419.161-8","terminado":"y","edificiofi":"FABRIMETAL LO BOZA","opfirma":"2","codigofmfi":"FM131409","customercodefi":"C85233500","longitudfi":"-70.7761974","ascensorIDfi":"11897","opayu":"N","txtObsFin":"","idSAP":"2242","idascensorfi":"","estadoascensor":"DETENIDO","oppre":"1","file01":"1000001495.jpg","file02":"1000001488.jpg","file03":"1000001487.jpg","dTime":"20250409172943","actCodigo":"55756","preg":null,"comercialID":2209,"codCenCosto":null,"nomCenCosto":null,"imgpresupuesto1":"imagen1_1744234187.jpg","imgpresupuesto2":"imagen2_1744234187.jpg","imgpresupuesto3":"imagen3_1744234187.jpg","imgfoso":null,"imgtecho":null,"imgmaquina":null,"imgoperador":null}
+09/04/2025 17:29:47 - Presupuesto  : 1 - Actividad 55756 - Supervisor1977
+09/04/2025 17:29:47 - Editar Actividad  :  - Entity Activities - ID 55756 - Actividad {"HandledByEmployee":"2242","Closed":"Y","U_PorFirmar":"Y","EndDueDate":"2025-04-09","EndTime":"17:29:47","Notes":"cb","U_EstadoFin":"OPERATIVO","U_GPSFin":"-33.3843782,-70.7761974","U_OBSINTERNA":null}
+09/04/2025 17:29:47 - Log Actividad  : 1 - ActividadID 55756 - Actividad {"HandledByEmployee":"2242","Closed":"Y","U_PorFirmar":"Y","EndDueDate":"2025-04-09","EndTime":"17:29:47","Notes":"cb","U_EstadoFin":"OPERATIVO","U_GPSFin":"-33.3843782,-70.7761974","U_OBSINTERNA":null}
+09/04/2025 17:29:47 - ID Ascensor  : 11897
+09/04/2025 17:29:47 - Editar Tarjeta de Equipo  :  - Entidad CustomerEquipmentCards - ID 11897 - Servicecall {"U_NX_ESTADOFM":"07"}
+09/04/2025 17:29:48 - Editar Servicio  :  - Entidad ServiceCalls - ID 511828 - Servicecall {"Status":5,"U_FallaTercero":"No"}
+09/04/2025 17:31:57 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42416, 'pregunta', 190, 'SI')
+09/04/2025 17:31:57 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42416, 'pregunta', 191, 'SI')
+09/04/2025 17:31:57 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42416, 'pregunta', 192, 'SI')
+09/04/2025 17:31:57 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42416, 'pregunta', 193, 'SI')
+09/04/2025 17:31:57 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42416, 'pregunta', 270, 'SI')
+09/04/2025 17:31:57 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42416, 'pregunta', 194, 'SI')
+09/04/2025 17:31:57 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42416, 'pregunta', 271, 'SI')
+09/04/2025 17:31:57 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42416, 'pregunta', 195, 'SI')
+09/04/2025 17:31:57 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42416, 'pregunta', 272, 'SI')
+09/04/2025 17:31:57 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42416, 'pregunta', 196, 'SI')
+09/04/2025 17:31:57 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42416, 'pregunta', 273, 'SI')
+09/04/2025 17:31:57 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42416, 'pregunta', 197, 'SI')
+09/04/2025 17:31:57 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42416, 'pregunta', 274, 'SI')
+09/04/2025 17:31:57 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42416, 'pregunta', 198, 'SI')
+09/04/2025 17:31:57 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42416, 'pregunta', 231, 'SI')
+09/04/2025 17:31:57 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42416, 'pregunta', 275, 'SI')
+09/04/2025 17:31:57 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42416, 'pregunta', 199, 'SI')
+09/04/2025 17:31:57 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42416, 'pregunta', 232, 'SI')
+09/04/2025 17:31:57 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42416, 'pregunta', 276, 'SI')
+09/04/2025 17:31:57 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42416, 'pregunta', 233, 'SI')
+09/04/2025 17:31:57 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42416, 'pregunta', 277, 'SI')
+09/04/2025 17:31:57 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42416, 'pregunta', 234, 'SI')
+09/04/2025 17:31:57 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42416, 'pregunta', 235, 'SI')
+09/04/2025 17:31:57 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42416, 'pregunta', 236, 'SI')
+09/04/2025 17:31:57 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42416, 'pregunta', 237, 'SI')
+09/04/2025 17:31:57 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42416, 'pregunta', 238, 'SI')
+09/04/2025 17:31:57 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42416, 'pregunta', 239, 'SI')
+09/04/2025 17:31:57 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42416, 'pregunta', 240, 'SI')
+09/04/2025 17:31:57 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42416, 'pregunta', 200, 'SI')
+09/04/2025 17:31:57 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42416, 'pregunta', 201, 'SI')
+09/04/2025 17:31:57 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42416, 'pregunta', 202, 'SI')
+09/04/2025 17:31:57 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42416, 'pregunta', 203, 'SI')
+09/04/2025 17:31:57 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42416, 'pregunta', 204, 'SI')
+09/04/2025 17:31:57 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42416, 'pregunta', 205, 'SI')
+09/04/2025 17:31:57 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42416, 'pregunta', 206, 'SI')
+09/04/2025 17:31:57 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42416, 'pregunta', 207, 'SI')
+09/04/2025 17:31:57 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42416, 'pregunta', 208, 'SI')
+09/04/2025 17:31:57 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42416, 'pregunta', 209, 'SI')
+09/04/2025 17:31:57 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42416, 'pregunta', 210, 'SI')
+09/04/2025 17:31:57 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42416, 'pregunta', 211, 'SI')
+09/04/2025 17:31:57 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42416, 'pregunta', 212, 'SI')
+09/04/2025 17:31:57 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42416, 'pregunta', 213, 'SI')
+09/04/2025 17:31:57 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42416, 'pregunta', 214, 'SI')
+09/04/2025 17:31:57 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42416, 'pregunta', 215, 'SI')
+09/04/2025 17:31:57 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42416, 'pregunta', 216, 'SI')
+09/04/2025 17:31:57 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42416, 'pregunta', 263, 'SI')
+09/04/2025 17:31:57 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42416, 'pregunta', 187, 'SI')
+09/04/2025 17:31:57 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42416, 'pregunta', 264, 'SI')
+09/04/2025 17:31:57 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42416, 'pregunta', 188, 'SI')
+09/04/2025 17:31:57 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42416, 'pregunta', 265, 'SI')
+09/04/2025 17:31:57 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42416, 'pregunta', 189, 'SI')
+09/04/2025 17:31:57 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42416, 'pregunta', 266, 'SI')
+09/04/2025 17:31:57 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42416, 'pregunta', 267, 'SI')
+09/04/2025 17:31:57 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42416, 'pregunta', 268, 'SI')
+09/04/2025 17:31:57 - Respuesta : INSERT INTO `respuesta`(`infv_id`, `resp_tipo`, `resp_idtipo`, `resp_data`) VALUES (42416, 'pregunta', 269, 'SI')
+09/04/2025 17:32:00 - Data dentro de modelo : {"codigoEquipo":"FM131409","descripcion":"hj","nombre_completo":"Jordan ariel Aguilera labra","servicecallIDfi":"511829","imgtecho":"55757_imgtecho_511829.jpg","iduser":"371","compreg":"hfut","actividadIDfi":55757,"attachments":"","tiposervicio":"Mantenci\u00f3n","tipoelevador":"LCE","cantayu":"0","supervisorID":"1977","configuracion":"Triplex","tipoEquipo":"Ascensor","preg":{"190":"SI","191":"SI","192":"SI","193":"SI","270":"SI","194":"SI","271":"SI","195":"SI","272":"SI","196":"SI","273":"SI","197":"SI","274":"SI","198":"SI","231":"SI","275":"SI","199":"SI","232":"SI","276":"SI","233":"SI","277":"SI","234":"SI","235":"SI","236":"SI","237":"SI","238":"SI","239":"SI","240":"SI","200":"SI","201":"SI","202":"SI","203":"SI","204":"SI","205":"SI","206":"SI","207":"SI","208":"SI","209":"SI","210":"SI","211":"SI","212":"SI","213":"SI","214":"SI","215":"SI","216":"SI","263":"SI","187":"SI","264":"SI","188":"SI","265":"SI","189":"SI","266":"SI","267":"SI","268":"SI","269":"SI"},"idestadofi":"07","idserviciofi":"","imgoperador":"55757_imgoperador_511829.jpg","observacionfi":"rh","latitudfi":"-33.3843782","codclifi":"ASC 1","imgmaquina":"55757_imgmaquina_511829.jpg","filefir":"1729863681.png","email":"jaguilera@fabrimetalsa.cl","num_documento":"19.419.161-8","terminado":"y","edificiofi":"FABRIMETAL LO BOZA","imgfoso":"55757_imgfoso_511829.jpg","opfirma":"2","codigofmfi":"FM131409","customercodefi":"C85233500","longitudfi":"-70.7761974","ascensorIDfi":"11897","opayu":"N","txtObsFin":"","idSAP":"2242","idascensorfi":"","estadoascensor":"DETENIDO","oppre":"1","file01":"","file02":"","file03":"","dTime":"20250409173154","actCodigo":"55757","comercialID":2209,"codCenCosto":null,"nomCenCosto":null,"imgpresupuesto1":"imagen1_1744234317.jpg","imgpresupuesto2":"imagen2_1744234317.jpg","imgpresupuesto3":"imagen3_1744234317.jpg"}
+09/04/2025 17:32:00 - Presupuesto  : 1 - Actividad 55757 - Supervisor1977
+09/04/2025 17:32:00 - Editar Actividad  :  - Entity Activities - ID 55757 - Actividad {"HandledByEmployee":"2242","Closed":"Y","U_PorFirmar":"Y","EndDueDate":"2025-04-09","EndTime":"17:32:00","Notes":"rh","U_EstadoFin":"OPERATIVO","U_GPSFin":"-33.3843782,-70.7761974","U_OBSINTERNA":null}
+09/04/2025 17:32:00 - Log Actividad  : 1 - ActividadID 55757 - Actividad {"HandledByEmployee":"2242","Closed":"Y","U_PorFirmar":"Y","EndDueDate":"2025-04-09","EndTime":"17:32:00","Notes":"rh","U_EstadoFin":"OPERATIVO","U_GPSFin":"-33.3843782,-70.7761974","U_OBSINTERNA":null}
+09/04/2025 17:32:00 - ID Ascensor  : 11897
+09/04/2025 17:32:00 - Editar Tarjeta de Equipo  :  - Entidad CustomerEquipmentCards - ID 11897 - Servicecall {"U_NX_ESTADOFM":"07"}
+09/04/2025 17:32:01 - Editar Servicio  :  - Entidad ServiceCalls - ID 511829 - Servicecall {"Status":5,"U_FallaTercero":"No"}

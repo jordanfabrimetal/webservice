@@ -1,0 +1,10 @@
+
+10/04/2025 10:12:24 - Estado Detenido
+10/04/2025 10:12:24 - Tu servicio es Reparación y es un/a Ascensor
+10/04/2025 10:12:24 - Ha ingresado al servicio: Reparación
+10/04/2025 10:12:24 - imagen 1 - 1000001501.jpg
+10/04/2025 10:12:24 - imagen 2 - 1000001502.jpg
+10/04/2025 10:12:24 - imagen 3 - 1000001503.jpg
+10/04/2025 10:12:37 - Correo pudo ser enviado exitosamente
+10/04/2025 10:12:43 - Correo de presupuesto pudo ser enviado exitosamente
+10/04/2025 10:12:43 - Servicio finalizado con exito

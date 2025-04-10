@@ -18,6 +18,7 @@ function newPdf($opcion, $data = '', $output = 'browser', $params = array()) {
 
         	$rsptaservicio = $encuesta->ultimoInforme($idencuesta, $idascensor, $idservicio);
         	$periodo = $rsptaservicio['infv_periodo'] . '';
+
             $idvisita = $rsptaservicio['infv_id'];
 
         	//Se ocupara sistema de plantillas TemplatePower
@@ -653,7 +654,7 @@ function newPdf($opcion, $data = '', $output = 'browser', $params = array()) {
             switch(strlen($params['actividadsap']['actHoraIni'])){case 1: $horaInicio = '000'.$horaInicio; break;case 2: $horaInicio = '00'.$horaInicio; break;case 3: $horaInicio = '0'.$horaInicio; break;case 4: $horaInicio = $params['actividadsap']['actHoraIni']; break;}
             $horaInicio = date('H:i',strtotime($horaInicio));
             $t->assign('fechainicio',date('d/m/Y', strtotime($params['actividadsap']['actFechaIni'])).' '.$horaInicio);
-            $t->assign('fechafin',date('d/m/Y H:i'));
+            $t->assign('fechafin',date('d/m/Y', strtotime($params['actividadsap']['actFechaFin'])).' '.date('H:i', strtotime($params['actividadsap']['actHoraFin'])));
             $t->assign('tecnico',$params['actividadsap']['tecNombre'].' '.$params['actividadsap']['tecApellido']);
 
             $t->newBlock('checklist');

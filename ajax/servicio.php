@@ -4358,6 +4358,7 @@ switch ($_GET["op"]) {
         $longitudfi = "-70.7761638";
         $_POST['latitudfi'] = $latitudfi;
         $_POST['longitudfi'] = $longitudfi;
+        $fechafin = $_POST['fechafin'];
         if ($estadoascensor == 01 || $estadoascensor == '01' || $estadoascensor == "OPERATIVO") {
             $estadoascensor = "OPERATIVO";
             $_POST['estadoascensor'] = "OPERATIVO";
@@ -4389,11 +4390,9 @@ switch ($_GET["op"]) {
         fwrite($logFile, "\n" . date("d/m/Y H:i:s") . " - Aun no inicia ningun servicio, pero el tipo es : " . $llamada) or die("Error escribiendo en el archivo");
         fclose($logFile);
 
-
         //Esto es si no es MANTENCIÓN----------------------------------------------------------------------
 
         if ($llamada != 'Mantención') {
-
             //Log
             $logFile = fopen("log/" . $nombre_log, 'a') or die("Error creando archivo");
             fwrite($logFile, "\n" . date("d/m/Y H:i:s") . " - Entro a : " . $llamada) or die("Error escribiendo en el archivo");
@@ -4646,6 +4645,8 @@ switch ($_GET["op"]) {
                                             ';
                 }
 
+                $estadoinicial = ($datosactividad['value'][0]['actEstEquiIni'] == 01 || $datosactividad['value'][0]['actEstEquiIni'] == '01' ? 'OPERATIVO' : 'DETENIDO'); 
+
                 $bodypdf .= '<tr class="item">
                                             <td>
                                                 <b>TIPO DE SERVICIO: </b> ' . $datosactividad['value'][0]['srvTipoLlamada'] . '
@@ -4658,7 +4659,7 @@ switch ($_GET["op"]) {
                                         </tr>
                                         <tr class="item">
                                             <td>
-                                                <b>ESTADO DEL EQUIPO AL INICIAR: </b> ' . $datosactividad['value'][0]['actEstEquiIni'] . '
+                                                <b>ESTADO DEL EQUIPO AL INICIAR: </b> ' . $estadoinicial . '
                                             </td>
                                         </tr>
                                         <tr class="item">
@@ -4668,7 +4669,7 @@ switch ($_GET["op"]) {
                                         </tr>
                                         <tr class="item">
                                             <td>
-                                                <b>FECHA Y HORA FINALIZACIÓN DEL SERVICIO: </b> ' . date('d-m-Y') . ' ' . date('H:i') . '
+                                                <b>FECHA Y HORA FINALIZACIÓN DEL SERVICIO: </b> ' . $fechafin . '
                                             </td>
                                         </tr>
                                         <tr class="item">
@@ -4974,6 +4975,8 @@ switch ($_GET["op"]) {
                                             ';
                 }
 
+                $estadoinicial = ($datosactividad['value'][0]['actEstEquiIni'] == 01 || $datosactividad['value'][0]['actEstEquiIni'] == '01' ? 'OPERATIVO' : 'DETENIDO'); 
+
                 $body .= '<tr class="item">
                                             <td>
                                                 <b>TIPO DE SERVICIO: </b> ' . $datosactividad['value'][0]['srvTipoLlamada'] . '
@@ -4986,7 +4989,7 @@ switch ($_GET["op"]) {
                                         </tr>
                                         <tr class="item">
                                             <td>
-                                                <b>ESTADO DEL EQUIPO AL INICIAR: </b> ' . $datosactividad['value'][0]['actEstEquiIni'] . '
+                                                <b>ESTADO DEL EQUIPO AL INICIAR: </b> ' . $estadoinicial . '
                                             </td>
                                         </tr>
                                         <tr class="item">
@@ -4996,7 +4999,7 @@ switch ($_GET["op"]) {
                                         </tr>
                                         <tr class="item">
                                             <td>
-                                                <b>FECHA Y HORA FINALIZACIÓN DEL SERVICIO: </b> ' . date('d-m-Y') . ' ' . date('H:i') . '
+                                                <b>FECHA Y HORA FINALIZACIÓN DEL SERVICIO: </b> ' . $fechafin . '
                                             </td>
                                         </tr>
                                         <tr class="item">
@@ -5511,6 +5514,8 @@ switch ($_GET["op"]) {
                 $params['imgmaquina'] = $rows[0]['imgmaquina'] . '';
                 $params['imgoperador'] = $rows[0]['imgoperador'] . '';
             }
+
+            $params['fechafin'] = $fechafin;
 
             $idascensor = $rows[0]['infv_ascensor'] . '';
             $idencuesta = $rows[0]['enc_id'] . '';
@@ -6198,6 +6203,7 @@ switch ($_GET["op"]) {
                 $params['modelo'] = $_POST['modelo'];
                 $params['interno'] = $_POST['interno'];
                 $params['edificio'] = $_POST['edificio'];
+                $params['fechafin'] = $fechafin;
 
                 $result = newPdf('informemantencion' . (($idencuesta == 4) ? 'escalera' : ''), '', 'variable', $params);
 

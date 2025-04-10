@@ -5555,7 +5555,6 @@ switch ($_GET["op"]) {
                 $params['imgpresupuesto2'] = $datospresupuesto->imgpresupuesto2;
                 $params['imgpresupuesto3'] = $datospresupuesto->imgpresupuesto3;
             }
-
             $srvCodigo = $_POST['idservicio'];
 
             //MANTENCIONES CON ASCENSORES///////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -5563,16 +5562,18 @@ switch ($_GET["op"]) {
             //MANTENCIONES CON ASCENSORES///////////////////////////////////////////////////////////////////////////////////////////////////////
             //MANTENCIONES CON ASCENSORES///////////////////////////////////////////////////////////////////////////////////////////////////////
             //MANTENCIONES CON ASCENSORES///////////////////////////////////////////////////////////////////////////////////////////////////////
+            
             if ($idencuesta !== "4") {
                 $params['nombrecliente'] = $_POST['nombre'] . ' ' . $_POST['apellido'];
                 $params['rutcliente'] = $_POST['rut'];
                 $params['cargocliente'] = $_POST['cargo'];
                 $params['firmacliente'] = $imgfirma;
-                $params['firmacliente_ascensor'] = $patchfir;
+                $params['firmacliente_ascensor'] = $patchfir;+
                 $_POST['actividadIDfi'] = $datosactividad['value'][0]['actCodigo'];
                 $_POST['idactividad'] = $datosactividad['value'][0]['actCodigo'];
                 $_POST['servicecallIDfi'] = $idservicio;
                 $_POST['idserfirma'] = $idservicio;
+                $params['actEstEquiFin'] = $datosactividad['value'][0]['actEstEquiFin'];
                 $idservicio = $_POST['idservicio'];
 
                 $result = newPdf('informemantencionnuevo', '', 'variable', $params);

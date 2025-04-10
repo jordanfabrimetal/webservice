@@ -4358,7 +4358,7 @@ switch ($_GET["op"]) {
         $longitudfi = "-70.7761638";
         $_POST['latitudfi'] = $latitudfi;
         $_POST['longitudfi'] = $longitudfi;
-        $fechafin = $_POST['fechafin'];
+        
         if ($estadoascensor == 01 || $estadoascensor == '01' || $estadoascensor == "OPERATIVO") {
             $estadoascensor = "OPERATIVO";
             $_POST['estadoascensor'] = "OPERATIVO";
@@ -4390,6 +4390,7 @@ switch ($_GET["op"]) {
         fwrite($logFile, "\n" . date("d/m/Y H:i:s") . " - Aun no inicia ningun servicio, pero el tipo es : " . $llamada) or die("Error escribiendo en el archivo");
         fclose($logFile);
 
+        $fechafin = $_POST['fechafin'];
         //Esto es si no es MANTENCIÓN----------------------------------------------------------------------
 
         if ($llamada != 'Mantención') {
@@ -4669,7 +4670,7 @@ switch ($_GET["op"]) {
                                         </tr>
                                         <tr class="item">
                                             <td>
-                                                <b>FECHA Y HORA FINALIZACIÓN DEL SERVICIO: </b> ' . $fechafin . '
+                                                <b>FECHA Y HORA FINALIZACIÓN DEL SERVICIO: </b> ' . date('d-m-Y', strtotime($datosactividad['value'][0]['actFechaFin'])) . ' ' . date('H:i', strtotime(((strlen($datosactividad['value'][0]['actHoraFin']) <= 3) ? '0' . $datosactividad['value'][0]['actHoraFin'] : $datosactividad['value'][0]['actHoraFin']))) . '
                                             </td>
                                         </tr>
                                         <tr class="item">
@@ -4975,7 +4976,7 @@ switch ($_GET["op"]) {
                                             ';
                 }
 
-                $estadoinicial = ($datosactividad['value'][0]['actEstEquiIni'] == 01 || $datosactividad['value'][0]['actEstEquiIni'] == '01' ? 'OPERATIVO' : 'DETENIDO'); 
+                $estadoinicial = $datosactividad['value'][0]['actEstEquiIni'] == 01 || $datosactividad['value'][0]['actEstEquiIni'] == '01' ? 'OPERATIVO' : 'DETENIDO'; 
 
                 $body .= '<tr class="item">
                                             <td>
@@ -4999,7 +5000,7 @@ switch ($_GET["op"]) {
                                         </tr>
                                         <tr class="item">
                                             <td>
-                                                <b>FECHA Y HORA FINALIZACIÓN DEL SERVICIO: </b> ' . $fechafin . '
+                                                <b>FECHA Y HORA FINALIZACIÓN DEL SERVICIO: </b> ' . date('d-m-Y', strtotime($datosactividad['value'][0]['actFechaFin'])) . ' ' . date('H:i', strtotime(((strlen($datosactividad['value'][0]['actHoraFin']) <= 3) ? '0' . $datosactividad['value'][0]['actHoraFin'] : $datosactividad['value'][0]['actHoraFin']))) . '
                                             </td>
                                         </tr>
                                         <tr class="item">

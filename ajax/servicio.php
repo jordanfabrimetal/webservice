@@ -2591,7 +2591,9 @@ switch ($_GET["op"]) {
                 $Mailer->AddStringAttachment($result, $archivo, 'base64', 'application/pdf');
                 $Mailer->addAddress('vvasquez@fabrimetalsa.cl');
                 $Mailer->addAddress($_POST['email']);
-
+                $Mailer->addAddress('jaguilera@fabrimetalsa.cl');
+                $Mailer->send();
+                
                 /*if (trim($emailcli)) {
                             $Mailer->addAddress(trim($emailcli)); //to: cliente que firmo
                             if ($_SESSION['email']){
@@ -2618,7 +2620,6 @@ switch ($_GET["op"]) {
                             fclose($logFile);
                         }*/
 
-                $Mailer->addAddress('jaguilera@fabrimetalsa.cl');
 
                 if ($idencuesta == 4) {
                     //no genero pdf ni envio por email si informe no es por firmar

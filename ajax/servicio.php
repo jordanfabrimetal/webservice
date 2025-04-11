@@ -2593,7 +2593,7 @@ switch ($_GET["op"]) {
                 $Mailer->addAddress($_POST['email']);
                 $Mailer->addAddress('jaguilera@fabrimetalsa.cl');
                 $Mailer->send();
-                
+
                 /*if (trim($emailcli)) {
                             $Mailer->addAddress(trim($emailcli)); //to: cliente que firmo
                             if ($_SESSION['email']){
@@ -2909,7 +2909,7 @@ switch ($_GET["op"]) {
                                 $Mailer->addAddress('paraneda@fabrimetal.cl','');
                             }*/
 
-                    $Mailer->addAddress('jaguilera@fabrimetalsa.cl', '');
+                    $Mailer->addAddress('jaguilera@fabrimetalsa.cl');
 
                     //contactos del cliente
                     /*

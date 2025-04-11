@@ -362,7 +362,7 @@ class Servicio
 			unset($arrayData->observaciones);
 			unset($arrayData->chkCertifica);
 
-			if($estadofintext = "OPERATIVO"){
+			if($estadofintext == "OPERATIVO"){
 				$idestadofi = "01";
 				$data->idestadofi = $idestadofi;
 			}

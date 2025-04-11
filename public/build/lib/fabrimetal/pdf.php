@@ -651,10 +651,24 @@ function newPdf($opcion, $data = '', $output = 'browser', $params = array()) {
 
             $t->newBlock('matenimiento');
             $t->assign('equipoatendido',$params['actividadsap']['equSnInterno']);
-            switch(strlen($params['actividadsap']['actHoraIni'])){case 1: $horaInicio = '000'.$horaInicio; break;case 2: $horaInicio = '00'.$horaInicio; break;case 3: $horaInicio = '0'.$horaInicio; break;case 4: $horaInicio = $params['actividadsap']['actHoraIni']; break;}
+            switch(strlen($params['actividadsap']['actHoraIni']))
+            {case 1: $horaInicio = '000'.$horaInicio; break;
+                case 2: $horaInicio = '00'.$horaInicio; break;
+                case 3: $horaInicio = '0'.$horaInicio; break;
+                case 4: $horaInicio = $params['actividadsap']['actHoraIni']; 
+            break;}
+
             $horaInicio = date('H:i',strtotime($horaInicio));
             $t->assign('fechainicio',date('d/m/Y', strtotime($params['actividadsap']['actFechaIni'])).' '.$horaInicio);
-            $t->assign('fechafin',date('d/m/Y', strtotime($params['actividadsap']['actFechaFin'])).' '.date('H:i', strtotime($params['actividadsap']['actHoraFin'])));
+
+            switch(strlen($params['actividadsap']['actHoraFin']))
+            {case 1: $horaTermino = '000'.$horaTermino; break;
+                case 2: $horaTermino = '00'.$horaTermino; break;
+                case 3: $horaTermino = '0'.$horaTermino; break;
+                case 4: $horaTermino = $params['actividadsap']['actHoraFin']; 
+            break;}
+            $horaTermino = date('H:i',strtotime($horaTermino));
+            $t->assign('fechafin',date('d/m/Y', strtotime($params['actividadsap']['actFechaFin'])).' '. $horaTermino);
             $t->assign('tecnico',$params['actividadsap']['tecNombre'].' '.$params['actividadsap']['tecApellido']);
 
             $t->newBlock('checklist');

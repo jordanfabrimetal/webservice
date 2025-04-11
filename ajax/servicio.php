@@ -2268,13 +2268,13 @@ switch ($_GET["op"]) {
             }
 
             if ($_POST['oppre'] == 1) {
-
                 //Guardo las imagenes que son las del Presupuesto
                 $jsonImages = $_POST['images'];
                 $data_imagen = json_decode($jsonImages, true);
                 $rutaDestino = '../files/images/';
 
-                for ($i = 1; $i <= 3; $i++) {
+                for ($i = 1; $i <= 3; $i++) 
+                {
                     $claveImagen = 'imagen' . $i;
                     if (isset($data_imagen[$claveImagen]) && !empty($data_imagen[$claveImagen])) {
                         $base64Image = $data_imagen[$claveImagen];

@@ -202,7 +202,7 @@ class Servicio
 	{
 		/* Inicio ServicaCalls */
 		$QueryPath = '$crossjoin(Activities,ServiceCalls,ServiceCallTypes,CustomerEquipmentCards,Items,Manufacturers,EmployeesInfo,EmployeePosition,ItemGroups)';
-		$QueryOption = '$expand=ServiceCalls($select=ServiceCallID,CallType,ItemCode,InternalSerialNum,Subject,CreationDate,CustomerCode),ServiceCallTypes($select=Name),CustomerEquipmentCards($select=InternalSerialNum,BuildingFloorRoom,Street,StreetNo,InstallLocation,ItemDescription),Items($select=Manufacturer,ItemCode,ItemName,U_NX_TIPEQUIPO,U_NX_MODELO),Manufacturers($select=ManufacturerName),Activities($select=ActivityDate,ActivityTime,ActivityCode),EmployeesInfo($select=FirstName,MiddleName,LastName,PassportNumber,Position),EmployeePosition($select=Description),ItemGroups($select=Number,GroupName)&$filter=ServiceCalls/CallType eq ServiceCallTypes/CallTypeID and ServiceCalls/InternalSerialNum eq CustomerEquipmentCards/InternalSerialNum and ServiceCalls/ItemCode eq Items/ItemCode and Items/Manufacturer eq Manufacturers/Code and CustomerEquipmentCards/ItemCode eq Items/ItemCode and Activities/ParentObjectId eq ServiceCalls/ServiceCallID and ServiceCalls/TechnicianCode eq EmployeesInfo/EmployeeID and EmployeesInfo/Position eq EmployeePosition/PositionID and Items/ItemsGroupCode eq ItemGroups/Number and Activities/ActivityCode eq ' . $idactividad;
+		$QueryOption = '$expand=ServiceCalls($select=ServiceCallID,CallType,ItemCode,InternalSerialNum,Subject,CreationDate,CustomerCode),ServiceCallTypes($select=Name),CustomerEquipmentCards($select=InternalSerialNum,BuildingFloorRoom,Street,StreetNo,InstallLocation,ItemDescription),Items($select=Manufacturer,ItemCode,ItemName,U_NX_TIPEQUIPO,U_NX_MODELO),Manufacturers($select=ManufacturerName),Activities($select=ActivityDate,ActivityTime,ActivityCode, U_TieneAyudante, U_AYUDANTE1, U_AYUDANTE2),EmployeesInfo($select=FirstName,MiddleName,LastName,PassportNumber,Position),EmployeePosition($select=Description),ItemGroups($select=Number,GroupName)&$filter=ServiceCalls/CallType eq ServiceCallTypes/CallTypeID and ServiceCalls/InternalSerialNum eq CustomerEquipmentCards/InternalSerialNum and ServiceCalls/ItemCode eq Items/ItemCode and Items/Manufacturer eq Manufacturers/Code and CustomerEquipmentCards/ItemCode eq Items/ItemCode and Activities/ParentObjectId eq ServiceCalls/ServiceCallID and ServiceCalls/TechnicianCode eq EmployeesInfo/EmployeeID and EmployeesInfo/Position eq EmployeePosition/PositionID and Items/ItemsGroupCode eq ItemGroups/Number and Activities/ActivityCode eq ' . $idactividad;
 		$rspta = postQuery($QueryPath, $QueryOption);
 
 		$rsptaJson = json_decode($rspta);
@@ -225,7 +225,11 @@ class Servicio
 				"srFecIni" => $data->Activities->ActivityDate . '',
 				"srHoraIni" => $data->Activities->ActivityTime . '',
 				"srObsIni" => $data->ServiceCalls->Subject . '',
+				"U_TieneAyudante" => $data->Activities->U_TieneAyudante . '',
+				"U_AYUDANTE1" => $data->Activities->U_AYUDANTE1 . '',
+				"U_AYUDANTE2" => $data->Activities->U_AYUDANTE2 . '',
 				"activityCode" => $data->Activities->ActivityCode . ''
+
 			)
 		);
 	}
@@ -1060,6 +1064,13 @@ class Servicio
 		$sql = "sml.svc/LISTA_ACTIVIDADES?\$select=srvCodigo,actCodigo,equSnInterno,artTipoEquipo,artFabricante,artModelo,equEdificio,equCalle,equCalleNro,actFechaIni,actHoraIni,srvTipoLlamada,actEstEquiIni,srvAsunto,actFechaFin,actHoraFin,actEstEquiFin,actComentario,equSupId&\$filter=actCodigo eq " . $idactividad;
 		return json_decode(Query($sql), true);
 	}
+
+	public function buscarAyudante($idsap)
+	{
+		$sql = 'EmployeesInfo?$filter=EmployeeID eq ' . $idsap;
+		return json_decode(Query($sql), true);
+	}
+
 
 	public function formfirmasap2($idservicio)
 	{

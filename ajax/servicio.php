@@ -2273,8 +2273,7 @@ switch ($_GET["op"]) {
                 $data_imagen = json_decode($jsonImages, true);
                 $rutaDestino = '../files/images/';
 
-                for ($i = 1; $i <= 3; $i++) 
-                {
+                for ($i = 1; $i <= 3; $i++) {
                     $claveImagen = 'imagen' . $i;
                     if (isset($data_imagen[$claveImagen]) && !empty($data_imagen[$claveImagen])) {
                         $base64Image = $data_imagen[$claveImagen];
@@ -4359,7 +4358,7 @@ switch ($_GET["op"]) {
         $longitudfi = "-70.7761638";
         $_POST['latitudfi'] = $latitudfi;
         $_POST['longitudfi'] = $longitudfi;
-        
+
         if ($estadoascensor == 01 || $estadoascensor == '01' || $estadoascensor == "OPERATIVO") {
             $estadoascensor = "OPERATIVO";
             $_POST['estadoascensor'] = "OPERATIVO";
@@ -4422,6 +4421,22 @@ switch ($_GET["op"]) {
 
             error_log("El json de lo que llega desde l POST: " . $data);
             $datosactividad = $servicio->Actividad($actividadIDfi);
+            $ayudantes = $servicio->infoActividadSAP($actividadIDfi);
+            $resultado = json_decode($ayudantes, true);
+
+            $U_TieneAyudante = $resultado['U_TieneAyudante'];
+            $U_AYUDANTE1 = $resultado['U_AYUDANTE1'];
+            $U_AYUDANTE2 = $resultado['U_AYUDANTE2'];
+
+            if ($U_AYUDANTE1 != '') {
+                $ayudantesbusqueda1 = $servicio->buscarAyudante($U_AYUDANTE1);
+                $nombretecnico1 = $ayudantesbusqueda1['value'][0]['FirstName'] . ' ' . $ayudantesbusqueda1['value'][0]['LastName'];
+            }
+
+            if ($U_AYUDANTE2 != '') {
+                $ayudantesbusqueda2 = $servicio->buscarAyudante($U_AYUDANTE2);
+                $nombretecnico2 = $ayudantesbusqueda2['value'][0]['FirstName'] . ' ' . $ayudantesbusqueda2['value'][0]['LastName'];
+            }
 
             //Log
             $logFile = fopen("log/" . $nombre_log, 'a') or die("Error creando archivo");
@@ -4622,32 +4637,23 @@ switch ($_GET["op"]) {
                                             </td>
                                         </tr>';
 
-                // SE AGREGA NOMBRE DE AYUDANTES
-                if ($_POST["cantayu"] == 1) {
+
+                if ($U_TieneAyudante == "S") {
                     $bodypdf .= '
                                             <tr class="item">
                                                 <td>
-                                                    <b>AYUDANTE: </b> ' . $_POST["ayudante1"] . '
-                                                </td>
-                                            </tr>
-                                            ';
-                }
-                if ($_POST["cantayu"] == 2) {
-                    $bodypdf .= '
-                                            <tr class="item">
-                                                <td>
-                                                    <b>AYUDANTE: </b> ' . $_POST["ayudante1"] . '
+                                                    <b>AYUDANTE: </b> ' . $nombretecnico1 . '
                                                 </td>
                                             </tr>
                                             <tr class="item">
                                                 <td>
-                                                    <b>AYUDANTE 2: </b> ' . $_POST["ayudante2"] . '
+                                                    <b>AYUDANTE 2: </b> ' . $nombretecnico2 . '
                                                 </td>
                                             </tr>
                                             ';
                 }
 
-                $estadoinicial = ($datosactividad['value'][0]['actEstEquiIni'] == 01 || $datosactividad['value'][0]['actEstEquiIni'] == '01' ? 'OPERATIVO' : 'DETENIDO'); 
+                $estadoinicial = ($datosactividad['value'][0]['actEstEquiIni'] == 01 || $datosactividad['value'][0]['actEstEquiIni'] == '01' ? 'OPERATIVO' : 'DETENIDO');
 
                 $bodypdf .= '<tr class="item">
                                             <td>
@@ -4952,32 +4958,23 @@ switch ($_GET["op"]) {
                                             </td>
                                         </tr>';
 
-                // SE AGREGA NOMBRE DE AYUDANTES
-                if ($_POST["cantayu"] == 1) {
-                    $body .= '
-                                            <tr class="item">
-                                                <td>
-                                                    <b>AYUDANTE: </b> ' . $_POST["ayudante1"] . '
-                                                </td>
-                                            </tr>
-                                            ';
-                }
-                if ($_POST["cantayu"] == 2) {
-                    $body .= '
-                                            <tr class="item">
-                                                <td>
-                                                    <b>AYUDANTE: </b> ' . $_POST["ayudante1"] . '
-                                                </td>
-                                            </tr>
-                                            <tr class="item">
-                                                <td>
-                                                    <b>AYUDANTE 2: </b> ' . $_POST["ayudante2"] . '
-                                                </td>
-                                            </tr>
-                                            ';
+
+                if ($U_TieneAyudante == "S") {
+                    $bodypdf .= '
+                                                                    <tr class="item">
+                                                                        <td>
+                                                                            <b>AYUDANTE: </b> ' . $nombretecnico1 . '
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr class="item">
+                                                                        <td>
+                                                                            <b>AYUDANTE 2: </b> ' . $nombretecnico2 . '
+                                                                        </td>
+                                                                    </tr>
+                                                                    ';
                 }
 
-                $estadoinicial = $datosactividad['value'][0]['actEstEquiIni'] == 01 || $datosactividad['value'][0]['actEstEquiIni'] == '01' ? 'OPERATIVO' : 'DETENIDO'; 
+                $estadoinicial = $datosactividad['value'][0]['actEstEquiIni'] == 01 || $datosactividad['value'][0]['actEstEquiIni'] == '01' ? 'OPERATIVO' : 'DETENIDO';
 
                 $body .= '<tr class="item">
                                             <td>
@@ -5563,14 +5560,14 @@ switch ($_GET["op"]) {
             //MANTENCIONES CON ASCENSORES///////////////////////////////////////////////////////////////////////////////////////////////////////
             //MANTENCIONES CON ASCENSORES///////////////////////////////////////////////////////////////////////////////////////////////////////
             //MANTENCIONES CON ASCENSORES///////////////////////////////////////////////////////////////////////////////////////////////////////
-            
+
             if ($idencuesta !== "4") {
                 $params['nombrecliente'] = $_POST['nombre'] . ' ' . $_POST['apellido'];
                 $params['rutcliente'] = $_POST['rut'];
                 $params['cargocliente'] = $_POST['cargo'];
                 $params['firmacliente'] = $imgfirma;
-                $params['firmacliente_ascensor'] = $patchfir;+
-                $_POST['actividadIDfi'] = $datosactividad['value'][0]['actCodigo'];
+                $params['firmacliente_ascensor'] = $patchfir;
+                +$_POST['actividadIDfi'] = $datosactividad['value'][0]['actCodigo'];
                 $_POST['idactividad'] = $datosactividad['value'][0]['actCodigo'];
                 $_POST['servicecallIDfi'] = $idservicio;
                 $_POST['idserfirma'] = $idservicio;
